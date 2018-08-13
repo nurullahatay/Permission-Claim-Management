@@ -1,0 +1,82 @@
+create table USERS
+(
+  USER_NAME varchar(15) not null primary key,
+  USER_PASS varchar(15) not null
+)
+
+create table ROLES
+(
+  ROLE_NAME varchar(15) not null primary key
+)
+
+create table USER_ROLES
+(
+  USER_NAME varchar(15) not null,
+  ROLE_NAME varchar(15) not null,
+  primary key( USER_NAME, ROLE_NAME )
+)
+
+insert into USERS(USER_NAME,USER_PASS) values('tomcat','tomcat')
+
+insert into ROLES(ROLE_NAME) values('tomcat')
+
+insert into ROLES(ROLE_NAME) values('role1')
+
+insert into USERS(USER_NAME,USER_PASS) values('user1','tomcat')
+
+insert into USERS(USER_NAME,USER_PASS) values('user2','tomcat')
+
+insert into USER_ROLES(ROLE_NAME,USER_NAME) values('tomcat','user1')
+
+insert into USER_ROLES(ROLE_NAME,USER_NAME) values('role1','user2')
+
+
+
+
+﻿;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+CREATE TABLE izintalepyonetimi.personelbilgisi (
+  SicilNo bigint(20) NOT NULL AUTO_INCREMENT,
+  Ad varchar(25) DEFAULT NULL,
+  Soyad varchar(25) DEFAULT NULL,
+  TelefonNumarasi int(11) DEFAULT NULL,
+  Adres varchar(255) DEFAULT NULL,
+  IseBaslangicTarihi date DEFAULT NULL,
+  Departman varchar(55) DEFAULT NULL,
+  IkinciYoneticiOnay boolean DEFAULT NULL,
+  PRIMARY KEY (SicilNo)
+)
+ENGINE = INNODB,
+CHARACTER SET utf8mb4,
+COLLATE utf8mb4_0900_ai_ci;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+CREATE TABLE izintalepyonetimi.izinhakedis (
+  SicilNo bigint(20) NOT NULL AUTO_INCREMENT,
+  GecerliOlacagiTarih date NOT NULL,
+  HakedilenGunSayisi int(3) NOT NULL,
+  MevcutYilIcinHakedilenGunSayisi int(3) NOT NULL,
+  PRIMARY KEY (SicilNo)
+)
+ENGINE = INNODB,
+CHARACTER SET utf8,
+COLLATE utf8_turkish_ci;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+CREATE TABLE izintalepyonetimi.izintalebi (
+  Id bigint(20) NOT NULL AUTO_INCREMENT,
+  SicilNo bigint(20) DEFAULT NULL,
+  IzinOlusturmaTarihi date DEFAULT NULL,
+  BaslangicTarihi date DEFAULT NULL,
+  DonusTarihi date DEFAULT NULL,
+  Gun int(3) DEFAULT NULL,
+  IzinNedeni varchar(55) DEFAULT NULL,
+  Aciklama varchar(255) DEFAULT NULL,
+  IkiniciYoneticiOnayi tinyint(1) DEFAULT NULL,
+  BirinciYoneticiOnayi tinyint(1) DEFAULT NULL,
+  IkOnayi tinyint(1) DEFAULT NULL,
+  Durum tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (Id)
+)
+ENGINE = INNODB,
+CHARACTER SET utf8mb4,
+COLLATE utf8mb4_0900_ai_ci;
