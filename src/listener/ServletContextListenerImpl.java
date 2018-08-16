@@ -13,7 +13,7 @@ public class ServletContextListenerImpl implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 
-		Properties appProperties = PropertiesService.getProperties();
+		Properties appProperties = PropertiesService.getProperties();//propertyler dosyadan okundu
 		try {
 			ServiceFacede.getInstance().initialize(appProperties);
 		} catch (Exception e) {

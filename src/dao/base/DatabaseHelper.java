@@ -10,10 +10,10 @@ import bean.DatabaseProperties;
 
 public class DatabaseHelper {
 
-	DatabaseProperties databaseProperties = null;
+	static DatabaseProperties databaseProperties = null;
 
-	protected void init(DatabaseProperties databaseProperties) {
-		this.databaseProperties = databaseProperties;
+	protected void init(DatabaseProperties dbaseProperties) {
+		DatabaseHelper.databaseProperties = dbaseProperties;
 	}
 
 	public Connection getConnection() throws Exception {
@@ -28,8 +28,8 @@ public class DatabaseHelper {
 		Connection conn = null;
 		try {
 			Class.forName(databaseProperties.getDatabaseDriver()).newInstance();
-			conn = (Connection) DriverManager.getConnection(databaseProperties.getDatabaseConnectionURL(),
-					databaseProperties.getUsername(), databaseProperties.getPassword());
+			conn = (Connection) DriverManager.getConnection(databaseProperties.getDatabaseConnectionURL(), databaseProperties.getUsername(),
+					databaseProperties.getPassword());
 		} catch (Exception exception) {
 			throw exception;
 		}

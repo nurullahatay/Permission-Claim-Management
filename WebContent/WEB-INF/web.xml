@@ -10,12 +10,12 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   	<servlet>
-		<servlet-name>test</servlet-name>
+		<servlet-name>personelkayit</servlet-name>
 		<servlet-class>controllers.Test</servlet-class>
 	</servlet>
   	<servlet-mapping>
-		<servlet-name>test</servlet-name>
-		<url-pattern>/test</url-pattern>
+		<servlet-name>personelkayit</servlet-name>
+		<url-pattern>/personelkayit</url-pattern>
 	</servlet-mapping>
   <listener>
 		<listener-class>listener.ServletContextListenerImpl</listener-class>
@@ -40,7 +40,7 @@
 		<!-- <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
 			</user-data-constraint> -->
 	</security-constraint>
-
+<!--  -->
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>

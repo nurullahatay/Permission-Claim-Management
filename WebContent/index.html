@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Personel kayıt</title>
+</head>
+<body>
+<form class="form-horizontal" name="kayıt" action="personelkayit" method="post">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Personel kayıt</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">AD</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="ad" placeholder="" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">SOYAD</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="soyad" placeholder="" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">TELEFON NUMARASI</label>  
+  <div class="col-md-4">
+  <input id="textinput" name="telno" placeholder="" class="form-control input-md" type="text">
+    
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="departman">DEPARTMAN</label>
+  <div class="col-md-4">
+    <select id="departman" name="departman" class="form-control">
+      <option value="dep1">Departman1</option>
+      <option value="dep2">Departman2</option>
+      <option value="dep3">Departman3</option>
+    </select>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textarea">ADRES</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="textarea" name="adres"></textarea>
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="checkboxes">İkinci yönetici onayı</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="checkboxes-0">
+      <input name="iyonay" id="checkboxes-0" value="true" type="checkbox">
+      İzin almak için zorunlu ise işaretleyiniz
+    </label>
+	</div>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+   	<input type="submit" value="Submit">
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</body>
+</html>
