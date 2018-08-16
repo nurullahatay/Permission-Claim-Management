@@ -8,7 +8,7 @@ public class PersonelBilgisiDTO {
 	private String soyad;
 	private int telefonnumarasi;
 	private String adres;
-	private Date isebaslangictarihi;
+	private String isebaslangictarihi;
 	private String departman;
 	private boolean ikinciyoneticionay;
 
@@ -52,11 +52,11 @@ public class PersonelBilgisiDTO {
 		this.adres = adres;
 	}
 
-	public Date getIsebaslangictarihi() {
+	public String getIsebaslangictarihi() {
 		return isebaslangictarihi;
 	}
 
-	public void setIsebaslangictarihi(Date isebaslangictarihi) {
+	public void setIsebaslangictarihi(String isebaslangictarihi) {
 		this.isebaslangictarihi = isebaslangictarihi;
 	}
 

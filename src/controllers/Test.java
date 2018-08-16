@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class Test extends HttpServlet {
 		personelBilgisiDTO.setAdres(req.getParameter("adres"));
 		personelBilgisiDTO.setDepartman(req.getParameter("departman"));
 		personelBilgisiDTO.setIkinciyoneticionay(Boolean.parseBoolean(req.getParameter("iyonay")));
+		personelBilgisiDTO.setIsebaslangictarihi((req.getParameter("isebaslamatarihi")));
 		
 		DatabaseInsert databaseInsert = new DatabaseInsert();
 		try {

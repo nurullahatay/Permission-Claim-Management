@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,13 +29,14 @@ public class DatabaseInsert extends DatabaseHelper{
 		Connection conn=getConnection();
 		try {
 			PreparedStatement preparedStatement = null;
-			preparedStatement = conn.prepareStatement("insert into personelbilgisi(Ad, Soyad, TelefonNumarasi, Adres, Departman, IkinciYoneticiOnay) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = conn.prepareStatement("insert into personelbilgisi(Ad, Soyad, TelefonNumarasi, Adres, Departman, IkinciYoneticiOnay, IseBaslangicTarihi) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, personelBilgisiDTO.getAd());
 			preparedStatement.setString(2, personelBilgisiDTO.getSoyad());
 			preparedStatement.setLong(3, personelBilgisiDTO.getTelefonnumarasi());
 			preparedStatement.setString(4, personelBilgisiDTO.getAdres());
 			preparedStatement.setString(5, personelBilgisiDTO.getDepartman());
 			preparedStatement.setBoolean(6, personelBilgisiDTO.isIkinciyoneticionay());
+			preparedStatement.setString(7,personelBilgisiDTO.getIsebaslangictarihi());
 			preparedStatement.execute();
 			conn.commit();
 		} catch (Exception e) {
