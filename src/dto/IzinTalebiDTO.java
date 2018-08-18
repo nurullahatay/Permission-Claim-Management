@@ -1,13 +1,11 @@
 package dto;
 
-import java.util.Date;
-
 public class IzinTalebiDTO {
 	private long id;
 	private long sicilno; // PersonelbilgisiDto'sunda var.
-	private Date izinolusturmatarihi;
-	private Date baslangictarihi;
-	private Date donustarihi;
+	private String izinolusturmatarihi;
+	private String baslangictarihi;
+	private String donustarihi;
 	private int gun;
 	private String izinnedeni;
 	private String aciklama;
@@ -32,27 +30,27 @@ public class IzinTalebiDTO {
 		this.sicilno = sicilno;
 	}
 
-	public Date getIzinolusturmatarihi() {
+	public String getIzinolusturmatarihi() {
 		return izinolusturmatarihi;
 	}
 
-	public void setIzinolusturmatarihi(Date izinolusturmatarihi) {
+	public void setIzinolusturmatarihi(String izinolusturmatarihi) {
 		this.izinolusturmatarihi = izinolusturmatarihi;
 	}
 
-	public Date getBaslangictarihi() {
+	public String getBaslangictarihi() {
 		return baslangictarihi;
 	}
 
-	public void setBaslangictarihi(Date baslangictarihi) {
+	public void setBaslangictarihi(String baslangictarihi) {
 		this.baslangictarihi = baslangictarihi;
 	}
 
-	public Date getDonustarihi() {
+	public String getDonustarihi() {
 		return donustarihi;
 	}
 
-	public void setDonustarihi(Date donustarihi) {
+	public void setDonustarihi(String donustarihi) {
 		this.donustarihi = donustarihi;
 	}
 

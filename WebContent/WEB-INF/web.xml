@@ -17,6 +17,16 @@
 		<servlet-name>personelkayit</servlet-name>
 		<url-pattern>/personelkayit</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>izintalep</servlet-name>
+		<servlet-class>controllers.IzinTalebi</servlet-class>
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>izintalep</servlet-name>
+		<url-pattern>/izintalep</url-pattern>
+	</servlet-mapping>
   <listener>
 		<listener-class>listener.ServletContextListenerImpl</listener-class>
 	</listener>
