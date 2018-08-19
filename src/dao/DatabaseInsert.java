@@ -58,13 +58,14 @@ public class DatabaseInsert extends DatabaseHelper {
 		try {
 			PreparedStatement preparedStatement = null;
 			preparedStatement = conn.prepareStatement(
-					"insert into izintalebi(SicilNo, IzinOlusturmaTarihi, BaslangicTarihi, DonusTarihi, IzinNedeni, Aciklama) values(?,CURDATE(),?,?,?,?)",
+					"insert into izintalebi(SicilNo, IzinOlusturmaTarihi, BaslangicTarihi, DonusTarihi, Gun, IzinNedeni, Aciklama) values(?,CURDATE(),?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setLong(1, izinTalebiDTO.getSicilno());
 			preparedStatement.setString(2, izinTalebiDTO.getBaslangictarihi());
 			preparedStatement.setString(3, izinTalebiDTO.getDonustarihi());
-			preparedStatement.setString(4, izinTalebiDTO.getIzinnedeni());
-			preparedStatement.setString(5, izinTalebiDTO.getAciklama());
+			preparedStatement.setInt(4, izinTalebiDTO.getGun());
+			preparedStatement.setString(5, izinTalebiDTO.getIzinnedeni());
+			preparedStatement.setString(6, izinTalebiDTO.getAciklama());
 			preparedStatement.execute();
 			conn.commit();
 		} catch (Exception e) {

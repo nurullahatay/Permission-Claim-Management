@@ -23,6 +23,7 @@ public class IzinTalebi extends HttpServlet {
 		izinTalebiDTO.setAciklama(req.getParameter("aciklama"));
 		izinTalebiDTO.setBaslangictarihi((req.getParameter("izinbaslangictarihi")));
 		izinTalebiDTO.setDonustarihi((req.getParameter("izinbitistarihi")));
+		izinTalebiDTO.setGun(Integer.parseInt(req.getParameter("gun")));
 		DatabaseInsert databaseInsert = new DatabaseInsert();
 		try {
 			databaseInsert.izinTalep(izinTalebiDTO);
