@@ -1,7 +1,9 @@
-package dao.base;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -12,8 +14,14 @@ public class DatabaseHelper {
 
 	static DatabaseProperties databaseProperties = null;
 
-	protected void init(DatabaseProperties dbaseProperties) {
-		DatabaseHelper.databaseProperties = dbaseProperties;
+	protected void init(Properties appProperties) {
+		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
+		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
+		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
+		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
+		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
+		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
+		
 	}
 
 	public Connection getConnection() throws Exception {

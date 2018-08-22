@@ -6,7 +6,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import properties.PropertiesService;
-import service.ServiceFacede;
+import service.ServiceFacade;;
 
 public class ServletContextListenerImpl implements ServletContextListener {
 
@@ -15,7 +15,7 @@ public class ServletContextListenerImpl implements ServletContextListener {
 
 		Properties appProperties = PropertiesService.getProperties();//propertyler dosyadan okundu
 		try {
-			ServiceFacede.getInstance().initialize(appProperties);
+			ServiceFacade.getInstance().initialize(appProperties);
 		} catch (Exception e) {
 		}
 

@@ -1,15 +1,17 @@
 package dto;
 
-import java.util.Date;
+import java.util.ArrayList;
 
-public class PersonelBilgisiDTO {
+public class Personel {
 	private long sicilno;
 	private String ad;
 	private String soyad;
-	private int telefonnumarasi;
-	private String adres;
+	private String email;
+	private String password;
 	private String isebaslangictarihi;
-	private String departman;
+	private Department departman;
+	private String pozisyon;
+	private ArrayList<String> personelRoles;
 	private boolean ikinciyoneticionay;
 
 	public long getSicilno() {
@@ -36,22 +38,6 @@ public class PersonelBilgisiDTO {
 		this.soyad = soyad;
 	}
 
-	public int getTelefonnumarasi() {
-		return telefonnumarasi;
-	}
-
-	public void setTelefonnumarasi(int telefonnumarasi) {
-		this.telefonnumarasi = telefonnumarasi;
-	}
-
-	public String getAdres() {
-		return adres;
-	}
-
-	public void setAdres(String adres) {
-		this.adres = adres;
-	}
-
 	public String getIsebaslangictarihi() {
 		return isebaslangictarihi;
 	}
@@ -60,11 +46,11 @@ public class PersonelBilgisiDTO {
 		this.isebaslangictarihi = isebaslangictarihi;
 	}
 
-	public String getDepartman() {
+	public Department getDepartman() {
 		return departman;
 	}
 
-	public void setDepartman(String departman) {
+	public void setDepartman(Department departman) {
 		this.departman = departman;
 	}
 
@@ -74,6 +60,38 @@ public class PersonelBilgisiDTO {
 
 	public void setIkinciyoneticionay(boolean ikinciyoneticionay) {
 		this.ikinciyoneticionay = ikinciyoneticionay;
+	}
+
+	public String getPozisyon() {
+		return pozisyon;
+	}
+
+	public void setPozisyon(String pozisyon) {
+		this.pozisyon = pozisyon;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public ArrayList<String> getPersonelRoles() {
+		return personelRoles;
+	}
+
+	public void setPersonelRoles(ArrayList<String> personelRoles) {
+		this.personelRoles = personelRoles;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
