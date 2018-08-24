@@ -11,16 +11,11 @@ import javax.sql.DataSource;
 import bean.DatabaseProperties;
 
 public class DatabaseHelper {
+	  DatabaseProperties databaseProperties = null;
 
-	static DatabaseProperties databaseProperties = null;
-
-	protected void init(Properties appProperties) {
-		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
-		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
-		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
-		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
-		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
-		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
+	protected void init(DatabaseProperties databaseProperties) {
+		 
+		this.databaseProperties = databaseProperties;
 		
 	}
 
