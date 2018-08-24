@@ -16,10 +16,21 @@ import dto.Personel;
 public class PersonelDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(PersonelDAO.class);
 
+	DatabaseProperties databaseProperties = null;
+
 	public void init(Properties appProperties) {
-		logger.debug("PersonelDAO init metodu çalışmaya başladı.");
-		super.init(appProperties);
-		logger.debug("PersonelDAO init metodu çalışması bitti.");
+
+		DatabaseProperties databaseProperties = new DatabaseProperties();
+
+		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
+		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
+		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
+		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
+		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
+		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
+
+		super.init(databaseProperties);
+
 	}
 
 	public void addPersonel(Personel personel) throws Exception {
