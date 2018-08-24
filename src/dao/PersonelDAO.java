@@ -1,9 +1,16 @@
 package dao;
-
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
-import dao.DatabaseHelper;
+
+import com.mysql.jdbc.PreparedStatement;
+
+import bean.DatabaseProperties;
+import dao.base.DatabaseHelper;
+import dto.Department;
 import dto.Personel;
 
 public class PersonelDAO extends DatabaseHelper {
