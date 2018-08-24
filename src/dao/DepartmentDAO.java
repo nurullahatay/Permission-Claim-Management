@@ -1,8 +1,15 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
+
+import com.mysql.jdbc.PreparedStatement;
+
+import bean.DatabaseProperties;
 import dto.Department;
 
 public class DepartmentDAO extends DatabaseHelper {
