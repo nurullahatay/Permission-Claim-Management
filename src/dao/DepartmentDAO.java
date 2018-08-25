@@ -1,21 +1,13 @@
 package dao;
 
 import java.sql.Connection;
-<<<<<<< HEAD
 import java.sql.PreparedStatement;
-=======
->>>>>>> ebe96d6d8ff7d6b5844b0c98e3cdf367949a20f5
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 
-<<<<<<< HEAD
-=======
-import com.mysql.jdbc.PreparedStatement;
-
->>>>>>> ebe96d6d8ff7d6b5844b0c98e3cdf367949a20f5
 import bean.DatabaseProperties;
 import dto.Department;
 

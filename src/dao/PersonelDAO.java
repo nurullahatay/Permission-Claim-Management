@@ -1,58 +1,33 @@
 package dao;
-<<<<<<< HEAD
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-=======
-import java.sql.Connection;
->>>>>>> ebe96d6d8ff7d6b5844b0c98e3cdf367949a20f5
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 
-<<<<<<< HEAD
 import bean.DatabaseProperties;
 import dao.DatabaseHelper;
-=======
-import com.mysql.jdbc.PreparedStatement;
-
-import bean.DatabaseProperties;
-import dao.base.DatabaseHelper;
->>>>>>> ebe96d6d8ff7d6b5844b0c98e3cdf367949a20f5
 import dto.Department;
 import dto.Personel;
 
 public class PersonelDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(PersonelDAO.class);
 
-	DatabaseProperties databaseProperties = null;
-
 	public void init(Properties appProperties) {
-<<<<<<< HEAD
 		logger.debug("PersonelDAO init metodu çalışmaya başladı.");
 		
 		DatabaseProperties databaseProperties = new DatabaseProperties();
-=======
-
-		DatabaseProperties databaseProperties = new DatabaseProperties();
-
->>>>>>> ebe96d6d8ff7d6b5844b0c98e3cdf367949a20f5
 		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
 		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
 		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
 		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
 		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
 		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
-<<<<<<< HEAD
 		super.init(databaseProperties);
 		logger.debug("PersonelDAO init metodu çalışması bitti.");
-=======
-
-		super.init(databaseProperties);
-
->>>>>>> ebe96d6d8ff7d6b5844b0c98e3cdf367949a20f5
 	}
 
 	public void addPersonel(Personel personel) throws Exception {
