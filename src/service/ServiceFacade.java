@@ -1,51 +1,52 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import dao.DepartmentDAO;
-import dao.PermissionDAO;
-import dao.PersonelDAO;
-import dao.RightOfPermissionDAO;
+
+import bean.DatabaseProperties;
+import dao.base.DepartmentDAO;
+import dao.base.PermissionDAO;
+import dao.base.PersonelDAO;
+import dao.base.RightOfPermissionDAO;
+import dto.RightOfPermission;
 import dto.Department;
 import dto.Permission;
 import dto.Personel;
-import dto.RightOfPermission;
 
-public class ServiceFacade {
 
-	private static ServiceFacade serviceFacede;
+public class ServiceFacede {
+private static ServiceFacede serviceFacede;
 	
 	private DepartmentDAO departmentDAO = null;
 	private PersonelDAO personelDAO = null;
 	private PermissionDAO permissionDAO = null;
 	private RightOfPermissionDAO rightOfPermissionDAO = null;
 
-	private ServiceFacade() {
+	private ServiceFacede() {
 	}
 
-	public static ServiceFacade getInstance() {
+	public static ServiceFacede getInstance() {
 		if (serviceFacede == null) {
-			serviceFacede = new ServiceFacade();
+			serviceFacede = new ServiceFacede();
 		}
 		return serviceFacede;
 	}
 
 	public void initialize(Properties appProperties) throws Exception {
 		departmentDAO = new DepartmentDAO();
-		
-		
 		permissionDAO = new PermissionDAO();
-		
 		rightOfPermissionDAO = new RightOfPermissionDAO();
 		personelDAO = new PersonelDAO();
 		departmentDAO.init(appProperties);
 
-		rightOfPermissionDAO.init(appProperties);
-		permissionDAO.init(appProperties);
+		
 		personelDAO.init(appProperties);
-
-
-
+	
+		permissionDAO.init(appProperties);
+		
+	
+		rightOfPermissionDAO.init(appProperties);
 	}
 
 	public void shutdown() {
@@ -61,18 +62,15 @@ public class ServiceFacade {
 		return departmentDAO.getDepartment(id);
 	}
 	
-	public List<Department> getAllDepartment() throws Exception {
-		return departmentDAO.getAllDepartment();
-	}
-	
+ 
 	public void updateDepartment(Department department) throws Exception {
 		departmentDAO.updateDepartment(department);
 	}
 	
-	public void deleteDepartment(Department department) throws Exception {
-		departmentDAO.deleteDepartment(department);
+	public ArrayList<Department>     getAllDepartment() throws Exception {
+		return departmentDAO.getAllDepartment();
 	}
-	
+ //////////////////////////////////////////////////////////////////////////77777
 	
 	public void addPermission(Permission permission) throws Exception {
 		permissionDAO.addPermission(permission);
@@ -81,11 +79,7 @@ public class ServiceFacade {
 	public Permission getPermission(long id) throws Exception {
 		return permissionDAO.getPermission(id);
 	}
-	
-	public List<Permission> getAllPermission() throws Exception {
-		return permissionDAO.getAllPermission();
-	}
-	
+ 
 	public void updatePermission(Permission permission) throws Exception {
 		permissionDAO.updatePermission(permission);
 	}
@@ -94,7 +88,55 @@ public class ServiceFacade {
 		permissionDAO.deletePermission(permission);
 	}
 	
+	public void firstManagerApprove(Permission permission) throws Exception {
+		permissionDAO.firstManagerApprove(permission);
+	}
 	
+	public void secondManagerApprove(Permission permission) throws Exception {
+		permissionDAO.secondManagerApprove(permission);
+	}
+	public void ikApprove(Permission permission) throws Exception {
+		permissionDAO.ikApprove(permission);
+	}
+	public void getNewPermissionsForFirstManager() throws Exception {
+		permissionDAO.getNewPermissionsForFirstManager();
+	}
+	public void getNewPermissionsForSecondManager() throws Exception {
+		permissionDAO.getNewPermissionsForFirstManager();
+	}
+ 
+	public ArrayList<Permission> getAllPermission() throws Exception {
+		return permissionDAO.getAllPermission();
+	}
+	
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////77
+	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+		rightOfPermissionDAO.addRightOfPermission(rightOfPermission);
+	}
+
+	public RightOfPermission getRightOfPermission(long sicilNo) throws Exception {
+		return rightOfPermissionDAO.getRightOfPermission(sicilNo);
+	}
+
+ 
+	
+	public void updateRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+		rightOfPermissionDAO.updateRightOfPermission(rightOfPermission);
+	}
+	
+	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+		rightOfPermissionDAO.deleteRightOfPermission(rightOfPermission);
+	}
+	
+	
+	public ArrayList<RightOfPermission>     getAllRightOfPermission() throws Exception {
+		return rightOfPermissionDAO.getAllRightOfPermission();
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////
 	public void addPersonel(Personel personel) throws Exception {
 		personelDAO.addPersonel(personel);
 	}
@@ -103,9 +145,10 @@ public class ServiceFacade {
 		return personelDAO.getPersonel(sicilNo);
 	}
 	
-	public List<Personel> getAllPersonel() throws Exception {
+	public ArrayList<Personel>     getAllPersonel() throws Exception {
 		return personelDAO.getAllPersonel();
 	}
+	 
 	
 	public void updatePersonel(Personel personel) throws Exception {
 		personelDAO.updatePersonel(personel);
@@ -115,29 +158,13 @@ public class ServiceFacade {
 		personelDAO.deletePersonel(personel);
 	}
 	
-	public Personel getPersonelDetailWithEmail(String email) {
-		return personelDAO.getPersonelDetailWithEmail(email);
-	}
 	
-	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
-		rightOfPermissionDAO.addRightOfPermission(rightOfPermission);
-	}
-
-	public RightOfPermission getRightOfPermission(long sicilNo) throws Exception {
-		return rightOfPermissionDAO.getRightOfPermission(sicilNo);
-	}
 	
-	public List<RightOfPermission> getAllRightOfPermission() throws Exception {
-		return rightOfPermissionDAO.getAllRightOfPermission();
-	}
 	
-	public void updateRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
-		rightOfPermissionDAO.updateRightOfPermission(rightOfPermission);
-	}
 	
-	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
-		rightOfPermissionDAO.deleteRightOfPermission(rightOfPermission);
-	}
-
+	
+	
+	
+	
 	
 }
