@@ -30,6 +30,7 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 	}
 
 	
+	
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
@@ -85,7 +86,7 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 				rightOfPermission.setMevcutYilIciHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
 				rightOfPermission.setHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVED"));
 				rightOfPermission.setGecerliOlacagiTarih(null);
-				System.out.println(rs.getLong("SICILNO"));
+				System.out.println(rs.getLong("SICILNO"));///konsoldan gör
 
 			} else {
 				System.out.println("olmadi");
@@ -100,38 +101,43 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 
 	}
 
-	public List<RightOfPermission> getAllRightOfPermission() throws Exception {
-		PreparedStatement pst = null;
+	public ArrayList<RightOfPermission> getAllRightOfPermission() throws Exception {
+		logger.debug("getAllcompanies is started");
+
+		Connection con = null;
+	 
 		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		RightOfPermission rightOfPermission;
 		ArrayList<RightOfPermission> rightOfPermissions = new ArrayList<>();
-		String query = "SELECT * FROM rightofpermission ";
-
 		try {
-			Connection conn = (Connection) getConnection();
+			String query = "SELECT *   FROM  rightofpermission ";
+			logger.debug("sql query created : " + query);
+			con = getConnection();
+			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			rs = preparedStatement.executeQuery();
 
-			pst = (PreparedStatement) conn.prepareStatement(query);
-
-			rs = pst.executeQuery();
-
-			if (rs.next()) {
-				RightOfPermission rightOfPermission = new RightOfPermission();
-				rightOfPermission.setSicilNo(rs.getLong("SICILNO"));
-				rightOfPermission.setMevcutYilIciHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
-				rightOfPermission.setHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVED"));
-				rightOfPermission.setGecerliOlacagiTarih(null);
-				rightOfPermissions.add(rightOfPermission);
-			} else {
-				System.out.println("olmadi");
+			while (rs.next()) {
+				rightOfPermission = new RightOfPermission();
+				  System.out.println(rs.getLong(1));
+					 
+					rightOfPermission.setSicilNo(rs.getLong("SICILNO"));
+					rightOfPermission.setMevcutYilIciHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
+					rightOfPermission.setHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVED"));
+					rightOfPermission.setGecerliOlacagiTarih(null);
+					rightOfPermissions.add(rightOfPermission);
 			}
 		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
+			logger.error(e.getMessage());
 		} finally {
-
+		 
+			closeConnection(con);
 		}
-
+		logger.debug("getAllcompany finished. company # is " + rightOfPermissions.size());
 		return rightOfPermissions;
 
 	}
+ 
 
 	public void updateRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		Connection conn = (Connection) getConnection();
@@ -196,4 +202,3 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 	}
 
 }
-
