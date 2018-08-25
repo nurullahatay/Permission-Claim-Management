@@ -30,7 +30,7 @@ public class PermissionDAO extends DatabaseHelper {
 		logger.debug("PersonelDAO init metodu çalışması bitti.");
 	}
 
-	public void addPermission(Permission permission) throws Exception {
+		public void addPermission(Permission permission) throws Exception {
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
@@ -110,23 +110,25 @@ public class PermissionDAO extends DatabaseHelper {
 
 	}
 
-	public List<Permission> getAllPermission() throws Exception {
-		PreparedStatement pst = null;
+	public ArrayList<Permission> getAllPermission() throws Exception {
+		logger.debug("getAllcompanies is started");
+
+		Connection con = null;
+	 
 		ResultSet rs = null;
-	
-		String query = "SELECT  * FROM permission  ";
+		PreparedStatement preparedStatement = null;
+		Permission permission;
 		ArrayList<Permission> permissions = new ArrayList<>();
-
 		try {
-			Connection conn = (Connection) getConnection();
+			String query = "SELECT * FROM permission";
+			logger.debug("sql query created : " + query);
+			con = getConnection();
+			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			rs = preparedStatement.executeQuery();
 
-			pst = (PreparedStatement) conn.prepareStatement(query);
-
-		 
-			rs = pst.executeQuery();
-			// dto'da form no var ama database yok ona bak istersen eklerim...
-			if (rs.next()) {
-				Permission permission = new Permission();
+			while (rs.next()) {
+				  permission = new Permission();
+				  System.out.println(rs.getLong("ID"));
 				permission.setId(rs.getLong("ID"));
 				permission.setSicilNo(rs.getLong("SICILNO"));
 				permission.setAciklama(rs.getString("DESCRIPTION"));
@@ -141,18 +143,15 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
 				permissions.add(permission);
-			} else {
-				System.out.println("olmadi");
 			}
 		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
+			logger.error(e.getMessage());
 		} finally {
-
+		 
+			closeConnection(con);
 		}
-
+		logger.debug("getAllcompany finished. company # is " + permissions.size());
 		return permissions;
-
-
 	}
 
 	public void updatePermission(Permission permission) throws Exception {
@@ -160,36 +159,34 @@ public class PermissionDAO extends DatabaseHelper {
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
 		try {
+			query.append("UPDATE permission  SET ");
 			query.append(
-					"UPDATE permission  SET ");
-			query.append("SICILNO = ? ,PERMISSIONCREATINGHISTORY = NOW()  ,STARTINGDATE = NOW()  ,DATEOFRETURN = NOW() ");
+					"SICILNO = ? ,PERMISSIONCREATINGHISTORY = NOW()  ,STARTINGDATE = NOW()  ,DATEOFRETURN = NOW() ");
 			query.append(" ,DAY = ?  ,PERMISSIONREASON = ? ,");
 			query.append(" DESCRIPTION = ? ,PHONENUMBER = ?  ,ADDRESS = ?");
-			query.append(",SECONDMANAGERAPPROVAL = ? ,FIRSTMANAGERAPPROVAL = ?  ,IKAPPROVAL = ?, STATUS = ?   WHERE ID = ? ");
+			query.append(
+					",SECONDMANAGERAPPROVAL = ? ,FIRSTMANAGERAPPROVAL = ?  ,IKAPPROVAL = ?, STATUS = ?   WHERE ID = ? ");
 			String queryString = query.toString();
-			
+
 			System.out.println(queryString);
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
 			stmt.setLong(1, permission.getSicilNo());
 			stmt.setInt(2, permission.getGun());
-			stmt.setString(3,permission.getIzinNedeni());
+			stmt.setString(3, permission.getIzinNedeni());
 
-			stmt.setString(4,permission.getAciklama());
-			stmt.setString(5,permission.getTelefonNumarasi());
-			stmt.setString(6,permission.getAdres());
+			stmt.setString(4, permission.getAciklama());
+			stmt.setString(5, permission.getTelefonNumarasi());
+			stmt.setString(6, permission.getAdres());
 			stmt.setBoolean(7, permission.isIkinciYoneticiOnayi());
 			stmt.setBoolean(8, permission.isBirinciYoneticiOnayi());
 			stmt.setBoolean(9, permission.isIkOnayi());
 			stmt.setBoolean(10, permission.isDurum());
 			stmt.setLong(11, permission.getId());
-			 
 
 			stmt.executeUpdate();
 
 			logger.error("update Basarıyla Göndelirdi");
-
- 
 
 		} catch (Exception e) {
 			logger.error("update islevinde sıkıntı oldu");
@@ -203,34 +200,273 @@ public class PermissionDAO extends DatabaseHelper {
 	}
 
 	public void deletePermission(Permission permission) throws Exception {
-		int temp =(int) permission.getId();//ID isterse rollerden gelebilir.
-		int sicilNo = (int)temp;
-		 
-				// departman user ve ticket kontrolu
-				Connection con = null;
-				PreparedStatement pstDepartment = null;
-				StringBuilder queryDeleteDepartment = new StringBuilder();
+		int temp = (int) permission.getId();// ID isterse rollerden gelebilir.
+		int sicilNo = (int) temp;
 
-				try {
-					
-					queryDeleteDepartment.append("DELETE FROM permission ");
-					queryDeleteDepartment.append("WHERE ID=?");
-					String queryString = queryDeleteDepartment.toString();
-					logger.debug("sql sorgusu: " + queryString);
+		// departman user ve ticket kontrolu
+		Connection con = null;
+		PreparedStatement pstDepartment = null;
+		StringBuilder queryDeleteDepartment = new StringBuilder();
 
-					con = getConnection();
-					pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+		try {
 
-			  
-					pstDepartment.setLong(1, sicilNo);
-					pstDepartment.executeUpdate();
+			queryDeleteDepartment.append("DELETE FROM permission ");
+			queryDeleteDepartment.append("WHERE ID=?");
+			String queryString = queryDeleteDepartment.toString();
+			logger.debug("sql sorgusu: " + queryString);
 
-				} catch (Exception e) {
-					logger.error("error:" + e.getMessage());
-				} finally {
-					 
-					closeConnection(con);
-				}
-				logger.debug("deleteDepartment is finished");
+			con = getConnection();
+			pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+
+			pstDepartment.setLong(1, sicilNo);
+			pstDepartment.executeUpdate();
+
+		} catch (Exception e) {
+			logger.error("error:" + e.getMessage());
+		} finally {
+
+			closeConnection(con);
+		}
+		logger.debug("deleteDepartment is finished");
+	}
+
+	public void firstManagerApprove(Permission permission) throws Exception {
+	/*
+	 * ornek Servlet gonderimi
+	 * 
+	 Permission permission=new Permission();
+	permission.setId(1);
+	permission.setBirinciYoneticiOnayi(true);
+			ServiceFacede.getInstance().  firstManagerApprove(permission);
+	 * 
+	 * 
+	 * */
+		int firstmanagerapproval;
+		int temp = (int) permission.getId();
+		Boolean temp2 = permission.isBirinciYoneticiOnayi();
+		int id = (int) temp;
+		if (temp2 == true) {
+
+			firstmanagerapproval = 1;
+		} else
+			firstmanagerapproval = 0;
+		Connection con = null;
+		PreparedStatement pstDepartment = null;
+		StringBuilder query = new StringBuilder();
+
+		try {
+
+			query.append("UPDATE permission  SET");
+			query.append(" FIRSTMANAGERAPPROVAL = ? ");
+			query.append("WHERE ID=?");
+			String queryString = query.toString();
+			System.out.println(queryString);
+			logger.debug("sql sorgusu: " + queryString);
+
+			con = getConnection();
+			pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+
+			pstDepartment.setInt(1, firstmanagerapproval);
+			pstDepartment.setLong(2, id);
+			pstDepartment.executeUpdate();
+
+		} catch (Exception e) {
+			logger.error("error:" + e.getMessage());
+		} finally {
+
+			closeConnection(con);
+		}
+	 
+	}
+	
+	public void secondManagerApprove(Permission permission) throws Exception {
+	/*
+	 * ornek Servlet gonderimi
+	 * 
+	Permission permission=new Permission();
+	permission.setId(1);
+	permission.setIkinciYoneticiOnayi(true);
+			ServiceFacede.getInstance().  secondManagerApprove(permission);
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	 * 
+	 * */
+		int secondmanagerapproval;
+		int temp = (int) permission.getId();
+		Boolean temp2 = permission.isIkinciYoneticiOnayi();
+		int id = (int) temp;
+		if (temp2 == true) {
+
+			secondmanagerapproval = 1;
+		} else
+			secondmanagerapproval = 0;
+		Connection con = null;
+		PreparedStatement pstDepartment = null;
+		StringBuilder query = new StringBuilder();
+
+		try {
+
+			query.append("UPDATE permission  SET");
+			query.append(" SECONDMANAGERAPPROVAL = ? ");
+			query.append("WHERE ID=?");
+			String queryString = query.toString();
+			System.out.println(queryString);
+			logger.debug("sql sorgusu: " + queryString);
+
+			con = getConnection();
+			pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+
+			pstDepartment.setInt(1, secondmanagerapproval);
+			pstDepartment.setLong(2, id);
+			pstDepartment.executeUpdate();
+
+		} catch (Exception e) {
+			logger.error("error:" + e.getMessage());
+		} finally {
+
+			closeConnection(con);
+		}
+	 
+	}
+	
+	public void ikApprove(Permission permission) throws Exception {
+		/*
+		 * ornek Servlet gonderimi
+		 * 
+		try {
+	Permission permission=new Permission();
+	permission.setId(1);
+	permission.setIkOnayi(true);
+			ServiceFacede.getInstance().  secondManagerApprove(permission);
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 * 
+		 * */
+			int ikapproval;
+			int temp = (int) permission.getId();
+			Boolean temp2 = permission.isIkOnayi();
+			int id = (int) temp;
+			if (temp2 == true) {
+
+				ikapproval = 1;
+			} else
+				ikapproval = 0;
+			Connection con = null;
+			PreparedStatement pstDepartment = null;
+			StringBuilder query = new StringBuilder();
+
+			try {
+
+				query.append("UPDATE permission  SET");
+				query.append(" IKAPPROVAL = ?,STATUS=? ");
+				query.append("WHERE ID=?");
+				String queryString = query.toString();
+				System.out.println(queryString);
+				logger.debug("sql sorgusu: " + queryString);
+
+				con = getConnection();
+				pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+
+				pstDepartment.setInt(1, ikapproval);
+				pstDepartment.setInt(2, ikapproval);
+				pstDepartment.setLong(3, id);
+				pstDepartment.executeUpdate();
+
+			} catch (Exception e) {
+				logger.error("error:" + e.getMessage());
+			} finally {
+
+				closeConnection(con);
 			}
 	}
+	
+	public List<Permission> getNewPermissionsForFirstManager() throws Exception {
+		logger.debug("getAllcompanies is started");
+
+		Connection con = null;
+	 
+		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		Permission permission;
+		ArrayList<Permission> permissions = new ArrayList<>();
+		try {
+			String query = "SELECT  * FROM permission WHERE FIRSTMANAGERAPPROVAl  IS NULL";
+			logger.debug("sql query created : " + query);
+			con = getConnection();
+			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				  permission = new Permission();
+				  System.out.println(rs.getLong("ID"));
+				permission.setId(rs.getLong("ID"));
+				permission.setSicilNo(rs.getLong("SICILNO"));
+				permission.setAciklama(rs.getString("DESCRIPTION"));
+				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
+				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
+				permission.setDurum(rs.getBoolean("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
+				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
+				permission.setGun(rs.getInt("DAY"));
+				permissions.add(permission);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+		 
+			closeConnection(con);
+		}
+		logger.debug("getAllcompany finished. company # is " + permissions.size());
+		return permissions;
+ }
+
+	public List<Permission> getNewPermissionsForSecondManager() throws Exception {
+		logger.debug("getAllcompanies is started");
+
+		Connection con = null;
+	 
+		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		Permission permission;
+		ArrayList<Permission> permissions = new ArrayList<>();
+		try {
+			String query = "SELECT *   FROM permission WHERE FIRSTMANAGERAPPROVAL=1 AND   SECONDMANAGERAPPROVAL  IS NULL ";
+			logger.debug("sql query created : " + query);
+			con = getConnection();
+			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				  permission = new Permission();
+				  System.out.println(rs.getLong("ID"));
+				permission.setId(rs.getLong("ID"));
+				permission.setSicilNo(rs.getLong("SICILNO"));
+				permission.setAciklama(rs.getString("DESCRIPTION"));
+				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
+				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
+				permission.setDurum(rs.getBoolean("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
+				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
+				permission.setGun(rs.getInt("DAY"));
+				permissions.add(permission);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+		 
+			closeConnection(con);
+		}
+		logger.debug("getAllcompany finished. company # is " + permissions.size());
+		return permissions;
+ }
