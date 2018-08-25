@@ -114,6 +114,14 @@ public class Permission {
 	public void setDurum(boolean durum) {
 		this.durum = durum;
 	}
+	@Override
+	public String toString() {
+		return "Permission [id=" + id + ", sicilNo=" + sicilNo + ", sahibi=" + sahibi + ", formNo=" + formNo
+				+ ", formTarihi=" + formTarihi + ", baslangicTarihi=" + baslangicTarihi + ", bitisTarihi=" + bitisTarihi
+				+ ", gun=" + gun + ", izinNedeni=" + izinNedeni + ", aciklama=" + aciklama + ", telefonNumarasi="
+				+ telefonNumarasi + ", adres=" + adres + ", birinciYoneticiOnayi=" + birinciYoneticiOnayi
+				+ ", ikinciYoneticiOnayi=" + ikinciYoneticiOnayi + ", ikOnayi=" + ikOnayi + ", durum=" + durum + "]";
+	}
 
 	
 }

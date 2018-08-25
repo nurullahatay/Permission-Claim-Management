@@ -8,6 +8,36 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>controllers.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>controllers.LogoutServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+
+<servlet>
+		<servlet-name>dddd</servlet-name>
+		<servlet-class>controllers.deneme</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dddd</servlet-name>
+		<url-pattern>/dede</url-pattern>
+	</servlet-mapping>
+
 	<listener>
 		<listener-class>listener.ServletContextListenerImpl</listener-class>
 	</listener>
@@ -16,16 +46,6 @@
 		<param-name>log4jConfiguration</param-name>
 		<param-value>log4j.xml</param-value>
 	</context-param>
-
-
-	<servlet>
-		<servlet-name>LogoutServlet</servlet-name>
-		<servlet-class>controllers.LogoutServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>LogoutServlet</servlet-name>
-		<url-pattern>/logout</url-pattern>
-	</servlet-mapping>
 
 
 

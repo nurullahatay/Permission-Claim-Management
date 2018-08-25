@@ -1,109 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<title>İzin Talep Yönetimi</title>
 <meta charset="UTF-8">
-<title>Personel kayıt</title>
-</head>
-<body>
-	<form class="form-horizontal" name="kayıt" action="personelkayit"
-		method="post">
-		<fieldset>
-
-			<!-- Form Name -->
-			<legend>Personel kayıt</legend>
-
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="textinput">AD</label>
-				<div class="col-md-4">
-					<input id="textinput" name="ad" placeholder=""
-						class="form-control input-md" type="text">
-
-				</div>
-			</div>
-
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="textinput">SOYAD</label>
-				<div class="col-md-4">
-					<input id="textinput" name="soyad" placeholder=""
-						class="form-control input-md" type="text">
-
-				</div>
-			</div>
-
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="textinput">TELEFON
-					NUMARASI</label>
-				<div class="col-md-4">
-					<input id="textinput" name="telno" placeholder=""
-						class="form-control input-md" type="text">
-
-				</div>
-			</div>
-
-			<!-- Select Basic -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="departman">DEPARTMAN</label>
-				<div class="col-md-4">
-					<select id="departman" name="departman" class="form-control">
-						<option value="dep1">Departman1</option>
-						<option value="dep2">Departman2</option>
-						<option value="dep3">Departman3</option>
-					</select>
-				</div>
-			</div>
-
-			<!-- Textarea -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="textarea">ADRES</label>
-				<div class="col-md-4">
-					<textarea class="form-control" id="textarea" name="adres"></textarea>
-				</div>
-			</div>
-
-			<!-- Multiple Checkboxes -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="checkboxes">İkinci
-					yönetici onayı</label>
-				<div class="col-md-4">
-					<div class="checkbox">
-						<label for="checkboxes-0"> <input name="iyonay"
-							id="checkboxes-0" value="true" type="checkbox"> İzin
-							almak için zorunlu ise işaretleyiniz
-						</label>
-					</div>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="datepicker">İşe başlangıç tarihi</label>
-				<div class="col-md-4">
-					<div class="datepicker">
-						<input id="tarih" type="text">
-						<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-						<input type="hidden" id="tarih-db" name="isebaslamatarihi">
-						<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-					</div>
-				</div>
-			</div>
-
-			<script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+<!-- Şuanki tarihi gösteren script -->
+<script language="JavaScript" type="text/javascript">
+var d=new Date();
+var monthname=new Array("Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık");
+var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+</script>
+<!-- takvim scriptleri -->
+<script>
+$(document).ready(function(){
 				$(function() {
 					$("#tarih").datepicker(
-							{   beforeShowDay: $.datepicker.noWeekends,
+							{
+								beforeShowDay : $.datepicker.noWeekends,
 								dateFormat : "dd-mm-yy",
 								altFormat : "yy-mm-dd",
 								altField : "#tarih-db",
@@ -116,18 +41,438 @@
 								firstDay : 1,
 							});
 				});
+				});
+</script>
+<script>
+$(document).ready(function(){
+				$(function() {
+					$("#tarih2").datepicker(
+							{
+								beforeShowDay : $.datepicker.noWeekends,
+								dateFormat : "dd-mm-yy",
+								altFormat : "yy-mm-dd",
+								altField : "#tarih-db2",
+								monthNames : [ "Ocak", "Şubat", "Mart",
+										"Nisan", "Mayıs", "Haziran", "Temmuz",
+										"Ağustos", "Eylül", "Ekim", "Kasım",
+										"Aralık" ],
+								dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+										"Cu", "Ct" ],
+								firstDay : 1,
+							});
+				});
+				});
 			</script>
+			<script>
+			$(document).ready(function(){
+				$(function() {
+					$("#gtarih").datepicker(
+							{
+								beforeShowDay : $.datepicker.noWeekends,
+								dateFormat : "dd-mm-yy",
+								altFormat : "yy-mm-dd",
+								altField : "#gtarih-db",
+								monthNames : [ "Ocak", "Şubat", "Mart",
+										"Nisan", "Mayıs", "Haziran", "Temmuz",
+										"Ağustos", "Eylül", "Ekim", "Kasım",
+										"Aralık" ],
+								dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+										"Cu", "Ct" ],
+								firstDay : 1,
+							});
+				});
+				});
+			</script>
+<!-- iki tarih arasındaki çalışma günlerini hesaplayan script -->
+<script>
+$(document).ready(function(){
+	$('#dif').mouseenter(function(){
+  var d1 = $('#tarih-db').val();
+  var d2 = $('#tarih-db2').val();
+		$('#dif').val(workingDaysBetweenDates(d1,d2));
+	});
+});
 
-			<!-- Button -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="singlebutton"></label>
-				<div class="col-md-4">
-					<input type="submit" value="Submit">
-				</div>
-			</div>
+function workingDaysBetweenDates(d0, d1) {
+	var holidays = ['2016-05-03','2016-05-05'];
+    var startDate = parseDate(d0);
+    var endDate = parseDate(d1);  
+    // Validate input
+    if (endDate < startDate) {
+        return 0;
+    }
+    // Calculate days between dates
+    var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
+    startDate.setHours(0,0,0,1);  // Start just after midnight
+    endDate.setHours(23,59,59,999);  // End just before midnight
+    var diff = endDate - startDate;  // Milliseconds between datetime objects    
+    var days = Math.ceil(diff / millisecondsPerDay);
+    
+    // Subtract two weekend days for every week in between
+    var weeks = Math.floor(days / 7);
+    days -= weeks * 2;
 
-		</fieldset>
-	</form>
-<a href="izintalebi.html"><h3>İzin Talep Sayfası</h3></a>
+    // Handle special cases
+    var startDay = startDate.getDay();
+    var endDay = endDate.getDay();
+    
+    // Remove weekend not previously removed.   
+    if (startDay - endDay > 1) {
+        days -= 2;
+    }
+    // Remove start day if span starts on Sunday but ends before Saturday
+    if (startDay == 0 && endDay != 6) {
+        days--;  
+    }
+    // Remove end day if span ends on Saturday but starts after Sunday
+    if (endDay == 6 && startDay != 0) {
+        days--;
+    }
+    /* Here is the code */
+    for (var i in holidays) {
+      if ((holidays[i] >= d0) && (holidays[i] <= d1)) {
+      	days--;
+      }
+    }
+    return days;
+}
+           
+function parseDate(input) {
+	// Transform date from text to date
+  var parts = input.match(/(\d+)/g);
+  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+  return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+}</script>
+<!-- fadeIn fadeOut scriptleri -->
+<script>
+$(document).ready(function(){
+$("#aizinhakedis").click(function(){
+  $("#izinhakedisdiv").fadeIn();
+	 $("#izintalebidiv").fadeOut();
+});
+$("#aizintalebi").click(function(){
+	$("#izintalebidiv").fadeIn();
+	 $("#izinhakedisdiv").fadeOut();
+});
+});
+</script>
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+<!-- dinamik div -->
+<script>
+$(document).ready(function(){
+	 var i = 1;
+	    $("#ekle").click(function () {
+	    	i++;
+			$(".izinhakedis").append('<tr id="izinhakedistr'+i+'"><td><input id="personelarama'+i+'" name="personelarama'+i+'"class="form-control input-md" placeholder="Ara" type="text"></td><td><div class="datepicker"><input id="tarih" class="form-control" type="datepicker"><input type="hidden" id="tarih-db" name="gecerliolacagitarih'+i+'"></div></td><td><input id="hakedilengunsayisi'+i+'" name="hakedilengunsayisi'+i+'" class="form-control input-md" type="text"></td></tr>');
+	    });
+	    $("#sil").click(function(){
+	    	if(i==1)
+	    		{
+	    		alert("En az 1 personel olmalı")
+	    		}
+	    	if(i>1){
+	    	$("#izinhakedistr"+i+"").remove(); <!-- tablodaki satırları sil ––>
+	    	i--;}
+	    });
+});
+</script>
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">-</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+     
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Hoşgeldiniz, <strong>mike</strong></span><br>
+      <a href="logout.jsp" class="w3-bar-item w3-button">
+<i class="fa fa-power-off"></i>&nbsp Çıkış</a>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Kontrol Paneli</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="index.html" class="w3-bar-item w3-button w3-padding w3-blue" style="text-decoration:none"><i class="fa fa-gears fa-fw"></i>  İzin Talep Yönetimi</a>
+    <a href="personelekle.html" class="w3-bar-item w3-button w3-padding" style="text-decoration:none"><i class="fa fa-id-card fa-fw"></i>  Personel Ekle</a>
+    <a href="departmanekle.html" class="w3-bar-item w3-button w3-padding" style="text-decoration:none"><i class="fa fa-building fa-fw"></i>  Departman Ekle</a>
+    <!-- 
+	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
+	-->
+<br><br>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-cog"></i> İzin Talep Yönetimi</b></h5>
+  </header>
+
+  
+  <div class="w3-row-padding w3-margin-bottom">
+    <a href="#" id="aizinhakedis">
+	<div class="w3-quarter">
+      <div class="w3-container w3-hover-black w3-red w3-padding-16">
+        <div class="w3-left"><i class="fa fa-trophy w3-xlarge"></i></div>
+       
+        <h4>&nbsp İzin Hakediş</h4>
+		<h6>Personellerinizin izin hakediş sayfası</h6>
+      </div>
+    </div></a>
+	   <a href="#" id="aiziniptali">
+    <div class="w3-quarter">
+      <div class="w3-container w3-blue w3-hover-black w3-padding-16">
+        <div class="w3-left"><i class="fa fa-remove w3-xlarge"></i></div>
+      
+    
+        <h4>&nbsp İzin İptali</h4>
+		<h6>Henüz tamamlanmamış izinlerin iptali</h6>
+      </div>
+    </div>
+	</a>     <a href="#" id="aizintalebi">
+    <div class="w3-quarter">
+      <div class="w3-container w3-hover-black w3-teal w3-padding-16">
+        <div class="w3-left"><i class="fa fa-edit w3-xlarge"></i></div>
+       
+     
+        <h4>&nbsp İzin Talebi</h4>
+		<h6>İzin talebi için bu sayfayı kullanabilirsiniz</h6>
+      </div>
+    </div></a>    <a href="#" id="atanimlar">
+    <div class="w3-quarter">
+      <div class="w3-container w3-hover-black w3-orange w3-text-white w3-padding-16">
+        <div class="w3-left"><i class="fa fa-sort-alpha-asc w3-xlarge"></i></div>
+  
+        <h4>&nbsp Tanımlar</h4>
+		<h6>böyle bişey yapıcakmıyız anlamadım da</h6>
+      </div>
+    </div></a> 
+
+  <div id="izinhakedisdiv">
+  <fieldset id="izinhakedisdiv">
+  <div class="w3-container"><hr>
+<h2> İzin Hakediş</h2><br>
+    
+	
+	<form class="form-horizontal" name="izintalebi" action="izintalep"
+		method="get">
+			          <table class="w3-table izinhakedis w3-white">
+          			
+			<tr>
+            
+            <th>Personel</th>
+			<th>Geçerli Olacağı Tarih</th>
+			<th>Hakedilen Gün Sayısı </th>
+			
+            
+          </tr>
+          <tr>
+            <td><input id="personelarama" name="personelarama" 
+						class="form-control input-md" placeholder="Ara" type="text"></td>
+					  <td><div class="datepicker">
+						<input id="gtarih" class="form-control" type="text">
+						<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+						<input type="hidden" id="gtarih-db" name="gecerliolacagitarih">
+						<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+					</div></td>
+						 <td><input id="hakedilengunsayisi" name="hakedilengunsayisi" placeholder=""
+						class="form-control input-md" type="text"></td>
+          </tr>
+        </table><br> <table><tr><td>
+<button type="button" id="ekle">Ekle</button>  <button type="button" id="sil">Kaldır</button></td></tr> </table>  <input class="w3-right" class="form-control" type="submit" value="Submit"/></form>
+</div>
+  </fieldset>
+  </div>
+  <div id="izintalebidiv">
+    <fieldset id="izinhakedisdiv">
+  <div class="w3-panel">
+
+    <h2>İzin Talebi</h2><br>
+	 
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-third">
+	  <h5>Personel Bilgisi</h5>
+	  
+	          <table class="w3-table  w3-white">
+          <tr>
+            
+            <td>Personel</td>
+            <td><i><input type="text" class="form-control" size="17px" placeholder="Ara" name="personelarama" id="personelarama"></input></i></td>
+          </tr>
+          <tr>
+            
+            <td>Departman</td>
+            <td><i id="departman">________</i></td>
+          </tr>
+          <tr>
+          
+            <td>Sicil No</td>
+             <td><i id="sicilno">________</i></td>
+          </tr>
+          <tr>
+            
+            <td>İşe Başlama Tarihi</td>
+            <td><i id="isebaslama">________</i></td>
+          </tr>
+          <tr>
+           
+            <td>Formu Dolduran Kişi</td>
+            <td><i id="formudolduran">________</i></td>
+          </tr>
+    
+        </table>
+
+      </div>
+      <div class="w3-twothird">
+        <h6>Genel Bilgiler</h6>
+	
+        <table class="w3-table  w3-white">
+           <tr>
+           
+            <td>Form Oluşturma Tarihi</td>
+            <td><i><b><script language="JavaScript" type="text/javascript">
+                        document.write(TODAY);
+                    </script></b></i></td>
+          </tr>
+          <tr>
+            
+            <td>Kullanılabilecek izin günü sayısı</td>
+            <td><i id="kullanilabilecekizin">_____</i></td>
+          </tr>
+          <tr>
+           
+            <td>Toplam hakedilen izin günü sayısı</td>
+            <td><i id="toplamhakedilen">____</i></td>
+          </tr>
+          
+         
+		  
+        </table>
+		<form class="form-horizontal" name="izintalebi" action="izintalep"
+		method="get">
+		
+		 <h6>İletişim Bilgileri</h6>
+		 <table class="w3-table  w3-white">
+		 <tr>
+		 <td>Telefon Numarası<td>
+		 <td><i><input type="text" class="form-control" id="telno" name="telno"/></i></td>
+		 </tr>
+		  <td>Adres<td>
+		 <td><i><input type="text" class="form-control" id="adres" name="adres"/></i></td>
+		 </table>
+      </div>
+	
+    </div>
+  </div>
+ 
+  <hr>
+  <div class="w3-container">
+
+    <h5>İzin Talep Bilgisi</h5>
+	
+	
+			          <table class="w3-table  w3-white">
+     <tr>
+            
+            <td>İzin başlangıç tarihi</td>
+            <td><i><div class="datepicker">
+						<input id="tarih" class="form-control" type="text">
+						<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+						<input type="hidden" id="tarih-db" name="izinbaslangictarihi">
+						<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+					</div></i></td>
+          </tr>
+          <tr>
+            
+            <td>İzin bitiş tarihi</td>
+            <td><i>	<div class="datepicker">
+						<input id="tarih2" class="form-control" type="text">
+						<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+						<input type="hidden" id="tarih-db2" name="izinbitistarihi">
+						<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+					</div></i></td>
+          </tr>
+          <tr>
+          
+            <td>Gün</td>
+             <td><i>
+					<input type="text" class="form-control" id="dif" name="gun" readonly placeholder="hesaplamak için tıklayınız">
+
+				</i></td>
+          </tr>
+          <tr>
+            
+            <td>İzin nedeni</td>
+            <td><i><select class="form-control" name="izinnedeni">
+  <option value="izinnedeni1">izinnedeni1</option>
+  <option value="izinnedeni2">izinnedeni2</option>
+  <option value="izinnedeni3">izinnedeni3</option>
+  <option value="izinnedeni4">izinnedeni4</option>
+</select></i></td>
+          </tr>
+          <tr>
+           
+            <td>Açıklama</td>
+            <td><i><textarea id="textarea" class="form-control" name="aciklama"></textarea></i></td>
+          </tr>
+		
+        </table>    <input class="w3-right" class="form-control" type="submit" value="Submit"/>
+		</div> </form>
+		  </fieldset>
+		</div>
+<hr>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-dark-grey">
+    <h4>FOOTER</h4>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+
 </body>
 </html>

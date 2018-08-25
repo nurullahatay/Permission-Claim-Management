@@ -1,18 +1,34 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
+
+import bean.DatabaseProperties;
 import dto.Department;
 
 public class DepartmentDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(DepartmentDAO.class);
 
-	public void init(Properties appProperties) {  s
-		logger.debug("DepartmentDAO init metodu çalışmaya başladı.");
-		super.init(appProperties);
-		logger.debug("DepartmentDAO init metodu çalışması bitti.");
+
+	public void init(Properties appProperties) {
+		logger.debug("PersonelDAO init metodu çalışmaya başladı.");
+		
+		DatabaseProperties databaseProperties = new DatabaseProperties();
+		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
+		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
+		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
+		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
+		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
+		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
+		super.init(databaseProperties);
+		logger.debug("PersonelDAO init metodu çalışması bitti.");
 	}
+
 
 	public void addDepartment(Department department ) throws Exception {
 		Connection conn = (Connection) getConnection();
@@ -187,4 +203,6 @@ public class DepartmentDAO extends DatabaseHelper {
 				}
 				logger.debug("deleteDepartment is finished");
 			}
+
+
 	}

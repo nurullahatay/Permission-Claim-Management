@@ -32,16 +32,20 @@ public class ServiceFacade {
 
 	public void initialize(Properties appProperties) throws Exception {
 		departmentDAO = new DepartmentDAO();
-		departmentDAO.init(appProperties);
 		
-		personelDAO = new PersonelDAO();
-		personelDAO.init(appProperties);
 		
 		permissionDAO = new PermissionDAO();
-		permissionDAO.init(appProperties);
 		
 		rightOfPermissionDAO = new RightOfPermissionDAO();
+		personelDAO = new PersonelDAO();
+		departmentDAO.init(appProperties);
+
 		rightOfPermissionDAO.init(appProperties);
+		permissionDAO.init(appProperties);
+		personelDAO.init(appProperties);
+
+
+
 	}
 
 	public void shutdown() {
@@ -65,8 +69,8 @@ public class ServiceFacade {
 		departmentDAO.updateDepartment(department);
 	}
 	
-	public void deleteDepartment(long ID) throws Exception {
-		departmentDAO.deletePersonel(ID);
+	public void deleteDepartment(Department department) throws Exception {
+		departmentDAO.deleteDepartment(department);
 	}
 	
 	
@@ -111,6 +115,9 @@ public class ServiceFacade {
 		personelDAO.deletePersonel(personel);
 	}
 	
+	public Personel getPersonelDetailWithEmail(String email) {
+		return personelDAO.getPersonelDetailWithEmail(email);
+	}
 	
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		rightOfPermissionDAO.addRightOfPermission(rightOfPermission);
@@ -131,4 +138,6 @@ public class ServiceFacade {
 	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		rightOfPermissionDAO.deleteRightOfPermission(rightOfPermission);
 	}
+
+	
 }

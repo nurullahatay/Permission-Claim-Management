@@ -94,4 +94,11 @@ public class Personel {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "Personel [sicilno=" + sicilno + ", ad=" + ad + ", soyad=" + soyad + ", email=" + email + ", password="
+				+ password + ", isebaslangictarihi=" + isebaslangictarihi + ", departman=" + departman + ", pozisyon="
+				+ pozisyon + ", personelRoles=" + personelRoles + ", ikinciyoneticionay=" + ikinciyoneticionay + "]";
+	}
+
 }

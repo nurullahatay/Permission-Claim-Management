@@ -44,8 +44,8 @@ public class DepartmentRest {
 	@POST
 	@Path("/deleteDepartment")
 	@RolesAllowed("admin")
-	public void deleteDepartment(long ID) throws Exception {
-		 ServiceFacade.getInstance().deleteDepartment(ID);
+	public void deleteDepartment(Department department) throws Exception {
+		 ServiceFacade.getInstance().deleteDepartment(department);
 	}
 
 }
