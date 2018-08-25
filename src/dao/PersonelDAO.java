@@ -17,7 +17,7 @@ public class PersonelDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(PersonelDAO.class);
 
 	public void init(Properties appProperties) {
-		logger.debug("PersonelDAO init metodu çalışmaya başladı.");
+		logger.debug("PersonelDAO init metodu Ã§alÄ±ÅŸmaya baÅŸladÄ±.");
 		
 		DatabaseProperties databaseProperties = new DatabaseProperties();
 		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
@@ -27,10 +27,10 @@ public class PersonelDAO extends DatabaseHelper {
 		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
 		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
 		super.init(databaseProperties);
-		logger.debug("PersonelDAO init metodu çalışması bitti.");
+		logger.debug("PersonelDAO init metodu Ã§alÄ±ÅŸmasÄ± bitti.");
 	}
 
-	public void addPersonel(Personel personel) throws Exception {
+		public void addPersonel(Personel personel) throws Exception {
 
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
@@ -64,107 +64,20 @@ public class PersonelDAO extends DatabaseHelper {
 	}
 
 	public Personel getPersonel(long sicilNo) throws Exception {
-		System.out.println("1");
 		PreparedStatement pst = null;
-		System.out.println("2");
 		ResultSet rs = null;
 		Personel personel = new Personel();
-		String query = "SELECT * FROM  PERSONEL WHERE  SICILNO=?";
- 
-		try {
-			System.out.println("geldi");
-			Connection conn =getConnection();
-System.out.println("baglant� ald�");
-			pst = (PreparedStatement) conn.prepareStatement(query);
-System.out.println("prement ald�");
-			pst.setLong(1, sicilNo);
-			rs = pst.executeQuery();
-
-			if (rs.next()) {
-				personel.setAd(rs.getString("NAME"));
-				personel.setSicilno(rs.getLong("SICILNO"));
-				Department departman = new Department();
-				departman.setDepartmentName(rs.getString("DEPARTMENT"));
-				personel.setDepartman(departman);
-				personel.setEmail(rs.getString("EMAIL"));
-				personel.setPassword(rs.getString("PASSWORD"));
-				personel.setSoyad(rs.getString("SURNAME"));
-				personel.setIsebaslangictarihi(rs.getString("DATEOFSTART"));
-				personel.setPozisyon(rs.getString("POSITION"));
-				personel.setIkinciyoneticionay(rs.getBoolean("SECCONDMANAGERAPPROVAL"));
-
-				System.out.println(rs.getString("NAME"));
-
-			} else {
-				System.out.println("olmadi");
-			}
-		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
-		} finally {
-
-		}
-
-		return personel;
-
-	}
-	
-	public Personel getPersonelDetailWithEmail(String email)  {
-		System.out.println("1");
-		PreparedStatement pst = null;
-		System.out.println("2");
-		ResultSet rs = null;
-		Personel personel = new Personel();
-		String query = "SELECT * FROM  PERSONEL WHERE  EMAIL =?";
- 
-		try {
-			Connection conn =getConnection();
-			pst = (PreparedStatement) conn.prepareStatement(query);
-			pst.setString(1, email);
-			rs = pst.executeQuery();
-
-			if (rs.next()) {
-				personel.setAd(rs.getString("NAME"));
-				personel.setSicilno(rs.getLong("SICILNO"));
-				Department departman = new Department();
-				departman.setDepartmentName(rs.getString("DEPARTMENT"));
-				personel.setDepartman(departman);
-				personel.setEmail(rs.getString("EMAIL"));
-				personel.setPassword(rs.getString("PASSWORD"));
-				personel.setSoyad(rs.getString("SURNAME"));
-				personel.setIsebaslangictarihi(rs.getString("DATEOFSTART"));
-				personel.setPozisyon(rs.getString("POSITION"));
-				personel.setIkinciyoneticionay(rs.getBoolean("SECONDMANEGERAPPROVAL"));
-				System.out.println(rs.getString("NAME"));
-
-			} else {
-				System.out.println("olmadi");
-			}
-		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
-		} finally {
-
-		}
-
-		return personel;
-	}
-
-
-	public List<Personel> getAllPersonel() throws Exception {
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		ArrayList<Personel> personels = new ArrayList<>();
-
-		String query = "SELECT * FROM  personel ";
+		String query = "SELECT * FROM  personel WHERE  SICILNO=?";
 
 		try {
 			Connection conn = (Connection) getConnection();
 
 			pst = (PreparedStatement) conn.prepareStatement(query);
 
+			pst.setLong(1, sicilNo);
 			rs = pst.executeQuery();
 
 			if (rs.next()) {
-				Personel personel = new Personel();
 				personel.setAd(rs.getString(2));
 				personel.setSicilno(rs.getLong(1));
 				Department departman = new Department();
@@ -176,17 +89,62 @@ System.out.println("prement ald�");
 				personel.setIsebaslangictarihi(rs.getString(6));
 				personel.setPozisyon(rs.getString(9));
 				personel.setIkinciyoneticionay(rs.getBoolean(10));
-				personels.add(personel);
+
+				System.out.println(rs.getString("NAME"));
 
 			} else {
 				System.out.println("olmadi");
 			}
 		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
+		System.out.println("e.getMessage()");
 		} finally {
 
 		}
 
+		return personel;
+
+	}
+
+	public ArrayList<Personel> getAllPersonel() throws Exception {
+		logger.debug("getAllcompanies is started");
+
+		Connection con = null;
+	 
+		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		Personel personel;
+		ArrayList<Personel> personels = new ArrayList<>();
+		try {
+			String query = "SELECT *   FROM  personel ";
+			logger.debug("sql query created : " + query);
+			con = getConnection();
+			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				personel = new Personel();
+				  System.out.println(rs.getLong(1));
+					 
+					personel.setAd(rs.getString(2));
+					personel.setSicilno(rs.getLong(1));
+					Department departman = new Department();
+					departman.setDepartmentName(rs.getString(7));
+					personel.setDepartman(departman);
+					personel.setEmail(rs.getString(4));
+					personel.setPassword(rs.getString(5));
+					personel.setSoyad(rs.getString(3));
+					personel.setIsebaslangictarihi(rs.getString(6));
+					personel.setPozisyon(rs.getString(9));
+					personel.setIkinciyoneticionay(rs.getBoolean(10));
+					personels.add(personel);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		} finally {
+		 
+			closeConnection(con);
+		}
+		logger.debug("getAllcompany finished. company # is " + personels.size());
 		return personels;
 	}
 
@@ -268,6 +226,43 @@ System.out.println("prement ald�");
 				}
 				logger.debug("deleteDepartment is finished");
 			}
+	public Personel getPersonelDetailWithEmail(String email)  {
+		System.out.println("1");
+		PreparedStatement pst = null;
+		System.out.println("2");
+		ResultSet rs = null;
+		Personel personel = new Personel();
+		String query = "SELECT * FROM  PERSONEL WHERE  EMAIL =?";
+ 
+		try {
+			Connection conn =getConnection();
+			pst = (PreparedStatement) conn.prepareStatement(query);
+			pst.setString(1, email);
+			rs = pst.executeQuery();
 
+			if (rs.next()) {
+				personel.setAd(rs.getString("NAME"));
+				personel.setSicilno(rs.getLong("SICILNO"));
+				Department departman = new Department();
+				departman.setDepartmentName(rs.getString("DEPARTMENT"));
+				personel.setDepartman(departman);
+				personel.setEmail(rs.getString("EMAIL"));
+				personel.setPassword(rs.getString("PASSWORD"));
+				personel.setSoyad(rs.getString("SURNAME"));
+				personel.setIsebaslangictarihi(rs.getString("DATEOFSTART"));
+				personel.setPozisyon(rs.getString("POSITION"));
+				personel.setIkinciyoneticionay(rs.getBoolean("SECONDMANEGERAPPROVAL"));
+				System.out.println(rs.getString("NAME"));
+
+			} else {
+				System.out.println("olmadi");
+			}
+		} catch (Exception e) {
+			logger.error("getDepartment error:" + e.getMessage());
+		} finally {
+
+		}
+
+		return personel;
 	}
 
