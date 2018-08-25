@@ -469,4 +469,6 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 		logger.debug("getAllcompany finished. company # is " + permissions.size());
 		return permissions;
- }
+
+	}
+}

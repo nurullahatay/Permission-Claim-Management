@@ -1,36 +1,34 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
-import bean.DatabaseProperties;
-import dao.base.DepartmentDAO;
-import dao.base.PermissionDAO;
-import dao.base.PersonelDAO;
-import dao.base.RightOfPermissionDAO;
+import dao.DepartmentDAO;
+import dao.PermissionDAO;
+import dao.PersonelDAO;
+import dao.RightOfPermissionDAO;
 import dto.RightOfPermission;
 import dto.Department;
 import dto.Permission;
 import dto.Personel;
 
 
-public class ServiceFacede {
-private static ServiceFacede serviceFacede;
+public class ServiceFacade {
+private static ServiceFacade serviceFacade;
 	
 	private DepartmentDAO departmentDAO = null;
 	private PersonelDAO personelDAO = null;
 	private PermissionDAO permissionDAO = null;
 	private RightOfPermissionDAO rightOfPermissionDAO = null;
 
-	private ServiceFacede() {
+	private ServiceFacade() {
 	}
 
-	public static ServiceFacede getInstance() {
-		if (serviceFacede == null) {
-			serviceFacede = new ServiceFacede();
+	public static ServiceFacade getInstance() {
+		if (serviceFacade == null) {
+			serviceFacade = new ServiceFacade();
 		}
-		return serviceFacede;
+		return serviceFacade;
 	}
 
 	public void initialize(Properties appProperties) throws Exception {
@@ -53,6 +51,9 @@ private static ServiceFacede serviceFacede;
 
 	}
 	
+	public void deleteDepartment(Department department) throws Exception {
+		departmentDAO.deleteDepartment(department);
+	}
 	
 	public void addDepartment(Department department ) throws Exception {
 		departmentDAO.addDepartment(department);
@@ -157,6 +158,12 @@ private static ServiceFacede serviceFacede;
 	public void deletePersonel(Personel personel) throws Exception {
 		personelDAO.deletePersonel(personel);
 	}
+
+	public Personel getPersonelDetailWithEmail(String email) {
+		return personelDAO.getPersonelDetailWithEmail(email);
+	}
+
+
 	
 	
 	

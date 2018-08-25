@@ -4,21 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
-
 import bean.DatabaseProperties;
 import dao.DatabaseHelper;
+
 import dto.Department;
 import dto.Personel;
 
 public class PersonelDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(PersonelDAO.class);
 
+	DatabaseProperties databaseProperties = null;
+
 	public void init(Properties appProperties) {
-		logger.debug("PersonelDAO init metodu Ã§alÄ±ÅŸmaya baÅŸladÄ±.");
-		
 		DatabaseProperties databaseProperties = new DatabaseProperties();
 		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
 		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
@@ -26,8 +25,8 @@ public class PersonelDAO extends DatabaseHelper {
 		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
 		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
 		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
+
 		super.init(databaseProperties);
-		logger.debug("PersonelDAO init metodu Ã§alÄ±ÅŸmasÄ± bitti.");
 	}
 
 		public void addPersonel(Personel personel) throws Exception {
@@ -265,4 +264,4 @@ public class PersonelDAO extends DatabaseHelper {
 
 		return personel;
 	}
-
+}

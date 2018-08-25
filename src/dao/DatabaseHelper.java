@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import bean.DatabaseProperties;
 
 public class DatabaseHelper {
+
 	final Logger logger = Logger.getLogger(DatabaseHelper.class);
 
 	DatabaseProperties databaseProperties = null;
@@ -18,6 +19,8 @@ public class DatabaseHelper {
 		this.databaseProperties = databaseProperties;
 		logger.debug("DatabaseHelper init metodu çalýþmasý bitti.");
 	}
+
+
 
 	public Connection getConnection() throws Exception {
 		logger.debug("DatabaseHelper getConnection metodu çalýþmaya baþladý.");

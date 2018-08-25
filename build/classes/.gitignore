@@ -1,3 +1,7 @@
-/controllers/
 /dao/
+/dto/
+/listener/
+/properties/
 /rest/
+/controllers/
+/service/
