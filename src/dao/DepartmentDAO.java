@@ -96,43 +96,40 @@ public class DepartmentDAO extends DatabaseHelper {
 
 	}
 	
-	public List<Department> getAllDepartment() throws Exception {
-		logger.debug("getAllDepartments started");
+	public ArrayList<Department> getAllDepartment() throws Exception {
+		logger.debug("getAllcompanies is started");
 
 		Connection con = null;
-		PreparedStatement pst = null;
+	 
 		ResultSet rs = null;
-
+		PreparedStatement preparedStatement = null;
+		Department department;
 		ArrayList<Department> departments = new ArrayList<>();
-
 		try {
-
-			String query = "SELECT * FROM department";
-			 
-
+			String query = "SELECT *   FROM  department";
+			logger.debug("sql query created : " + query);
 			con = getConnection();
-
-			pst = (PreparedStatement) con.prepareStatement(query);
-
-			rs = pst.executeQuery();
+			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				Department department = new Department();
-				department.setId(rs.getLong("ID"));
-				System.out.println(""+rs.getString("DEPARTMANNAME"));
-				department.setDepartmentName(rs.getString("DEPARTMANNAME"));
-				department.setDepartmentFirstManager(rs.getLong("DEPARTMENTFIRSTMANAGER"));
-				department.setDepartmentSecondManager(rs.getLong("DEPARTMENTSECONDMANAGER"));
-				departments.add(department);
+				department = new Department();
+				  System.out.println(rs.getLong(1));
+					 
+				  department.setId(rs.getLong("ID"));
+					System.out.println(""+rs.getString("DEPARTMANNAME"));
+					department.setDepartmentName(rs.getString("DEPARTMANNAME"));
+					department.setDepartmentFirstManager(rs.getLong("DEPARTMENTFIRSTMANAGER"));
+					department.setDepartmentSecondManager(rs.getLong("DEPARTMENTSECONDMANAGER"));
+					departments.add(department);
 			}
-
 		} catch (Exception e) {
-		 
+			logger.error(e.getMessage());
 		} finally {
 		 
 			closeConnection(con);
 		}
-	 
+		logger.debug("getAllcompany finished. company # is " + departments.size());
 		return departments;
 	}
 	
@@ -203,6 +200,4 @@ public class DepartmentDAO extends DatabaseHelper {
 				}
 				logger.debug("deleteDepartment is finished");
 			}
-
-
 	}
