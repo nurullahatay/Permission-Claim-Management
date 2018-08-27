@@ -169,11 +169,9 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 		logger.debug("updateRightOfPermission finished. company ");
 	}
 
-	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+	public void deleteRightOfPermission(long sicilNo) throws Exception {
 		logger.debug("deleteRightOfPermission is started");
 
-		int temp = (int) rightOfPermission.getSicilNo();// ID isterse rollerden gelebilir.
-		int sicilNo = (int) temp;
 
 		// departman user ve ticket kontrolu
 		Connection conn = null;
@@ -202,6 +200,32 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 			closeConnection(conn);
 		}
 		logger.debug("deleteRightOfPermission is finished");
+	}
+
+	public void deleteAllRightOfPermission() throws Exception {
+		logger.debug("deleteRightOfPermission is started");
+		Connection conn = null;
+		PreparedStatement statement = null;
+		StringBuilder queryDeleteDepartment = new StringBuilder();
+
+		try {
+
+			queryDeleteDepartment.append("DELETE FROM rightofpermission ");
+			queryDeleteDepartment.append("WHERE 1=1");
+			String queryString = queryDeleteDepartment.toString();
+			logger.debug("sql query created : " + queryString);
+			conn = getConnection();
+			statement = (PreparedStatement) conn.prepareStatement(queryString);
+			statement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			logger.error("error:" + e.getMessage());
+		} finally {
+			closePreparedStatement(statement);
+			closeConnection(conn);
+		}
+		logger.debug("deleteRightOfPermission is finished");		
 	}
 
 }

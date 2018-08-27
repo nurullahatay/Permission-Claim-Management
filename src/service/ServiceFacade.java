@@ -124,8 +124,8 @@ private static ServiceFacade serviceFacade;
 		rightOfPermissionDAO.updateRightOfPermission(rightOfPermission);
 	}
 	
-	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
-		rightOfPermissionDAO.deleteRightOfPermission(rightOfPermission);
+	public void deleteRightOfPermission(long sicilNo) throws Exception {
+		rightOfPermissionDAO.deleteRightOfPermission(sicilNo);
 	}
 	
 	
@@ -157,6 +157,11 @@ private static ServiceFacade serviceFacade;
 
 	public Personel getPersonelDetailWithEmail(String email) throws Exception {
 		return personelDAO.getPersonelDetailWithEmail(email);
+	}
+
+	public void deleteAllRightOfPermission() throws Exception {
+		rightOfPermissionDAO.deleteAllRightOfPermission();
+		
 	}
 	
 }

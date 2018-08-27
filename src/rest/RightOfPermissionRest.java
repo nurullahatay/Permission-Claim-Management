@@ -52,8 +52,16 @@ public class RightOfPermissionRest {
 	@Path("/deleteRight")
 	@POST
 	@RolesAllowed("HR")
-	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
-		ServiceFacade.getInstance().deleteRightOfPermission(rightOfPermission);
+	public void deleteRightOfPermission(long sicilNo) throws Exception {
+		ServiceFacade.getInstance().deleteRightOfPermission(sicilNo);
 	}
+	
+	@Path("/deleteAllRight")
+	@GET
+	@RolesAllowed("HR")
+	public void deleteRightOfPermission() throws Exception {
+		ServiceFacade.getInstance().deleteAllRightOfPermission();
+	}
+	
 	
 }

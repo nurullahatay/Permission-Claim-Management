@@ -44,20 +44,6 @@ public class PermissionRest {
 		return ServiceFacade.getInstance().getPermission(id);
 	}
 
-	/*@Path("/addResponse")
-	@POST
-	@PermitAll
-	public PermissionResponse addResponse(PermissionResponse response) {
-		return ServiceFacade.getInstance().addResponse(response);
-	}
-
-	@Path("/getAllResponses")
-	@POST
-	@PermitAll
-	public ArrayList<PermissionResponse> getAllResponses(long ID) {
-		return ServiceFacade.getInstance().getAllResponses(ID);
-	}
-*/
 	@Path("/deletePermission")
 	@POST
 	@RolesAllowed("admin")
@@ -70,13 +56,5 @@ public class PermissionRest {
 	public void updatePermission(Permission permission) throws Exception {
 		ServiceFacade.getInstance().updatePermission(permission);
 	}
-	/*
-	@Path("/closePermission")
-	@POST
-	@PermitAll
-	public void closePermission(long ID) throws Exception {
-		ServiceFacade.getInstance().closeTicket(ticketID);
-	}
-	*/
+
 }
-	

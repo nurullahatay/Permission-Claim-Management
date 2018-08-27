@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<title>İzin Talep Yönetimi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="js/permission.js"></script>
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5 {
+	font-family: "Raleway", sans-serif
+}
+</style>
+<body class="w3-light-grey">
+	
+
+
+	<!-- JAVASCRIPT SOURCES -->
+	<script type="text/javascript" src="./js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/i18n/grid.locale-en.js"></script>
+	<script type="text/javascript" src="./js/jquery.jqGrid.min.js"></script>
+
+	<!-- core js -->
+	<script type="text/javascript" src="./js/core.js"></script>
+
+	
+	
+	
+	<!-- fadeIn fadeOut scriptleri -->
+	<script>
+$(document).ready(function(){
+$("#aizinhakedis").click(function(){
+  $("#izinhakedisdiv").fadeIn();
+	 $("#izintalebidiv").fadeOut();
+});
+$("#aizintalebi").click(function(){
+	$("#izintalebidiv").fadeIn();
+	 $("#izinhakedisdiv").fadeOut();
+});
+});
+</script>
+	<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+    } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+    }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+    overlayBg.style.display = "none";
+}
+</script>
+
+	<!-- Top container -->
+	<div class="w3-bar w3-top w3-black w3-large" style="z-index: 4">
+		<button
+			class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+			onclick="w3_open();">
+			<i class="fa fa-bars"></i>  Menu
+		</button>
+		<span class="w3-bar-item w3-right">-</span>
+	</div>
+
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-collapse w3-white w3-animate-left"
+		style="z-index: 3; width: 300px;" id="mySidebar">
+		<br>
+		<div class="w3-container w3-row">
+			<div class="w3-col s4"></div>
+			<div class="w3-col s8 w3-bar">
+				<span>Hoşgeldiniz, <strong>mike</strong></span><br> <a
+					href="logout.jsp" class="w3-bar-item w3-button"> <i
+					class="fa fa-power-off"></i>&nbsp Çıkış
+				</a>
+			</div>
+		</div>
+		<hr>
+		<div class="w3-container">
+			<h5>Kontrol Paneli</h5>
+		</div>
+		<div class="w3-bar-block">
+			<a href="#"
+				class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+				onclick="w3_close()" title="close menu"><i
+				class="fa fa-remove fa-fw"></i>  Close Menu</a> <a href="index.html"
+				class="w3-bar-item w3-button w3-padding w3-blue"
+				style="text-decoration: none"><i class="fa fa-gears fa-fw"></i> 
+				İzin Talep Yönetimi</a> <a href="personelekle.html"
+				class="w3-bar-item w3-button w3-padding"
+				style="text-decoration: none"><i class="fa fa-id-card fa-fw"></i> 
+				Personel Ekle</a> <a href="departmanekle.html"
+				class="w3-bar-item w3-button w3-padding"
+				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
+				Departman Ekle</a>
+			<!-- 
+	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
+	-->
+			<br> <br>
+		</div>
+	</nav>
+
+
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large w3-animate-opacity"
+		onclick="w3_close()" style="cursor: pointer" title="close side menu"
+		id="myOverlay"></div>
+
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main" style="margin-left: 300px; margin-top: 43px;">
+
+		<!-- Header -->
+		<header class="w3-container" style="padding-top: 22px">
+			<h5>
+				<b><i class="fa fa-cog"></i> İzin Talep Yönetimi</b>
+			</h5>
+		</header>
+
+
+		<div class="w3-row-padding w3-margin-bottom">
+			<a href="#" id="aizinhakedis">
+				<div class="w3-quarter">
+					<div class="w3-container w3-hover-black w3-red w3-padding-16">
+						<div class="w3-left">
+							<i class="fa fa-trophy w3-xlarge"></i>
+						</div>
+
+						<h4>&nbsp İzin Hakediş</h4>
+						<h6>Personellerinizin izin hakediş sayfası</h6>
+					</div>
+				</div>
+			</a> <a href="#" id="aiziniptali">
+				<div class="w3-quarter">
+					<div class="w3-container w3-blue w3-hover-black w3-padding-16">
+						<div class="w3-left">
+							<i class="fa fa-remove w3-xlarge"></i>
+						</div>
+
+
+						<h4>&nbsp İzin İptali</h4>
+						<h6>Henüz tamamlanmamış izinlerin iptali</h6>
+					</div>
+				</div>
+			</a> <a href="#" id="aizintalebi">
+				<div class="w3-quarter">
+					<div class="w3-container w3-hover-black w3-teal w3-padding-16">
+						<div class="w3-left">
+							<i class="fa fa-edit w3-xlarge"></i>
+						</div>
+
+
+						<h4>&nbsp İzin Talebi</h4>
+						<h6>İzin talebi için bu sayfayı kullanabilirsiniz</h6>
+					</div>
+				</div>
+			</a> <a href="#" id="atanimlar">
+				<div class="w3-quarter">
+					<div
+						class="w3-container w3-hover-black w3-orange w3-text-white w3-padding-16">
+						<div class="w3-left">
+							<i class="fa fa-sort-alpha-asc w3-xlarge"></i>
+						</div>
+
+						<h4>&nbsp Tanımlar</h4>
+						<h6>böyle bişey yapıcakmıyız anlamadım da</h6>
+					</div>
+				</div>
+			</a>
+
+			<div id="izinhakedisdiv">
+				<fieldset id="izinhakedisdiv">
+					<div class="w3-container">
+						<hr>
+						<h2>İzin Hakediş</h2>
+						<br>
+
+
+						<form class="form-horizontal" name="izintalebi" action="izintalep"
+							method="get">
+							<table class="w3-table izinhakedis w3-white">
+
+								<tr>
+
+									<th>Personel</th>
+									<th>Geçerli Olacağı Tarih</th>
+									<th>Hakedilen Gün Sayısı</th>
+
+
+								</tr>
+								<tr>
+									<td><input id="personelarama" name="personelarama"
+										class="form-control input-md" placeholder="Ara" type="text"></td>
+									<td><div class="datepicker">
+											<input id="gtarih" class="form-control" type="text">
+											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+											<input type="hidden" id="gtarih-db"
+												name="gecerliolacagitarih">
+											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+										</div></td>
+									<td><input id="hakedilengunsayisi"
+										name="hakedilengunsayisi" placeholder=""
+										class="form-control input-md" type="text"></td>
+								</tr>
+							</table>
+							<br>
+							<table>
+								<tr>
+									<td>
+										<button type="button" id="ekle">Ekle</button>
+										<button type="button" id="sil">Kaldır</button>
+									</td>
+								</tr>
+							</table>
+							<input class="w3-right" class="form-control" type="submit"
+								value="Submit" />
+						</form>
+					</div>
+				</fieldset>
+			</div>
+			<div id="izintalebidiv">
+				<fieldset id="izinhakedisdiv">
+					<div class="w3-panel">
+
+						<h2>İzin Talebi</h2>
+						<br>
+
+						<div class="w3-row-padding" style="margin: 0 -16px">
+							<div class="w3-third">
+								<h5>Personel Bilgisi</h5>
+
+								<table class="w3-table  w3-white">
+									<tr>
+
+										<td>Personel</td>
+										<td><i><input type="text" class="form-control"
+												size="17px" placeholder="Ara" name="personelarama"
+												id="personelarama"></input></i></td>
+									</tr>
+									<tr>
+
+										<td>Departman</td>
+										<td><i id="departman">________</i></td>
+									</tr>
+									<tr>
+
+										<td>Sicil No</td>
+										<td><i id="sicilno">________</i></td>
+									</tr>
+									<tr>
+
+										<td>İşe Başlama Tarihi</td>
+										<td><i id="isebaslama">________</i></td>
+									</tr>
+									<tr>
+
+										<td>Formu Dolduran Kişi</td>
+										<td><i id="formudolduran">________</i></td>
+									</tr>
+
+								</table>
+
+							</div>
+							<div class="w3-twothird">
+								<h6>Genel Bilgiler</h6>
+
+								<table class="w3-table  w3-white">
+									<tr>
+
+										<td>Form Oluşturma Tarihi</td>
+										<td><i><b><script language="JavaScript"
+														type="text/javascript">
+                        document.write(TODAY);
+                    </script></b></i></td>
+									</tr>
+									<tr>
+
+										<td>Kullanılabilecek izin günü sayısı</td>
+										<td><i id="kullanilabilecekizin">_____</i></td>
+									</tr>
+									<tr>
+
+										<td>Toplam hakedilen izin günü sayısı</td>
+										<td><i id="toplamhakedilen">____</i></td>
+									</tr>
+
+
+
+								</table>
+								<form class="form-horizontal" name="izintalebi">
+
+									<h6>İletişim Bilgileri</h6>
+									<table class="w3-table  w3-white">
+										<tr>
+											<td>Telefon Numarası
+											<td>
+											<td><i><input type="text" class="form-control"
+													id="permissiontel" name="telno" /></i></td>
+										</tr>
+										<td>Adres
+										<td>
+										<td><i><input type="text" class="form-control"
+												id="permissionadres" name="adres" /></i></td>
+									</table>
+							</div>
+
+						</div>
+					</div>
+
+					<hr>
+					<div class="w3-container">
+
+						<h5>İzin Talep Bilgisi</h5>
+
+
+						<table class="w3-table  w3-white">
+							<tr>
+
+								<td>İzin başlangıç tarihi</td>
+								<td><i><div class="datepicker">
+											<input id="tarih" class="form-control" type="text">
+											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+											<input type="hidden" id="permissionstart" name="izinbaslangictarihi">
+											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+										</div></i></td>
+							</tr>
+							<tr>
+
+								<td>İzin bitiş tarihi</td>
+								<td><i>
+										<div class="datepicker">
+											<input id="tarih2" class="form-control" type="text">
+											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+											<input type="hidden" id="permissionfinish" name="izinbitistarihi">
+											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+										</div>
+								</i></td>
+							</tr>
+							<tr>
+
+								<td>Gün</td>
+								<td><i> <input type="text" class="form-control"
+										id="permissiongun" name="gun" readonly
+										placeholder="hesaplamak için tıklayınız">
+
+								</i></td>
+							</tr>
+							<tr>
+
+								<td>İzin nedeni</td>
+								<td><i><select class="form-control" name="permissionreason" id="permissionreason">
+											<option value="izinnedeni1">izinnedeni1</option>
+											<option value="izinnedeni2">izinnedeni2</option>
+											<option value="izinnedeni3">izinnedeni3</option>
+											<option value="izinnedeni4">izinnedeni4</option>
+									</select></i></td>
+							</tr>
+							<tr>
+
+								<td>Açıklama</td>
+								<td><i><textarea id="permissionaciklama" class="form-control"
+											name="aciklama"></textarea></i></td>
+							</tr>
+
+						</table>
+						<input class="w3-right" id="postPermission" class="form-control" type="submit"
+							value="Submit" />
+					</div>
+					</form>
+				</fieldset>
+
+			</div>
+			<hr>
+
+			<!-- Footer -->
+			<footer class="w3-container w3-padding-16 w3-dark-grey">
+				<h4>FOOTER</h4>
+				<p>
+					Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+						target="_blank">w3.css</a>
+				</p>
+			</footer>
+
+			<!-- End page content -->
+		</div>
+</body>
+</html>

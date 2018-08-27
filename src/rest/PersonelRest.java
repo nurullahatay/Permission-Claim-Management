@@ -1,11 +1,14 @@
 package rest;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 
@@ -18,12 +21,19 @@ import service.ServiceFacade;
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonelRest {
 
+	@GET
+	@PermitAll
+	public Personel getUserDetails(@Context HttpServletRequest request) throws Exception {
+		String userId = request.getUserPrincipal().getName();
+		Personel authenticatedPersonelDetails = (Personel) request.getSession().getAttribute("LOGIN_USER");
+		authenticatedPersonelDetails.getEmail();
+		return authenticatedPersonelDetails;
+	}
 
 	@Path("/addPersonel")
 	@POST
 	@RolesAllowed("admin")
 	public void addPersonel(Personel personel) throws Exception {
-		System.out.println("------gelegle");
 		ServiceFacade.getInstance().addPersonel(personel);
 	}
 
