@@ -1,37 +1,34 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
-
+import com.mysql.jdbc.PreparedStatement;
 import bean.DatabaseProperties;
 import dto.RightOfPermission;;
 
 public class RightOfPermissionDAO extends DatabaseHelper {
 	Logger logger = Logger.getLogger(RightOfPermissionDAO.class);
 
-
 	public void init(Properties appProperties) {
-		logger.debug("PersonelDAO init metodu çalışmaya başladı.");
-		
+
 		DatabaseProperties databaseProperties = new DatabaseProperties();
+
 		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
 		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
 		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
 		databaseProperties.setDatabaseDriver(appProperties.getProperty("databaseDriver"));
 		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
 		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
+
 		super.init(databaseProperties);
-		logger.debug("PersonelDAO init metodu çalışması bitti.");
+
 	}
 
-	
-	
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+		logger.debug("addRightOfPermission is started");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
@@ -40,40 +37,36 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 					"INSERT INTO rightofpermission (SICILNO,VALIDDATE,DAYCOUNTOFDESERVED,DAYCOUNTOFDESERVEDFORYEAR)");
 			query.append("VALUES  (?,NOW(),?,?) ");
 			String queryString = query.toString();
-			System.out.println(queryString);
+			logger.debug("sql query created : " + queryString);
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
 			stmt.setLong(1, rightOfPermission.getSicilNo());
-			stmt.setInt(2, rightOfPermission.getHakedilenGunSayisi());
-			stmt.setInt(3, rightOfPermission.getMevcutYilIciHakedilenGunSayisi());
+			stmt.setInt(2, rightOfPermission.getDayCountOfDeserved());
+			stmt.setInt(3, rightOfPermission.getDayCountOfDeservedForYear());
 
 			stmt.executeUpdate();
-
-			logger.error("Liste Basarıyla Göndelirdi");
-
-			System.out.println("2. islev Basarili Bir Sekilde Tamamlandi");
-
+			conn.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
-
-			throw e;
+			conn.rollback();
+			logger.error(e.getMessage());
 		} finally {
-			if (stmt != null)
-				stmt.close();
 
+			closePreparedStatement(stmt);
+			closeConnection(conn);
 		}
+		logger.debug("addRightOfPermission finished.");
 
 	}
 
 	public RightOfPermission getRightOfPermission(long sicilNo) throws Exception {
-
+		logger.debug("RightOfPermission is started");
+		Connection conn = (Connection) getConnection();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		RightOfPermission rightOfPermission = new RightOfPermission();
 		String query = "SELECT * FROM rightofpermission WHERE  SICILNO=?";
-
+		logger.debug("sql query created : " + query);
 		try {
-			Connection conn = (Connection) getConnection();
 
 			pst = (PreparedStatement) conn.prepareStatement(query);
 
@@ -83,29 +76,30 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 			if (rs.next()) {
 
 				rightOfPermission.setSicilNo(rs.getLong("SICILNO"));
-				rightOfPermission.setMevcutYilIciHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
-				rightOfPermission.setHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVED"));
-				rightOfPermission.setGecerliOlacagiTarih(null);
-				System.out.println(rs.getLong("SICILNO"));///konsoldan gör
+				rightOfPermission.setDayCountOfDeservedForYear(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
+				rightOfPermission.setDayCountOfDeserved(rs.getInt("DAYCOUNTOFDESERVED"));
+				rightOfPermission.setValidDate(null);
 
-			} else {
-				System.out.println("olmadi");
 			}
+			conn.commit();
 		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
+			conn.rollback();
+			logger.error("RightOfPermission error:" + e.getMessage());
 		} finally {
-
+			closeResultSet(rs);
+			closePreparedStatement(pst);
+			closeConnection(conn);
 		}
-
+		logger.debug("RightOfPermission finished.");
 		return rightOfPermission;
 
 	}
 
 	public ArrayList<RightOfPermission> getAllRightOfPermission() throws Exception {
-		logger.debug("getAllcompanies is started");
+		logger.debug("getAllRightOfPermission is started");
 
-		Connection con = null;
-	 
+		Connection conn = null;
+
 		ResultSet rs = null;
 		PreparedStatement preparedStatement = null;
 		RightOfPermission rightOfPermission;
@@ -113,33 +107,37 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 		try {
 			String query = "SELECT *   FROM  rightofpermission ";
 			logger.debug("sql query created : " + query);
-			con = getConnection();
-			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				rightOfPermission = new RightOfPermission();
-				  System.out.println(rs.getLong(1));
-					 
-					rightOfPermission.setSicilNo(rs.getLong("SICILNO"));
-					rightOfPermission.setMevcutYilIciHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
-					rightOfPermission.setHakedilenGunSayisi(rs.getInt("DAYCOUNTOFDESERVED"));
-					rightOfPermission.setGecerliOlacagiTarih(null);
-					rightOfPermissions.add(rightOfPermission);
+				System.out.println(rs.getLong(1));
+
+				rightOfPermission.setSicilNo(rs.getLong("SICILNO"));
+				rightOfPermission.setDayCountOfDeservedForYear(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
+				rightOfPermission.setDayCountOfDeserved(rs.getInt("DAYCOUNTOFDESERVED"));
+				rightOfPermission.setValidDate(null);
+				rightOfPermissions.add(rightOfPermission);
 			}
+			conn.commit();
 		} catch (Exception e) {
+			conn.rollback();
 			logger.error(e.getMessage());
 		} finally {
-		 
-			closeConnection(con);
+			closeResultSet(rs);
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
 		}
-		logger.debug("getAllcompany finished. company # is " + rightOfPermissions.size());
+		logger.debug("getAllRightOfPermission finished. company # is " + rightOfPermissions.size());
 		return rightOfPermissions;
 
 	}
- 
 
 	public void updateRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+		logger.debug("updateRightOfPermission is started");
+
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
@@ -147,36 +145,39 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 			query.append("UPDATE rightofpermission  SET VALIDDATE =");
 			query.append(" NOW()    ,DAYCOUNTOFDESERVED = ?   ,DAYCOUNTOFDESERVEDFORYEAR = ?   WHERE SICILNO = ? ");
 			String queryString = query.toString();
-			System.out.println(queryString);
+			logger.debug("sql query created : " + queryString);
+
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
 			stmt.setLong(3, rightOfPermission.getSicilNo());
-			stmt.setInt(1, rightOfPermission.getHakedilenGunSayisi());
-			stmt.setInt(2, rightOfPermission.getMevcutYilIciHakedilenGunSayisi());
+			stmt.setInt(1, rightOfPermission.getDayCountOfDeserved());
+			stmt.setInt(2, rightOfPermission.getDayCountOfDeservedForYear());
 
 			stmt.executeUpdate();
 
-			logger.error("update Basarıyla Göndelirdi");
-
+			conn.commit();
 		} catch (Exception e) {
-			logger.error("update islevinde sıkıntı oldu");
+			conn.rollback();
+			logger.error(e.getMessage());
 
 			throw e;
 		} finally {
-			if (stmt != null)
-				stmt.close();
 
+			closePreparedStatement(stmt);
+			closeConnection(conn);
 		}
+		logger.debug("updateRightOfPermission finished. company ");
 	}
 
 	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
+		logger.debug("deleteRightOfPermission is started");
 
 		int temp = (int) rightOfPermission.getSicilNo();// ID isterse rollerden gelebilir.
 		int sicilNo = (int) temp;
 
 		// departman user ve ticket kontrolu
-		Connection con = null;
-		PreparedStatement pstDepartment = null;
+		Connection conn = null;
+		PreparedStatement statement = null;
 		StringBuilder queryDeleteDepartment = new StringBuilder();
 
 		try {
@@ -186,19 +187,21 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 			String queryString = queryDeleteDepartment.toString();
 			logger.debug("sql query created : " + queryString);
 
-			con = getConnection();
-			pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+			conn = getConnection();
+			statement = (PreparedStatement) conn.prepareStatement(queryString);
 
-			pstDepartment.setLong(1, sicilNo);
-			pstDepartment.executeUpdate();
-
+			statement.setLong(1, sicilNo);
+			statement.executeUpdate();
+			conn.commit();
 		} catch (Exception e) {
+			conn.rollback();
 			logger.error("error:" + e.getMessage());
 		} finally {
 
-			closeConnection(con);
+			closePreparedStatement(statement);
+			closeConnection(conn);
 		}
-		logger.debug("deleteDepartment is finished");
+		logger.debug("deleteRightOfPermission is finished");
 	}
 
 }

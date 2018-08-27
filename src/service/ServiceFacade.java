@@ -36,14 +36,10 @@ private static ServiceFacade serviceFacade;
 		permissionDAO = new PermissionDAO();
 		rightOfPermissionDAO = new RightOfPermissionDAO();
 		personelDAO = new PersonelDAO();
+		
 		departmentDAO.init(appProperties);
-
-		
 		personelDAO.init(appProperties);
-	
 		permissionDAO.init(appProperties);
-		
-	
 		rightOfPermissionDAO.init(appProperties);
 	}
 
@@ -159,19 +155,8 @@ private static ServiceFacade serviceFacade;
 		personelDAO.deletePersonel(personel);
 	}
 
-	public Personel getPersonelDetailWithEmail(String email) {
+	public Personel getPersonelDetailWithEmail(String email) throws Exception {
 		return personelDAO.getPersonelDetailWithEmail(email);
 	}
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

@@ -2,6 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -9,7 +12,6 @@ import org.apache.log4j.Logger;
 import bean.DatabaseProperties;
 
 public class DatabaseHelper {
-
 	final Logger logger = Logger.getLogger(DatabaseHelper.class);
 
 	DatabaseProperties databaseProperties = null;
@@ -19,8 +21,6 @@ public class DatabaseHelper {
 		this.databaseProperties = databaseProperties;
 		logger.debug("DatabaseHelper init metodu çalýþmasý bitti.");
 	}
-
-
 
 	public Connection getConnection() throws Exception {
 		logger.debug("DatabaseHelper getConnection metodu çalýþmaya baþladý.");
@@ -78,6 +78,28 @@ public class DatabaseHelper {
 		}
 		logger.debug("DatabaseHelper closeConnection metodu çalýþmasý bitti.");
 
+	}
+	
+	public void closeResultSet(ResultSet rs) {
+		try {
+			if (rs != null)
+				rs.close();
+			logger.trace("ResultSet closed");
+		} catch (Exception e) {
+			logger.trace("ResultSet close error: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public void closePreparedStatement(PreparedStatement pst) {
+		try {
+			if (pst != null)
+				pst.close();
+			logger.trace("PreparedStatement closed");
+		} catch (Exception e) {
+			logger.trace("PreparedStatement close error: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 }

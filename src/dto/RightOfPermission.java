@@ -1,36 +1,38 @@
 package dto;
 
-import java.util.Date;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RightOfPermission {
 	private long sicilNo; // PersonelbilgisiDto'sunda var.
-	private Date gecerliOlacagiTarih;
-	private int hakedilenGunSayisi;
-	private int mevcutYilIciHakedilenGunSayisi;
+	private String ValidDate;
+	private int DayCountOfDeserved;
+	private int DayCountOfDeservedForYear;
 	public long getSicilNo() {
 		return sicilNo;
 	}
 	public void setSicilNo(long sicilNo) {
 		this.sicilNo = sicilNo;
 	}
-	public Date getGecerliOlacagiTarih() {
-		return gecerliOlacagiTarih;
+	public String getValidDate() {
+		return ValidDate;
 	}
-	public void setGecerliOlacagiTarih(Date gecerliOlacagiTarih) {
-		this.gecerliOlacagiTarih = gecerliOlacagiTarih;
+	public void setValidDate(String validDate) {
+		ValidDate = validDate;
 	}
-	public int getHakedilenGunSayisi() {
-		return hakedilenGunSayisi;
+	public int getDayCountOfDeserved() {
+		return DayCountOfDeserved;
 	}
-	public void setHakedilenGunSayisi(int hakedilenGunSayisi) {
-		this.hakedilenGunSayisi = hakedilenGunSayisi;
+	public void setDayCountOfDeserved(int dayCountOfDeserved) {
+		DayCountOfDeserved = dayCountOfDeserved;
 	}
-	public int getMevcutYilIciHakedilenGunSayisi() {
-		return mevcutYilIciHakedilenGunSayisi;
+	public int getDayCountOfDeservedForYear() {
+		return DayCountOfDeservedForYear;
 	}
-	public void setMevcutYilIciHakedilenGunSayisi(int mevcutYilIciHakedilenGunSayisi) {
-		this.mevcutYilIciHakedilenGunSayisi = mevcutYilIciHakedilenGunSayisi;
+	public void setDayCountOfDeservedForYear(int dayCountOfDeservedForYear) {
+		DayCountOfDeservedForYear = dayCountOfDeservedForYear;
 	}
+
 
 
 }

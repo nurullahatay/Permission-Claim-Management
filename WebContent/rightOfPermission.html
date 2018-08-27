@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Izin Hakediş</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="./js/rightOfPermisson.js"></script>
+	<script src="./js/core.js"></script>
+</head>
+<body>
+	<div class="container ">
+		<div class="col-lg-4">
+			<div id="izinhakedisdiv">
+
+				<hr>
+				<h2>İzin Hakediş</h2>
+				<br>
+
+
+				<table>
+
+					<tr>
+
+						<th>Personel</th>
+						<th>Geçerli Olacağı Tarih</th>
+						<th>Hakedilen Gün Sayısı</th>
+
+
+					</tr>
+					<tr>
+						<td><input id="personelarama" name="personelarama"
+							class="form-control input-md" placeholder="Ara" type="text"></td>
+						<td><div class="datepicker">
+								<input id="gtarih" class="form-control" type="text">
+								<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+								<input type="hidden" id="gtarih-db" name="gecerliolacagitarih">
+								<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+							</div></td>
+						<td><input id="hakedilengunsayisi" name="hakedilengunsayisi"
+							placeholder="" class="form-control input-md" type="text"></td>
+					</tr>
+				</table>
+				<button id="addRightOfPermissionBtn" class="btn btn-success"
+					onclick="addRightOfPermission()">Add</button>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

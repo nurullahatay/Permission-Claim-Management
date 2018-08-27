@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 $("#dept").show();
 function authenticatePersonel() {
-  // login to system
+ 
   $.get("/Permission-Claim-Management/login", function() {
     $.ajax({
       type: "POST",
@@ -21,7 +21,7 @@ function authenticatePersonel() {
       success: function(data) {
         authenticatedUser = data;
         $("#nav_nickname").text(authenticatedPersonel.email);
-        // sayfayi izinlere gore hazirla
+        
         $.each(authenticatedPersonel.userRoles, function(key, value) {
           if (value == "admin")
             isAdmin = true;
@@ -43,3 +43,4 @@ function logout() {
   });
 
 }
+

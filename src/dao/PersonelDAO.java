@@ -1,24 +1,24 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
 import org.apache.log4j.Logger;
+import java.sql.PreparedStatement;
 import bean.DatabaseProperties;
-import dao.DatabaseHelper;
-
 import dto.Department;
 import dto.Personel;
 
 public class PersonelDAO extends DatabaseHelper {
-	final Logger logger = Logger.getLogger(PersonelDAO.class);
+	Logger logger = Logger.getLogger(RightOfPermissionDAO.class);
 
 	DatabaseProperties databaseProperties = null;
 
 	public void init(Properties appProperties) {
+
 		DatabaseProperties databaseProperties = new DatabaseProperties();
+
 		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
 		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
 		databaseProperties.setDatabaseConnectionURL(appProperties.getProperty("database"));
@@ -27,9 +27,11 @@ public class PersonelDAO extends DatabaseHelper {
 		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
 
 		super.init(databaseProperties);
+
 	}
 
-		public void addPersonel(Personel personel) throws Exception {
+	public void addPersonel(Personel personel) throws Exception {
+		logger.debug("addPersonel is started");
 
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
@@ -38,7 +40,8 @@ public class PersonelDAO extends DatabaseHelper {
 			query.append("INSERT INTO personel ");
 			query.append("VALUES (?,?,?,?,?,NOW() ,?,NOW() ,?,?) ");
 			String queryString = query.toString();
-			System.out.println(queryString);
+			logger.debug("sql query created : " + queryString);
+
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
 			stmt.setLong(1, personel.getSicilno());
@@ -50,26 +53,31 @@ public class PersonelDAO extends DatabaseHelper {
 			stmt.setString(7, personel.getPozisyon());
 			stmt.setBoolean(8, personel.isIkinciyoneticionay());
 			stmt.executeUpdate();
-
+			conn.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			conn.rollback();
+			logger.error(e.getMessage());
 
 			throw e;
 		} finally {
-			if (stmt != null)
-				stmt.close();
 
+			closePreparedStatement(stmt);
+			closeConnection(conn);
 		}
+		logger.debug("addPersonel finished. ");
 	}
 
 	public Personel getPersonel(long sicilNo) throws Exception {
+		logger.debug("getPersonel is started");
+
 		PreparedStatement pst = null;
 		ResultSet rs = null;
+		Connection conn = (Connection) getConnection();
 		Personel personel = new Personel();
 		String query = "SELECT * FROM  personel WHERE  SICILNO=?";
+		logger.debug("sql query created : " + query);
 
 		try {
-			Connection conn = (Connection) getConnection();
 
 			pst = (PreparedStatement) conn.prepareStatement(query);
 
@@ -89,26 +97,29 @@ public class PersonelDAO extends DatabaseHelper {
 				personel.setPozisyon(rs.getString(9));
 				personel.setIkinciyoneticionay(rs.getBoolean(10));
 
-				System.out.println(rs.getString("NAME"));
-
 			} else {
 				System.out.println("olmadi");
 			}
+			conn.commit();
 		} catch (Exception e) {
-		System.out.println("e.getMessage()");
+			conn.rollback();
+			logger.error(e.getMessage());
 		} finally {
-
+			closeResultSet(rs);
+			closePreparedStatement(pst);
+			closeConnection(conn);
 		}
+		logger.debug("getPersonel finished. company # is");
 
 		return personel;
 
 	}
 
 	public ArrayList<Personel> getAllPersonel() throws Exception {
-		logger.debug("getAllcompanies is started");
+		logger.debug("getAllPersonel is started");
 
-		Connection con = null;
-	 
+		Connection conn = null;
+
 		ResultSet rs = null;
 		PreparedStatement preparedStatement = null;
 		Personel personel;
@@ -116,125 +127,127 @@ public class PersonelDAO extends DatabaseHelper {
 		try {
 			String query = "SELECT *   FROM  personel ";
 			logger.debug("sql query created : " + query);
-			con = getConnection();
-			preparedStatement = (PreparedStatement) con.prepareStatement(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
 			rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
 				personel = new Personel();
-				  System.out.println(rs.getLong(1));
-					 
-					personel.setAd(rs.getString(2));
-					personel.setSicilno(rs.getLong(1));
-					Department departman = new Department();
-					departman.setDepartmentName(rs.getString(7));
-					personel.setDepartman(departman);
-					personel.setEmail(rs.getString(4));
-					personel.setPassword(rs.getString(5));
-					personel.setSoyad(rs.getString(3));
-					personel.setIsebaslangictarihi(rs.getString(6));
-					personel.setPozisyon(rs.getString(9));
-					personel.setIkinciyoneticionay(rs.getBoolean(10));
-					personels.add(personel);
+				System.out.println(rs.getLong(1));
+
+				personel.setAd(rs.getString(2));
+				personel.setSicilno(rs.getLong(1));
+				Department departman = new Department();
+				departman.setDepartmentName(rs.getString(7));
+				personel.setDepartman(departman);
+				personel.setEmail(rs.getString(4));
+				personel.setPassword(rs.getString(5));
+				personel.setSoyad(rs.getString(3));
+				personel.setIsebaslangictarihi(rs.getString(6));
+				personel.setPozisyon(rs.getString(9));
+				personel.setIkinciyoneticionay(rs.getBoolean(10));
+				personels.add(personel);
 			}
+			conn.commit();
 		} catch (Exception e) {
+			conn.rollback();
 			logger.error(e.getMessage());
 		} finally {
-		 
-			closeConnection(con);
+			closeResultSet(rs);
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
 		}
-		logger.debug("getAllcompany finished. company # is " + personels.size());
+		logger.debug("getAllPersonel finished. company # is " + personels.size());
 		return personels;
 	}
 
 	public void updatePersonel(Personel personel) throws Exception {
+		logger.debug("updatePersonel is started");
+
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
 		try {
+			query.append("UPDATE personel   set ");
 			query.append(
-					"UPDATE personel   set ");
-			query.append("NAME = ? ,SURNAME = ?,EMAIL = ? PASSWORD=? ,ISEBASLANGICTARIHI=?,DEPARTMENT=?,DATEOFSTART=?,POSITION=? ,SECONDMANEGERAPPROVAL=? ");
+					"NAME = ? ,SURNAME = ?,EMAIL = ? PASSWORD=? ,ISEBASLANGICTARIHI=?,DEPARTMENT=?,DATEOFSTART=?,POSITION=? ,SECONDMANEGERAPPROVAL=? ");
 			query.append(" WHERE   SICILNO = ?");
-			
+
 			String queryString = query.toString();
-			
-			System.out.println(queryString);
+			logger.debug("sql query created : " + queryString);
+
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
-			 
 			stmt.setString(1, personel.getAd());
 			stmt.setString(2, personel.getSoyad());
 			stmt.setString(3, personel.getEmail());
 			stmt.setString(4, personel.getPassword());
 			stmt.setString(5, personel.getIsebaslangictarihi());
 			stmt.setObject(6, personel.getDepartman());
-			stmt.setString(7,    null )  ;
+			stmt.setString(7, null);
 			stmt.setString(8, personel.getPozisyon());
-			stmt.setBoolean(9,  personel.isIkinciyoneticionay());
+			stmt.setBoolean(9, personel.isIkinciyoneticionay());
 			stmt.setLong(10, personel.getSicilno());
- 
- 
 
 			stmt.executeUpdate();
 
-			logger.error("update Basarıyla Göndelirdi");
-
- 
+			conn.commit();
 
 		} catch (Exception e) {
-			logger.error("update islevinde sıkıntı oldu");
-
-			throw e;
+			conn.rollback();
+			logger.error(e.getMessage());
 		} finally {
-			if (stmt != null)
-				stmt.close();
 
+			closePreparedStatement(stmt);
+			closeConnection(conn);
 		}
+		logger.debug("updatePersonel finished. ");
 	}
 
 	public void deletePersonel(Personel personel) throws Exception {
+		logger.debug("deletePersonel is started");
 
-		int temp =(int) personel.getSicilno();//ID isterse rollerden gelebilir.
-		int sicilNo = (int)temp;
-		 
-				// departman user ve ticket kontrolu
-				Connection con = null;
-				PreparedStatement pstDepartment = null;
-				StringBuilder queryDeleteDepartment = new StringBuilder();
+		int temp = (int) personel.getSicilno();// ID isterse rollerden gelebilir.
+		int sicilNo = (int) temp;
 
-				try {
-					
-					queryDeleteDepartment.append("DELETE FROM personel ");
-					queryDeleteDepartment.append("WHERE SICILNO=?");
-					String queryString = queryDeleteDepartment.toString();
-					logger.debug("sql sorgusu: " + queryString);
+		// departman user ve ticket kontrolu
+		Connection conn = null;
+		PreparedStatement pstDepartment = null;
+		StringBuilder queryDeleteDepartment = new StringBuilder();
 
-					con = getConnection();
-					pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
+		try {
 
-			  
-					pstDepartment.setLong(1, sicilNo);
-					pstDepartment.executeUpdate();
+			queryDeleteDepartment.append("DELETE FROM personel ");
+			queryDeleteDepartment.append("WHERE SICILNO=?");
+			String queryString = queryDeleteDepartment.toString();
+			logger.debug("sql query created " + queryString);
 
-				} catch (Exception e) {
-					logger.error("error:" + e.getMessage());
-				} finally {
-					 
-					closeConnection(con);
-				}
-				logger.debug("deleteDepartment is finished");
-			}
-	public Personel getPersonelDetailWithEmail(String email)  {
-		System.out.println("1");
+			conn = getConnection();
+			pstDepartment = (PreparedStatement) conn.prepareStatement(queryString);
+
+			pstDepartment.setLong(1, sicilNo);
+			pstDepartment.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			logger.error("error:" + e.getMessage());
+		} finally {
+
+			closeConnection(conn);
+		}
+		logger.debug("deletePersonel is finished");
+	}
+
+	public Personel getPersonelDetailWithEmail(String email) throws Exception {
+		logger.debug("getPersonelDetailWithEmail is started");
 		PreparedStatement pst = null;
-		System.out.println("2");
+		Connection conn = getConnection();
 		ResultSet rs = null;
 		Personel personel = new Personel();
 		String query = "SELECT * FROM  PERSONEL WHERE  EMAIL =?";
- 
+
 		try {
-			Connection conn =getConnection();
+
 			pst = (PreparedStatement) conn.prepareStatement(query);
 			pst.setString(1, email);
 			rs = pst.executeQuery();
@@ -253,14 +266,17 @@ public class PersonelDAO extends DatabaseHelper {
 				personel.setIkinciyoneticionay(rs.getBoolean("SECONDMANEGERAPPROVAL"));
 				System.out.println(rs.getString("NAME"));
 
-			} else {
-				System.out.println("olmadi");
 			}
+			conn.commit();
 		} catch (Exception e) {
-			logger.error("getDepartment error:" + e.getMessage());
+			conn.rollback();
+			logger.error("getPersonelDetailWithEmail error:" + e.getMessage());
 		} finally {
-
+			closeResultSet(rs);
+			closePreparedStatement(pst);
+			closeConnection(conn);
 		}
+		logger.debug("getPersonelDetailWithEmail finished. ");
 
 		return personel;
 	}

@@ -19,10 +19,9 @@ import service.ServiceFacade;
 @Produces(MediaType.APPLICATION_JSON)
 public class RightOfPermissionRest {
 
-	
 	@Path("/addRight")
 	@POST
-	@RolesAllowed("HR")
+	@RolesAllowed("admin")
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		ServiceFacade.getInstance().addRightOfPermission(rightOfPermission);
 	}
@@ -31,7 +30,7 @@ public class RightOfPermissionRest {
 	@POST
 	@PermitAll
 	public RightOfPermission getRightOfPermission(long sicilNo) throws Exception {
-		return		ServiceFacade.getInstance().getRightOfPermission(sicilNo);
+		return	ServiceFacade.getInstance().getRightOfPermission(sicilNo);
 	}
 	
 	
@@ -39,10 +38,10 @@ public class RightOfPermissionRest {
 	@GET
 	@RolesAllowed("HR")
 	public List<RightOfPermission> getAllRightOfPermission() throws Exception {
-		return 		ServiceFacade.getInstance().getAllRightOfPermission();
+		return 	ServiceFacade.getInstance().getAllRightOfPermission();
 
 	}
-	@Path("/updatePersonel")
+	@Path("/updateRight")
 	@POST
 	@RolesAllowed("admin")
 	public void updateRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
@@ -55,8 +54,6 @@ public class RightOfPermissionRest {
 	@RolesAllowed("HR")
 	public void deleteRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		ServiceFacade.getInstance().deleteRightOfPermission(rightOfPermission);
-
 	}
-	
 	
 }

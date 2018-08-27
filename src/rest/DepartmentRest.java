@@ -20,7 +20,7 @@ import service.ServiceFacade;
 @Produces(MediaType.APPLICATION_JSON)
 public class DepartmentRest {
 
-	@Path("/getAllDepartments")
+	@Path("/getAllDepartment")
 	@GET
 	@PermitAll
 	public ArrayList<Department> getAllDepartments() throws Exception {
@@ -35,7 +35,7 @@ public class DepartmentRest {
 	}
 	
 	@POST
-	@Path("/getDepartmentDetails")
+	@Path("/getDepartment")
 	@RolesAllowed("admin")
 	public Department getDepartmentDetails(long ID) throws Exception {
 		return ServiceFacade.getInstance().getDepartment(ID);
