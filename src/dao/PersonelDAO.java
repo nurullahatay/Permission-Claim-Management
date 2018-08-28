@@ -121,7 +121,7 @@ public class PersonelDAO extends DatabaseHelper {
 		Personel personel;
 		ArrayList<Personel> personels = new ArrayList<>();
 		try {
-			String query = "SELECT *   FROM  personel ";
+			String query = "SELECT *   FROM  PERSONEL ";
 			logger.debug("sql query created : " + query);
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());

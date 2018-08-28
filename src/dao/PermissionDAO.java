@@ -32,39 +32,44 @@ public class PermissionDAO extends DatabaseHelper {
 	}
 
 	public void addPermission(Permission permission) throws Exception {
-		logger.debug("addPermission is started");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
 		try {
+			// 1.NOW PERMISSIONCREATINGHISTORY
 
-			query.append("INSERT INTO permission  ");
-			query.append("VALUES  (?,?,NOW(),NOW(),NOW(),?,?,?,?,?,0,0,0,0) ");
+			query.append(
+					"INSERT INTO PERMISSION(SICILNO, PERMISSIONCREATINGHISTORY, STARTINGDATE, DATEOFRETURN, DAY, PERMISSIONREASON, DESCRIPTION, PHONENUMBER, ADDRESS, SECONDMANAGERAPPROVAL, FIRSTMANAGERAPPROVAL, IKAPPROVAL, STATUS) ");
+			query.append("VALUES(?,NOW(),?,?,?,?,?,?,?,0,0,0,0) ");
 			String queryString = query.toString();
-			logger.debug("sql query created : " + queryString);
+			System.out.println(queryString);
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
-			stmt.setLong(1, permission.getId());
-			stmt.setLong(2, permission.getSicilNo());
-			stmt.setInt(3, permission.getGun());
-			stmt.setString(4, permission.getIzinNedeni());
-			stmt.setString(5, permission.getAciklama());
-			stmt.setString(6, permission.getTelefonNumarasi());
-			stmt.setString(7, permission.getAdres());
+			// stmt.setLong(1, permission.getId());
+			stmt.setLong(1,   permission.getSicilNo());
+			stmt.setString(2, permission.getBaslangicTarihi());
+			stmt.setString(3, permission.getBitisTarihi());
+			stmt.setInt(4,    permission.getGun());
+			stmt.setString(5, permission.getIzinNedeni());
+			stmt.setString(6, permission.getAciklama());
+			stmt.setString(7, permission.getTelefonNumarasi());
+			stmt.setString(8, permission.getAdres());
 			stmt.executeUpdate();
-			conn.commit();
+
+			logger.error("Liste BasarÄ±yla GÃ¶ndelirdi");
+
+			System.out.println("2. islev Basarili Bir Sekilde Tamamlandi");
 
 		} catch (Exception e) {
-			logger.error("addPermission error" + e.getMessage());
+			e.printStackTrace();
 			conn.rollback();
 			throw e;
 		} finally {
-
-			closePreparedStatement(stmt);
+			if (stmt != null)
+				stmt.close();
+			conn.commit();
 			closeConnection(conn);
-
 		}
-		logger.debug("addPermission is finished");
 	}
 
 	public Permission getPermission(long id) throws Exception {
@@ -115,25 +120,23 @@ public class PermissionDAO extends DatabaseHelper {
 	}
 
 	public ArrayList<Permission> getAllPermission() throws Exception {
-		logger.debug("getAllcompanies is started");
-
-		Connection conn = null;
-
+		PreparedStatement pst = null;
 		ResultSet rs = null;
-		PreparedStatement preparedStatement = null;
-		Permission permission;
-		ArrayList<Permission> permissions = new ArrayList<>();
-		try {
-			String query = "SELECT * FROM permission";
-			logger.debug("sql query created : " + query);
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
-			rs = preparedStatement.executeQuery();
 
+		String query = "SELECT  * FROM PERMISSION  ";
+		ArrayList<Permission> permissions = new ArrayList<>();
+		Permission permission;
+		try {
+			Connection conn = (Connection) getConnection();
+
+			pst = (PreparedStatement) conn.prepareStatement(query);
+
+			rs = pst.executeQuery();
+			// dto'da form no var ama database yok ona bak istersen eklerim...
 			while (rs.next()) {
-				permission = new Permission();
-				System.out.println(rs.getLong("ID"));
+				permission=new Permission();
 				permission.setId(rs.getLong("ID"));
+				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
 				permission.setSicilNo(rs.getLong("SICILNO"));
 				permission.setAciklama(rs.getString("DESCRIPTION"));
 				permission.setAdres(rs.getString("ADDRESS"));
@@ -147,19 +150,16 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
 				permissions.add(permission);
-				conn.commit();
-			}
+			} 
 		} catch (Exception e) {
-			conn.rollback();
-			logger.error(e.getMessage());
+			e.printStackTrace();
+			logger.error("getDepartment error:" + e.getMessage());
 		} finally {
 
-			closeResultSet(rs);
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
 		}
-		logger.debug("getAllcompany finished. company # is " + permissions.size());
+
 		return permissions;
+
 	}
 
 	public void updatePermission(Permission permission) throws Exception {
@@ -198,7 +198,7 @@ public class PermissionDAO extends DatabaseHelper {
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
-			logger.error("update islevinde sýkýntý oldu");
+			logger.error("update islevinde sï¿½kï¿½ntï¿½ oldu");
 
 		} finally {
 
