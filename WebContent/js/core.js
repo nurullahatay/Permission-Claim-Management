@@ -14,24 +14,17 @@ function authenticatePersonel() {
  
   $.get("/Permission-Claim-Management/login", function() {
     $.ajax({
-      type: "POST",
+      type: "GET",
       url: '/Permission-Claim-Management/rest/session/getAuthenticatedPersonel',
       contentType: "application/json",
       mimeType: "application/json",
       success: function(data) {
-        authenticatedUser = data;
-        $("#nav_nickname").text(authenticatedPersonel.email);
-        
-        $.each(authenticatedPersonel.userRoles, function(key, value) {
-          if (value == "admin")
-            isAdmin = true;
-          else if (value == "HR")
-        	  isHR = true;
-          else
-        	  isPersonel = true;
-        });
-     
-      }
+    	  authenticatedPersonel = data;
+      },
+		error : function() {
+			alert("error");
+
+		}
     });
   });
 }

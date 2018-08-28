@@ -21,7 +21,7 @@ public class RightOfPermissionRest {
 
 	@Path("/addRight")
 	@POST
-	@RolesAllowed("admin")
+	@RolesAllowed("HR")
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		ServiceFacade.getInstance().addRightOfPermission(rightOfPermission);
 	}

@@ -5,9 +5,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RightOfPermission {
 	private long sicilNo; // PersonelbilgisiDto'sunda var.
-	private String ValidDate;
-	private int DayCountOfDeserved;
-	private int DayCountOfDeservedForYear;
+	private String validDate;
+	private int dayCountOfDeserved;
+	private int dayCountOfDeservedForYear;
 	public long getSicilNo() {
 		return sicilNo;
 	}
@@ -15,22 +15,22 @@ public class RightOfPermission {
 		this.sicilNo = sicilNo;
 	}
 	public String getValidDate() {
-		return ValidDate;
+		return validDate;
 	}
 	public void setValidDate(String validDate) {
-		ValidDate = validDate;
+		this.validDate = validDate;
 	}
 	public int getDayCountOfDeserved() {
-		return DayCountOfDeserved;
+		return dayCountOfDeserved;
 	}
 	public void setDayCountOfDeserved(int dayCountOfDeserved) {
-		DayCountOfDeserved = dayCountOfDeserved;
+		this.dayCountOfDeserved = dayCountOfDeserved;
 	}
 	public int getDayCountOfDeservedForYear() {
-		return DayCountOfDeservedForYear;
+		return dayCountOfDeservedForYear;
 	}
 	public void setDayCountOfDeservedForYear(int dayCountOfDeservedForYear) {
-		DayCountOfDeservedForYear = dayCountOfDeservedForYear;
+		this.dayCountOfDeservedForYear = dayCountOfDeservedForYear;
 	}
 
 

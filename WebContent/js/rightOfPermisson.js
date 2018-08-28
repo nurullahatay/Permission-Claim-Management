@@ -1,5 +1,19 @@
-var allRight = [];
-var selectedRight;
+
+$(document).ready(function(){
+	personelInfo();
+    var TDEKLE='</th><td>';
+    $.getJSON("/Permission-Claim-Management/rest/right/getAllRight", function(result){
+        $.each(result, function(i, right){
+            $("#getAllRightOfPermission").append('<tr><th>'+right.sicilNo+TDEKLE+right.validDate+TDEKLE+right.dayCountOfDeserved+TDEKLE+right.dayCountOfDeservedForYear+TDEKLE+'<button type="button" id="delete" class="btn btn-danger" onclick="deleteRight('+right.sicilNo+')">Sil</button>'+'</th></tr>');
+        });
+    });
+});
+
+
+
+
+
+
 
 
 function addRightOfPermission() {
@@ -117,3 +131,17 @@ function deleteRight(sicilNo) {
 		}
 	});
 }
+var personel;
+
+
+
+function personelInfo() {
+	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
+	
+	$("#personel_name").text(personel.ad+' '+personel.soyad);
+	  $("#personel_department").text(personel.departmentId);
+	  $("#personel_sicilNo").text(personel.sicilno);
+	  
+	});  
+	
+	}

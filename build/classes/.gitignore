@@ -1,3 +1,7 @@
 /dao/
-/service/
+/dto/
+/listener/
+/properties/
 /rest/
+/service/
+/bean/
