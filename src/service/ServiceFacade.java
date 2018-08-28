@@ -151,8 +151,8 @@ private static ServiceFacade serviceFacade;
 		personelDAO.updatePersonel(personel);
 	}
 	
-	public void deletePersonel(Personel personel) throws Exception {
-		personelDAO.deletePersonel(personel);
+	public void deletePersonel(long sicilNo) throws Exception {
+		personelDAO.deletePersonel(sicilNo);
 	}
 
 	public Personel getPersonelDetailWithEmail(String email) throws Exception {

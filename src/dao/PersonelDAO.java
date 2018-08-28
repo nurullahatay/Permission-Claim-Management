@@ -7,11 +7,10 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import java.sql.PreparedStatement;
 import bean.DatabaseProperties;
-import dto.Department;
 import dto.Personel;
 
 public class PersonelDAO extends DatabaseHelper {
-	Logger logger = Logger.getLogger(RightOfPermissionDAO.class);
+	Logger logger = Logger.getLogger(PersonelDAO.class);
 
 	DatabaseProperties databaseProperties = null;
 
@@ -31,40 +30,37 @@ public class PersonelDAO extends DatabaseHelper {
 	}
 
 	public void addPersonel(Personel personel) throws Exception {
-		logger.debug("addPersonel is started");
 
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
 		try {
-			query.append("INSERT INTO personel ");
-			query.append("VALUES (?,?,?,?,?,NOW() ,?,NOW() ,?,?) ");
+			
+			query.append("INSERT INTO PERSONEL(NAME, SURNAME, EMAIL, PASSWORD, DATEOFSTART, POSITION, SECONDMANEGERAPPROVAL,DEPARTMENT) ");
+			query.append("VALUES (?,?,?,?,NOW(),?,?,?)");
 			String queryString = query.toString();
-			logger.debug("sql query created : " + queryString);
-
+			System.out.println(queryString);
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
-			stmt.setLong(1, personel.getSicilno());
-			stmt.setString(2, personel.getAd());
-			stmt.setString(3, personel.getSoyad());
-			stmt.setString(4, personel.getEmail());
-			stmt.setString(5, personel.getPassword());
-			stmt.setObject(6, personel.getDepartman().getDepartmentName());
-			stmt.setString(7, personel.getPozisyon());
-			stmt.setBoolean(8, personel.isIkinciyoneticionay());
+			stmt.setString(1, personel.getAd());
+			stmt.setString(2, personel.getSoyad());
+			stmt.setString(3, personel.getEmail());
+			stmt.setString(4, personel.getPassword());
+			stmt.setString(5, personel.getPozisyon());
+			stmt.setBoolean(6, personel.isIkinciyoneticionay());
+			stmt.setLong(7, personel.getDepartment());
 			stmt.executeUpdate();
 			conn.commit();
-		} catch (Exception e) {
-			conn.rollback();
-			logger.error(e.getMessage());
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
 			throw e;
 		} finally {
-
-			closePreparedStatement(stmt);
+			if (stmt != null)
+				stmt.close();
 			closeConnection(conn);
 		}
-		logger.debug("addPersonel finished. ");
 	}
 
 	public Personel getPersonel(long sicilNo) throws Exception {
@@ -87,9 +83,7 @@ public class PersonelDAO extends DatabaseHelper {
 			if (rs.next()) {
 				personel.setAd(rs.getString(2));
 				personel.setSicilno(rs.getLong(1));
-				Department departman = new Department();
-				departman.setDepartmentName(rs.getString(7));
-				personel.setDepartman(departman);
+				personel.setDepartment(rs.getLong(7));
 				personel.setEmail(rs.getString(4));
 				personel.setPassword(rs.getString(5));
 				personel.setSoyad(rs.getString(3));
@@ -104,6 +98,8 @@ public class PersonelDAO extends DatabaseHelper {
 		} catch (Exception e) {
 			conn.rollback();
 			logger.error(e.getMessage());
+			throw e;
+
 		} finally {
 			closeResultSet(rs);
 			closePreparedStatement(pst);
@@ -133,25 +129,22 @@ public class PersonelDAO extends DatabaseHelper {
 
 			while (rs.next()) {
 				personel = new Personel();
-				System.out.println(rs.getLong(1));
-
 				personel.setAd(rs.getString(2));
 				personel.setSicilno(rs.getLong(1));
-				Department departman = new Department();
-				departman.setDepartmentName(rs.getString(7));
-				personel.setDepartman(departman);
+				personel.setDepartment(rs.getLong(6));
 				personel.setEmail(rs.getString(4));
 				personel.setPassword(rs.getString(5));
 				personel.setSoyad(rs.getString(3));
-				personel.setIsebaslangictarihi(rs.getString(6));
-				personel.setPozisyon(rs.getString(9));
-				personel.setIkinciyoneticionay(rs.getBoolean(10));
+				personel.setIsebaslangictarihi(rs.getString(7));
+				personel.setPozisyon(rs.getString(8));
+				personel.setIkinciyoneticionay(rs.getBoolean(9));
 				personels.add(personel);
 			}
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
 			logger.error(e.getMessage());
+			throw e;
 		} finally {
 			closeResultSet(rs);
 			closePreparedStatement(preparedStatement);
@@ -183,7 +176,7 @@ public class PersonelDAO extends DatabaseHelper {
 			stmt.setString(3, personel.getEmail());
 			stmt.setString(4, personel.getPassword());
 			stmt.setString(5, personel.getIsebaslangictarihi());
-			stmt.setObject(6, personel.getDepartman());
+			stmt.setObject(6, personel.getDepartment());
 			stmt.setString(7, null);
 			stmt.setString(8, personel.getPozisyon());
 			stmt.setBoolean(9, personel.isIkinciyoneticionay());
@@ -196,6 +189,8 @@ public class PersonelDAO extends DatabaseHelper {
 		} catch (Exception e) {
 			conn.rollback();
 			logger.error(e.getMessage());
+			throw e;
+
 		} finally {
 
 			closePreparedStatement(stmt);
@@ -203,40 +198,42 @@ public class PersonelDAO extends DatabaseHelper {
 		}
 		logger.debug("updatePersonel finished. ");
 	}
+	public void deletePersonel(long sicilno) throws Exception {
 
-	public void deletePersonel(Personel personel) throws Exception {
-		logger.debug("deletePersonel is started");
-
-		int temp = (int) personel.getSicilno();// ID isterse rollerden gelebilir.
-		int sicilNo = (int) temp;
-
-		// departman user ve ticket kontrolu
-		Connection conn = null;
+		
+		 
+		
+		Connection con = null;
 		PreparedStatement pstDepartment = null;
 		StringBuilder queryDeleteDepartment = new StringBuilder();
 
 		try {
-
-			queryDeleteDepartment.append("DELETE FROM personel ");
+			
+			queryDeleteDepartment.append("DELETE FROM PERSONEL ");
 			queryDeleteDepartment.append("WHERE SICILNO=?");
 			String queryString = queryDeleteDepartment.toString();
-			logger.debug("sql query created " + queryString);
+			logger.debug("sql sorgusu: " + queryString);
 
-			conn = getConnection();
-			pstDepartment = (PreparedStatement) conn.prepareStatement(queryString);
+			con = getConnection();
+			pstDepartment = (PreparedStatement) con.prepareStatement(queryString);
 
-			pstDepartment.setLong(1, sicilNo);
+	  
+			pstDepartment.setLong(1, sicilno);
 			pstDepartment.executeUpdate();
-			conn.commit();
-		} catch (Exception e) {
-			conn.rollback();
-			logger.error("error:" + e.getMessage());
-		} finally {
+			 con.commit();
 
-			closeConnection(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("error:" + e.getMessage());
+			throw e;
+
+		} finally {
+			closeConnection(con);
 		}
-		logger.debug("deletePersonel is finished");
+		logger.debug("deletepersonel is finished");
 	}
+
+
 
 	public Personel getPersonelDetailWithEmail(String email) throws Exception {
 		logger.debug("getPersonelDetailWithEmail is started");
@@ -255,9 +252,7 @@ public class PersonelDAO extends DatabaseHelper {
 			if (rs.next()) {
 				personel.setAd(rs.getString("NAME"));
 				personel.setSicilno(rs.getLong("SICILNO"));
-				Department departman = new Department();
-				departman.setDepartmentName(rs.getString("DEPARTMENT"));
-				personel.setDepartman(departman);
+				personel.setDepartment(rs.getLong("DEPARTMENT"));
 				personel.setEmail(rs.getString("EMAIL"));
 				personel.setPassword(rs.getString("PASSWORD"));
 				personel.setSoyad(rs.getString("SURNAME"));
@@ -271,6 +266,8 @@ public class PersonelDAO extends DatabaseHelper {
 		} catch (Exception e) {
 			conn.rollback();
 			logger.error("getPersonelDetailWithEmail error:" + e.getMessage());
+			throw e;
+
 		} finally {
 			closeResultSet(rs);
 			closePreparedStatement(pst);

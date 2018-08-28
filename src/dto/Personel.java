@@ -9,7 +9,7 @@ public class Personel {
 	private String email;
 	private String password;
 	private String isebaslangictarihi;
-	private Department departman;
+	private long departmentId;
 	private String pozisyon;
 	private ArrayList<String> personelRoles;
 	private boolean ikinciyoneticionay;
@@ -46,12 +46,12 @@ public class Personel {
 		this.isebaslangictarihi = isebaslangictarihi;
 	}
 
-	public Department getDepartman() {
-		return departman;
+	public long getDepartment() {
+		return departmentId;
 	}
 
-	public void setDepartman(Department departman) {
-		this.departman = departman;
+	public void setDepartment(long departmanId) {
+		this.departmentId = departmanId;
 	}
 
 	public boolean isIkinciyoneticionay() {
@@ -97,7 +97,7 @@ public class Personel {
 	@Override
 	public String toString() {
 		return "Personel [sicilno=" + sicilno + ", ad=" + ad + ", soyad=" + soyad + ", email=" + email + ", password="
-				+ password + ", isebaslangictarihi=" + isebaslangictarihi + ", departman=" + departman + ", pozisyon="
+				+ password + ", isebaslangictarihi=" + isebaslangictarihi + ", departman=" + departmentId + ", pozisyon="
 				+ pozisyon + ", personelRoles=" + personelRoles + ", ikinciyoneticionay=" + ikinciyoneticionay + "]";
 	}
 

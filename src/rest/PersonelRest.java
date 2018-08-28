@@ -1,5 +1,7 @@
 package rest;
 
+import java.util.List;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
@@ -40,16 +42,16 @@ public class PersonelRest {
 	@Path("/getAllPersonel")
 	@GET
 	@RolesAllowed("admin")
-	public Personel getPersonel(long sicilNo) throws Exception {
-		return ServiceFacade.getInstance().getPersonel(sicilNo);
+	public List<Personel> getPersonel() throws Exception {
+		return ServiceFacade.getInstance().getAllPersonel();
 	}
 
 
 	@Path("/deletePersonel")
 	@POST
 	@RolesAllowed("admin")
-	public void deletePersonel(Personel personel) throws Exception {
-		ServiceFacade.getInstance().deletePersonel(personel);
+	public void deletePersonel(long sicilNo) throws Exception {
+		ServiceFacade.getInstance().deletePersonel(sicilNo);
 	}
 
 	@Path("/updatePersonel")
