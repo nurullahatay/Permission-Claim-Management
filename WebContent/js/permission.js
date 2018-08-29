@@ -1,6 +1,38 @@
+//personelleri açılır menüye getirme
+$(document).ready(function(){
+        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+            $.each(result, function(i, personel){
+                $("#selectpersonel").append('<option id="personelselect" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+            });
+        });
+});
+
+//açılır menüden seçilen personelin bilgilerinin doldurulması
+$(document).ready(function(){
+	 $(document).on("click","#personelselect",function(){
+		 sicilno=$(this).attr("value");
+		 $.ajax({
+				type : "POST",
+				url : '/Permission-Claim-Management/rest/personel/getPersonel',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data : sicilno,
+				success : function(result) {
+					$("#departman").text(result.departmentId);
+					$("#sicilno").text(result.sicilno);
+					$("#isebaslama").text(result.isebaslangictarihi);
+				},
+				error : function() {
+					alert("error");
+
+				}
+			});
+    });
+});
+
+
 //Tüm izinleri Listeleme
 $(document).ready(function(){
-    $("#tümizinlerigetir").on("click",function(){
     	var TDEKLE='</td><td>';
     	var durum='Henüz İncelenmedi';
         $.getJSON("/Permission-Claim-Management/rest/permission/getAllPermission", function(result){
@@ -11,7 +43,6 @@ $(document).ready(function(){
             		var durum='Reddedildi';
             	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="delete" class="'+permission.id+'">Sil</button>'+'</td></tr>');
             });
-        });
     });
 });
 

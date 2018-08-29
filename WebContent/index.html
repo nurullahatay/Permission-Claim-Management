@@ -7,6 +7,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/personel.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
@@ -25,50 +26,74 @@ html, body, h1, h2, h3, h4, h5 {
 }
 </style>
 <body class="w3-light-grey">
-	
 
-<script src="./js/core.js"></script>
-		<script src="./js/rightOfPermisson.js"></script>
-	
-	
-	
+
+
+
 	<!-- fadeIn fadeOut scriptleri -->
 	<script>
-$(document).ready(function(){
-$("#aizinhakedis").click(function(){
-  $("#izinhakedisdiv").fadeIn();
-	 $("#izintalebidiv").fadeOut();
-});
-$("#aizintalebi").click(function(){
-	$("#izintalebidiv").fadeIn();
-	 $("#izinhakedisdiv").fadeOut();
-});
-});
-</script>
+		$(document).ready(function() {
+			$("#aizinhakedis").click(function() {
+				$("#izinhakedisdiv").fadeIn();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+			});
+			$("#aizintalebi").click(function() {
+				$("#izintalebidiv").fadeIn();
+				$("#izinhakedisdiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+			});
+			$("#apersonelekle").click(function() {
+				$("#personelkayıtdiv").fadeIn();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+			});
+			$("#apersonellistesi").click(function() {
+				$("#getallpersoneldiv").fadeIn();
+				$("#izintalebidiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+			});
+			$("#aizinlistesi").click(function() {
+				$("#tümizinlerdiv").fadeIn();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+			});
+		});
+	</script>
 	<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
+		// Get the Sidebar
+		var mySidebar = document.getElementById("mySidebar");
 
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
+		// Get the DIV with overlay effect
+		var overlayBg = document.getElementById("myOverlay");
 
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
+		// Toggle between showing and hiding the sidebar, and add overlay effect
+		function w3_open() {
+			if (mySidebar.style.display === 'block') {
+				mySidebar.style.display = 'none';
+				overlayBg.style.display = "none";
+			} else {
+				mySidebar.style.display = 'block';
+				overlayBg.style.display = "block";
+			}
+		}
 
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
+		// Close the sidebar with the close button
+		function w3_close() {
+			mySidebar.style.display = "none";
+			overlayBg.style.display = "none";
+		}
+	</script>
 
 	<!-- Top container -->
 	<div class="w3-bar w3-top w3-black w3-large" style="z-index: 4">
@@ -88,7 +113,7 @@ function w3_close() {
 			<div class="w3-col s4"></div>
 			<div class="w3-col s8 w3-bar">
 				<span>Hoşgeldiniz, <strong>mike</strong></span><br> <a
-					href="logout.jsp" class="w3-bar-item w3-button"> <i
+					href="logout" style="text-decoration:none" class="w3-bar-item w3-button"> <i
 					class="fa fa-power-off"></i>&nbsp Çıkış
 				</a>
 			</div>
@@ -104,16 +129,16 @@ function w3_close() {
 				class="fa fa-remove fa-fw"></i>  Close Menu</a> <a href="index.html"
 				class="w3-bar-item w3-button w3-padding w3-blue"
 				style="text-decoration: none"><i class="fa fa-gears fa-fw"></i> 
-				İzin Talep Yönetimi</a> <a href="personelekle.html"
+				İzin Talep Yönetimi</a> <a id="apersonelekle" href="#"
 				class="w3-bar-item w3-button w3-padding"
 				style="text-decoration: none"><i class="fa fa-id-card fa-fw"></i> 
-				Personel Ekle</a> <a href="departmanekle.html"
+				Personel Ekle</a> <a id="apersonellistesi" href="#"
 				class="w3-bar-item w3-button w3-padding"
 				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
-				Departman Ekle</a>
-			<!-- 
-	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>  Geo</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+				Personel Listesi</a>
+			
+	<a style="text-decoration:none" id="aizinlistesi" href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i> İzin Listesi</a>
+    <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
@@ -240,7 +265,7 @@ function w3_close() {
 					</div>
 				</fieldset>
 			</div>
-			<div id="izintalebidiv">
+			<div id="izintalebidiv" style="display:none">
 				<fieldset id="izinhakedisdiv">
 					<div class="w3-panel">
 
@@ -254,25 +279,28 @@ function w3_close() {
 								<table class="w3-table  w3-white">
 									<tr>
 
-										<td>Personel</td>
-										<td><i><input type="text" class="form-control"
-												size="17px" placeholder="Ara" name="personelarama"
-												id="personelarama"></input></i></td>
+										<td>Personel:<select id="selectpersonel">
+
+
+
+
+
+										</select></td>
 									</tr>
 									<tr>
 
 										<td>Departman</td>
-										<td><i id="departman">________</i></td>
+										<td><p id="departman">________</p></td>
 									</tr>
 									<tr>
 
 										<td>Sicil No</td>
-										<td><i id="sicilno">________</i></td>
+										<td><p id="sicilno">________</p></td>
 									</tr>
 									<tr>
 
 										<td>İşe Başlama Tarihi</td>
-										<td><i id="isebaslama">________</i></td>
+										<td><p id="isebaslama">________</p></td>
 									</tr>
 									<tr>
 
@@ -292,8 +320,8 @@ function w3_close() {
 										<td>Form Oluşturma Tarihi</td>
 										<td><i><b><script language="JavaScript"
 														type="text/javascript">
-                        document.write(TODAY);
-                    </script></b></i></td>
+											document.write(TODAY);
+										</script></b></i></td>
 									</tr>
 									<tr>
 
@@ -342,7 +370,8 @@ function w3_close() {
 								<td><i><div class="datepicker">
 											<input id="tarih" class="form-control" type="text">
 											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="permissionstart" name="izinbaslangictarihi">
+											<input type="hidden" id="permissionstart"
+												name="izinbaslangictarihi">
 											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
 										</div></i></td>
 							</tr>
@@ -353,7 +382,8 @@ function w3_close() {
 										<div class="datepicker">
 											<input id="tarih2" class="form-control" type="text">
 											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="permissionfinish" name="izinbitistarihi">
+											<input type="hidden" id="permissionfinish"
+												name="izinbitistarihi">
 											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
 										</div>
 								</i></td>
@@ -370,7 +400,8 @@ function w3_close() {
 							<tr>
 
 								<td>İzin nedeni</td>
-								<td><i><select class="form-control" name="permissionreason" id="permissionreason">
+								<td><i><select class="form-control"
+										name="permissionreason" id="permissionreason">
 											<option value="izinnedeni1">izinnedeni1</option>
 											<option value="izinnedeni2">izinnedeni2</option>
 											<option value="izinnedeni3">izinnedeni3</option>
@@ -380,44 +411,144 @@ function w3_close() {
 							<tr>
 
 								<td>Açıklama</td>
-								<td><i><textarea id="permissionaciklama" class="form-control"
-											name="aciklama"></textarea></i></td>
+								<td><i><textarea id="permissionaciklama"
+											class="form-control" name="aciklama"></textarea></i></td>
 							</tr>
 
 						</table>
-						<input class="w3-right" id="postPermission" class="form-control" type="submit"
-							value="Submit" />
+						<input class="w3-right" id="postPermission" class="form-control"
+							type="submit" value="Submit" />
 					</div>
 					</form>
 				</fieldset>
 
 			</div>
-						<div id="tümizinlerdiv">
-						<button id="tümizinlerigetir" type="button">İzinleri Listele</button>
+			<div id="tümizinlerdiv" style="display:none">
+
 				<fieldset id="tümizinlerdiv">
 					<div class="w3-container">
 						<hr>
 						<h2>İzin Listesi</h2>
 						<br>
-							<table id="tümizinlertable" class="w3-table  w3-striped w3-white">
-								<tr>
-									<th>ID</th>
-									<th>İzin Oluşturma Tarihi</th>
-									<th>İzin Başlama Tarihi</th>
-									<th>İzin Bitiş Tarihi</th>
-									<th>Gün</th>
-									<th>İzin Nedeni</th>
-									<th>Telefon No</th>
-									<th>Adres</th>
-									<th>Durum</th>
-									<th>Sil</th>
-								</tr>
-							</table>
+						<table id="tümizinlertable" class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+								<th>Sil</th>
+							</tr>
+						</table>
 					</div>
 				</fieldset>
 			</div>
 			<hr>
+			<fieldset id="personelkayıtdiv" style="display:none">
+				<div class="w3-container">
 
+					<h2>Personel Kayıt</h2>
+					<br>
+
+						<table class="w3-table  w3-white">
+
+							<tr>
+
+								<td>Ad</td>
+								<td><input id="personelad" name="ad" placeholder=""
+									class="form-control input-md" type="text"></td>
+							</tr>
+							<tr>
+
+								<td>Soyad</td>
+								<td><input id="personelsoyad" name="soyad" placeholder=""
+									class="form-control input-md" type="text"></td>
+							</tr>
+							<tr>
+
+								<td>E-mail</td>
+								<td><input id="personelemail" placeholder="" name="email"
+									class="form-control input-md" type="text"></td>
+							</tr>
+							<tr>
+
+								<td>Parola</td>
+								<td><input id="personelpassword" placeholder=""
+									name="password" class="form-control input-md" type="text"></td>
+							</tr>
+							<tr>
+							<tr>
+
+								<td>Departman</td>
+								<td><select id="personeldep" class="form-control">
+										<option value="dep1">Departman1</option>
+										<option value="dep2">Departman2</option>
+										<option value="dep3">Departman3</option>
+								</select></td>
+							</tr>
+							<td>Pozisyon</td>
+							<td><select id="personelpoz" class="form-control">
+									<option value="p1">p1</option>
+									<option value="p2">p2</option>
+									<option value="p3">p3</option>
+							</select></td>
+							</tr>
+							<tr>
+
+								<td>İkinci Yönetici Onayı</td>
+								<td><div class="checkbox">
+										<label for="checkboxes-0"> <input id="personeliyonay"
+											value="true" type="checkbox"> İzin almak için zorunlu
+											ise işaretleyiniz
+										</label>
+									</div></td>
+							</tr>
+							<div class="from-group">
+						<label>Personel Rol:<span class="text-danger">*</span></label>
+						<div id="add_personel_roles" class="checkbox form-control">
+							<label class="checkbox-inline">
+								<input type="checkbox" name="userRole" id="adminRole">Admin
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" name="userRole" id="HRRole">İnsan Kaynakları
+							</label>
+							<label class="checkbox-inline">
+								<input type="checkbox" name="userRole" id="personelRole">Personel
+							</label>
+						</div>
+					</div>
+
+
+
+						</table>
+						<input class="w3-right" id="postPersonel" class="form-control"
+							type="submit" value="Submit" />
+				</div>
+			</fieldset>
+			<fieldset id="getallpersoneldiv" style="display:none">
+				<div id="getallpersoneldiv">
+					<table id="getallpersoneltable"
+						class="w3-table w3-striped w3-white">
+						<th>Sicil No</th>
+						<th>Ad</th>
+						<th>Soyad</th>
+						<th>E-mail</th>
+						<th>Password</th>
+						<th>İşe Başlama Tarihi</th>
+						<th>Pozisyon</th>
+						<th>İkinci Yönetici Onayı Gerekli mi?</th>
+						<th>SİL</th>
+
+
+
+
+					</table>
+				</div>
+			</fieldset>
 			<!-- Footer -->
 			<footer class="w3-container w3-padding-16 w3-dark-grey">
 				<h4>FOOTER</h4>

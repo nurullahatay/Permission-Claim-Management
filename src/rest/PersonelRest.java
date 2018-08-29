@@ -38,10 +38,17 @@ public class PersonelRest {
 	public void addPersonel(Personel personel) throws Exception {
 		ServiceFacade.getInstance().addPersonel(personel);
 	}
-
+	
+	@Path("/getPersonel")
+	@POST
+	@RolesAllowed("admin"+"HR")
+	public Personel getPersonel(long sicilNo) throws Exception {
+		return ServiceFacade.getInstance().getPersonel(sicilNo);
+	}
+	
 	@Path("/getAllPersonel")
 	@GET
-	@RolesAllowed("admin")
+	@RolesAllowed("admin"+"HR")
 	public List<Personel> getPersonel() throws Exception {
 		return ServiceFacade.getInstance().getAllPersonel();
 	}

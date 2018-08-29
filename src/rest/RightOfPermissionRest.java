@@ -43,7 +43,7 @@ public class RightOfPermissionRest {
 	}
 	@Path("/updateRight")
 	@POST
-	@RolesAllowed("admin")
+	@RolesAllowed("HR")
 	public void updateRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
 		ServiceFacade.getInstance().updateRightOfPermission(rightOfPermission);
 

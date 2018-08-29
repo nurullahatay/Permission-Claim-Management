@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 import java.sql.PreparedStatement;
@@ -51,18 +52,45 @@ public class PersonelDAO extends DatabaseHelper {
 			stmt.setLong(7, personel.getDepartment());
 			stmt.executeUpdate();
 			conn.commit();
-
+			addPersonelRoles(personel);
 		} catch (Exception e) {
 			e.printStackTrace();
 			conn.rollback();
 			throw e;
 		} finally {
-			if (stmt != null)
-				stmt.close();
+			closePreparedStatement(stmt);
 			closeConnection(conn);
 		}
 	}
 
+	private void addPersonelRoles(Personel personel) throws Exception {
+		PreparedStatement pStmt = null;
+		StringBuilder query = new StringBuilder();
+		Connection conn = null;
+		try {
+			conn=getConnection();
+			query.append("INSERT INTO personel_roles ");
+			query.append("(EMAIL,ROLE) values (?,?)");
+
+			pStmt = conn.prepareStatement(query.toString());
+
+			List<String> personelRoles = personel.getPersonelRoles();
+			for (String role : personelRoles) {
+				pStmt.setString(1, personel.getEmail());
+				pStmt.setString(2, role);
+				pStmt.executeUpdate();
+			}
+			conn.commit();
+		} catch (Exception e) {
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(pStmt);
+			closeConnection(conn);
+		}
+	}
+	
+	
 	public Personel getPersonel(long sicilNo) throws Exception {
 		logger.debug("getPersonel is started");
 
@@ -83,13 +111,13 @@ public class PersonelDAO extends DatabaseHelper {
 			if (rs.next()) {
 				personel.setAd(rs.getString(2));
 				personel.setSicilno(rs.getLong(1));
-				personel.setDepartment(rs.getLong(7));
+				personel.setDepartment(rs.getLong(6));
 				personel.setEmail(rs.getString(4));
 				personel.setPassword(rs.getString(5));
 				personel.setSoyad(rs.getString(3));
-				personel.setIsebaslangictarihi(rs.getString(6));
-				personel.setPozisyon(rs.getString(9));
-				personel.setIkinciyoneticionay(rs.getBoolean(10));
+				personel.setIsebaslangictarihi(rs.getString(7));
+				personel.setPozisyon(rs.getString(8));
+				personel.setIkinciyoneticionay(rs.getBoolean(9));
 
 			} else {
 				System.out.println("olmadi");

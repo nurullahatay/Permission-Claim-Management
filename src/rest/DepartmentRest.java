@@ -3,7 +3,6 @@ package rest;
 import java.util.ArrayList;
 
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,21 +28,21 @@ public class DepartmentRest {
 	
 	@POST
 	@Path("/addDepartment")
-	@RolesAllowed("admin")
+	@PermitAll
 	public void addDepartment(Department department) throws Exception {
 		 ServiceFacade.getInstance().addDepartment(department);
 	}
 	
 	@POST
 	@Path("/getDepartment")
-	@RolesAllowed("admin")
+	@PermitAll
 	public Department getDepartmentDetails(long ID) throws Exception {
 		return ServiceFacade.getInstance().getDepartment(ID);
 	}
 	
 	@POST
 	@Path("/deleteDepartment")
-	@RolesAllowed("admin")
+	@PermitAll
 	public void deleteDepartment(Department department) throws Exception {
 		 ServiceFacade.getInstance().deleteDepartment(department);
 	}

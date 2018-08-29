@@ -1,7 +1,7 @@
 //tüm personelleri listele
 $(document).ready(function(){
-    $("#getallpersonelbutton").on("click",function(){
-    	var TDEKLE='</td><td>';
+    var TDEKLE='</th><td>';
+
         $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
             $.each(result, function(i, personel){
             	if(personel.ikinciyoneticionay==true)
@@ -12,7 +12,7 @@ $(document).ready(function(){
             });
         });
     });
-});
+
 
 //personel silme
 $(document).ready(function(){
@@ -45,15 +45,27 @@ $(document).ready(
 			$("#postPersonel")
 					.click(
 							function() {
-								var personel = {}
+								var personel = {};
 								personel["ad"] = $("#personelad").val();
 								personel["soyad"] = $("#personelsoyad").val();
 								personel["email"] = $("#personelemail").val();
 								personel["password"] = $("#personelpassword").val();
 								//personel["isebaslangictarihi"] = $("#personelisbasi").val();
-								//personel["department"] = $("#personeldep").val();
+								personel["department"] = 0;
 								personel["pozisyon"] = $("#personelpoz").val();
 								personel["ikinciyoneticionay"] = $("#personeliyonay").val();
+								
+								var roles = [];
+								if ($('#adminRole').is(':checked')) {
+									roles.push("admin");
+								}
+								if ($('#HRRole').is(':checked')) {
+									roles.push("HR");
+								}
+								if ($('#personelRole').is(':checked')) {
+									roles.push("personel");
+								}
+								personel["personelRoles"] = roles;
 								$
 										.ajax({
 											type : "POST",

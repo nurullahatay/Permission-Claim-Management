@@ -3,7 +3,6 @@ package rest;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -46,13 +45,13 @@ public class PermissionRest {
 
 	@Path("/deletePermission")
 	@POST
-	@RolesAllowed("admin")
+	@PermitAll
 	public void deletePermission(Permission permission) throws Exception {
 		ServiceFacade.getInstance().deletePermission(permission);
 	}
 	@Path("/updatePermission")
 	@POST
-	@RolesAllowed("admin")
+	@PermitAll
 	public void updatePermission(Permission permission) throws Exception {
 		ServiceFacade.getInstance().updatePermission(permission);
 	}
