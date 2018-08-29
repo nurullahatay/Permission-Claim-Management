@@ -1,0 +1,7 @@
+
+.project
+.classpath
+.settings/org.eclipse.jdt.core.prefs
+.settings/org.eclipse.wst.common.component
+build/classes/application.properties
+src/application.properties

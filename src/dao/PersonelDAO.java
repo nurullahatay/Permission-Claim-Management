@@ -37,7 +37,7 @@ public class PersonelDAO extends DatabaseHelper {
 		StringBuilder query = new StringBuilder();
 		try {
 			
-			query.append("INSERT INTO PERSONEL(NAME, SURNAME, EMAIL, PASSWORD, DATEOFSTART, POSITION, SECONDMANEGERAPPROVAL,DEPARTMENT) ");
+			query.append("INSERT INTO personel(NAME, SURNAME, EMAIL, PASSWORD, DATEOFSTART, POSITION, SECONDMANEGERAPPROVAL,DEPARTMENT) ");
 			query.append("VALUES (?,?,?,?,NOW(),?,?,?)");
 			String queryString = query.toString();
 			System.out.println(queryString);
@@ -149,7 +149,7 @@ public class PersonelDAO extends DatabaseHelper {
 		Personel personel;
 		ArrayList<Personel> personels = new ArrayList<>();
 		try {
-			String query = "SELECT *   FROM  PERSONEL ";
+			String query = "SELECT * FROM personel ";
 			logger.debug("sql query created : " + query);
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
@@ -171,7 +171,7 @@ public class PersonelDAO extends DatabaseHelper {
 			conn.commit();
 		} catch (Exception e) {
 			conn.rollback();
-			logger.error(e.getMessage());
+			e.printStackTrace();
 			throw e;
 		} finally {
 			closeResultSet(rs);

@@ -39,8 +39,8 @@ public class PermissionDAO extends DatabaseHelper {
 			// 1.NOW PERMISSIONCREATINGHISTORY
 
 			query.append(
-					"INSERT INTO PERMISSION(SICILNO, PERMISSIONCREATINGHISTORY, STARTINGDATE, DATEOFRETURN, DAY, PERMISSIONREASON, DESCRIPTION, PHONENUMBER, ADDRESS, SECONDMANAGERAPPROVAL, FIRSTMANAGERAPPROVAL, IKAPPROVAL, STATUS) ");
-			query.append("VALUES(?,NOW(),?,?,?,?,?,?,?,0,0,0,0) ");
+					"INSERT INTO permission(SICILNO, PERMISSIONCREATINGHISTORY, STARTINGDATE, DATEOFRETURN, DAY, PERMISSIONREASON, DESCRIPTION, PHONENUMBER, ADDRESS, SECONDMANAGERAPPROVAL, FIRSTMANAGERAPPROVAL, IKAPPROVAL, STATUS, FORMFILLER) ");
+			query.append("VALUES(?,NOW(),?,?,?,?,?,?,?,0,0,0,0,?) ");
 			String queryString = query.toString();
 			System.out.println(queryString);
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
@@ -54,9 +54,10 @@ public class PermissionDAO extends DatabaseHelper {
 			stmt.setString(6, permission.getAciklama());
 			stmt.setString(7, permission.getTelefonNumarasi());
 			stmt.setString(8, permission.getAdres());
+			stmt.setLong(9,   1);
 			stmt.executeUpdate();
 
-			logger.error("Liste Basarıyla Göndelirdi");
+			logger.debug("Liste Basarıyla Göndelirdi");
 
 			System.out.println("2. islev Basarili Bir Sekilde Tamamlandi");
 
@@ -123,7 +124,7 @@ public class PermissionDAO extends DatabaseHelper {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
-		String query = "SELECT  * FROM PERMISSION  ";
+		String query = "SELECT  * FROM permission  ";
 		ArrayList<Permission> permissions = new ArrayList<>();
 		Permission permission;
 		try {
