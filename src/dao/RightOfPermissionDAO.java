@@ -35,20 +35,22 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 		try {
 			query.append(
 					"INSERT INTO rightofpermission (SICILNO,VALIDDATE,DAYCOUNTOFDESERVED,DAYCOUNTOFDESERVEDFORYEAR)");
-			query.append("VALUES  (?,NOW(),?,?) ");
+			query.append("VALUES  (?,?,?,?) ");
 			String queryString = query.toString();
 			logger.debug("sql query created : " + queryString);
 			stmt = (PreparedStatement) conn.prepareStatement(queryString);
 
 			stmt.setLong(1, rightOfPermission.getSicilNo());
-			stmt.setInt(2, rightOfPermission.getDayCountOfDeserved());
-			stmt.setInt(3, rightOfPermission.getDayCountOfDeservedForYear());
+			stmt.setString(2, rightOfPermission.getValidDate());
+			stmt.setInt(3, rightOfPermission.getDayCountOfDeserved());
+			stmt.setInt(4, rightOfPermission.getDayCountOfDeservedForYear());
 
 			stmt.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
-			conn.rollback();
 			logger.error(e.getMessage());
+			conn.rollback();
+			throw e;
 		} finally {
 
 			closePreparedStatement(stmt);
