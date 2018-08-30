@@ -233,15 +233,21 @@ public class PersonelDAO extends DatabaseHelper {
 	public Personel getPersonelDetailWithEmail(String email) throws Exception {
 		logger.debug("PersonelDAO getPersonelDetailWithEmail metodu çalýþmaya baþladý.");
 		PreparedStatement pst = null;
+		PreparedStatement pst2 = null;
 		Connection conn = getConnection();
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		Personel personel = new Personel();
 		String query = "SELECT * FROM  personel WHERE  EMAIL =?";
+		String query2 = "SELECT role FROM  personel_roles WHERE  EMAIL =?";
 		logger.trace(query);
 		try {
 			pst = (PreparedStatement) conn.prepareStatement(query);
+			pst2 = (PreparedStatement) conn.prepareStatement(query2);
 			pst.setString(1, email);
+			pst2.setString(1, email);
 			rs = pst.executeQuery();
+			rs2 = pst2.executeQuery();
 			if (rs.next()) {
 				personel.setAd(rs.getString("NAME"));
 				personel.setSicilno(rs.getLong("SICILNO"));
@@ -253,6 +259,11 @@ public class PersonelDAO extends DatabaseHelper {
 				personel.setPozisyon(rs.getString("POSITION"));
 				personel.setIkinciyoneticionay(rs.getBoolean("SECONDMANEGERAPPROVAL"));
 			}
+			ArrayList<String> personelRoles = new ArrayList<>();
+			while(rs2.next()) {
+				personelRoles.add(rs2.getString("ROLE"));
+			}
+			personel.setPersonelRoles(personelRoles);
 			conn.commit();
 		} catch (Exception e) {
 			logger.error("PersonelDAO getPersonelDetailWithEmail metodu exeption = " + e);
