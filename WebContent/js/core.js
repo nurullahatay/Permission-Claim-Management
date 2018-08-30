@@ -2,11 +2,17 @@ var authenticatedPersonel;
 var isAdmin = false;
 var isHR = false;
 var isPersonel = false;
+var isFirstManager = false;
+var isSecondManager = false;
 
 
 
 $(document).ready(function() {
   authenticatePersonel();
+
+  
+  
+  
 });
 
 $("#dept").show();
@@ -20,6 +26,19 @@ function authenticatePersonel() {
       mimeType: "application/json",
       success: function(data) {
     	  authenticatedPersonel = data;
+    	$("#personel_avatar_name").text(authenticatedPersonel.ad+' '+authenticatedPersonel.soyad);
+    	 $.each(authenticatedUser.userRoles, function(key, value) {
+             if (value == "admin")
+               isAdmin = true;
+             else if (value == "HR")
+               isHR = true;
+             else if (value == "personel")
+            	 isPersonel = true;
+             else if (value == "firstManager")
+            	 isFirstManager = true;
+             else
+            	 isSecondManager = true;
+           });
       },
 		error : function() {
 			alert("error");
@@ -28,6 +47,9 @@ function authenticatePersonel() {
     });
   });
 }
+
+
+
 
 
 function logout() {

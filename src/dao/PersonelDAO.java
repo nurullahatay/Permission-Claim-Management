@@ -236,7 +236,7 @@ public class PersonelDAO extends DatabaseHelper {
 		Connection conn = getConnection();
 		ResultSet rs = null;
 		Personel personel = new Personel();
-		String query = "SELECT * FROM  PERSONEL WHERE  EMAIL =?";
+		String query = "SELECT * FROM  personel WHERE  EMAIL =?";
 		logger.trace(query);
 		try {
 			pst = (PreparedStatement) conn.prepareStatement(query);

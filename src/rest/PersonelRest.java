@@ -41,7 +41,7 @@ public class PersonelRest {
 	
 	@Path("/getPersonel")
 	@POST
-	@RolesAllowed("admin")
+	@RolesAllowed({"admin","HR"})
 	public Personel getPersonel(long sicilNo) throws Exception {
 		return ServiceFacade.getInstance().getPersonel(sicilNo);
 	}
