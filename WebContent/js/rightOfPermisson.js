@@ -21,7 +21,7 @@ function addRightOfPermission() {
 	var rightOfPermission = {};
 
 	rightOfPermission["sicilNo"] = $('#selectpersonelRight').val();
-	rightOfPermission["validDate"] =$("#gtarih").val();
+	rightOfPermission["validDate"] =$("#gtarih-db").val();
 	rightOfPermission["dayCountOfDeserved"] = $('#hakedilengunsayisi').val();
 	rightOfPermission["dayCountOfDeservedForYear"] = $('#hakedilengunsayisi').val();
 	
@@ -135,7 +135,7 @@ var personel;
 
 function personelInfo() {
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
-	
+		 $("#nickname").text(personel.ad+" "+personel.soyad);
 	$("#personel_name").text(personel.ad+' '+personel.soyad);
 	  $("#personel_department").text(personel.departmentId);
 	  $("#personel_sicilNo").text(personel.sicilno);

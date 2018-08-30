@@ -98,7 +98,7 @@ public class DepartmentDAO extends DatabaseHelper {
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				department = new Department();
-				System.out.println(rs.getLong(1));
+				department.setId(rs.getLong(1));
 				department.setDepartmentName(rs.getString("DEPARTMANNAME"));
 				department.setDepartmentFirstManager(rs.getLong("DEPARTMENTFIRSTMANAGER"));
 				department.setDepartmentSecondManager(rs.getLong("DEPARTMENTSECONDMANAGER"));
