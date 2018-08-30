@@ -26,7 +26,7 @@ public class PersonelRest {
 	@GET
 	@PermitAll
 	public Personel getUserDetails(@Context HttpServletRequest request) throws Exception {
-		String userId = request.getUserPrincipal().getName();
+//		String userId = request.getUserPrincipal().getName();
 		Personel authenticatedPersonelDetails = (Personel) request.getSession().getAttribute("LOGIN_USER");
 		authenticatedPersonelDetails.getEmail();
 		return authenticatedPersonelDetails;

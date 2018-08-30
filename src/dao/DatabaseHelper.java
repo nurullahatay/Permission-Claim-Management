@@ -77,29 +77,33 @@ public class DatabaseHelper {
 			}
 		}
 		logger.debug("DatabaseHelper closeConnection metodu çalýþmasý bitti.");
-
 	}
 	
 	public void closeResultSet(ResultSet rs) {
+		logger.debug("DatabaseHelper closeResultSet metodu çalýþmaya baþladý.");
 		try {
 			if (rs != null)
 				rs.close();
-			logger.trace("ResultSet closed");
+			logger.trace("closeResultSet metodu çalýþtý.");
 		} catch (Exception e) {
-			logger.trace("ResultSet close error: " + e.getMessage());
+			logger.error("closeResultSet close error: " + e.getMessage());
 			e.printStackTrace();
 		}
+		logger.debug("DatabaseHelper closeResultSet metodu çalýþmasý bitti.");
+
 	}
 
 	public void closePreparedStatement(PreparedStatement pst) {
+		logger.debug("DatabaseHelper closePreparedStatement metodu çalýþmaya baþladý.");
 		try {
 			if (pst != null)
 				pst.close();
-			logger.trace("PreparedStatement closed");
+			logger.trace("closePreparedStatement metodu çalýþmaya baþladý.");
 		} catch (Exception e) {
-			logger.trace("PreparedStatement close error: " + e.getMessage());
+			logger.error("closePreparedStatement close error: " + e.getMessage());
 			e.printStackTrace();
 		}
+		logger.debug("DatabaseHelper closePreparedStatement metodu çalýþmasý bitti.");
 	}
 
 }
