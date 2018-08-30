@@ -54,12 +54,13 @@ public class PermissionDAO extends DatabaseHelper {
 			stmt.setString(6, permission.getAciklama());
 			stmt.setString(7, permission.getTelefonNumarasi());
 			stmt.setString(8, permission.getAdres());
-			stmt.setLong(9,   1);
+			stmt.setLong(9,   permission.getFormFiller());
 			stmt.executeUpdate();
 
 			logger.debug("Liste Basarıyla Göndelirdi");
 
 			System.out.println("2. islev Basarili Bir Sekilde Tamamlandi");
+			conn.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +69,6 @@ public class PermissionDAO extends DatabaseHelper {
 		} finally {
 			if (stmt != null)
 				stmt.close();
-			conn.commit();
 			closeConnection(conn);
 		}
 	}
@@ -104,6 +104,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				conn.commit();
 			}
 		} catch (Exception e) {
@@ -150,6 +151,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				permissions.add(permission);
 			} 
 		} catch (Exception e) {
@@ -435,6 +437,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				permissions.add(permission);
 			}
 			conn.commit();
@@ -488,6 +491,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				permissions.add(permission);
 			}
 			conn.commit();
@@ -536,6 +540,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				permissions.add(permission);
 			}
 			conn.commit();
@@ -585,6 +590,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				permissions.add(permission);
 			}
 			conn.commit();
@@ -634,6 +640,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
 				permissions.add(permission);
 			}
 

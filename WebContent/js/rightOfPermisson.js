@@ -17,18 +17,16 @@ $(document).ready(function(){
 
 
 function addRightOfPermission() {
-	var personel = $('#personelarama').val();
-	var tarih = "qw";
-	var hakedilenGunSayisi = $('#hakedilengunsayisi').val();
-	var mevcutYilIciHakedilenGunSayisi = $('#hakedilengunsayisi').val();
 
 	var rightOfPermission = {};
 
-	rightOfPermission["sicilNo"] = personel;
-	rightOfPermission["ValidDate"] = tarih;
-	rightOfPermission["DayCountOfDeserved"] = hakedilenGunSayisi;
-	rightOfPermission["DayCountOfDeservedForYear"] = mevcutYilIciHakedilenGunSayisi;
-
+	rightOfPermission["sicilNo"] = $('#selectpersonelRight').val();
+	rightOfPermission["validDate"] =$("#gtarih").val();
+	rightOfPermission["dayCountOfDeserved"] = $('#hakedilengunsayisi').val();
+	rightOfPermission["dayCountOfDeservedForYear"] = $('#hakedilengunsayisi').val();
+	
+	console.log(rightOfPermission.sicilNo+rightOfPermission.validDate+rightOfPermission.dayCountOfDeserved+rightOfPermission.dayCountOfDeservedForYear);
+	
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/right/addRight',
@@ -145,3 +143,13 @@ function personelInfo() {
 	});  
 	
 	}
+
+
+//personelleri açılır menüye getirme
+$(document).ready(function(){
+        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+            $.each(result, function(i, personel){
+                $("#selectpersonelRight").append('<option id="personelselectRight" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+            });
+        });
+});

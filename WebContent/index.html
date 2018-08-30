@@ -7,7 +7,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/core.js"></script>
+
 <script src="js/personel.js"></script>
+<script src="./js/rightOfPermisson.js"></script>
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
@@ -113,8 +117,9 @@ html, body, h1, h2, h3, h4, h5 {
 			<div class="w3-col s4"></div>
 			<div class="w3-col s8 w3-bar">
 				<span>Hoşgeldiniz, <strong>mike</strong></span><br> <a
-					href="logout" style="text-decoration:none" class="w3-bar-item w3-button"> <i
-					class="fa fa-power-off"></i>&nbsp Çıkış
+					href="logout" style="text-decoration: none"
+					class="w3-bar-item w3-button"> <i class="fa fa-power-off"></i>&nbsp
+					Çıkış
 				</a>
 			</div>
 		</div>
@@ -135,10 +140,10 @@ html, body, h1, h2, h3, h4, h5 {
 				Personel Ekle</a> <a id="apersonellistesi" href="#"
 				class="w3-bar-item w3-button w3-padding"
 				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
-				Personel Listesi</a>
-			
-	<a style="text-decoration:none" id="aizinlistesi" href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i> İzin Listesi</a>
-    <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+				Personel Listesi</a> <a style="text-decoration: none" id="aizinlistesi"
+				href="#" class="w3-bar-item w3-button w3-padding"><i
+				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a>
+			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
@@ -222,50 +227,86 @@ html, body, h1, h2, h3, h4, h5 {
 						<h2>İzin Hakediş</h2>
 						<br>
 
+						<!-- personel bilgisi-->
+						<div id="personelInformation" class="container ">
+							<div class="col-lg-12">
+								<hr>
+								<h2>Personel Bilgisi</h2>
+								<br> <strong>Personel : </strong> <span class="personel"
+									id="personel_name"></span> <strong>Departman :</strong> <span
+									class="personel" id="personel_department"> <strong>Sicil
+										No :</strong> <span class="personel" id="personel_sicilNo"></span> <br />
+									<br />
+							</div>
+						</div>
 
-						<form class="form-horizontal" name="izintalebi" action="izintalep"
-							method="get">
-							<table class="w3-table izinhakedis w3-white">
 
+						<table class="w3-table izinhakedis w3-white">
+
+							<tr>
+
+								<th>Personel</th>
+								<th>Geçerli Olacağı Tarih</th>
+								<th>Hakedilen Gün Sayısı</th>
+
+
+							</tr>
+							<tr>
+								<td>Personel:<select id="selectpersonelRight">
+
+
+
+
+
+								</select>
+								</td>
+
+								<td>
+									<div class="datepicker">
+										<input id="gtarih" class="form-control" type="text">
+										<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+										<input type="hidden" id="gtarih-db" name="gecerliolacagitarih">
+										<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+									</div>
+								</td>
+								<td><input id="hakedilengunsayisi"
+									name="hakedilengunsayisi" placeholder=""
+									class="form-control input-md" type="text"></td>
+							</tr>
+						</table>
+						<br>
+						<table>
+							<tr>
+								<td>
+									<button type="button" id="ekle">Ekle</button>
+									<button type="button" id="sil">Kaldır</button>
+								</td>
+							</tr>
+						</table>
+						<button id="addRightOfPermissionBtn" class="btn btn-success"
+							onclick="addRightOfPermission()">Add</button>
+						<br /> <br />
+					</div>
+					<!-- izin hakedis listeleme-->
+					<div id="list_rightOfPermission" class="container ">
+						<div class="col-lg-12">
+							<table id="getAllRightOfPermission" class="table table-striped">
 								<tr>
-
-									<th>Personel</th>
+									<th>Sicil No</th>
 									<th>Geçerli Olacağı Tarih</th>
 									<th>Hakedilen Gün Sayısı</th>
-
-
-								</tr>
-								<tr>
-									<td><input id="personelarama" name="personelarama"
-										class="form-control input-md" placeholder="Ara" type="text"></td>
-									<td><div class="datepicker">
-											<input id="gtarih" class="form-control" type="text">
-											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="gtarih-db"
-												name="gecerliolacagitarih">
-											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-										</div></td>
-									<td><input id="hakedilengunsayisi"
-										name="hakedilengunsayisi" placeholder=""
-										class="form-control input-md" type="text"></td>
+									<th>Mevcut Yıl İçin Hakedilen Gün Sayısı</th>
+									<th></th>
 								</tr>
 							</table>
-							<br>
-							<table>
-								<tr>
-									<td>
-										<button type="button" id="ekle">Ekle</button>
-										<button type="button" id="sil">Kaldır</button>
-									</td>
-								</tr>
-							</table>
-							<input class="w3-right" class="form-control" type="submit"
-								value="Submit" />
-						</form>
+						</div>
+						<button type="button" id="deleteAllRight" class="btn btn-danger"
+							onclick="deleteAllRight()">Hepsini Sil</button>
 					</div>
+
 				</fieldset>
 			</div>
-			<div id="izintalebidiv" style="display:none">
+			<div id="izintalebidiv" style="display: none">
 				<fieldset id="izinhakedisdiv">
 					<div class="w3-panel">
 
@@ -337,21 +378,20 @@ html, body, h1, h2, h3, h4, h5 {
 
 
 								</table>
-								<form class="form-horizontal" name="izintalebi">
 
-									<h6>İletişim Bilgileri</h6>
-									<table class="w3-table  w3-white">
-										<tr>
-											<td>Telefon Numarası
-											<td>
-											<td><i><input type="text" class="form-control"
-													id="permissiontel" name="telno" /></i></td>
-										</tr>
-										<td>Adres
+								<h6>İletişim Bilgileri</h6>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Telefon Numarası
 										<td>
 										<td><i><input type="text" class="form-control"
-												id="permissionadres" name="adres" /></i></td>
-									</table>
+												id="permissiontel" name="telno" /></i></td>
+									</tr>
+									<td>Adres
+									<td>
+									<td><i><input type="text" class="form-control"
+											id="permissionadres" name="adres" /></i></td>
+								</table>
 							</div>
 
 						</div>
@@ -402,10 +442,8 @@ html, body, h1, h2, h3, h4, h5 {
 								<td>İzin nedeni</td>
 								<td><i><select class="form-control"
 										name="permissionreason" id="permissionreason">
-											<option value="izinnedeni1">izinnedeni1</option>
-											<option value="izinnedeni2">izinnedeni2</option>
-											<option value="izinnedeni3">izinnedeni3</option>
-											<option value="izinnedeni4">izinnedeni4</option>
+											<option value="Yıllık">Yıllık</option>
+											<option value="Özel">Özel</option>
 									</select></i></td>
 							</tr>
 							<tr>
@@ -419,11 +457,10 @@ html, body, h1, h2, h3, h4, h5 {
 						<input class="w3-right" id="postPermission" class="form-control"
 							type="submit" value="Submit" />
 					</div>
-					</form>
 				</fieldset>
 
 			</div>
-			<div id="tümizinlerdiv" style="display:none">
+			<div id="tümizinlerdiv" style="display: none">
 
 				<fieldset id="tümizinlerdiv">
 					<div class="w3-container">
@@ -448,88 +485,86 @@ html, body, h1, h2, h3, h4, h5 {
 				</fieldset>
 			</div>
 			<hr>
-			<fieldset id="personelkayıtdiv" style="display:none">
+			<fieldset id="personelkayıtdiv" style="display: none">
 				<div class="w3-container">
 
 					<h2>Personel Kayıt</h2>
 					<br>
 
-						<table class="w3-table  w3-white">
+					<table class="w3-table  w3-white">
 
-							<tr>
+						<tr>
 
-								<td>Ad</td>
-								<td><input id="personelad" name="ad" placeholder=""
-									class="form-control input-md" type="text"></td>
-							</tr>
-							<tr>
+							<td>Ad</td>
+							<td><input id="personelad" name="ad" placeholder=""
+								class="form-control input-md" type="text"></td>
+						</tr>
+						<tr>
 
-								<td>Soyad</td>
-								<td><input id="personelsoyad" name="soyad" placeholder=""
-									class="form-control input-md" type="text"></td>
-							</tr>
-							<tr>
+							<td>Soyad</td>
+							<td><input id="personelsoyad" name="soyad" placeholder=""
+								class="form-control input-md" type="text"></td>
+						</tr>
+						<tr>
 
-								<td>E-mail</td>
-								<td><input id="personelemail" placeholder="" name="email"
-									class="form-control input-md" type="text"></td>
-							</tr>
-							<tr>
+							<td>E-mail</td>
+							<td><input id="personelemail" placeholder="" name="email"
+								class="form-control input-md" type="text"></td>
+						</tr>
+						<tr>
 
-								<td>Parola</td>
-								<td><input id="personelpassword" placeholder=""
-									name="password" class="form-control input-md" type="text"></td>
-							</tr>
-							<tr>
-							<tr>
+							<td>Parola</td>
+							<td><input id="personelpassword" placeholder=""
+								name="password" class="form-control input-md" type="text"></td>
+						</tr>
+						<tr>
+						<tr>
 
-								<td>Departman</td>
-								<td><select id="personeldep" class="form-control">
-										<option value="dep1">Departman1</option>
-										<option value="dep2">Departman2</option>
-										<option value="dep3">Departman3</option>
-								</select></td>
-							</tr>
-							<td>Pozisyon</td>
-							<td><select id="personelpoz" class="form-control">
-									<option value="p1">p1</option>
-									<option value="p2">p2</option>
-									<option value="p3">p3</option>
+
+
+							<td>Departman</td>
+							<td><select id="personeldep" class="form-control">
+
 							</select></td>
-							</tr>
-							<tr>
+						</tr>
+						<td>Pozisyon</td>
+						<td><select id="personelpoz" class="form-control">
+								<option value="p1">p1</option>
+								<option value="p2">p2</option>
+								<option value="p3">p3</option>
+						</select></td>
+						</tr>
+						<tr>
 
-								<td>İkinci Yönetici Onayı</td>
-								<td><div class="checkbox">
-										<label for="checkboxes-0"> <input id="personeliyonay"
-											value="true" type="checkbox"> İzin almak için zorunlu
-											ise işaretleyiniz
-										</label>
-									</div></td>
-							</tr>
-							<div class="from-group">
-						<label>Personel Rol:<span class="text-danger">*</span></label>
-						<div id="add_personel_roles" class="checkbox form-control">
-							<label class="checkbox-inline">
-								<input type="checkbox" name="userRole" id="adminRole">Admin
-							</label>
-							<label class="checkbox-inline">
-								<input type="checkbox" name="userRole" id="HRRole">İnsan Kaynakları
-							</label>
-							<label class="checkbox-inline">
-								<input type="checkbox" name="userRole" id="personelRole">Personel
-							</label>
+							<td>İkinci Yönetici Onayı</td>
+							<td><div class="checkbox">
+									<label for="checkboxes-0"> <input id="personeliyonay"
+										value="true" type="checkbox"> İzin almak için zorunlu
+										ise işaretleyiniz
+									</label>
+								</div></td>
+						</tr>
+						<div class="from-group">
+							<label>Personel Rol:<span class="text-danger">*</span></label>
+							<div id="add_personel_roles" class="checkbox form-control">
+								<label class="checkbox-inline"> <input type="checkbox"
+									name="userRole" id="adminRole">Admin
+								</label> <label class="checkbox-inline"> <input type="checkbox"
+									name="userRole" id="HRRole">İnsan Kaynakları
+								</label> <label class="checkbox-inline"> <input type="checkbox"
+									name="userRole" id="personelRole">Personel
+								</label>
+							</div>
 						</div>
-					</div>
 
 
 
-						</table>
-						<input class="w3-right" id="postPersonel" class="form-control"
-							type="submit" value="Submit" />
+					</table>
+					<input class="w3-right" id="postPersonel" class="form-control"
+						type="submit" value="Submit" />
 				</div>
 			</fieldset>
-			<fieldset id="getallpersoneldiv" style="display:none">
+			<fieldset id="getallpersoneldiv" style="display: none">
 				<div id="getallpersoneldiv">
 					<table id="getallpersoneltable"
 						class="w3-table w3-striped w3-white">

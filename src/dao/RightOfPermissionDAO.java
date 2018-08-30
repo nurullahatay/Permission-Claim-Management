@@ -118,7 +118,7 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 				rightOfPermission.setSicilNo(rs.getLong("SICILNO"));
 				rightOfPermission.setDayCountOfDeservedForYear(rs.getInt("DAYCOUNTOFDESERVEDFORYEAR"));
 				rightOfPermission.setDayCountOfDeserved(rs.getInt("DAYCOUNTOFDESERVED"));
-				rightOfPermission.setValidDate(null);
+				rightOfPermission.setValidDate(rs.getString("VALIDDATE"));
 				rightOfPermissions.add(rightOfPermission);
 			}
 			conn.commit();

@@ -6,8 +6,37 @@ $(document).ready(function(){
             });
         });
 });
+var formfiller;
+$(document).ready(function(){
+	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
 
-//açılır menüden seçilen personelin bilgilerinin doldurulması
+	$("#formudolduran").text(personel.ad+' '+personel.soyad);
+	formfiller=personel.sicilno;
+	});  
+});
+
+
+
+function getRightOfPermission(sicilNo) {
+
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/right/getRightDetails',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(sicilNo),
+		success : function(result) {
+			$("#kullanilabilecekizin").text(result.dayCountOfDeserved);
+			$("#toplamhakedilen").text(result.dayCountOfDeservedForYear);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});
+}
+
+// açılır menüden seçilen personelin bilgilerinin doldurulması
 $(document).ready(function(){
 	 $(document).on("click","#personelselect",function(){
 		 sicilno=$(this).attr("value");
@@ -21,6 +50,7 @@ $(document).ready(function(){
 					$("#departman").text(result.departmentId);
 					$("#sicilno").text(result.sicilno);
 					$("#isebaslama").text(result.isebaslangictarihi);
+					 getRightOfPermission(result.sicilno);
 				},
 				error : function() {
 					alert("error");
@@ -31,7 +61,7 @@ $(document).ready(function(){
 });
 
 
-//Tüm izinleri Listeleme
+// Tüm izinleri Listeleme
 $(document).ready(function(){
     	var TDEKLE='</td><td>';
     	var durum='Henüz İncelenmedi';
@@ -47,14 +77,14 @@ $(document).ready(function(){
 });
 
 
-//izintalebi
+// izintalebi
 $(document).ready(
 		function() {
 			$("#postPermission")
 					.click(
 							function() {
 								var permission = {}
-								permission["sicilNo"] = 2;
+								permission["sicilNo"] = $("#selectpersonel").val();
 								permission["baslangicTarihi"] = $("#permissionstart").val();
 								permission["bitisTarihi"] = $("#permissionfinish").val();
 								permission["gun"] = $("#permissiongun").val();
@@ -62,6 +92,7 @@ $(document).ready(
 								permission["aciklama"] = $("#permissionaciklama").val();
 								permission["telefonNumarasi"] = $("#permissiontel").val();
 								permission["adres"] = $("#permissionadres").val();
+								permission["formFiller"]= formfiller;
 								$
 										.ajax({
 											type : "POST",
@@ -82,8 +113,9 @@ $(document).ready(
 
 							});
 		});
+
 		
-//izin hakediş için dinamik div
+// izin hakediş için dinamik div
 $(document).ready(function(){
 	 var i = 1;
 	    $("#ekle").click(function () {
@@ -96,12 +128,13 @@ $(document).ready(function(){
 	    		alert("En az 1 personel olmalı")
 	    		}
 	    	if(i>1){
-	    	$("#izinhakedistr"+i+"").remove(); <!-- tablodaki satırları sil ––>
-	    	i--;}
+	    	$("#izinhakedistr"+i+"").remove(); 
+	    	i--;
+	    	}
 	    });
 });
 
-//iki tarih arasındaki çalışma günlerini hesaplayan script
+// iki tarih arasındaki çalışma günlerini hesaplayan script
 $(document).ready(function(){
 	$('#permissiongun').mouseenter(function(){
   var d1 = $('#permissionstart').val();
@@ -122,7 +155,7 @@ function workingDaysBetweenDates(d0, d1) {
     var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
     startDate.setHours(0,0,0,1);  // Start just after midnight
     endDate.setHours(23,59,59,999);  // End just before midnight
-    var diff = endDate - startDate;  // Milliseconds between datetime objects    
+    var diff = endDate - startDate;  // Milliseconds between datetime objects
     var days = Math.ceil(diff / millisecondsPerDay);
     
     // Subtract two weekend days for every week in between
@@ -133,7 +166,7 @@ function workingDaysBetweenDates(d0, d1) {
     var startDay = startDate.getDay();
     var endDay = endDate.getDay();
     
-    // Remove weekend not previously removed.   
+    // Remove weekend not previously removed.
     if (startDay - endDay > 1) {
         days -= 2;
     }
@@ -162,7 +195,7 @@ function parseDate(input) {
 }
 
 
-//takvim scriptleri
+// takvim scriptleri
 $(document).ready(function(){
 				$(function() {
 					$("#tarih").datepicker(
@@ -201,28 +234,28 @@ $(document).ready(function(){
 				});
 				});
 				
-//Şuanki tarihi gösteren script -->
+// Şuanki tarihi gösteren script -->
 var d=new Date();
 var monthname=new Array("Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık");
 var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
 
 
-//izin hakediş için takvim(geçerli olacağı tarih inputu için)
-			$(document).ready(function(){
-				$(function() {
-					$("#gtarih").datepicker(
-							{
-								beforeShowDay : $.datepicker.noWeekends,
-								dateFormat : "dd-mm-yy",
-								altFormat : "yy-mm-dd",
-								altField : "#gtarih-db",
-								monthNames : [ "Ocak", "Şubat", "Mart",
-										"Nisan", "Mayıs", "Haziran", "Temmuz",
-										"Ağustos", "Eylül", "Ekim", "Kasım",
-										"Aralık" ],
-								dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
-										"Cu", "Ct" ],
-								firstDay : 1,
-							});
+// izin hakediş için takvim(geçerli olacağı tarih inputu için)
+$(document).ready(function(){
+	$(function() {
+		$("#gtarih").datepicker(
+				{
+					beforeShowDay : $.datepicker.noWeekends,
+					dateFormat : "dd-mm-yy",
+					altFormat : "yy-mm-dd",
+					altField : "#gtarih-db",
+					monthNames : [ "Ocak", "Şubat", "Mart",
+							"Nisan", "Mayıs", "Haziran", "Temmuz",
+							"Ağustos", "Eylül", "Ekim", "Kasım",
+							"Aralık" ],
+					dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+							"Cu", "Ct" ],
+					firstDay : 1,
 				});
-				});
+	});
+});

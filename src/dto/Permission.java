@@ -3,7 +3,6 @@ package dto;
 public class Permission {
 	private long id;
 	private long sicilNo; // PersonelbilgisiDto'sunda var.
-	private String sahibi;
 	private int formNo;
 	private String formTarihi;
 	private String baslangicTarihi;
@@ -17,6 +16,7 @@ public class Permission {
 	private boolean ikinciYoneticiOnayi;
 	private boolean ikOnayi;
 	private boolean durum;
+	private long formFiller;
 	
 	public long getId() {
 		return id;
@@ -30,12 +30,7 @@ public class Permission {
 	public void setSicilNo(long sicilNo) {
 		this.sicilNo = sicilNo;
 	}
-	public String getSahibi() {
-		return sahibi;
-	}
-	public void setSahibi(String sahibi) {
-		this.sahibi = sahibi;
-	}
+
 	public int getFormNo() {
 		return formNo;
 	}
@@ -114,13 +109,21 @@ public class Permission {
 	public void setDurum(boolean durum) {
 		this.durum = durum;
 	}
+	
+	public long getFormFiller() {
+		return formFiller;
+	}
+	public void setFormFiller(long formFiller) {
+		this.formFiller = formFiller;
+	}
 	@Override
 	public String toString() {
-		return "Permission [id=" + id + ", sicilNo=" + sicilNo + ", sahibi=" + sahibi + ", formNo=" + formNo
-				+ ", formTarihi=" + formTarihi + ", baslangicTarihi=" + baslangicTarihi + ", bitisTarihi=" + bitisTarihi
-				+ ", gun=" + gun + ", izinNedeni=" + izinNedeni + ", aciklama=" + aciklama + ", telefonNumarasi="
-				+ telefonNumarasi + ", adres=" + adres + ", birinciYoneticiOnayi=" + birinciYoneticiOnayi
-				+ ", ikinciYoneticiOnayi=" + ikinciYoneticiOnayi + ", ikOnayi=" + ikOnayi + ", durum=" + durum + "]";
+		return "Permission [id=" + id + ", sicilNo=" + sicilNo + ", formNo=" + formNo + ", formTarihi=" + formTarihi
+				+ ", baslangicTarihi=" + baslangicTarihi + ", bitisTarihi=" + bitisTarihi + ", gun=" + gun
+				+ ", izinNedeni=" + izinNedeni + ", aciklama=" + aciklama + ", telefonNumarasi=" + telefonNumarasi
+				+ ", adres=" + adres + ", birinciYoneticiOnayi=" + birinciYoneticiOnayi + ", ikinciYoneticiOnayi="
+				+ ikinciYoneticiOnayi + ", ikOnayi=" + ikOnayi + ", durum=" + durum + ", formFiller=" + formFiller
+				+ "]";
 	}
 
 	

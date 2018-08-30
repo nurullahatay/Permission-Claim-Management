@@ -51,7 +51,7 @@ $(document).ready(
 								personel["email"] = $("#personelemail").val();
 								personel["password"] = $("#personelpassword").val();
 								//personel["isebaslangictarihi"] = $("#personelisbasi").val();
-								personel["department"] = 0;
+								personel["department"] = $("#personeldep").val();
 								personel["pozisyon"] = $("#personelpoz").val();
 								personel["ikinciyoneticionay"] = $("#personeliyonay").val();
 								
@@ -88,3 +88,11 @@ $(document).ready(
 		});
 
 		
+//Departmanları getirme
+$(document).ready(function(){
+    $.getJSON("/Permission-Claim-Management/rest/department/getAllDepartment", function(result){
+        $.each(result, function(i, department){
+            $("#personeldep").append('<option id="departmentselect" value="'+department.id+'">'+department.departmentName+'</option');
+        });
+    });
+});

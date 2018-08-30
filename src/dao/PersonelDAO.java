@@ -90,7 +90,6 @@ public class PersonelDAO extends DatabaseHelper {
 		}
 	}
 	
-	
 	public Personel getPersonel(long sicilNo) throws Exception {
 		logger.debug("getPersonel is started");
 
@@ -226,6 +225,7 @@ public class PersonelDAO extends DatabaseHelper {
 		}
 		logger.debug("updatePersonel finished. ");
 	}
+
 	public void deletePersonel(long sicilno) throws Exception {
 
 		
@@ -260,8 +260,6 @@ public class PersonelDAO extends DatabaseHelper {
 		}
 		logger.debug("deletepersonel is finished");
 	}
-
-
 
 	public Personel getPersonelDetailWithEmail(String email) throws Exception {
 		logger.debug("getPersonelDetailWithEmail is started");
@@ -305,4 +303,13 @@ public class PersonelDAO extends DatabaseHelper {
 
 		return personel;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
