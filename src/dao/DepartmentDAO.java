@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.mysql.jdbc.PreparedStatement;
 import bean.DatabaseProperties;
 import dto.Department;
+import dto.Personel;
 
 public class DepartmentDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(DepartmentDAO.class);
@@ -28,8 +29,21 @@ public class DepartmentDAO extends DatabaseHelper {
 		logger.debug("DepartmentDAO setDepartmentManagers metodu �al��maya ba�lad�.");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
+		PreparedStatement stmt2 = null;
+		PreparedStatement stmt3 = null;
 		StringBuilder query = new StringBuilder();
 		try {
+			String query2="delete from personel_roles where (email=(select email from personel where(sicilno=(select DEPARTMENTFIRSTMANAGER from department where id=?))) and role='FirstManager');";
+			stmt2=(PreparedStatement) conn.prepareStatement(query2);
+			stmt2.setLong(1, department.getId());
+			stmt2.executeUpdate();
+			
+			String query4="delete from personel_roles where (email=(select email from personel where(sicilno=(select DEPARTMENTSECONDMANAGER from department where id=?))) and role='SecondManager');";
+			stmt2=(PreparedStatement) conn.prepareStatement(query4);
+			stmt2.setLong(1, department.getId());
+			stmt2.executeUpdate();
+			
+			
 			query.append("UPDATE department set ");
 			query.append("DEPARTMENTFIRSTMANAGER = ?,DEPARTMENTSECONDMANAGER = ? WHERE ID = ?");
 			String queryString = query.toString();
@@ -39,6 +53,16 @@ public class DepartmentDAO extends DatabaseHelper {
 			stmt.setLong(2, department.getDepartmentSecondManager());
 			stmt.setLong(3, department.getId());
 			stmt.executeUpdate();
+			
+			String query3="insert into personel_roles(email,role) values((select email from personel where(sicilno=?)),'FirstManager');";
+			stmt3=(PreparedStatement) conn.prepareStatement(query3);
+			stmt3.setLong(1, department.getDepartmentFirstManager());
+			stmt3.executeUpdate();
+			
+			String query5="insert into personel_roles(email,role) values((select email from personel where(sicilno=?)),'SecondManager');";
+			stmt3=(PreparedStatement) conn.prepareStatement(query5);
+			stmt3.setLong(1, department.getDepartmentSecondManager());
+			stmt3.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
 			logger.error("DepartmentDAO setDepartmentManagers metodu exeption = " + e);
