@@ -171,10 +171,20 @@ public class ServiceFacade {
 
 		return permissionDAO.getFirstManagerApproval(id);
 	}
+	public ArrayList<Permission> getSecondManagerApproval(long id) throws Exception {
+
+		return permissionDAO.getSecondManagerApproval(id);
+	}
 	public void confirmedPermissionFirstManager(long id) throws Exception {
 		permissionDAO.confirmedPermissionFirstManager(id);
 	}
 	public void deniedPermissionFirstManager(long id) throws Exception {
 		permissionDAO.deniedPermissionFirstManager(id);
+	}
+	public void confirmedPermissionSecondManager(long id) throws Exception {
+		permissionDAO.confirmedPermissionSecondManager(id);
+	}
+	public void deniedPermissionSecondManager(long id) throws Exception {
+		permissionDAO.deniedPermissionSecondManager(id);
 	}
 }

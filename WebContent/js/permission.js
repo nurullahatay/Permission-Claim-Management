@@ -24,7 +24,7 @@ function confirmedPermissionFirstManager(permissionId) {
 		}
 	});	
 }
-//birici yönetici onayı
+//birici yönetici reddi
 function deniedPermissionFirstManager(permissionId) {
 	$.ajax({
 		type : "POST",
@@ -67,6 +67,66 @@ function getFirstManagerApproval(deptId) {
 		}
 	});	
 }
+
+//2. yönetici onayı
+function confirmedPermissionSecondManager(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionSecondManager',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//2. yönetici reddi
+function deniedPermissionSecondManager(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/deniedPermissionSecondManager',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//2. yönetici onayı bekleyen izinler.
+function getSecondManagerApproval(deptId) {
+	var TDEKLE='</td><td>';
+	var durum='Henüz İncelenmedi';
+
+	
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getSecondManagerApproval',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(deptId),
+		success : function(result) {
+	$.each(result, function(i, per){
+	        	
+	        	$("#SecondManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionSecondManager('+per.id+')" id="onaybutonikinciy" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionSecondManager('+per.id+')" type="button" id="redbutonikinciy" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        });
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
 var formfiller;
 $(document).ready(function(){
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
@@ -74,6 +134,7 @@ $(document).ready(function(){
 	$("#formudolduran").text(personel.ad+' '+personel.soyad);
 	formfiller=personel.sicilno;
 	getFirstManagerApproval(personel.department);
+	getSecondManagerApproval(personel.department);
 	});  
 });
 
