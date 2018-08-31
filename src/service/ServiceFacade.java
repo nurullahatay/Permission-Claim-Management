@@ -24,11 +24,11 @@ public class ServiceFacade {
 	private RightOfPermissionDAO rightOfPermissionDAO = null;
 
 	private ServiceFacade() {
-		logger.info("ServiceFacade nesnesi oluþturuldu.");
+		logger.info("ServiceFacade nesnesi oluï¿½turuldu.");
 	}
 
 	public static ServiceFacade getInstance() {
-		logger.info("ServiceFacade getInstance  metodu çalýþmaya baþladý..");
+		logger.info("ServiceFacade getInstance  metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½..");
 		if (serviceFacade == null) {
 			serviceFacade = new ServiceFacade();
 		}
@@ -36,7 +36,7 @@ public class ServiceFacade {
 	}
 
 	public void initialize(Properties appProperties) throws Exception {
-		logger.info("ServiceFacade initialize  metodu çalýþmaya baþladý..");
+		logger.info("ServiceFacade initialize  metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½..");
 		departmentDAO = new DepartmentDAO();
 		permissionDAO = new PermissionDAO();
 		rightOfPermissionDAO = new RightOfPermissionDAO();
@@ -46,11 +46,11 @@ public class ServiceFacade {
 		personelDAO.init(appProperties);
 		permissionDAO.init(appProperties);
 		rightOfPermissionDAO.init(appProperties);
-		logger.debug("ServiceFacade initialize metodu çalýþmasý bitti.");
+		logger.debug("ServiceFacade initialize metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 	}
 
 	public void shutdown() {
-		logger.info("ServiceFacade shutdown  metodu çalýþmaya baþladý..");
+		logger.info("ServiceFacade shutdown  metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½..");
 	}
 
 	public void deleteDepartment(Department department) throws Exception {
@@ -60,7 +60,9 @@ public class ServiceFacade {
 	public void addDepartment(Department department) throws Exception {
 		departmentDAO.addDepartment(department);
 	}
-
+	public void setDepartmentManagers(Department department) throws Exception {
+		departmentDAO.setDepartmentManagers(department);
+	}
 	public Department getDepartment(long id) throws Exception {
 		return departmentDAO.getDepartment(id);
 	}

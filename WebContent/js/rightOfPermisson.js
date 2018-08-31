@@ -135,7 +135,7 @@ var personel;
 
 function personelInfo() {
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
-		 $("#nickname").text(personel.ad+" "+personel.soyad); //Sol üstteki hoşgeldisiniz için
+		 $("#nickname").text(personel.ad+" "+personel.soyad);
 	$("#personel_name").text(personel.ad+' '+personel.soyad);
 	  $("#personel_department").text(personel.departmentId);
 	  $("#personel_sicilNo").text(personel.sicilno);

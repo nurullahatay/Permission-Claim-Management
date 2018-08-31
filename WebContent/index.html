@@ -8,7 +8,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/core.js"></script>
-
+<script src="js/department.js"></script>
 <script src="js/personel.js"></script>
 <script src="./js/rightOfPermisson.js"></script>
 
@@ -561,6 +561,36 @@ html, body, h1, h2, h3, h4, h5 {
 					</table>
 					<input class="w3-right" id="postPersonel" class="form-control"
 						type="submit" value="Submit" />
+				</div>
+			</fieldset>
+						<fieldset id="setdepartmanmanagersdiv">
+				<div class="w3-container">
+
+					<h2>Departman yöneticilerini atama</h2>
+					<br>
+
+					<table class="w3-table  w3-white">
+
+						<tr>
+							<td>Departman</td>
+							<td><select id="personeldep2" class="form-control">
+							</select></td>
+						</tr>
+						<tr>
+							<td>1. Yönetici</td>
+							<td><select id="selectpersonel2" class="form-control">
+							<option value="0">Seçiniz</option>
+										</select></td>
+						</tr>
+						<tr>
+							<td>2. Yönetici</td>
+							<td><select id="selectpersonel3" class="form-control">
+							<option value="0">Seçiniz</option>
+										</select></td>
+						</tr>
+					</table>
+					<input class="w3-right" id="setdepartmanmanagers" class="form-control"
+						type="button" value="Submit" />
 				</div>
 			</fieldset>
 			<fieldset id="getallpersoneldiv" >

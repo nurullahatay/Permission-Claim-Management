@@ -96,3 +96,11 @@ $(document).ready(function(){
         });
     });
 });
+//Departmanları getirme
+$(document).ready(function(){
+    $.getJSON("/Permission-Claim-Management/rest/department/getAllDepartment", function(result){
+        $.each(result, function(i, department){
+            $("#personeldep2").append('<option id="departmentselect2" value="'+department.id+'">'+department.departmentName+'</option');
+        });
+    });
+});

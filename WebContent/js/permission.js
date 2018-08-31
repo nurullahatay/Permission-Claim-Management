@@ -15,7 +15,22 @@ $(document).ready(function(){
 	});  
 });
 
-
+//personelleri açılır menüye getirme
+$(document).ready(function(){
+        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+            $.each(result, function(i, personel){
+                $("#selectpersonel2").append('<option id="personelselect2" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+            });
+        });
+});
+//personelleri açılır menüye getirme
+$(document).ready(function(){
+        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+            $.each(result, function(i, personel){
+                $("#selectpersonel3").append('<option id="personelselect3" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+            });
+        });
+});
 
 function getRightOfPermission(sicilNo) {
 

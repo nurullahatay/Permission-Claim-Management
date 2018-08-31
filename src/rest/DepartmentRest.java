@@ -19,6 +19,13 @@ import service.ServiceFacade;
 @Produces(MediaType.APPLICATION_JSON)
 public class DepartmentRest {
 
+	@POST
+	@Path("/setDepartmentManagers")
+	@PermitAll
+	public void setDepartmentManagers(Department department) throws Exception {
+		 ServiceFacade.getInstance().setDepartmentManagers(department);
+	}
+	
 	@Path("/getAllDepartment")
 	@GET
 	@PermitAll
