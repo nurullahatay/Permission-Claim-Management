@@ -6,12 +6,38 @@ $(document).ready(function(){
             });
         });
 });
+//birici yönetici onayı bekleyen izinler.
+function getFirstManagerApproval(deptId) {
+	var TDEKLE='</td><td>';
+	var durum='Henüz İncelenmedi';
+
+	
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getFirstManagerApproval',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(deptId),
+		success : function(result) {
+	$.each(result, function(i, per){
+	        	
+	        	$("#FirstManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="delete" class="'+per.id+'">Sil</button>'+'</td></tr>');
+	        });
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
 var formfiller;
 $(document).ready(function(){
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
 
 	$("#formudolduran").text(personel.ad+' '+personel.soyad);
 	formfiller=personel.sicilno;
+	getFirstManagerApproval(personel.department);
 	});  
 });
 
@@ -51,6 +77,7 @@ function getRightOfPermission(sicilNo) {
 	});
 }
 
+
 // açılır menüden seçilen personelin bilgilerinin doldurulması
 $(document).ready(function(){
 	 $(document).on("click","#personelselect",function(){
@@ -62,19 +89,34 @@ $(document).ready(function(){
 				mimeType : "application/json",
 				data : sicilno,
 				success : function(result) {
-					$("#departman").text(result.departmentId);
+					getDepartman(result.department);
 					$("#sicilno").text(result.sicilno);
 					$("#isebaslama").text(result.isebaslangictarihi);
 					 getRightOfPermission(result.sicilno);
 				},
 				error : function() {
 					alert("error");
-
 				}
 			});
     });
 });
+//departman bilgisinin doldurulması
+function getDepartman(variable){
+		 $.ajax({
+			 	type : "POST",
+				url : '/Permission-Claim-Management/rest/department/getDepartment',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data : ''+variable,
+				success : function(result) {
+					$("#departman").text(result.departmentName);
+				},
+				error : function() {
+					alert("error");
 
+				}
+			});
+}
 
 // Tüm izinleri Listeleme
 $(document).ready(function(){

@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import com.mysql.jdbc.PreparedStatement;
 import bean.DatabaseProperties;
 import dto.Department;
-import dto.Personel;
 
 public class DepartmentDAO extends DatabaseHelper {
 	final Logger logger = Logger.getLogger(DepartmentDAO.class);

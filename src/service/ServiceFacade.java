@@ -167,4 +167,9 @@ public class ServiceFacade {
 
 	}
 
+	public ArrayList<Permission> getFirstManagerApproval(long id) throws Exception {
+
+		return permissionDAO.getFirstManagerApproval(id);
+	}
+
 }

@@ -49,8 +49,8 @@
 			<role-name>admin</role-name>
 			<role-name>HR</role-name>
 			<role-name>personel</role-name>
-			<role-name>firstManager</role-name>
-			<role-name>secondManager</role-name>
+			<role-name>FirstManager</role-name>
+			<role-name>SecondManager</role-name>
 		</auth-constraint>
 	</security-constraint>
 
@@ -67,11 +67,11 @@
 	</security-role>
 
 	<security-role>
-		<role-name>firstManager</role-name>
+		<role-name>FirstManager</role-name>
 	</security-role>
 	<security-role>
 	
-		<role-name>secondManager</role-name>
+		<role-name>SecondManager</role-name>
 	</security-role>
 	<login-config>
 		<auth-method>FORM</auth-method>

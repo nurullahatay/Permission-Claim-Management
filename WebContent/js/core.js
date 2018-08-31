@@ -42,7 +42,7 @@ function authenticatePersonel() {
              else if (value == "personel")
             	 $("#izintalebidiv").show();
     		 
-             else if (value == "firstManager")
+             else if (value == "FirstManager")
             	 isFirstManager = true;
     		 
              else

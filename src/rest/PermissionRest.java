@@ -1,5 +1,6 @@
 package rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
@@ -56,4 +57,10 @@ public class PermissionRest {
 		ServiceFacade.getInstance().updatePermission(permission);
 	}
 
+	@Path("/getFirstManagerApproval")
+	@POST
+	@PermitAll
+	public ArrayList<Permission> getFirstManagerApproval(long id) throws Exception {
+		return  ServiceFacade.getInstance().getFirstManagerApproval(id);
+	}
 }
