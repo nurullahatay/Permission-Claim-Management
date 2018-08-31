@@ -6,6 +6,42 @@ $(document).ready(function(){
             });
         });
 });
+
+//birici yönetici onayı
+function confirmedPermissionFirstManager(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionFirstManager',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//birici yönetici onayı
+function deniedPermissionFirstManager(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/deniedPermissionFirstManager',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+
 //birici yönetici onayı bekleyen izinler.
 function getFirstManagerApproval(deptId) {
 	var TDEKLE='</td><td>';
@@ -21,7 +57,7 @@ function getFirstManagerApproval(deptId) {
 		success : function(result) {
 	$.each(result, function(i, per){
 	        	
-	        	$("#FirstManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="delete" class="'+per.id+'">Sil</button>'+'</td></tr>');
+	        	$("#FirstManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionFirstManager('+per.id+')" id="onaybuton" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionFirstManager('+per.id+')" type="button" id="redbuton" class="'+per.id+'">Red</button>'+'</td></tr>');
 	        });
 			alert("SUCCESS : ",data);
 		},

@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -604,7 +605,7 @@ public class PermissionDAO extends DatabaseHelper {
 		Permission permission;
 		ArrayList<Permission> permissions = new ArrayList<>();
 		try {
-			String query = "SELECT  * FROM permission b INNER JOIN (SELECT SICILNO FROM personel WHERE DEPARTMENT=?) a where a.SICILNO=b.SICILNO and FIRSTMANAGERAPPROVAL=0";
+			String query = "SELECT  * FROM permission b INNER JOIN (SELECT SICILNO FROM personel WHERE DEPARTMENT=?) a where a.SICILNO=b.SICILNO and FIRSTMANAGERAPPROVAL='0'";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
@@ -616,6 +617,7 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setSicilNo(rs.getLong("SICILNO"));
 				permission.setAciklama(rs.getString("DESCRIPTION"));
 				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
 				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
@@ -640,5 +642,50 @@ public class PermissionDAO extends DatabaseHelper {
 			logger.debug("PermissionDAO getFirstManagerApproval metodu çalışması bitti.");
 		}
 		return permissions;
+	}
+	public void deniedPermissionFirstManager(long id) throws Exception {
+		logger.debug("PermissionDAO deniedPermissionFirstManager metodu çalışmaya başladı.");
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			String query = "UPDATE permission SET FIRSTMANAGERAPPROVAL = 'Rededildi' ,STATUS = 'Rededildi' WHERE ID =?";
+			logger.trace(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+			
+			preparedStatement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO deniedPermissionFirstManager metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
+			logger.debug("PermissionDAO deniedPermissionFirstManager metodu çalışması bitti.");
+		}
+	}
+	public void confirmedPermissionFirstManager(long id) throws Exception {
+		logger.debug("PermissionDAO confirmedPermissionFirstManager metodu çalışmaya başladı.");
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			String query = "UPDATE permission SET FIRSTMANAGERAPPROVAL = 'Onaylandı' WHERE ID =?";
+			logger.trace(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+			preparedStatement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO confirmedPermissionFirstManager metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
+			logger.debug("PermissionDAO confirmedPermissionFirstManager metodu çalışması bitti.");
+		}
 	}
 }

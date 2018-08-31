@@ -63,4 +63,16 @@ public class PermissionRest {
 	public ArrayList<Permission> getFirstManagerApproval(long id) throws Exception {
 		return  ServiceFacade.getInstance().getFirstManagerApproval(id);
 	}
+	@Path("/confirmedPermissionFirstManager")
+	@POST
+	@PermitAll
+	public void confirmedPermissionFirstManager(long id) throws Exception {
+		ServiceFacade.getInstance().confirmedPermissionFirstManager(id);
+	}
+	@Path("/deniedPermissionFirstManager")
+	@POST
+	@PermitAll
+	public void deniedPermissionFirstManager(long id) throws Exception {
+		  ServiceFacade.getInstance().deniedPermissionFirstManager(id);
+	}
 }

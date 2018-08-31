@@ -171,5 +171,10 @@ public class ServiceFacade {
 
 		return permissionDAO.getFirstManagerApproval(id);
 	}
-
+	public void confirmedPermissionFirstManager(long id) throws Exception {
+		permissionDAO.confirmedPermissionFirstManager(id);
+	}
+	public void deniedPermissionFirstManager(long id) throws Exception {
+		permissionDAO.deniedPermissionFirstManager(id);
+	}
 }
