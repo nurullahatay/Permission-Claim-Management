@@ -6,18 +6,12 @@ var isFirstManager = false;
 var isSecondManager = false;
 
 
-
+//rollere göre div gösterme
 $(document).ready(function() {
   authenticatePersonel();
-
-  
-  
-  
 });
 
-$("#dept").show();
 function authenticatePersonel() {
- 
   $.get("/Permission-Claim-Management/login", function() {
     $.ajax({
       type: "GET",
@@ -25,17 +19,32 @@ function authenticatePersonel() {
       contentType: "application/json",
       mimeType: "application/json",
       success: function(data) {
-    	  authenticatedPersonel = data;
-    	$("#personel_avatar_name").text(authenticatedPersonel.ad+' '+authenticatedPersonel.soyad);
-    	 $.each(authenticatedUser.userRoles, function(key, value) {
-             if (value == "admin")
-               isAdmin = true;
-             else if (value == "HR")
-               isHR = true;
+    	 $.each(data.personelRoles, function(key, value) {
+    		 
+    		 if (value == "admin"){
+    			$("#personelkayıtdiv").show();
+    			$("#izintalebidiv").show();
+    			$("#getallpersoneldiv").show();
+    			$("#tümizinlerdiv").show();
+    			//$("#aizinhakedis").hide();
+    			$("#izinhakedisdiv").hide();
+    			}
+    		 
+             else if (value == "HR"){   
+            	$("#personelkayıtdiv").show();
+            	$("#izintalebidiv").show();
+            	$("#getallpersoneldiv").show();
+         		$("#tümizinlerdiv").show();
+         		$("#izinhakedisdiv").show();
+         		$("#aizinhakedis").show();
+         		}
+    		 
              else if (value == "personel")
-            	 isPersonel = true;
+            	 $("#izintalebidiv").show();
+    		 
              else if (value == "firstManager")
             	 isFirstManager = true;
+    		 
              else
             	 isSecondManager = true;
            });
