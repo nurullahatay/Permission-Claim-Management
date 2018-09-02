@@ -23,6 +23,7 @@ function authenticatePersonel() {
     	 $.each(data.personelRoles, function(key, value) {
     		 
     		 if (value == "admin"){
+    			 isAdmin=true;
     			$("#personelkayıtdiv").show();
     			$("#izintalebidiv").show();
     			$("#getallpersoneldiv").show();
@@ -35,6 +36,7 @@ function authenticatePersonel() {
     			}
     		 
              if (value == "HR"){   
+            	 isHR=true;
             	$("#personelkayıtdiv").show();
             	$("#izintalebidiv").show();
             	$("#getallpersoneldiv").show();
@@ -46,9 +48,10 @@ function authenticatePersonel() {
          		$("#getAllHRApproval").show();
          		}
     		 
-              if (value == "personel")
+              if (value == "personel"){
+            	  isPersonel=true;
             	 $("#izintalebidiv").show();
-    		 
+              }
              if (value == "FirstManager"){
             	 isFirstManager = true;
             	 $("#getAllFirstManagerApproval").show();

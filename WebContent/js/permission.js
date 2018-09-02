@@ -1,17 +1,7 @@
 //personelleri açılır menüye getirme
-$(document).ready(function(){
-	if (isPersonel=true){
-    	 $("#dropboxgetirme").hide();
+var isPersonel;
 
-		
-	}else{
-        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
-            $.each(result, function(i, personel){
-                $("#selectpersonel").append('<option id="personelselect" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
-            });
-        });
-	}
-});
+
 
 //birici yönetici onayı
 function confirmedPermissionFirstManager(permissionId) {
@@ -197,12 +187,20 @@ function getHRApproval() {
 var formfiller;
 $(document).ready(function(){
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
-		if (isPersonel=true){
+   	 $.each(personel.personelRoles, function(key, value) {
+
+		if (value =="personel"){
+	    	 $("#dropboxgetirme").hide();
+
 		getDepartman(personel.department);
 		$("#sicilno").text(personel.sicilno);
 		$("#isebaslama").text(personel.isebaslangictarihi);
 		 getRightOfPermission(personel.sicilno);
+		 isPersonel=true;
 		}
+		
+     });
+
 		
 	$("#formudolduran").text(personel.ad+' '+personel.soyad);
 	formfiller=personel.sicilno;
@@ -210,6 +208,19 @@ $(document).ready(function(){
 	getSecondManagerApproval(personel.department);
 	getHRApproval();
 	});  
+});
+
+$(document).ready(function(){
+	if (isPersonel==true){
+
+		
+	}else{
+        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+            $.each(result, function(i, personel){
+                $("#selectpersonel").append('<option id="personelselect" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+            });
+        });
+	}
 });
 
 //personelleri açılır menüye getirme
@@ -312,7 +323,7 @@ $(document).ready(
 					.click(
 							function() {
 								var permission = {}
-								if (isPersonel=true){
+								if (isPersonel==true){
 									permission["sicilNo"]=authenticatedPersonel.sicilno;
 								}else{
 									permission["sicilNo"] = $("#selectpersonel").val();
