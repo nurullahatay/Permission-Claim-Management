@@ -59,7 +59,7 @@ function getFirstManagerApproval(deptId) {
 	        	
 	        	$("#FirstManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionFirstManager('+per.id+')" id="onaybuton" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionFirstManager('+per.id+')" type="button" id="redbuton" class="'+per.id+'">Red</button>'+'</td></tr>');
 	        });
-			alert("SUCCESS : ",data);
+			
 		},
 		error : function() {
 			alert("error");
@@ -119,7 +119,68 @@ function getSecondManagerApproval(deptId) {
 	        	
 	        	$("#SecondManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionSecondManager('+per.id+')" id="onaybutonikinciy" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionSecondManager('+per.id+')" type="button" id="redbutonikinciy" class="'+per.id+'">Red</button>'+'</td></tr>');
 	        });
+			
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//
+//
+//HR onayı
+function confirmedPermissionHR(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionHR',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
 			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//HR reddi
+function deniedPermissionHR(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/deniedPermissionHR',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",data);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//HR onayı bekleyen izinler.
+function getHRApproval() {
+	var TDEKLE='</td><td>';
+	var durum='Henüz İncelenmedi';
+
+	
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getHRApproval',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(),
+		success : function(result) {
+	$.each(result, function(i, per){
+	        	
+	        	$("#HRApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionHR('+per.id+')" id="onaybutonHR" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionHR('+per.id+')" type="button" id="redbutonHR" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        });
+			
 		},
 		error : function() {
 			alert("error");
@@ -135,6 +196,7 @@ $(document).ready(function(){
 	formfiller=personel.sicilno;
 	getFirstManagerApproval(personel.department);
 	getSecondManagerApproval(personel.department);
+	getHRApproval();
 	});  
 });
 

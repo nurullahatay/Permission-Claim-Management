@@ -70,6 +70,12 @@ public class PermissionRest {
 	public ArrayList<Permission> getSecondManagerApproval(long id) throws Exception {
 		return  ServiceFacade.getInstance().getSecondManagerApproval(id);
 	}
+	@Path("/getHRApproval")
+	@POST
+	@PermitAll
+	public ArrayList<Permission> getHRApproval() throws Exception {
+		return  ServiceFacade.getInstance().getHRApproval();
+	}
 	@Path("/confirmedPermissionFirstManager")
 	@POST
 	@PermitAll
@@ -93,5 +99,17 @@ public class PermissionRest {
 	@PermitAll
 	public void deniedPermissionSecondManager(long id) throws Exception {
 		  ServiceFacade.getInstance().deniedPermissionSecondManager(id);
+	}
+	@Path("/confirmedPermissionHR")
+	@POST
+	@PermitAll
+	public void confirmedPermissionHR(long id) throws Exception {
+		ServiceFacade.getInstance().confirmedPermissionHR(id);
+	}
+	@Path("/deniedPermissionHR")
+	@POST
+	@PermitAll
+	public void deniedPermissionHR(long id) throws Exception {
+		  ServiceFacade.getInstance().deniedPermissionHR(id);
 	}
 }

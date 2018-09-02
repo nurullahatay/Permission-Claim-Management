@@ -175,6 +175,10 @@ public class ServiceFacade {
 
 		return permissionDAO.getSecondManagerApproval(id);
 	}
+	public ArrayList<Permission> getHRApproval() throws Exception {
+
+		return permissionDAO.getHRApproval();
+	}
 	public void confirmedPermissionFirstManager(long id) throws Exception {
 		permissionDAO.confirmedPermissionFirstManager(id);
 	}
@@ -186,5 +190,11 @@ public class ServiceFacade {
 	}
 	public void deniedPermissionSecondManager(long id) throws Exception {
 		permissionDAO.deniedPermissionSecondManager(id);
+	}
+	public void confirmedPermissionHR(long id) throws Exception {
+		permissionDAO.confirmedPermissionHR(id);
+	}
+	public void deniedPermissionHR(long id) throws Exception {
+		permissionDAO.deniedPermissionHR(id);
 	}
 }

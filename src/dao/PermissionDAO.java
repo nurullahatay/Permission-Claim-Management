@@ -686,6 +686,51 @@ public class PermissionDAO extends DatabaseHelper {
 			}
 			return permissions;
 	}
+	public ArrayList<Permission> getHRApproval() throws Exception {
+		logger.debug("PermissionDAO getHRApproval metodu çalışmaya başladı.");
+		Connection conn = null;
+		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		Permission permission;
+		ArrayList<Permission> permissions = new ArrayList<>();
+		try {
+			String query = "SELECT  * FROM permission b INNER JOIN personel a where (a.SICILNO=b.SICILNO and b.IKAPPROVAL='0') and ((a.SECONDMANEGERAPPROVAL=false and b.FIRSTMANAGERAPPROVAL='Onaylandı') or b.SECONDMANAGERAPPROVAL='Onaylandı') ";
+			logger.trace(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				permission = new Permission();
+				permission.setId(rs.getLong("ID"));
+				permission.setSicilNo(rs.getLong("SICILNO"));
+				permission.setAciklama(rs.getString("DESCRIPTION"));
+				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
+				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
+				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
+				permission.setDurum(rs.getBoolean("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
+				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
+				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
+				permissions.add(permission);
+			}
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO getHRApproval metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closeResultSet(rs);
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
+			logger.debug("PermissionDAO getHRApproval metodu çalışması bitti.");
+		}
+		return permissions;
+}
 
 	public void deniedPermissionFirstManager(long id) throws Exception {
 		logger.debug("PermissionDAO deniedPermissionFirstManager metodu çalışmaya başladı.");
@@ -777,6 +822,52 @@ public class PermissionDAO extends DatabaseHelper {
 			closePreparedStatement(preparedStatement);
 			closeConnection(conn);
 			logger.debug("PermissionDAO confirmedPermissionSecondManager metodu çalışması bitti.");
+		}
+	}
+	public void deniedPermissionHR(long id) throws Exception {
+		logger.debug("PermissionDAO deniedPermissionHR metodu çalışmaya başladı.");
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			String query = "UPDATE permission SET IKAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi' WHERE ID =?";
+			logger.trace(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+
+			preparedStatement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO deniedPermissionHR metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
+			logger.debug("PermissionDAO deniedPermissionHR metodu çalışması bitti.");
+		}
+	}
+
+	public void confirmedPermissionHR(long id) throws Exception {
+		logger.debug("PermissionDAO confirmedPermissionHR metodu çalışmaya başladı.");
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			String query = "UPDATE permission SET IKAPPROVAL = 'Onaylandı' WHERE ID =?";
+			logger.trace(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
+			preparedStatement.setLong(1, id);
+			preparedStatement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO confirmedPermissionHR metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
+			logger.debug("PermissionDAO confirmedPermissionHR metodu çalışması bitti.");
 		}
 	}
 }
