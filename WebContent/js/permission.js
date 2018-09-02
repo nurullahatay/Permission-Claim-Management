@@ -1,10 +1,16 @@
 //personelleri açılır menüye getirme
 $(document).ready(function(){
+	if (isPersonel=true){
+    	 $("#dropboxgetirme").hide();
+
+		
+	}else{
         $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
             $.each(result, function(i, personel){
                 $("#selectpersonel").append('<option id="personelselect" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
             });
         });
+	}
 });
 
 //birici yönetici onayı
@@ -191,7 +197,13 @@ function getHRApproval() {
 var formfiller;
 $(document).ready(function(){
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
-
+		if (isPersonel=true){
+		getDepartman(personel.department);
+		$("#sicilno").text(personel.sicilno);
+		$("#isebaslama").text(personel.isebaslangictarihi);
+		 getRightOfPermission(personel.sicilno);
+		}
+		
 	$("#formudolduran").text(personel.ad+' '+personel.soyad);
 	formfiller=personel.sicilno;
 	getFirstManagerApproval(personel.department);
@@ -300,7 +312,11 @@ $(document).ready(
 					.click(
 							function() {
 								var permission = {}
-								permission["sicilNo"] = $("#selectpersonel").val();
+								if (isPersonel=true){
+									permission["sicilNo"]=authenticatedPersonel.sicilno;
+								}else{
+									permission["sicilNo"] = $("#selectpersonel").val();
+								}
 								permission["baslangicTarihi"] = $("#permissionstart").val();
 								permission["bitisTarihi"] = $("#permissionfinish").val();
 								permission["gun"] = $("#permissiongun").val();

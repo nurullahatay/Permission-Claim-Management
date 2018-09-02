@@ -648,7 +648,7 @@ public class PermissionDAO extends DatabaseHelper {
 			Permission permission;
 			ArrayList<Permission> permissions = new ArrayList<>();
 			try {
-				String query = "SELECT  * FROM permission b INNER JOIN (SELECT SICILNO,SECONDMANEGERAPPROVAL FROM personel WHERE DEPARTMENT=?) a where a.SICILNO=b.SICILNO and a.SECONDMANEGERAPPROVAL=true and b.FIRSTMANAGERAPPROVAL='Onaylandı' and b.SECONDMANAGERAPPROVAL='0'";
+				String query = "SELECT  * FROM permission b INNER JOIN (SELECT SICILNO FROM personel WHERE DEPARTMENT=?) a where a.SICILNO=b.SICILNO and b.FIRSTMANAGERAPPROVAL='Onaylandı' and b.SECONDMANAGERAPPROVAL='0'";
 				logger.trace(query.toString());
 				conn = getConnection();
 				preparedStatement = (PreparedStatement) conn.prepareStatement(query);

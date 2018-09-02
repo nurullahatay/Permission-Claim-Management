@@ -116,7 +116,8 @@ html, body, h1, h2, h3, h4, h5 {
 		<div class="w3-container w3-row">
 			<div class="w3-col s4"></div>
 			<div class="w3-col s8 w3-bar">
-				<span>Hoşgeldiniz, <strong id="nickname" >a</strong></span><br> <a href="logout" style="text-decoration: none"
+				<span>Hoşgeldiniz, <strong id="nickname">a</strong></span><br>
+				<a href="logout" style="text-decoration: none"
 					class="w3-bar-item w3-button"> <i class="fa fa-power-off"></i>&nbsp
 					Çıkış
 				</a>
@@ -218,7 +219,8 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 				</div>
 			</a>
-
+		</div>
+		<div>
 			<div id="izinhakedisdiv">
 				<fieldset id="izinhakedisdiv">
 					<div class="w3-container">
@@ -319,13 +321,13 @@ html, body, h1, h2, h3, h4, h5 {
 								<table class="w3-table  w3-white">
 									<tr>
 
-										<td>Personel:<select id="selectpersonel">
+										<td><div id="dropboxgetirme">Personel:<select id="selectpersonel">
 
 
 
 
 
-										</select></td>
+										</select></div></td>
 									</tr>
 									<tr>
 
@@ -538,8 +540,8 @@ html, body, h1, h2, h3, h4, h5 {
 							<td>İkinci Yönetici Onayı</td>
 							<td><div class="checkbox">
 									<label for="checkboxes-0"> <input id="personeliyonay"
-										 type="checkbox"> İzin almak için zorunlu
-										ise işaretleyiniz
+										type="checkbox"> İzin almak için zorunlu ise
+										işaretleyiniz
 									</label>
 								</div></td>
 						</tr>
@@ -563,7 +565,7 @@ html, body, h1, h2, h3, h4, h5 {
 						type="submit" value="Submit" />
 				</div>
 			</fieldset>
-						<fieldset id="setdepartmanmanagersdiv">
+			<fieldset id="setdepartmanmanagersdiv">
 				<div class="w3-container">
 
 					<h2>Departman yöneticilerini atama</h2>
@@ -579,21 +581,21 @@ html, body, h1, h2, h3, h4, h5 {
 						<tr>
 							<td>1. Yönetici</td>
 							<td><select id="selectpersonel2" class="form-control">
-							<option value="0">Seçiniz</option>
-										</select></td>
+									<option value="0">Seçiniz</option>
+							</select></td>
 						</tr>
 						<tr>
 							<td>2. Yönetici</td>
 							<td><select id="selectpersonel3" class="form-control">
-							<option value="0">Seçiniz</option>
-										</select></td>
+									<option value="0">Seçiniz</option>
+							</select></td>
 						</tr>
 					</table>
-					<input class="w3-right" id="setdepartmanmanagers" class="form-control"
-						type="button" value="Submit" />
+					<input class="w3-right" id="setdepartmanmanagers"
+						class="form-control" type="button" value="Submit" />
 				</div>
 			</fieldset>
-			<fieldset id="getallpersoneldiv" >
+			<fieldset id="getallpersoneldiv">
 				<div id="getallpersoneldiv">
 					<table id="getallpersoneltable"
 						class="w3-table w3-striped w3-white">
@@ -613,14 +615,15 @@ html, body, h1, h2, h3, h4, h5 {
 					</table>
 				</div>
 			</fieldset>
-			
+
 			<div id="getAllFirstManagerApproval">
 				<fieldset id="getAllFirstManagerApproval">
 					<div class="w3-container">
 						<hr>
 						<h2>Birinci Yönetici Onayı Bekleyen İzinler</h2>
 						<br>
-						<table id="FirstManagerApproval" class="w3-table  w3-striped w3-white">
+						<table id="FirstManagerApproval"
+							class="w3-table  w3-striped w3-white">
 							<tr>
 								<th>ID</th>
 								<th>Sicil NO</th>
@@ -645,7 +648,8 @@ html, body, h1, h2, h3, h4, h5 {
 						<hr>
 						<h2>İkinci Yönetici Onayı Bekleyen İzinler</h2>
 						<br>
-						<table id="SecondManagerApproval" class="w3-table  w3-striped w3-white">
+						<table id="SecondManagerApproval"
+							class="w3-table  w3-striped w3-white">
 							<tr>
 								<th>ID</th>
 								<th>Sicil NO</th>

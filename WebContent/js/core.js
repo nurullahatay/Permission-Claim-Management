@@ -19,6 +19,7 @@ function authenticatePersonel() {
       contentType: "application/json",
       mimeType: "application/json",
       success: function(data) {
+    	  authenticatedPersonel=data;
     	 $.each(data.personelRoles, function(key, value) {
     		 
     		 if (value == "admin"){
@@ -28,25 +29,39 @@ function authenticatePersonel() {
     			$("#tümizinlerdiv").show();
     			//$("#aizinhakedis").hide();
     			$("#izinhakedisdiv").hide();
+    			 $("#getAllFirstManagerApproval").hide();
+            	 $("#getAllSecondManagerApproval").hide();
+            	 $("#getAllHRApproval").hide();
     			}
     		 
-             else if (value == "HR"){   
+             if (value == "HR"){   
             	$("#personelkayıtdiv").show();
             	$("#izintalebidiv").show();
             	$("#getallpersoneldiv").show();
          		$("#tümizinlerdiv").show();
          		$("#izinhakedisdiv").show();
          		$("#aizinhakedis").show();
+         		$("#getAllFirstManagerApproval").hide();
+         		$("#getAllSecondManagerApproval").hide();
+         		$("#getAllHRApproval").show();
          		}
     		 
-             else if (value == "personel")
+              if (value == "personel")
             	 $("#izintalebidiv").show();
     		 
-             else if (value == "FirstManager")
+             if (value == "FirstManager"){
             	 isFirstManager = true;
+            	 $("#getAllFirstManagerApproval").show();
+            	 $("#getAllSecondManagerApproval").hide();
+            	 $("#getAllHRApproval").hide();
+             }
     		 
-             else
+             if (value == "SecondManager"){
             	 isSecondManager = true;
+            	 $("#getAllFirstManagerApproval").hide();
+            	 $("#getAllSecondManagerApproval").show();
+            	 $("#getAllHRApproval").hide();
+             }
            });
       },
 		error : function() {
