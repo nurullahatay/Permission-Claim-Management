@@ -160,6 +160,10 @@ public class ServiceFacade {
 
 		return permissionDAO.getHRApproval();
 	}
+	public ArrayList<Permission> getPersonelApproval(long sicilNo) throws Exception {
+
+		return permissionDAO.getPersonelApproval(sicilNo);
+	}
 	public void confirmedPermissionFirstManager(long id) throws Exception {
 		permissionDAO.confirmedPermissionFirstManager(id);
 	}
@@ -177,5 +181,11 @@ public class ServiceFacade {
 	}
 	public void deniedPermissionHR(long id) throws Exception {
 		permissionDAO.deniedPermissionHR(id);
+	}
+	public void confirmedPermissionPersonel(long id) throws Exception {
+		permissionDAO.confirmedPermissionPersonel(id);
+	}
+	public void deniedPermissionPersonel(long id) throws Exception {
+		permissionDAO.deniedPermissionPersonel(id);
 	}
 }

@@ -184,6 +184,69 @@ function getHRApproval() {
 		}
 	});	
 }
+
+
+//personel onayı
+function confirmedPermissionPersonel(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionPersonel',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",result);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+//personel reddi
+function deniedPermissionPersonel(permissionId) {
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/deniedPermissionPersonel',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permissionId),
+		success : function(result) {
+			alert("SUCCESS : ",result);
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+
+//Personel onayı bekleyen izinler.
+function getPersonelApproval(sicilno) {
+	var TDEKLE='</td><td>';
+	var durum='Henüz İncelenmedi';
+
+	
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getPersonelApproval',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(sicilno),
+		success : function(result) {
+	$.each(result, function(i, per){
+	        	
+	        	$("#PersonelApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionPersonel('+per.id+')" id="onaybutonpersonel" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionPersonel('+per.id+')" type="button" id="redbutonpersonel" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        });
+			
+		},
+		error : function() {
+			alert("error");
+
+		}
+	});	
+}
+
 var formfiller;
 $(document).ready(function(){
 	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
@@ -207,6 +270,7 @@ $(document).ready(function(){
 	getFirstManagerApproval(personel.department);
 	getSecondManagerApproval(personel.department);
 	getHRApproval();
+	getPersonelApproval(personel.sicilno);
 	});  
 });
 
