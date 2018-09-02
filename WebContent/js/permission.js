@@ -306,10 +306,10 @@ $(document).ready(function(){
     	var durum='Henüz İncelenmedi';
         $.getJSON("/Permission-Claim-Management/rest/permission/getAllPermission", function(result){
             $.each(result, function(i, permission){
-            	if(permission.durum==true)
-            		var durum='Onaylandı';
-            	if(permission.durum==false)
-            		var durum='Reddedildi';
+            	if(permission.durum=='0')
+            		durum='Beklemede';
+            	else 
+            		durum = permission.durum;
             	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="delete" class="'+permission.id+'">Sil</button>'+'</td></tr>');
             });
     });

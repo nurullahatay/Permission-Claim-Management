@@ -12,10 +12,10 @@ public class Permission {
 	private String aciklama;
 	private String telefonNumarasi;
 	private String adres;
-	private boolean birinciYoneticiOnayi;
-	private boolean ikinciYoneticiOnayi;
-	private boolean ikOnayi;
-	private boolean durum;
+	private String birinciYoneticiOnayi;
+	private String ikinciYoneticiOnayi;
+	private String ikOnayi;
+	private String durum;
 	private long formFiller;
 	
 	public long getId() {
@@ -85,31 +85,32 @@ public class Permission {
 	public void setAdres(String adres) {
 		this.adres = adres;
 	}
-	public boolean isBirinciYoneticiOnayi() {
+	
+	
+	public String getBirinciYoneticiOnayi() {
 		return birinciYoneticiOnayi;
 	}
-	public void setBirinciYoneticiOnayi(boolean birinciYoneticiOnayi) {
+	public void setBirinciYoneticiOnayi(String birinciYoneticiOnayi) {
 		this.birinciYoneticiOnayi = birinciYoneticiOnayi;
 	}
-	public boolean isIkinciYoneticiOnayi() {
+	public String getIkinciYoneticiOnayi() {
 		return ikinciYoneticiOnayi;
 	}
-	public void setIkinciYoneticiOnayi(boolean ikinciYoneticiOnayi) {
+	public void setIkinciYoneticiOnayi(String ikinciYoneticiOnayi) {
 		this.ikinciYoneticiOnayi = ikinciYoneticiOnayi;
 	}
-	public boolean isIkOnayi() {
+	public String getIkOnayi() {
 		return ikOnayi;
 	}
-	public void setIkOnayi(boolean ikOnayi) {
+	public void setIkOnayi(String ikOnayi) {
 		this.ikOnayi = ikOnayi;
 	}
-	public boolean isDurum() {
+	public String getDurum() {
 		return durum;
 	}
-	public void setDurum(boolean durum) {
+	public void setDurum(String durum) {
 		this.durum = durum;
 	}
-	
 	public long getFormFiller() {
 		return formFiller;
 	}

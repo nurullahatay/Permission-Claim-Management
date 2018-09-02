@@ -92,26 +92,7 @@ public class ServiceFacade {
 		permissionDAO.deletePermission(permission);
 	}
 
-	public void firstManagerApprove(Permission permission) throws Exception {
-		permissionDAO.firstManagerApprove(permission);
-	}
-
-	public void secondManagerApprove(Permission permission) throws Exception {
-		permissionDAO.secondManagerApprove(permission);
-	}
-
-	public void ikApprove(Permission permission) throws Exception {
-		permissionDAO.ikApprove(permission);
-	}
-
-	public void getNewPermissionsForFirstManager() throws Exception {
-		permissionDAO.getNewPermissionsForFirstManager();
-	}
-
-	public void getNewPermissionsForSecondManager() throws Exception {
-		permissionDAO.getNewPermissionsForFirstManager();
-	}
-
+	
 	public ArrayList<Permission> getAllPermission() throws Exception {
 		return permissionDAO.getAllPermission();
 	}

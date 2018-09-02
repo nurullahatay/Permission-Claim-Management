@@ -83,11 +83,11 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setAciklama(rs.getString("DESCRIPTION"));
 				permission.setAdres(rs.getString("ADDRESS"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
@@ -127,11 +127,11 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setAciklama(rs.getString("DESCRIPTION"));
 				permission.setAdres(rs.getString("ADDRESS"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
@@ -172,10 +172,10 @@ public class PermissionDAO extends DatabaseHelper {
 			stmt.setString(4, permission.getAciklama());
 			stmt.setString(5, permission.getTelefonNumarasi());
 			stmt.setString(6, permission.getAdres());
-			stmt.setBoolean(7, permission.isIkinciYoneticiOnayi());
-			stmt.setBoolean(8, permission.isBirinciYoneticiOnayi());
-			stmt.setBoolean(9, permission.isIkOnayi());
-			stmt.setBoolean(10, permission.isDurum());
+			stmt.setString(7, permission.getIkinciYoneticiOnayi());
+			stmt.setString(8, permission.getBirinciYoneticiOnayi());
+			stmt.setString(9, permission.getIkOnayi());
+			stmt.setString(10, permission.getDurum());
 			stmt.setLong(11, permission.getId());
 			stmt.executeUpdate();
 			conn.commit();
@@ -217,288 +217,8 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void firstManagerApprove(Permission permission) throws Exception {
-		logger.debug("PermissionDAO firstManagerApprove metodu çalışmaya başladı.");
-		/*
-		 * ornek Servlet gonderimi
-		 * 
-		 * Permission permission=new Permission(); permission.setId(1);
-		 * permission.setBirinciYoneticiOnayi(true); ServiceFacede.getInstance().
-		 * firstManagerApprove(permission);
-		 * 
-		 * 
-		 */
-		int firstmanagerapproval;
-		int temp = (int) permission.getId();
-		Boolean temp2 = permission.isBirinciYoneticiOnayi();
-		int id = (int) temp;
-		if (temp2 == true) {
 
-			firstmanagerapproval = 1;
-		} else
-			firstmanagerapproval = 0;
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		StringBuilder query = new StringBuilder();
-
-		try {
-			query.append("UPDATE permission  SET");
-			query.append(" FIRSTMANAGERAPPROVAL = ? ");
-			query.append("WHERE ID=?");
-			String queryString = query.toString();
-			logger.trace(queryString.toString());
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(queryString);
-			preparedStatement.setInt(1, firstmanagerapproval);
-			preparedStatement.setLong(2, id);
-			preparedStatement.executeUpdate();
-			conn.commit();
-		} catch (Exception e) {
-			logger.error("PermissionDAO firstManagerApprove metodu exeption = " + e);
-			conn.rollback();
-			throw e;
-		} finally {
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
-			logger.debug("PermissionDAO firstManagerApprove metodu çalışması bitti.");
-		}
-	}
-
-	public void secondManagerApprove(Permission permission) throws Exception {
-		logger.debug("PermissionDAO secondManagerApprove metodu çalışmaya başladı.");
-		int secondmanagerapproval;
-		/*
-		 * ornek Servlet gonderimi
-		 * 
-		 * Permission permission=new Permission(); permission.setId(1);
-		 * permission.setIkinciYoneticiOnayi(true); ServiceFacede.getInstance().
-		 * secondManagerApprove(permission); } catch (Exception e) { // TODO
-		 * Auto-generated catch block e.printStackTrace();
-		 * 
-		 */
-		int temp = (int) permission.getId();
-		Boolean temp2 = permission.isIkinciYoneticiOnayi();
-		int id = (int) temp;
-		if (temp2 == true) {
-			secondmanagerapproval = 1;
-		} else
-			secondmanagerapproval = 0;
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		StringBuilder query = new StringBuilder();
-		try {
-			query.append("UPDATE permission  SET");
-			query.append(" SECONDMANAGERAPPROVAL = ? ");
-			query.append("WHERE ID=?");
-			String queryString = query.toString();
-			System.out.println(queryString);
-			logger.trace(queryString.toString());
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(queryString);
-			preparedStatement.setInt(1, secondmanagerapproval);
-			preparedStatement.setLong(2, id);
-			preparedStatement.executeUpdate();
-			conn.commit();
-		} catch (Exception e) {
-			logger.error("PermissionDAO secondManagerApprove metodu exeption = " + e);
-			conn.rollback();
-			throw e;
-		} finally {
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
-			logger.debug("PermissionDAO firstManagerApprove metodu çalışması bitti.");
-		}
-	}
-
-	public void ikApprove(Permission permission) throws Exception {
-		logger.debug("PermissionDAO ikApprove metodu çalışmaya başladı.");
-		/*
-		 * ornek Servlet gonderimi
-		 * 
-		 * try { Permission permission=new Permission(); permission.setId(1);
-		 * permission.setIkOnayi(true); ServiceFacede.getInstance().
-		 * secondManagerApprove(permission); } catch (Exception e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 */
-		int ikapproval;
-		int temp = (int) permission.getId();
-		Boolean temp2 = permission.isIkOnayi();
-		int id = (int) temp;
-		if (temp2 == true) {
-
-			ikapproval = 1;
-		} else
-			ikapproval = 0;
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		StringBuilder query = new StringBuilder();
-		try {
-			query.append("UPDATE permission  SET");
-			query.append(" IKAPPROVAL = ?,STATUS=? ");
-			query.append("WHERE ID=?");
-			String queryString = query.toString();
-			logger.trace(queryString.toString());
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(queryString);
-			preparedStatement.setInt(1, ikapproval);
-			preparedStatement.setInt(2, ikapproval);
-			preparedStatement.setLong(3, id);
-			preparedStatement.executeUpdate();
-			conn.commit();
-		} catch (Exception e) {
-			logger.error("PermissionDAO ikApprove metodu exeption = " + e);
-			conn.rollback();
-			throw e;
-		} finally {
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
-			logger.debug("PermissionDAO ikApprove metodu çalışması bitti.");
-		}
-	}
-
-	public List<Permission> getNewPermissionsForFirstManager() throws Exception {
-		logger.debug("PermissionDAO getNewPermissionsForFirstManager metodu çalışmaya başladı.");
-		Connection conn = null;
-		ResultSet rs = null;
-		PreparedStatement preparedStatement = null;
-		Permission permission;
-		ArrayList<Permission> permissions = new ArrayList<>();
-		try {
-			String query = "SELECT  * FROM permission WHERE FIRSTMANAGERAPPROVAl  IS NULL";
-			logger.trace(query.toString());
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
-			rs = preparedStatement.executeQuery();
-			while (rs.next()) {
-				permission = new Permission();
-				System.out.println(rs.getLong("ID"));
-				permission.setId(rs.getLong("ID"));
-				permission.setSicilNo(rs.getLong("SICILNO"));
-				permission.setAciklama(rs.getString("DESCRIPTION"));
-				permission.setAdres(rs.getString("ADDRESS"));
-				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
-				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
-				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
-				permission.setGun(rs.getInt("DAY"));
-				permission.setFormFiller(rs.getLong("FORMFILLER"));
-				permissions.add(permission);
-			}
-			conn.commit();
-		} catch (Exception e) {
-			logger.error("PermissionDAO getNewPermissionsForFirstManager metodu exeption = " + e);
-			conn.rollback();
-			throw e;
-		} finally {
-			closeResultSet(rs);
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
-			logger.debug("PermissionDAO getNewPermissionsForFirstManager metodu çalışması bitti.");
-		}
-		return permissions;
-	}
-
-	public List<Permission> getNewPermissionsForSecondManager() throws Exception {
-		logger.debug("PermissionDAO getNewPermissionsForSecondManager metodu çalışmaya başladı.");
-		Connection conn = null;
-		ResultSet rs = null;
-		PreparedStatement preparedStatement = null;
-		Permission permission;
-		StringBuilder query = new StringBuilder();
-		ArrayList<Permission> permissions = new ArrayList<>();
-		try {
-			query.append("SELECT * FROM permission ");
-			query.append("INNER JOIN personel ON permission.SICILNO = ");
-			query.append("personel.SICILNO WHERE permission.FIRSTMANAGERAPPROVAL=1 ");
-			query.append("AND personel.SECONDMANEGERAPPROVAL=1 ");
-			logger.trace(query.toString());
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
-			rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				permission = new Permission();
-				System.out.println(rs.getLong("ID"));
-				permission.setId(rs.getLong("ID"));
-				permission.setSicilNo(rs.getLong("SICILNO"));
-				permission.setAciklama(rs.getString("DESCRIPTION"));
-				permission.setAdres(rs.getString("ADDRESS"));
-				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
-				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
-				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
-				permission.setGun(rs.getInt("DAY"));
-				permission.setFormFiller(rs.getLong("FORMFILLER"));
-				permissions.add(permission);
-			}
-			conn.commit();
-		} catch (Exception e) {
-			logger.error("PermissionDAO getNewPermissionsForSecondManager metodu exeption = " + e);
-			conn.rollback();
-			throw e;
-		} finally {
-			closeResultSet(rs);
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
-			logger.debug("PermissionDAO getNewPermissionsForSecondManager metodu çalışması bitti.");
-		}
-		return permissions;
-	}
-
-	public List<Permission> getNewPermissionsForIK() throws Exception {
-		logger.debug("PermissionDAO getNewPermissionsForIK metodu çalışmaya başladı.");
-		Connection conn = null;
-		ResultSet rs = null;
-		PreparedStatement preparedStatement = null;
-		Permission permission;
-		ArrayList<Permission> permissions = new ArrayList<>();
-		try {
-			String query = "SELECT *   FROM permission WHERE FIRSTMANAGERAPPROVAL=1 AND   SECONDMANAGERAPPROVAL =1 OR SECONDMANAGERAPPROVAL=NULL  ";
-			logger.trace(query.toString());
-			conn = getConnection();
-			preparedStatement = (PreparedStatement) conn.prepareStatement(query.toString());
-			rs = preparedStatement.executeQuery();
-			while (rs.next()) {
-				permission = new Permission();
-				System.out.println(rs.getLong("ID"));
-				permission.setId(rs.getLong("ID"));
-				permission.setSicilNo(rs.getLong("SICILNO"));
-				permission.setAciklama(rs.getString("DESCRIPTION"));
-				permission.setAdres(rs.getString("ADDRESS"));
-				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
-				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
-				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
-				permission.setGun(rs.getInt("DAY"));
-				permission.setFormFiller(rs.getLong("FORMFILLER"));
-				permissions.add(permission);
-			}
-			conn.commit();
-		} catch (Exception e) {
-			logger.error("PermissionDAO getNewPermissionsForIK metodu exeption = " + e);
-			conn.rollback();
-			throw e;
-		} finally {
-			closeResultSet(rs);
-			closePreparedStatement(preparedStatement);
-			closeConnection(conn);
-			logger.debug("PermissionDAO getNewPermissionsForIK metodu çalışması bitti.");
-		}
-		return permissions;
-	}
+	
 
 	public List<Permission> getPermissionClaimInfo() throws Exception {
 		logger.debug("PermissionDAO getPermissionClaimInfo metodu çalışmaya başladı.");
@@ -521,11 +241,11 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setAciklama(rs.getString("DESCRIPTION"));
 				permission.setAdres(rs.getString("ADDRESS"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
@@ -568,11 +288,11 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setAciklama(rs.getString("DESCRIPTION"));
 				permission.setAdres(rs.getString("ADDRESS"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
@@ -615,11 +335,11 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setAdres(rs.getString("ADDRESS"));
 				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
@@ -648,8 +368,7 @@ public class PermissionDAO extends DatabaseHelper {
 			Permission permission;
 			ArrayList<Permission> permissions = new ArrayList<>();
 			try {
-				String query = "SELECT  * FROM permission b INNER JOIN (SELECT SICILNO FROM personel WHERE DEPARTMENT=?) a where a.SICILNO=b.SICILNO and b.FIRSTMANAGERAPPROVAL='Onaylandı' and b.SECONDMANAGERAPPROVAL='0'";
-				logger.trace(query.toString());
+ 				String query = "SELECT  * FROM permission b INNER JOIN (SELECT SICILNO,SECONDMANEGERAPPROVAL FROM personel WHERE DEPARTMENT=?) a where a.SICILNO=b.SICILNO and a.SECONDMANEGERAPPROVAL=true and b.FIRSTMANAGERAPPROVAL='Onaylandı' and b.SECONDMANAGERAPPROVAL='0'"; 				logger.trace(query.toString());
 				conn = getConnection();
 				preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 				preparedStatement.setLong(1, id);
@@ -662,11 +381,11 @@ public class PermissionDAO extends DatabaseHelper {
 					permission.setAdres(rs.getString("ADDRESS"));
 					permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
 					permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-					permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+					permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 					permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-					permission.setDurum(rs.getBoolean("STATUS"));
-					permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-					permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+					permission.setDurum(rs.getString("STATUS"));
+					permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+					permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 					permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 					permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 					permission.setGun(rs.getInt("DAY"));
@@ -707,11 +426,11 @@ public class PermissionDAO extends DatabaseHelper {
 				permission.setAdres(rs.getString("ADDRESS"));
 				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
 				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
-				permission.setBirinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
 				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
-				permission.setDurum(rs.getBoolean("STATUS"));
-				permission.setIkinciYoneticiOnayi(rs.getBoolean("FIRSTMANAGERAPPROVAL"));
-				permission.setIkOnayi(rs.getBoolean("IKAPPROVAL"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
 				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
 				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
 				permission.setGun(rs.getInt("DAY"));
