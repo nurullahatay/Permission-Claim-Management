@@ -24,46 +24,62 @@ public class DepartmentDAO extends DatabaseHelper {
 		super.init(databaseProperties);
 		logger.debug("DepartmentDAO init metodu �al��mas� bitti.");
 	}
+
 	public void setDepartmentManagers(Department department) throws Exception {
 		logger.debug("DepartmentDAO setDepartmentManagers metodu �al��maya ba�lad�.");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		PreparedStatement stmt2 = null;
 		PreparedStatement stmt3 = null;
+		PreparedStatement stmt4 = null;
 		StringBuilder query = new StringBuilder();
 		try {
-			String query2="delete from personel_roles where (email=(select email from personel where(sicilno=(select DEPARTMENTFIRSTMANAGER from department where id=?))) and role='FirstManager');";
-			stmt2=(PreparedStatement) conn.prepareStatement(query2);
-			stmt2.setLong(1, department.getId());
-			stmt2.executeUpdate();
-			
-			String query4="delete from personel_roles where (email=(select email from personel where(sicilno=(select DEPARTMENTSECONDMANAGER from department where id=?))) and role='SecondManager');";
-			stmt2=(PreparedStatement) conn.prepareStatement(query4);
-			stmt2.setLong(1, department.getId());
-			stmt2.executeUpdate();
-			
-			
-			query.append("UPDATE department set ");
-			query.append("DEPARTMENTFIRSTMANAGER = ?,DEPARTMENTSECONDMANAGER = ? WHERE ID = ?");
-			String queryString = query.toString();
-			logger.trace(query.toString());
-			stmt = (PreparedStatement) conn.prepareStatement(queryString);
-			stmt.setLong(1, department.getDepartmentFirstManager());
-			stmt.setLong(2, department.getDepartmentSecondManager());
-			stmt.setLong(3, department.getId());
-			stmt.executeUpdate();
-			
-			String query3="insert into personel_roles(email,role) values((select email from personel where(sicilno=?)),'FirstManager');";
-			stmt3=(PreparedStatement) conn.prepareStatement(query3);
-			stmt3.setLong(1, department.getDepartmentFirstManager());
-			stmt3.executeUpdate();
-			
-			String query5="insert into personel_roles(email,role) values((select email from personel where(sicilno=?)),'SecondManager');";
-			stmt3=(PreparedStatement) conn.prepareStatement(query5);
-			stmt3.setLong(1, department.getDepartmentSecondManager());
-			stmt3.executeUpdate();
+			if (department.getDepartmentFirstManager() != 0) {
+				String query2 = "delete from personel_roles where (email=(select email from personel where(sicilno=(select DEPARTMENTFIRSTMANAGER from department where id= ? ))) and role='FirstManager');";
+				stmt2 = (PreparedStatement) conn.prepareStatement(query2);
+				stmt2.setLong(1, department.getId());
+				stmt2.executeUpdate();
+			}
+			if (department.getDepartmentSecondManager() != 0) {
+				String query4 = "delete from personel_roles where (email=(select email from personel where(sicilno=(select DEPARTMENTSECONDMANAGER from department where id=?))) and role='SecondManager');";
+				stmt2 = (PreparedStatement) conn.prepareStatement(query4);
+				stmt2.setLong(1, department.getId());
+				stmt2.executeUpdate();
+			}
+
+			if (department.getDepartmentFirstManager() != 0) {
+				query.append("UPDATE department set ");
+				query.append("DEPARTMENTFIRSTMANAGER = ? WHERE ID = ?");
+				String queryString = query.toString();
+				logger.trace(query.toString());
+				stmt = (PreparedStatement) conn.prepareStatement(queryString);
+
+				stmt.setLong(1, department.getDepartmentFirstManager());
+				stmt.setLong(2, department.getId());
+				stmt.executeUpdate();
+			}
+			if (department.getDepartmentSecondManager() != 0) {
+				String query6 = "UPDATE department set DEPARTMENTSECONDMANAGER = ? WHERE ID = ?";
+				stmt4 = (PreparedStatement) conn.prepareStatement(query6);
+				stmt4.setLong(1, department.getDepartmentSecondManager());
+				stmt4.setLong(2, department.getId());
+				stmt4.executeUpdate();
+			}
+			if (department.getDepartmentFirstManager() != 0) {
+				String query3 = "insert into personel_roles(email,role) values((select email from personel where(sicilno=?)),'FirstManager');";
+				stmt3 = (PreparedStatement) conn.prepareStatement(query3);
+				stmt3.setLong(1, department.getDepartmentFirstManager());
+				stmt3.executeUpdate();
+			}
+			if (department.getDepartmentSecondManager() != 0) {
+				String query5 = "insert into personel_roles(email,role) values((select email from personel where(sicilno= ? )),'SecondManager');";
+				stmt3 = (PreparedStatement) conn.prepareStatement(query5);
+				stmt3.setLong(1, department.getDepartmentSecondManager());
+				stmt3.executeUpdate();
+			}
 			conn.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("DepartmentDAO setDepartmentManagers metodu exeption = " + e);
 			conn.rollback();
 			throw e;
