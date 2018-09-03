@@ -107,7 +107,52 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 		return permission;
 	}
-
+	public ArrayList<Permission> searchPermission(Permission permission2) throws Exception {
+		logger.debug("PermissionDAO searchPermission metodu çalışmaya başladı.");
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String query = "select * from permission where(STARTINGDATE BETWEEN ? AND ?)";
+		ArrayList<Permission> permissions = new ArrayList<>();
+		Permission permission;
+		logger.trace(query.toString());
+		Connection conn = (Connection) getConnection();
+		try {
+			pst = (PreparedStatement) conn.prepareStatement(query);
+			pst.setString(1, permission2.getBaslangicTarihi());
+			pst.setString(2, permission2.getBitisTarihi());
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				permission = new Permission();
+				permission.setId(rs.getLong("ID"));
+				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
+				permission.setSicilNo(rs.getLong("SICILNO"));
+				permission.setAciklama(rs.getString("DESCRIPTION"));
+				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
+				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
+				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
+				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
+				permissions.add(permission);
+			}
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO searchPermission metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closeResultSet(rs);
+			closePreparedStatement(pst);
+			closeConnection(conn);
+			logger.debug("PermissionDAO searchPermission metodu çalışması bitti.");
+		}
+		return permissions;
+	}
 	public ArrayList<Permission> getAllPermission() throws Exception {
 		logger.debug("PermissionDAO getAllPermission metodu çalışmaya başladı.");
 		PreparedStatement pst = null;

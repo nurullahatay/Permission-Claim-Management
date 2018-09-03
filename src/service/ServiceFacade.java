@@ -96,6 +96,9 @@ public class ServiceFacade {
 	public ArrayList<Permission> getAllPermission() throws Exception {
 		return permissionDAO.getAllPermission();
 	}
+	public ArrayList<Permission> searchPermission(Permission permission) throws Exception {
+		return permissionDAO.searchPermission(permission);
+	}
 
 	///////////////////////////////////////////////////////////////////////////////// 77
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {

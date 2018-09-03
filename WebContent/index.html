@@ -811,7 +811,7 @@ html, body, h1, h2, h3, h4, h5 {
 										<div class="datepicker">
 											<input id="btarih" class="form-control" type="text">
 											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="ilktarihi"
+											<input type="hidden" id="btarih-db"
 												name="gecerliolacagitarih">
 											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
 										</div>
@@ -824,7 +824,7 @@ html, body, h1, h2, h3, h4, h5 {
 										<div class="datepicker">
 											<input id="starih" class="form-control" type="text">
 											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="sontarihi"
+											<input type="hidden" id="starih-db"
 												name="gecerliolacagitarih">
 											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
 										</div>
@@ -833,7 +833,7 @@ html, body, h1, h2, h3, h4, h5 {
 
 							</table>
 					
-								<button id="iziniptalarama" class="btn btn-success">Add</button>
+								<button id="iziniptalarama" class="btn btn-success">Ara</button>
 						<br />
 						</div>
 
@@ -855,8 +855,7 @@ html, body, h1, h2, h3, h4, h5 {
 										<th>Telefon No</th>
 										<th>Adres</th>
 										<th>Durum</th>
-										<th>Onay</th>
-										<th>Red</th>
+										<th>İptal</th>
 									</tr>
 								</table>
 							</div>

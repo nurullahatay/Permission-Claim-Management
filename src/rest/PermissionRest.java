@@ -35,7 +35,7 @@ public class PermissionRest {
 		return ServiceFacade.getInstance().getAllPermission();
 	}
 
-	@Path("/getPermissionDetails")
+	@Path("/getPermission")
 	@POST
 	@PermitAll
 	public Permission getPermission(long id) throws Exception {
@@ -135,15 +135,21 @@ public class PermissionRest {
 
 	@Path("/deniedPermissionPersonel")
 	@POST
-	@PermitAll	
+	@PermitAll
 	public void deniedPermissionPersonel(long id) throws Exception {
-		ServiceFacade.getInstance().deniedPermissionPersonel(id);
 	}
-	
+
+	@Path("/searchPermission")
+	@POST
+	@PermitAll
+	public ArrayList<Permission> searchPermission(Permission permission) throws Exception {
+		return ServiceFacade.getInstance().searchPermission(permission);
+	}
+
 	@Path("/cancelPermission")
 	@POST
-	@PermitAll	
-	public void cancelPermission(long permission ) throws Exception {
+	@PermitAll
+	public void cancelPermission(long permission) throws Exception {
 		ServiceFacade.getInstance().cancelPermission(permission);
 	}
 }

@@ -384,10 +384,11 @@ $(document).ready(function(){
             		durum='Beklemede';
             	else 
             		durum = permission.durum;
-            	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="delete" class="'+permission.id+'">Sil</button>'+'</td></tr>');
+            	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button">Sil</button>'+'</td></tr>');
             });
     });
 });
+
 
 
 // izintalebi
@@ -587,7 +588,7 @@ $(document).ready(function(){
 					beforeShowDay : $.datepicker.noWeekends,
 					dateFormat : "dd-mm-yy",
 					altFormat : "yy-mm-dd",
-					altField : "#gtarih-db",
+					altField : "#btarih-db",
 					monthNames : [ "Ocak", "Şubat", "Mart",
 							"Nisan", "Mayıs", "Haziran", "Temmuz",
 							"Ağustos", "Eylül", "Ekim", "Kasım",
@@ -607,7 +608,7 @@ $(document).ready(function(){
 					beforeShowDay : $.datepicker.noWeekends,
 					dateFormat : "dd-mm-yy",
 					altFormat : "yy-mm-dd",
-					altField : "#gtarih-db",
+					altField : "#starih-db",
 					monthNames : [ "Ocak", "Şubat", "Mart",
 							"Nisan", "Mayıs", "Haziran", "Temmuz",
 							"Ağustos", "Eylül", "Ekim", "Kasım",
@@ -619,30 +620,34 @@ $(document).ready(function(){
 	});
 });
 
-
+//izin arama
 $(document).ready(function(){
     $(document).on("click","#iziniptalarama",function(){
 	var TDEKLE='</td><td>';
 	var durum='Henüz İncelenmedi';
-    $.getJSON("/Permission-Claim-Management/rest/permission/getAllPermission", function(result){
-        $.each(result, function(i, permission){
-        	if(permission.durum=='0')
-        		durum='Beklemede';
-        	else 
-        		durum = permission.durum;
-        	var arama = $('#personelarama').val();
-        	console.log(arama + permission.sicilNo);
-        	
-
-        	if(arama==permission.sicilNo){
-        		if(permission.durum=='Onaylandı'){
-                		$("#iziniptalsonuclari").append('<tr><td>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="iptalHR" onclick="cancelPermission('+permission.id+')">İptal</button>'+'</td></tr>');
-        		}
-        	}
-
-        	
-        });
-    });
+	var permission={};
+	permission["baslangicTarihi"] = $("#btarih-db").val();
+	permission["bitisTarihi"] = $("#starih-db").val();
+	 $.ajax({
+			type : "POST",
+			url : '/Permission-Claim-Management/rest/permission/searchPermission',
+			contentType : "application/json",
+			mimeType : "application/json",
+			data : JSON
+			.stringify(permission),
+			success : function(result) {
+				$.each(result, function(i, permission){
+	            	if(permission.durum=='0')
+	            		durum='Beklemede';
+	            	else 
+	            		durum = permission.durum;
+	            	$("#iziniptalsonuclari").append('<tr><td>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="'+cancelPermission(permission.id)+'">İptal</button>'+'</td></tr>');
+	            });
+			},
+			error : function() {
+				alert("error : personelselect");
+			}
+		});
     });  
 });
 
@@ -655,7 +660,7 @@ function cancelPermission(permission){
 		mimeType : "application/json",
 		data : JSON.stringify(permission),
 		success : function(result) {
-			alert("SUCCESS : ",result);
+			//alert("SUCCESS : ",result);
 		},
 		error : function() {
 			alert("error : cancelPermission");
