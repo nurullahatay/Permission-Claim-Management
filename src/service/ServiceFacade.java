@@ -117,7 +117,13 @@ public class ServiceFacade {
 	public ArrayList<RightOfPermission> getAllRightOfPermission() throws Exception {
 		return rightOfPermissionDAO.getAllRightOfPermission();
 	}
+	
+	
 
+	public void decreasePermission(long sicilNo, int day) throws Exception {
+		rightOfPermissionDAO.decreasePermission(sicilNo,day);
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////////////////
 	public void addPersonel(Personel personel) throws Exception {
 		personelDAO.addPersonel(personel);

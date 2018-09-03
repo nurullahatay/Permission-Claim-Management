@@ -12,6 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import bean.DatabaseProperties;
 import dto.Permission;
+import service.ServiceFacade;
 
 public class PermissionDAO extends DatabaseHelper {
 	Logger logger = Logger.getLogger(PermissionDAO.class);
@@ -664,6 +665,7 @@ public class PermissionDAO extends DatabaseHelper {
 
 	public void confirmedPermissionPersonel(long id) throws Exception {
 		logger.debug("PermissionDAO confirmedPermissionPersonel metodu çalışmaya başladı.");
+		Permission permission = ServiceFacade.getInstance().getPermission(id);
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -673,6 +675,7 @@ public class PermissionDAO extends DatabaseHelper {
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setLong(1, id);
 			preparedStatement.executeUpdate();
+			ServiceFacade.getInstance().decreasePermission(permission.getSicilNo(), permission.getGun());
 			conn.commit();
 		} catch (Exception e) {
 			logger.error("PermissionDAO confirmedPermissionPersonel metodu exeption = " + e);

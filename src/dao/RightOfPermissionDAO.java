@@ -7,7 +7,8 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import com.mysql.jdbc.PreparedStatement;
 import bean.DatabaseProperties;
-import dto.RightOfPermission;;
+import dto.RightOfPermission;
+import service.ServiceFacade;;
 
 public class RightOfPermissionDAO extends DatabaseHelper {
 	Logger logger = Logger.getLogger(RightOfPermissionDAO.class);
@@ -196,6 +197,35 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 			closePreparedStatement(statement);
 			closeConnection(conn);
 			logger.debug("RightOfPermissionDAO deleteAllRightOfPermission metodu çalýþmasý bitti.");
+		}
+	}
+	
+	public void decreasePermission(long sicilNo, int day) throws Exception {
+		logger.debug("RightOfPermissionDAO addPermission metodu çalýþmaya baþladý.");
+		Connection conn = null;
+		PreparedStatement statement = null;
+		StringBuilder queryDeleteDepartment = new StringBuilder();
+		RightOfPermission rightOfPermission = ServiceFacade.getInstance().getRightOfPermission(sicilNo);
+		rightOfPermission.setDayCountOfDeservedForYear(rightOfPermission.getDayCountOfDeservedForYear()-day);
+		
+		try {
+			queryDeleteDepartment.append("UPDATE rightofpermission SET DAYCOUNTOFDESERVEDFORYEAR =? WHERE SICILNO =?");
+			String queryString = queryDeleteDepartment.toString();
+			logger.trace(queryDeleteDepartment.toString());
+			conn = getConnection();
+			statement = (PreparedStatement) conn.prepareStatement(queryString);
+			statement.setInt(1, rightOfPermission.getDayCountOfDeservedForYear());
+			statement.setLong(2, sicilNo);
+			statement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("RightOfPermissionDAO addPermission metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(statement);
+			closeConnection(conn);
+			logger.debug("RightOfPermissionDAO addPermission metodu çalýþmasý bitti.");
 		}
 	}
 }
