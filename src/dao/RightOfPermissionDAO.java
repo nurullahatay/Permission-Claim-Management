@@ -200,8 +200,8 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 		}
 	}
 	
-	public void decreasePermission(long sicilNo, int day) throws Exception {
-		logger.debug("RightOfPermissionDAO addPermission metodu çalýþmaya baþladý.");
+	public void decreasePermissionRight(long sicilNo, int day) throws Exception {
+		logger.debug("RightOfPermissionDAO decreasePermissionRight metodu çalýþmaya baþladý.");
 		Connection conn = null;
 		PreparedStatement statement = null;
 		StringBuilder queryDeleteDepartment = new StringBuilder();
@@ -219,13 +219,44 @@ public class RightOfPermissionDAO extends DatabaseHelper {
 			statement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
-			logger.error("RightOfPermissionDAO addPermission metodu exeption = " + e);
+			logger.error("RightOfPermissionDAO decreasePermissionRight metodu exeption = " + e);
 			conn.rollback();
 			throw e;
 		} finally {
 			closePreparedStatement(statement);
 			closeConnection(conn);
-			logger.debug("RightOfPermissionDAO addPermission metodu çalýþmasý bitti.");
+			logger.debug("RightOfPermissionDAO decreasePermissionRight metodu çalýþmasý bitti.");
 		}
 	}
+
+	public void addOnPermissionRight(long sicilNo, int day) throws Exception {
+		logger.debug("RightOfPermissionDAO addOnPermissionRight metodu çalýþmaya baþladý.");
+		Connection conn = null;
+		PreparedStatement statement = null;
+		StringBuilder queryDeleteDepartment = new StringBuilder();
+		RightOfPermission rightOfPermission = ServiceFacade.getInstance().getRightOfPermission(sicilNo);
+		rightOfPermission.setDayCountOfDeservedForYear(rightOfPermission.getDayCountOfDeservedForYear()+day);
+		
+		try {
+			queryDeleteDepartment.append("UPDATE rightofpermission SET DAYCOUNTOFDESERVEDFORYEAR =? WHERE SICILNO =?");
+			String queryString = queryDeleteDepartment.toString();
+			logger.trace(queryDeleteDepartment.toString());
+			conn = getConnection();
+			statement = (PreparedStatement) conn.prepareStatement(queryString);
+			statement.setInt(1, rightOfPermission.getDayCountOfDeservedForYear());
+			statement.setLong(2, sicilNo);
+			statement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("RightOfPermissionDAO addOnPermissionRight metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(statement);
+			closeConnection(conn);
+			logger.debug("RightOfPermissionDAO addOnPermissionRight metodu çalýþmasý bitti.");
+		}
+		
+	}
+
 }

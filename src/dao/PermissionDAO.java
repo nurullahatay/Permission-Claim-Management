@@ -675,8 +675,8 @@ public class PermissionDAO extends DatabaseHelper {
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setLong(1, id);
 			preparedStatement.executeUpdate();
-			ServiceFacade.getInstance().decreasePermission(permission.getSicilNo(), permission.getGun());
 			conn.commit();
+			ServiceFacade.getInstance().decreasePermissionRight(permission.getSicilNo(), permission.getGun());
 		} catch (Exception e) {
 			logger.error("PermissionDAO confirmedPermissionPersonel metodu exeption = " + e);
 			conn.rollback();
@@ -688,8 +688,9 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void cancelPermission(long permission ) throws Exception {
+	public void cancelPermission(long permissionId ) throws Exception {
 		logger.debug("PermissionDAO cancelPermission metodu çalışmaya başladı.");
+		Permission permission = ServiceFacade.getInstance().getPermission(permissionId);
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -697,9 +698,10 @@ public class PermissionDAO extends DatabaseHelper {
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, permission);
+			preparedStatement.setLong(1, permissionId);
 			preparedStatement.executeUpdate();
 			conn.commit();
+			ServiceFacade.getInstance().addOnPermissionRight(permission.getSicilNo(), permission.getGun());
 		} catch (Exception e) {
 			logger.error("PermissionDAO cancelPermission metodu exeption = " + e);
 			conn.rollback();

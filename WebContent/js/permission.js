@@ -636,7 +636,7 @@ $(document).ready(function(){
 
         	if(arama==permission.sicilNo){
         		if(permission.durum=='Onaylandı'){
-                		$("#iziniptalsonuclari").append('<tr><td>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button class="edit-user">EDIT</button>'+TDEKLE+'<button type="button" id="iptalHR" onclick="cancelPermission('+permission.id+')">İptal</button>'+'</td></tr>');
+                		$("#iziniptalsonuclari").append('<tr><td>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="iptalHR" onclick="cancelPermission('+permission.id+')">İptal</button>'+'</td></tr>');
         		}
         	}
 

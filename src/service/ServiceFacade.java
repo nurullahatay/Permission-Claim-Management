@@ -118,12 +118,19 @@ public class ServiceFacade {
 		return rightOfPermissionDAO.getAllRightOfPermission();
 	}
 	
-	
 
-	public void decreasePermission(long sicilNo, int day) throws Exception {
-		rightOfPermissionDAO.decreasePermission(sicilNo,day);
+	public void decreasePermissionRight(long sicilNo, int day) throws Exception {
+		rightOfPermissionDAO.decreasePermissionRight(sicilNo,day);
+		
 	}
 	
+
+	public void addOnPermissionRight(long sicilNo, int day) throws Exception {
+		rightOfPermissionDAO.addOnPermissionRight(sicilNo,day);
+		
+	}
+
+
 	/////////////////////////////////////////////////////////////////////////////////////////
 	public void addPersonel(Personel personel) throws Exception {
 		personelDAO.addPersonel(personel);
@@ -199,4 +206,6 @@ public class ServiceFacade {
 		permissionDAO.cancelPermission( permission );
 		
 	}
+
+
 }
