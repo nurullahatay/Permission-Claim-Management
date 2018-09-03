@@ -260,17 +260,26 @@ $(document).ready(function(){
 		$("#isebaslama").text(personel.isebaslangictarihi);
 		 getRightOfPermission(personel.sicilno);
 		 isPersonel=true;
+
 		}
+		
+		if (value =="FirstManager"){
+			getFirstManagerApproval(personel.department);
+		}
+		if (value =="HR"){
+			getHRApproval();
+		}
+		if (value =="SecondManager"){
+			getSecondManagerApproval(personel.department);
+		}
+
 		
      });
 
-		
+		getPersonelApproval(personel.sicilno);
+
 	$("#formudolduran").text(personel.ad+' '+personel.soyad);
 	formfiller=personel.sicilno;
-	getFirstManagerApproval(personel.department);
-	getSecondManagerApproval(personel.department);
-	getHRApproval();
-	getPersonelApproval(personel.sicilno);
 	});  
 });
 
