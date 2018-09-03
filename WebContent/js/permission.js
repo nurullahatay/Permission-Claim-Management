@@ -325,6 +325,9 @@ function getRightOfPermission(sicilNo) {
 		success : function(result) {
 			$("#kullanilabilecekizin").text(result.dayCountOfDeserved);
 			$("#toplamhakedilen").text(result.dayCountOfDeservedForYear);
+			$("#kullanilabilecekizinpop").text(result.dayCountOfDeserved);
+		    $("#toplamhakedilenpop").text(result.dayCountOfDeservedForYear);
+
 		},
 		error : function() {
 			alert("error : getRightOfPermission");
@@ -356,6 +359,7 @@ $(document).ready(function(){
 			});
     });
 });
+
 //departman bilgisinin doldurulması
 function getDepartman(variable){
 		 $.ajax({
@@ -366,6 +370,8 @@ function getDepartman(variable){
 				data : ''+variable,
 				success : function(result) {
 					$("#departman").text(result.departmentName);
+				    $("#departmanpop").text(result.departmentName);
+
 				},
 				error : function() {
 					alert("error : getDepartman");
@@ -374,7 +380,7 @@ function getDepartman(variable){
 			});
 }
 
-// Tüm izinleri Listeleme
+//Tüm izinleri Listeleme
 $(document).ready(function(){
     	var TDEKLE='</td><td>';
     	var durum='Henüz İncelenmedi';
@@ -384,10 +390,65 @@ $(document).ready(function(){
             		durum='Beklemede';
             	else 
             		durum = permission.durum;
-            	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button">Sil</button>'+'</td></tr>');
+            	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button  onclick="getPermissionInfo('+permission.id+')"  type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#İzinBilgisi">Göster</button>'+'</td></tr>');
             });
     });
 });
+
+
+
+function getPermissionInfo(id){
+    $("#deneme").text(id);
+    $.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getPermission',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(id),
+		success : function(permission) {
+			sicilNo=permission.sicilNo;
+		    $("#sicilnopop").text(permission.sicilNo);
+		    $("#formudolduranpop").text(permission.formFiller);
+		    $("#formtarihinpop").text(permission.formTarihi);
+		    $("#izinbaslangıctarihipop").text(permission.baslangicTarihi);
+		    $("#izindonustarihipop").text(permission.bitisTarihi);
+		    $("#gunsayisipop").text(permission.gun);
+		    $("#nedenipop").text(permission.izinNedeni);
+		    $("#aciklamapop").text(permission.aciklama);
+		    $("#telpop").text(permission.telefonNumarasi);
+		    $("#adrespop").text(permission.adres);
+		    
+		    $.ajax({
+				type : "POST",
+				url : '/Permission-Claim-Management/rest/personel/getPersonel',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data :  JSON.stringify(permission.sicilNo),
+				success : function(result) {
+					getDepartman(result.department);
+					$("#personelpop").text(result.ad+' '+result.soyad);
+					$("#isebaslamapop").text(result.isebaslangictarihi);
+				},
+				error : function() {
+					alert("error : getPersonel");
+				}
+			});
+		 
+		 getRightOfPermission(permission.sicilNo);
+		    
+		    
+		},
+		error : function() {
+			alert("error : getPermissionInfo");
+
+		}
+	});
+    
+    
+	
+    
+}
+ 
 
 
 

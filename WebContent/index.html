@@ -883,21 +883,148 @@ html, body, h1, h2, h3, h4, h5 {
 	</div>
 
 
-<div class="container">
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
 
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
+	<div class="modal fade" id="İzinBilgisi" role="dialog">
+		<div class="modal-dialog modal-lg">
+
+			<!-- Modal content-->
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					<h4 class="modal-title">İzin Bilgisi</h4>
+				</div>
+				<div class="modal-body">
+
+
+					<div class="w3-panel">
+
+						<h2>İzin Talebi</h2>
+						<br>
+
+						<div class="w3-row-padding" style="margin: 0 -16px">
+							<div class="w3-third">
+								<h5>Personel Bilgisi</h5>
+
+								<table class="w3-table  w3-white">
+
+									<tr>
+
+										<td>Personel :</td>
+										<td><p id="personelpop"></p></td>
+									</tr>
+
+									<tr>
+
+										<td>Departman :</td>
+										<td><p id="departmanpop"></p></td>
+									</tr>
+									<tr>
+
+										<td>Sicil No :</td>
+										<td><p id="sicilnopop"></p></td>
+									</tr>
+									<tr>
+
+										<td>İşe Başlama Tarihi :</td>
+										<td><p id="isebaslamapop"></p></td>
+									</tr>
+									<tr>
+
+										<td>Formu Dolduran Kişi</td>
+										<td><i id="formudolduranpop"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+							<div class="w3-twothird">
+								<h6>Genel Bilgiler</h6>
+
+								<table class="w3-table  w3-white">
+									<tr>
+
+										<td>Form Oluşturma Tarihi</td>
+										<td><i id="formtarihinpop"></i></td>
+
+									</tr>
+									<tr>
+
+										<td>Kullanılabilecek izin günü sayısı</td>
+										<td><i id="kullanilabilecekizinpop"></i></td>
+									</tr>
+									<tr>
+
+										<td>Toplam hakedilen izin günü sayısı</td>
+										<td><i id="toplamhakedilenpop"></i></td>
+									</tr>
+
+
+
+								</table>
+
+								<div class="w3-twothird">
+									<h6>İzin Talep Bilgisi</h6>
+
+									<table class="w3-table  w3-white">
+										<tr>
+
+											<td>Başlangıç Tarihi</td>
+											<td><i id="izinbaslangıctarihipop"></i></td>
+
+										</tr>
+										<tr>
+
+											<td>Dönüş Tarihi</td>
+											<td><i id="izindonustarihipop"></i></td>
+										</tr>
+										<tr>
+
+											<td>Gün</td>
+											<td><i id="gunsayisipop"></i></td>
+										</tr>
+
+										<tr>
+
+											<td>İzin Nedeni</td>
+											<td><i id="nedenipop"></i></td>
+										</tr>
+										<tr>
+
+											<td>Açıklama</td>
+											<td><i id="aciklamapop"></i></td>
+										</tr>
+
+
+									</table>
+
+									<h6>İletişim Bilgileri</h6>
+									<table class="w3-table  w3-white">
+										<tr>
+											<td>Telefon Numarası
+											<td>
+											<td>
+											<td><i id="telpop"></i></td>
+
+
+										</tr>
+										<tr>
+											<td>Adres
+											<td><i id="adrespop"></i></td>
+
+										</tr>
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+
+
+						<p id="deneme">Some text in the modal.</p>
 					</div>
-					<div class="modal-body">
-						
-							
-					</div>
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
@@ -905,7 +1032,6 @@ html, body, h1, h2, h3, h4, h5 {
 
 			</div>
 		</div>
-
-</div>
+	</div>
 </body>
 </html>
