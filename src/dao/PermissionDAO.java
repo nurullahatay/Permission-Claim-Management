@@ -458,7 +458,7 @@ public class PermissionDAO extends DatabaseHelper {
 		Permission permission;
 		ArrayList<Permission> permissions = new ArrayList<>();
 		try {
-			String query = "select * From permission where IKAPPROVAL='Onaylandı' and SICILNO=?";
+			String query = "select * From permission where IKAPPROVAL='Onaylandı' and SICILNO=? and STATUS = '0'";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
@@ -683,5 +683,29 @@ public class PermissionDAO extends DatabaseHelper {
 			closeConnection(conn);
 			logger.debug("PermissionDAO confirmedPermissionPersonel metodu çalışması bitti.");
 		}
+	}
+
+	public void cancelPermission(long permission ) throws Exception {
+		logger.debug("PermissionDAO cancelPermission metodu çalışmaya başladı.");
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			String query = "UPDATE permission SET STATUS = 'İptal' WHERE ID =?";
+			logger.trace(query.toString());
+			conn = getConnection();
+			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
+			preparedStatement.setLong(1, permission);
+			preparedStatement.executeUpdate();
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO cancelPermission metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closePreparedStatement(preparedStatement);
+			closeConnection(conn);
+			logger.debug("PermissionDAO cancelPermission metodu çalışması bitti.");
+		}
+		
 	}
 }

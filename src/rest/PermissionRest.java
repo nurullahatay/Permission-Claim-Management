@@ -79,7 +79,7 @@ public class PermissionRest {
 
 	@Path("/getPersonelApproval")
 	@POST
-	@RolesAllowed("personel")
+	@PermitAll
 	public ArrayList<Permission> getPersonelApproval(long sicilNo) throws Exception {
 		return ServiceFacade.getInstance().getPersonelApproval(sicilNo);
 	}
@@ -128,15 +128,22 @@ public class PermissionRest {
 
 	@Path("/confirmedPermissionPersonel")
 	@POST
-	@RolesAllowed("personel")
+	@PermitAll
 	public void confirmedPermissionPersonel(long id) throws Exception {
 		ServiceFacade.getInstance().confirmedPermissionPersonel(id);
 	}
 
 	@Path("/deniedPermissionPersonel")
 	@POST
-	@RolesAllowed("personel")
+	@PermitAll	
 	public void deniedPermissionPersonel(long id) throws Exception {
 		ServiceFacade.getInstance().deniedPermissionPersonel(id);
+	}
+	
+	@Path("/cancelPermission")
+	@POST
+	@PermitAll	
+	public void cancelPermission(long permission ) throws Exception {
+		ServiceFacade.getInstance().cancelPermission(permission);
 	}
 }

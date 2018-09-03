@@ -15,7 +15,7 @@ function confirmedPermissionFirstManager(permissionId) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
-			alert("error");
+			alert("error: confirmedPermissionFirstManager");
 
 		}
 	});	
@@ -32,7 +32,7 @@ function deniedPermissionFirstManager(permissionId) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
-			alert("error");
+			alert("error : deniedPermissionFirstManager");
 
 		}
 	});	
@@ -58,7 +58,7 @@ function getFirstManagerApproval(deptId) {
 			
 		},
 		error : function() {
-			alert("error");
+			alert("error : getFirstManagerApproval");
 
 		}
 	});	
@@ -76,7 +76,7 @@ function confirmedPermissionSecondManager(permissionId) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
-			alert("error");
+			alert("error : confirmedPermissionSecondManager");
 
 		}
 	});	
@@ -93,7 +93,7 @@ function deniedPermissionSecondManager(permissionId) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
-			alert("error");
+			alert("error : deniedPermissionSecondManager");
 
 		}
 	});	
@@ -118,7 +118,7 @@ function getSecondManagerApproval(deptId) {
 			
 		},
 		error : function() {
-			alert("error");
+			alert("error : getSecondManagerApproval");
 
 		}
 	});	
@@ -137,7 +137,7 @@ function confirmedPermissionHR(permissionId) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
-			alert("error");
+			alert("error : confirmedPermissionHR");
 
 		}
 	});	
@@ -154,7 +154,7 @@ function deniedPermissionHR(permissionId) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
-			alert("error");
+			alert("error : deniedPermissionHR");
 
 		}
 	});	
@@ -179,7 +179,7 @@ function getHRApproval() {
 			
 		},
 		error : function() {
-			alert("error");
+			alert("error : getHRApproval");
 
 		}
 	});	
@@ -198,7 +198,7 @@ function confirmedPermissionPersonel(permissionId) {
 			alert("SUCCESS : ",result);
 		},
 		error : function() {
-			alert("error");
+			alert("error : confirmedPermissionPersonel");
 
 		}
 	});	
@@ -215,7 +215,7 @@ function deniedPermissionPersonel(permissionId) {
 			alert("SUCCESS : ",result);
 		},
 		error : function() {
-			alert("error");
+			alert("error : deniedPermissionPersonel");
 
 		}
 	});	
@@ -241,7 +241,7 @@ function getPersonelApproval(sicilno) {
 			
 		},
 		error : function() {
-			alert("error");
+			alert("error : getPersonelApproval");
 
 		}
 	});	
@@ -317,7 +317,7 @@ function getRightOfPermission(sicilNo) {
 			$("#toplamhakedilen").text(result.dayCountOfDeservedForYear);
 		},
 		error : function() {
-			alert("error");
+			alert("error : getRightOfPermission");
 
 		}
 	});
@@ -341,7 +341,7 @@ $(document).ready(function(){
 					 getRightOfPermission(result.sicilno);
 				},
 				error : function() {
-					alert("error");
+					alert("error : personelselect");
 				}
 			});
     });
@@ -358,7 +358,7 @@ function getDepartman(variable){
 					$("#departman").text(result.departmentName);
 				},
 				error : function() {
-					alert("error");
+					alert("error : getDepartman");
 
 				}
 			});
@@ -414,7 +414,7 @@ $(document).ready(
 												alert("SUCCESS : ",data);
 											},
 											error : function(e) {
-												alert("ERROR : ",e);
+												alert("ERROR : postPermission");
 											}
 										});
 
@@ -496,7 +496,7 @@ function workingDaysBetweenDates(d0, d1) {
            
 function parseDate(input) {
 	// Transform date from text to date
-  var parts = input.match(/(\d+)/g);
+  var parts = input.match(/-(\d+)/g);
   // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
   return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
 }
@@ -566,3 +566,90 @@ $(document).ready(function(){
 				});
 	});
 });
+
+//izin iptal için takvim(aramada başlangıc zamanın belirleme)
+$(document).ready(function(){
+	$(function() {
+		$("#btarih").datepicker(
+				{
+					beforeShowDay : $.datepicker.noWeekends,
+					dateFormat : "dd-mm-yy",
+					altFormat : "yy-mm-dd",
+					altField : "#gtarih-db",
+					monthNames : [ "Ocak", "Şubat", "Mart",
+							"Nisan", "Mayıs", "Haziran", "Temmuz",
+							"Ağustos", "Eylül", "Ekim", "Kasım",
+							"Aralık" ],
+					dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+							"Cu", "Ct" ],
+					firstDay : 1,
+				});
+	});
+});
+
+//izin iptal için takvim(aramada bitis zamanın belirleme)
+$(document).ready(function(){
+	$(function() {
+		$("#starih").datepicker(
+				{
+					beforeShowDay : $.datepicker.noWeekends,
+					dateFormat : "dd-mm-yy",
+					altFormat : "yy-mm-dd",
+					altField : "#gtarih-db",
+					monthNames : [ "Ocak", "Şubat", "Mart",
+							"Nisan", "Mayıs", "Haziran", "Temmuz",
+							"Ağustos", "Eylül", "Ekim", "Kasım",
+							"Aralık" ],
+					dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+							"Cu", "Ct" ],
+					firstDay : 1,
+				});
+	});
+});
+
+
+$(document).ready(function(){
+    $(document).on("click","#iziniptalarama",function(){
+	var TDEKLE='</td><td>';
+	var durum='Henüz İncelenmedi';
+    $.getJSON("/Permission-Claim-Management/rest/permission/getAllPermission", function(result){
+        $.each(result, function(i, permission){
+        	if(permission.durum=='0')
+        		durum='Beklemede';
+        	else 
+        		durum = permission.durum;
+        	var arama = $('#personelarama').val();
+        	console.log(arama + permission.sicilNo);
+        	
+
+        	if(arama==permission.sicilNo){
+        		if(permission.durum=='Onaylandı'){
+                		$("#iziniptalsonuclari").append('<tr><td>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" id="iptalHR" onclick="cancelPermission('+permission.id+')">İptal</button>'+'</td></tr>');
+        		}
+        	}
+
+        	
+        });
+    });
+    });  
+});
+
+
+function cancelPermission(permission){
+	$.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/cancelPermission',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(permission),
+		success : function(result) {
+			alert("SUCCESS : ",result);
+		},
+		error : function() {
+			alert("error : cancelPermission");
+
+		}
+	});	
+	
+}
+

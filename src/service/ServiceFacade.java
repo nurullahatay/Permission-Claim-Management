@@ -188,4 +188,9 @@ public class ServiceFacade {
 	public void deniedPermissionPersonel(long id) throws Exception {
 		permissionDAO.deniedPermissionPersonel(id);
 	}
+
+	public void cancelPermission(long permission ) throws Exception {
+		permissionDAO.cancelPermission( permission );
+		
+	}
 }

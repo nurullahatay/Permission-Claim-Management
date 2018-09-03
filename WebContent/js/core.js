@@ -68,7 +68,7 @@ function authenticatePersonel() {
            });
       },
 		error : function() {
-			alert("error");
+			alert("error: authenticatePersonel");
 
 		}
     });

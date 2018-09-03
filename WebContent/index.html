@@ -37,7 +37,17 @@ html, body, h1, h2, h3, h4, h5 {
 	<!-- fadeIn fadeOut scriptleri -->
 	<script>
 		$(document).ready(function() {
+			$("#aiziniptali").click(function() {
+				$("#izinhakedisdiv").fadeOut();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+				$("#iziniptaldiv").fadeIn();
+			});
+
 			$("#aizinhakedis").click(function() {
+				$("#iziniptaldiv").fadeOut();
 				$("#izinhakedisdiv").fadeIn();
 				$("#izintalebidiv").fadeOut();
 				$("#getallpersoneldiv").fadeOut();
@@ -45,6 +55,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 			});
 			$("#aizintalebi").click(function() {
+				$("#iziniptaldiv").fadeOut();
 				$("#izintalebidiv").fadeIn();
 				$("#izinhakedisdiv").fadeOut();
 				$("#getallpersoneldiv").fadeOut();
@@ -52,6 +63,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 			});
 			$("#apersonelekle").click(function() {
+				$("#iziniptaldiv").fadeOut();
 				$("#personelkayıtdiv").fadeIn();
 				$("#izintalebidiv").fadeOut();
 				$("#getallpersoneldiv").fadeOut();
@@ -59,6 +71,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 			});
 			$("#apersonellistesi").click(function() {
+				$("#iziniptaldiv").fadeOut();
 				$("#getallpersoneldiv").fadeIn();
 				$("#izintalebidiv").fadeOut();
 				$("#personelkayıtdiv").fadeOut();
@@ -66,12 +79,14 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 			});
 			$("#aizinlistesi").click(function() {
+				$("#iziniptaldiv").fadeOut();
 				$("#tümizinlerdiv").fadeIn();
 				$("#izintalebidiv").fadeOut();
 				$("#getallpersoneldiv").fadeOut();
 				$("#izinhakedisdiv").fadeOut();
 				$("#personelkayıtdiv").fadeOut();
 			});
+
 		});
 	</script>
 	<script>
@@ -321,13 +336,15 @@ html, body, h1, h2, h3, h4, h5 {
 								<table class="w3-table  w3-white">
 									<tr>
 
-										<td><div id="dropboxgetirme">Personel:<select id="selectpersonel">
+										<td><div id="dropboxgetirme">
+												Personel:<select id="selectpersonel">
 
 
 
 
 
-										</select></div></td>
+												</select>
+											</div></td>
 									</tr>
 									<tr>
 
@@ -715,6 +732,87 @@ html, body, h1, h2, h3, h4, h5 {
 								<th>Red</th>
 							</tr>
 						</table>
+					</div>
+				</fieldset>
+			</div>
+
+			<div id="iziniptaldiv">
+				<fieldset id="iziniptaldiv">
+					<div class="w3-container">
+						<hr>
+						<h2>İzin İptal</h2>
+						<br>
+						<div id="aramakosullari">
+
+							<table class="w3-table izinhakedis w3-white">
+
+								<tr>
+									<td>Çalışan</td>
+									<td><input id="personelarama"
+										placeholder="Aramak için bir şey girin" name="arama"
+										class="form-control input-md" type="text"></td>
+
+
+								</tr>
+								<tr>
+									<td>Başlangıç Günü</td>
+									<td>
+										<div class="datepicker">
+											<input id="btarih" class="form-control" type="text">
+											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+											<input type="hidden" id="ilktarihi"
+												name="gecerliolacagitarih">
+											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+										</div>
+									</td>
+								</tr>
+
+								<tr>
+									<td>Bitiş Günü</td>
+									<td>
+										<div class="datepicker">
+											<input id="starih" class="form-control" type="text">
+											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+											<input type="hidden" id="sontarihi"
+												name="gecerliolacagitarih">
+											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+										</div>
+									</td>
+								</tr>
+
+							</table>
+					
+								<button id="iziniptalarama" class="btn btn-success">Add</button>
+						<br />
+						</div>
+
+						<div id="aramasonucları">
+							<div class="w3-container">
+								<hr>
+								<h2>Arama Sonuçları</h2>
+								<br>
+								<table id="iziniptalsonuclari"
+									class="w3-table  w3-striped w3-white">
+									<tr>
+										<th>ID</th>
+										<th>Sicil NO</th>
+										<th>İzin Oluşturma Tarihi</th>
+										<th>İzin Başlama Tarihi</th>
+										<th>İzin Bitiş Tarihi</th>
+										<th>Gün</th>
+										<th>İzin Nedeni</th>
+										<th>Telefon No</th>
+										<th>Adres</th>
+										<th>Durum</th>
+										<th>Onay</th>
+										<th>Red</th>
+									</tr>
+								</table>
+							</div>
+
+
+						</div>
+
 					</div>
 				</fieldset>
 			</div>
