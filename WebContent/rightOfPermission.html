@@ -9,81 +9,63 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="./js/rightOfPermisson.js"></script>
-	<script src="./js/core.js"></script>
+
+
 </head>
+<script>
+function operateFormatter(value, row, index) {
+    return [
+        '<a class="info btn btn-info btn-sm" data-toggle="modalTable" data-target="#modalTable">',
+        '<span class="glyphicon glyphicon-eye-open"></span>',
+        '</a>'
+    ].join('');
+}
+
+var $tablemodal = $('#tablemodal');    
+window.operateEvents = {
+    'click .info': function () {
+        $('#modalTable').modal('show');
+    }
+};
+</script>
 <body>
+<div class="container">
+<table id="table"
+    class="table" 
+    data-search="true"
+    data-pagination="true"
+    data-mobile-responsive="true"
+    data-toggle="table"
+    data-url="json/membersData.json"
+    data-id-field="id">
+    <thead>
+        <tr>
+            <th data-field="id">Member ID</th>
+            <th data-field="m_fname">First Name</th>
+            <th data-field="m_lname">Last Name</th>
+            <th data-field="operate" data-events="operateEvents" data-formatter="operateFormatter">Actions</th>
+        </tr>
+    </thead>
+</table>
 
-			<hr>
-			<h2>İzin Hakediş</h2>
-			<br>
-	<!-- personel bilgisi-->
-	<div id="personelInformation" class="container ">
-		<div class="col-lg-12">
-			<hr>
-			<h2>Personel Bilgisi</h2>
-			<br>
-			<strong>Personel :  </strong> <span class="personel" id="personel_name"></span>						
-			<strong>Departman :</strong> <span class="personel" id="personel_department">
-			<strong>Sicil No :</strong> <span class="personel" id="personel_sicilNo"></span>
-			<br/> <br/> 
-		</div>
-	</div>
+        <div class="modal fade" id="modalTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Modal table</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- output data here-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-
-
-
-	<!-- izin hakedis ekleme-->
-	<div id="add_rightOfPermission" class="container ">
-		<div class="col-lg-12">
-			<table>
-				<tr>
-					<th>Personel</th>
-					<th>Geçerli Olacağı Tarih</th>
-					<th>Hakedilen Gün Sayısı</th>
-				</tr>
-				<tr>
-					<td>
-						<input id="personelarama" name="personelarama"
-							class="form-control input-md" placeholder="Ara" type="text"></td>
-					<td>
-						<div class="datepicker">
-							<input id="gtarih" class="form-control" type="text">
-								<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-							<input type="hidden" id="gtarih-db" name="gecerliolacagitarih">
-								<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-						</div>
-					</td>
-						
-					<td>
-						<input id="hakedilengunsayisi" name="hakedilengunsayisi"
-							placeholder="" class="form-control input-md" type="text">
-					</td>
-				</tr>
-			</table>
-			
-			<button id="addRightOfPermissionBtn" class="btn btn-success"
-					onclick="addRightOfPermission()">Add</button>
-					<br/> <br/> 
-		</div>
-	</div>
-	
-	<!-- izin hakedis listeleme-->
-	<div id="list_rightOfPermission" class="container ">
-		<div class="col-lg-12">
-			<table id="getAllRightOfPermission" class="table table-striped">
-				<tr>
-					<th>Sicil No</th>
-					<th>Geçerli Olacağı Tarih</th>
-					<th>Hakedilen Gün Sayısı</th>
-					<th>Mevcut Yıl İçin Hakedilen Gün Sayısı</th>
-					<th></th>
-				</tr>
-			</table>
-		</div>
-		<button type="button" id="deleteAllRight" class="btn btn-danger" onclick="deleteAllRight()">Hepsini Sil</button>
-	</div>
-	
-
+</div>
 </body>
 </html>

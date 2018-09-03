@@ -1,13 +1,14 @@
 
-$(document).ready(function(){
-	personelInfo();
-    var TDEKLE='</th><td>';
+
+
+function getAllRight(){
+    var TDEKLE='</th><th>';
     $.getJSON("/Permission-Claim-Management/rest/right/getAllRight", function(result){
         $.each(result, function(i, right){
             $("#getAllRightOfPermission").append('<tr><th>'+right.sicilNo+TDEKLE+right.validDate+TDEKLE+right.dayCountOfDeserved+TDEKLE+right.dayCountOfDeservedForYear+TDEKLE+'<button type="button" id="delete" class="btn btn-danger" onclick="deleteRight('+right.sicilNo+')">Sil</button>'+'</th></tr>');
         });
     });
-});
+}
 
 
 
@@ -133,17 +134,6 @@ var personel;
 
 
 
-function personelInfo() {
-	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
-		 $("#nickname").text(personel.ad+" "+personel.soyad);
-	$("#personel_name").text(personel.ad+' '+personel.soyad);
-	  $("#personel_department").text(personel.departmentId);
-	  $("#personel_sicilNo").text(personel.sicilno);
-	  
-	});  
-	
-	}
-
 
 //personelleri açılır menüye getirme
 $(document).ready(function(){
@@ -152,4 +142,22 @@ $(document).ready(function(){
                 $("#selectpersonelRight").append('<option id="personelselectRight" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
             });
         });
+});
+
+
+
+
+$(document).ready(function(){
+	$.getJSON("/Permission-Claim-Management/rest/session/getAuthenticatedPersonel", function(personel){
+		 $("#nickname").text(personel.ad+" "+personel.soyad);
+		 $("#personel_name").text(personel.ad+' '+personel.soyad);
+		 $("#personel_department").text(personel.departmentId);
+		 $("#personel_sicilNo").text(personel.sicilno);
+	   	 $.each(personel.personelRoles, function(key, value) {
+	   		if (value =="HR"){
+	   			getAllRight();
+			}
+	   		
+	     });
+    });
 });
