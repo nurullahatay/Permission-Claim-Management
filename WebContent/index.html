@@ -44,6 +44,9 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#personelkayıtdiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
 				$("#iziniptaldiv").fadeIn();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
 			});
 
 			$("#aizinhakedis").click(function() {
@@ -53,6 +56,9 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#getallpersoneldiv").fadeOut();
 				$("#personelkayıtdiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
 			});
 			$("#aizintalebi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -61,6 +67,9 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#getallpersoneldiv").fadeOut();
 				$("#personelkayıtdiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
 			});
 			$("#apersonelekle").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -69,6 +78,9 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#getallpersoneldiv").fadeOut();
 				$("#izinhakedisdiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
 			});
 			$("#apersonellistesi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -77,6 +89,9 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#personelkayıtdiv").fadeOut();
 				$("#izinhakedisdiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
 			});
 			$("#aizinlistesi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -85,7 +100,38 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#getallpersoneldiv").fadeOut();
 				$("#izinhakedisdiv").fadeOut();
 				$("#personelkayıtdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
 			});
+			
+			
+			$("#aonayislemleri").click(function() {
+				$("#iziniptaldiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeIn();
+				$("#setdepartmanmanagersdiv").fadeOut();
+
+			});
+			
+			
+			$("#adepartmanyonetimi").click(function() {
+				$("#iziniptaldiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeIn();
+
+			});
+			
+			
 
 		});
 	</script>
@@ -158,6 +204,9 @@ html, body, h1, h2, h3, h4, h5 {
 				Personel Listesi</a> <a style="text-decoration: none" id="aizinlistesi"
 				href="#" class="w3-bar-item w3-button w3-padding"><i
 				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a>
+				<a style="text-decoration: none" id="adepartmanyonetimi"
+				href="#" class="w3-bar-item w3-button w3-padding"><i
+				class="fa fa-bullseye fa-fw"></i>Departman Yönetimi</a>
 			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
@@ -221,7 +270,7 @@ html, body, h1, h2, h3, h4, h5 {
 						<h6>İzin talebi için bu sayfayı kullanabilirsiniz</h6>
 					</div>
 				</div>
-			</a> <a href="#" id="atanimlar">
+			</a> <a href="#" id="aonayislemleri">
 				<div class="w3-quarter">
 					<div
 						class="w3-container w3-hover-black w3-orange w3-text-white w3-padding-16">
@@ -229,8 +278,8 @@ html, body, h1, h2, h3, h4, h5 {
 							<i class="fa fa-sort-alpha-asc w3-xlarge"></i>
 						</div>
 
-						<h4>&nbsp Tanımlar</h4>
-						<h6>böyle bişey yapıcakmıyız anlamadım da</h6>
+						<h4>&nbsp Onay İşlemleri</h4>
+						<h6>İzin onayları için bu sayfayı kullanabilirsiniz</h6>
 					</div>
 				</div>
 			</a>
@@ -582,6 +631,7 @@ html, body, h1, h2, h3, h4, h5 {
 						type="submit" value="Submit" />
 				</div>
 			</fieldset>
+			<div id="setdepartmanmanagersdiv">
 			<fieldset id="setdepartmanmanagersdiv">
 				<div class="w3-container">
 
@@ -612,6 +662,7 @@ html, body, h1, h2, h3, h4, h5 {
 						class="form-control" type="button" value="Submit" />
 				</div>
 			</fieldset>
+			</div>
 			<fieldset id="getallpersoneldiv">
 				<div id="getallpersoneldiv">
 					<table id="getallpersoneltable"
@@ -632,7 +683,7 @@ html, body, h1, h2, h3, h4, h5 {
 					</table>
 				</div>
 			</fieldset>
-
+<div id="izinonayislemleridiv">
 			<div id="getAllFirstManagerApproval">
 				<fieldset id="getAllFirstManagerApproval">
 					<div class="w3-container">
@@ -735,7 +786,8 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 				</fieldset>
 			</div>
-
+			
+	</div>
 			<div id="iziniptaldiv">
 				<fieldset id="iziniptaldiv">
 					<div class="w3-container">
