@@ -180,8 +180,8 @@ public class ServiceFacade {
 
 		return permissionDAO.getPersonelApproval(sicilNo);
 	}
-	public void confirmedPermissionFirstManager(long id) throws Exception {
-		permissionDAO.confirmedPermissionFirstManager(id);
+	public void confirmedPermissionFirstManager(Permission permission) throws Exception {
+		permissionDAO.confirmedPermissionFirstManager( permission);
 	}
 	public void deniedPermissionFirstManager(long id) throws Exception {
 		permissionDAO.deniedPermissionFirstManager(id);

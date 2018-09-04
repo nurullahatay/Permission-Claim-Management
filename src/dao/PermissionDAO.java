@@ -567,16 +567,17 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void confirmedPermissionFirstManager(long id) throws Exception {
+	public void confirmedPermissionFirstManager(Permission permission) throws Exception {
 		logger.debug("PermissionDAO confirmedPermissionFirstManager metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET FIRSTMANAGERAPPROVAL = 'Onaylandı' WHERE ID =?";
+			String query = "UPDATE permission SET FIRSTMANAGERAPPROVAL = 'Onaylandı' , COMMENT = ? WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
+			preparedStatement.setString(1, permission.getComment());
+			preparedStatement.setLong(2, permission.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {

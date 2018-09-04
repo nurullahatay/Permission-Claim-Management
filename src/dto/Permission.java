@@ -17,6 +17,7 @@ public class Permission {
 	private String ikOnayi;
 	private String durum;
 	private long formFiller;
+	private String comment;
 	
 	public long getId() {
 		return id;
@@ -125,6 +126,12 @@ public class Permission {
 				+ ", adres=" + adres + ", birinciYoneticiOnayi=" + birinciYoneticiOnayi + ", ikinciYoneticiOnayi="
 				+ ikinciYoneticiOnayi + ", ikOnayi=" + ikOnayi + ", durum=" + durum + ", formFiller=" + formFiller
 				+ "]";
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	

@@ -5,12 +5,16 @@ var isPersonel;
 
 //birici yönetici onayı
 function confirmedPermissionFirstManager(permissionId) {
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorum").val();
+	
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionFirstManager',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
 			alert("SUCCESS : ");
 		},
@@ -22,12 +26,17 @@ function confirmedPermissionFirstManager(permissionId) {
 }
 //birici yönetici reddi
 function deniedPermissionFirstManager(permissionId) {
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorum").val();
+	
+	
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/deniedPermissionFirstManager',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
 			alert("SUCCESS : ",data);
 		},

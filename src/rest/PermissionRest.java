@@ -87,8 +87,8 @@ public class PermissionRest {
 	@Path("/confirmedPermissionFirstManager")
 	@POST
 	@RolesAllowed("FirstManager")
-	public void confirmedPermissionFirstManager(long id) throws Exception {
-		ServiceFacade.getInstance().confirmedPermissionFirstManager(id);
+	public void confirmedPermissionFirstManager(Permission permission) throws Exception {
+		ServiceFacade.getInstance().confirmedPermissionFirstManager(permission);
 	}
 
 	@Path("/deniedPermissionFirstManager")
