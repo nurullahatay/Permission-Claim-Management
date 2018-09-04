@@ -12,7 +12,7 @@ function confirmedPermissionFirstManager(permissionId) {
 		mimeType : "application/json",
 		data : JSON.stringify(permissionId),
 		success : function(result) {
-			alert("SUCCESS : ",data);
+			alert("SUCCESS : ");
 		},
 		error : function() {
 			alert("error: confirmedPermissionFirstManager");
