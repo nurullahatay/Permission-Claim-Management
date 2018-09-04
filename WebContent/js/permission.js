@@ -344,7 +344,14 @@ $(document).ready(function(){
             });
         });
 });
-
+//personelleri açılır menüye getirme
+$(document).ready(function(){
+        $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+            $.each(result, function(i, personel){
+                $("#selectpersonelforsearch").append('<option id="personelselect4" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+            });
+        });
+});
 function getRightOfPermission(sicilNo) {
 
 	$.ajax({
@@ -890,9 +897,11 @@ $(document).ready(function(){
 //izin arama
 $(document).ready(function(){
     $(document).on("click","#iziniptalarama",function(){
+    	$("#iziniptalsonuclari").empty();
 	var TDEKLE='</td><td>';
 	var durum='Henüz İncelenmedi';
 	var permission={};
+	permission["sicilNo"]=$("#selectpersonelforsearch").val();
 	permission["baslangicTarihi"] = $("#btarih-db").val();
 	permission["bitisTarihi"] = $("#starih-db").val();
 	 $.ajax({

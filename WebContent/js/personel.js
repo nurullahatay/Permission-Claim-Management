@@ -53,7 +53,7 @@ $(document).ready(
 								//personel["isebaslangictarihi"] = $("#personelisbasi").val();
 								personel["department"] = $("#personeldep").val();
 								personel["pozisyon"] = $("#personelpoz").val();
-								personel["ikinciyoneticionay"] = $("#personeliyonay").val();
+								personel["ikinciyoneticionay"] = $("#personeliyonay").is(":checked");
 								
 								var roles = [];
 								if ($('#adminRole').is(':checked')) {

@@ -107,20 +107,31 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 		return permission;
 	}
+
 	public ArrayList<Permission> searchPermission(Permission permission2) throws Exception {
 		logger.debug("PermissionDAO searchPermission metodu çalışmaya başladı.");
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		String query = "select * from permission where(STARTINGDATE BETWEEN ? AND ?)";
 		ArrayList<Permission> permissions = new ArrayList<>();
 		Permission permission;
-		logger.trace(query.toString());
 		Connection conn = (Connection) getConnection();
 		try {
-			pst = (PreparedStatement) conn.prepareStatement(query);
-			pst.setString(1, permission2.getBaslangicTarihi());
-			pst.setString(2, permission2.getBitisTarihi());
-			rs = pst.executeQuery();
+			if (permission2.getSicilNo() != 0) {
+				String query = "select * from permission where(STARTINGDATE BETWEEN ? AND ?) and SICILNO= ?";
+				logger.trace(query.toString());
+				pst = (PreparedStatement) conn.prepareStatement(query);
+				pst.setString(1, permission2.getBaslangicTarihi());
+				pst.setString(2, permission2.getBitisTarihi());
+				pst.setLong(3, permission2.getSicilNo());
+				rs = pst.executeQuery();
+			} else {
+				String query = "select * from permission where(STARTINGDATE BETWEEN ? AND ?)";
+				logger.trace(query.toString());
+				pst = (PreparedStatement) conn.prepareStatement(query);
+				pst.setString(1, permission2.getBaslangicTarihi());
+				pst.setString(2, permission2.getBitisTarihi());
+				rs = pst.executeQuery();
+			}
 			while (rs.next()) {
 				permission = new Permission();
 				permission.setId(rs.getLong("ID"));
@@ -153,6 +164,7 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 		return permissions;
 	}
+
 	public ArrayList<Permission> getAllPermission() throws Exception {
 		logger.debug("PermissionDAO getAllPermission metodu çalışmaya başladı.");
 		PreparedStatement pst = null;
@@ -495,7 +507,7 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 		return permissions;
 	}
-	
+
 	public ArrayList<Permission> getPersonelApproval(long sicilNo) throws Exception {
 		logger.debug("PermissionDAO getPersonelApproval metodu çalışmaya başladı.");
 		Connection conn = null;
@@ -625,7 +637,7 @@ public class PermissionDAO extends DatabaseHelper {
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setString(1, permission.getComment());
-			preparedStatement.setLong(2, permission.getId());			
+			preparedStatement.setLong(2, permission.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -649,7 +661,7 @@ public class PermissionDAO extends DatabaseHelper {
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setString(1, permission.getComment());
-			preparedStatement.setLong(2, permission.getId());	
+			preparedStatement.setLong(2, permission.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -673,7 +685,7 @@ public class PermissionDAO extends DatabaseHelper {
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setString(1, permission.getComment());
-			preparedStatement.setLong(2, permission.getId());	
+			preparedStatement.setLong(2, permission.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -697,7 +709,7 @@ public class PermissionDAO extends DatabaseHelper {
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setString(1, permission1.getComment());
-			preparedStatement.setLong(2, permission1.getId());	
+			preparedStatement.setLong(2, permission1.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -722,7 +734,7 @@ public class PermissionDAO extends DatabaseHelper {
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
 			preparedStatement.setString(1, permission1.getComment());
-			preparedStatement.setLong(2, permission1.getId());	
+			preparedStatement.setLong(2, permission1.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 			ServiceFacade.getInstance().decreasePermissionRight(permission.getSicilNo(), permission.getGun());
@@ -737,7 +749,7 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void cancelPermission(long permissionId ) throws Exception {
+	public void cancelPermission(long permissionId) throws Exception {
 		logger.debug("PermissionDAO cancelPermission metodu çalışmaya başladı.");
 		Permission permission = ServiceFacade.getInstance().getPermission(permissionId);
 		Connection conn = null;
@@ -760,6 +772,6 @@ public class PermissionDAO extends DatabaseHelper {
 			closeConnection(conn);
 			logger.debug("PermissionDAO cancelPermission metodu çalışması bitti.");
 		}
-		
+
 	}
 }
