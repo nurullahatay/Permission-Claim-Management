@@ -43,7 +43,7 @@ $(document).ready(function(){
 $(document).ready(
 		function() {
 			$("#postPersonel")
-					.click(
+					.submit(
 							function() {
 								var personel = {};
 								personel["ad"] = $("#personelad").val();

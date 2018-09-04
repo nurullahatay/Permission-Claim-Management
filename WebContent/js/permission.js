@@ -669,7 +669,7 @@ function getPermissionInfoP(id){
 $(document).ready(
 		function() {
 			$("#postPermission")
-					.click(
+					.submit(
 							function() {
 								var permission = {}
 								if (isPersonel==true){
