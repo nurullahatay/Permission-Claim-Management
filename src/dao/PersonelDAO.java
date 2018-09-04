@@ -16,7 +16,7 @@ public class PersonelDAO extends DatabaseHelper {
 	DatabaseProperties databaseProperties = null;
 
 	public void init(Properties appProperties) {
-		logger.debug("PersonelDAO init metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO init metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		DatabaseProperties databaseProperties = new DatabaseProperties();
 		databaseProperties.setUsername(appProperties.getProperty("dbuser"));
 		databaseProperties.setPassword(appProperties.getProperty("dbpassword"));
@@ -25,11 +25,11 @@ public class PersonelDAO extends DatabaseHelper {
 		databaseProperties.setJndiName(appProperties.getProperty("jndiName"));
 		databaseProperties.setDataSource(Boolean.parseBoolean(appProperties.getProperty("isDataSource")));
 		super.init(databaseProperties);
-		logger.debug("PersonelDAO init metodu çalýþmasý bitti.");
+		logger.debug("PersonelDAO init metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 	}
 
 	public void addPersonel(Personel personel) throws Exception {
-		logger.debug("PersonelDAO addPersonel metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO addPersonel metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
@@ -57,12 +57,12 @@ public class PersonelDAO extends DatabaseHelper {
 		} finally {
 			closePreparedStatement(stmt);
 			closeConnection(conn);
-			logger.debug("PersonelDAO addPersonel metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO addPersonel metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 	}
 
 	private void addPersonelRoles(Personel personel) throws Exception {
-		logger.debug("PersonelDAO addPersonelRoles metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO addPersonelRoles metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		PreparedStatement pStmt = null;
 		StringBuilder query = new StringBuilder();
 		Connection conn = null;
@@ -86,12 +86,12 @@ public class PersonelDAO extends DatabaseHelper {
 		} finally {
 			closePreparedStatement(pStmt);
 			closeConnection(conn);
-			logger.debug("PersonelDAO addPersonelRoles metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO addPersonelRoles metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 	}
 
 	public Personel getPersonel(long sicilNo) throws Exception {
-		logger.debug("PersonelDAO getPersonel metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO getPersonel metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		Connection conn = (Connection) getConnection();
@@ -122,13 +122,13 @@ public class PersonelDAO extends DatabaseHelper {
 			closeResultSet(rs);
 			closePreparedStatement(pst);
 			closeConnection(conn);
-			logger.debug("PersonelDAO getPersonel metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO getPersonel metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 		return personel;
 	}
 
 	public ArrayList<Personel> getAllPersonel() throws Exception {
-		logger.debug("PersonelDAO getAllPersonel metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO getAllPersonel metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		Connection conn = null;
 		ResultSet rs = null;
 		PreparedStatement preparedStatement = null;
@@ -162,13 +162,13 @@ public class PersonelDAO extends DatabaseHelper {
 			closeResultSet(rs);
 			closePreparedStatement(preparedStatement);
 			closeConnection(conn);
-			logger.debug("PersonelDAO getAllPersonel metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO getAllPersonel metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 		return personels;
 	}
 
 	public void updatePersonel(Personel personel) throws Exception {
-		logger.debug("PersonelDAO updatePersonel metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO updatePersonel metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
 		StringBuilder query = new StringBuilder();
@@ -200,17 +200,17 @@ public class PersonelDAO extends DatabaseHelper {
 		} finally {
 			closePreparedStatement(stmt);
 			closeConnection(conn);
-			logger.debug("PersonelDAO updatePersonel metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO updatePersonel metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 	}
 
 	public void deletePersonel(long sicilno) throws Exception {
-		logger.debug("PersonelDAO deletePersonel metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO deletePersonel metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		Connection conn = null;
 		PreparedStatement pstDepartment = null;
 		StringBuilder queryDeleteDepartment = new StringBuilder();
 		try {
-			queryDeleteDepartment.append("DELETE FROM PERSONEL ");
+			queryDeleteDepartment.append("DELETE FROM personel ");
 			queryDeleteDepartment.append("WHERE SICILNO=?");
 			String queryString = queryDeleteDepartment.toString();
 			logger.trace(queryDeleteDepartment.toString());
@@ -226,12 +226,12 @@ public class PersonelDAO extends DatabaseHelper {
 		} finally {
 			closePreparedStatement(pstDepartment);
 			closeConnection(conn);
-			logger.debug("PersonelDAO deletePersonel metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO deletePersonel metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 	}
 
 	public Personel getPersonelDetailWithEmail(String email) throws Exception {
-		logger.debug("PersonelDAO getPersonelDetailWithEmail metodu çalýþmaya baþladý.");
+		logger.debug("PersonelDAO getPersonelDetailWithEmail metodu ï¿½alï¿½ï¿½maya baï¿½ladï¿½.");
 		PreparedStatement pst = null;
 		PreparedStatement pst2 = null;
 		Connection conn = getConnection();
@@ -273,7 +273,7 @@ public class PersonelDAO extends DatabaseHelper {
 			closeResultSet(rs);
 			closePreparedStatement(pst);
 			closeConnection(conn);
-			logger.debug("PersonelDAO getPersonelDetailWithEmail metodu çalýþmasý bitti.");
+			logger.debug("PersonelDAO getPersonelDetailWithEmail metodu ï¿½alï¿½ï¿½masï¿½ bitti.");
 		}
 		return personel;
 	}

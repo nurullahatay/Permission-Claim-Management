@@ -8,7 +8,7 @@ $(document).ready(function(){
             		var evethayır='Evet';
             	else
             		var evethayır='Hayır';
-                $("#getallpersoneltable").append('<tr><td>'+personel.sicilno+TDEKLE+personel.ad+TDEKLE+personel.soyad+TDEKLE+personel.email+TDEKLE+personel.password+TDEKLE+personel.isebaslangictarihi+TDEKLE+personel.pozisyon+TDEKLE+evethayır+TDEKLE+'<button type="button" id="delete" class="'+personel.sicilno+'">Sil</button>'+'</td></tr>');
+                $("#getallpersoneltable").append('<tr><td>'+personel.sicilno+TDEKLE+personel.ad+TDEKLE+personel.soyad+TDEKLE+personel.email+TDEKLE+personel.password+TDEKLE+personel.isebaslangictarihi+TDEKLE+personel.pozisyon+TDEKLE+evethayır+TDEKLE+'<button type="button" id="delete" class="'+personel.sicilno+' btn-sm btn btn-danger">Sil</button>'+'</td></tr>');
             });
         });
     });
