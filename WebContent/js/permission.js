@@ -75,13 +75,17 @@ function getFirstManagerApproval(deptId) {
 
 //2. yönetici onayı
 function confirmedPermissionSecondManager(permissionId) {
+	
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorum2").val();
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionSecondManager',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
-		success : function(result) {
+		data : JSON.stringify(obj),
+		success : function(obj) {
 			alert("SUCCESS : ",data);
 		},
 		error : function() {
@@ -92,14 +96,17 @@ function confirmedPermissionSecondManager(permissionId) {
 }
 //2. yönetici reddi
 function deniedPermissionSecondManager(permissionId) {
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorum2").val();
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/deniedPermissionSecondManager',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
-			alert("SUCCESS : ",data);
+			alert("SUCCESS : ");
 		},
 		error : function() {
 			alert("error : deniedPermissionSecondManager");
@@ -122,7 +129,7 @@ function getSecondManagerApproval(deptId) {
 		success : function(result) {
 	$.each(result, function(i, per){
 	        	
-	        	$("#SecondManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionSecondManager('+per.id+')" id="onaybutonikinciy" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionSecondManager('+per.id+')" type="button" id="redbutonikinciy" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        	$("#SecondManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button  onclick="getPermissionInfo2('+per.id+')"  type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#ikinciyoneticiizinbilgisi">Göster</button>'+'</td></tr>');
 	        });
 			
 		},
@@ -136,12 +143,16 @@ function getSecondManagerApproval(deptId) {
 //
 //HR onayı
 function confirmedPermissionHR(permissionId) {
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorumhr").val();
+	
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionHR',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
 			alert("SUCCESS : ",data);
 		},
@@ -153,12 +164,16 @@ function confirmedPermissionHR(permissionId) {
 }
 //HR reddi
 function deniedPermissionHR(permissionId) {
+	
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorumhr").val();
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/deniedPermissionHR',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
 			alert("SUCCESS : ",data);
 		},
@@ -183,7 +198,7 @@ function getHRApproval() {
 		success : function(result) {
 	$.each(result, function(i, per){
 	        	
-	        	$("#HRApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionHR('+per.id+')" id="onaybutonHR" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionHR('+per.id+')" type="button" id="redbutonHR" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        	$("#HRApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button  onclick="getPermissionInfoHR('+per.id+')"  type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#hryoneticiizinbilgisi">Göster</button>'+'</td></tr>');
 	        });
 			
 		},
@@ -197,12 +212,16 @@ function getHRApproval() {
 
 //personel onayı
 function confirmedPermissionPersonel(permissionId) {
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorump").val();
+	
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/confirmedPermissionPersonel',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
 			alert("SUCCESS : ",result);
 		},
@@ -214,12 +233,15 @@ function confirmedPermissionPersonel(permissionId) {
 }
 //personel reddi
 function deniedPermissionPersonel(permissionId) {
+	var obj = {};
+	obj["id"]=permissionId; 
+	obj["comment"] =$("#yorump").val();
 	$.ajax({
 		type : "POST",
 		url : '/Permission-Claim-Management/rest/permission/deniedPermissionPersonel',
 		contentType : "application/json",
 		mimeType : "application/json",
-		data : JSON.stringify(permissionId),
+		data : JSON.stringify(obj),
 		success : function(result) {
 			alert("SUCCESS : ",result);
 		},
@@ -245,7 +267,7 @@ function getPersonelApproval(sicilno) {
 		success : function(result) {
 	$.each(result, function(i, per){
 	        	
-	        	$("#PersonelApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionPersonel('+per.id+')" id="onaybutonpersonel" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionPersonel('+per.id+')" type="button" id="redbutonpersonel" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        	$("#PersonelApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button  onclick="getPermissionInfoP('+per.id+')"  type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#pyoneticiizinbilgisi">Göster</button>'+'</td></tr>');
 	        });
 			
 		},
@@ -336,7 +358,12 @@ function getRightOfPermission(sicilNo) {
 			$("#toplamhakedilen").text(result.dayCountOfDeservedForYear);
 			$("#kullanilabilecekizinpop").text(result.dayCountOfDeserved);
 		    $("#toplamhakedilenpop").text(result.dayCountOfDeservedForYear);
-
+			$("#kullanilabilecekizinpop2").text(result.dayCountOfDeserved);
+		    $("#toplamhakedilenpop2").text(result.dayCountOfDeservedForYear);
+			$("#kullanilabilecekizinpophr").text(result.dayCountOfDeserved);
+		    $("#toplamhakedilenpophr").text(result.dayCountOfDeservedForYear);
+			$("#kullanilabilecekizinpopp").text(result.dayCountOfDeserved);
+		    $("#toplamhakedilenpopp").text(result.dayCountOfDeservedForYear);
 		},
 		error : function() {
 			alert("error : getRightOfPermission");
@@ -380,6 +407,9 @@ function getDepartman(variable){
 				success : function(result) {
 					$("#departman").text(result.departmentName);
 				    $("#departmanpop").text(result.departmentName);
+				    $("#departmanpop2").text(result.departmentName);
+				    $("#departmanpophr").text(result.departmentName);
+				    $("#departmanpopp").text(result.departmentName);
 
 				},
 				error : function() {
@@ -458,6 +488,173 @@ function getPermissionInfo(id){
     
 }
  
+
+
+
+function getPermissionInfo2(id){
+    $.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getPermission',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(id),
+		success : function(permission) {
+			sicilNo=permission.sicilNo;
+		    $("#sicilnopop2").text(permission.sicilNo);
+		    $("#formudolduranpop2").text(permission.formFiller);
+		    $("#formtarihinpop2").text(permission.formTarihi);
+		    $("#izinbaslangıctarihipop2").text(permission.baslangicTarihi);
+		    $("#izindonustarihipop2").text(permission.bitisTarihi);
+		    $("#gunsayisipop2").text(permission.gun);
+		    $("#nedenipop2").text(permission.izinNedeni);
+		    $("#aciklamapop2").text(permission.aciklama);
+		    $("#telpop2").text(permission.telefonNumarasi);
+		    $("#adrespop2").text(permission.adres);
+		    $("#izinidpop2").text(permission.id);    
+		    $.ajax({
+				type : "POST",
+				url : '/Permission-Claim-Management/rest/personel/getPersonel',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data :  JSON.stringify(permission.sicilNo),
+				success : function(result) {
+					getDepartman(result.department);
+					$("#personelpop2").text(result.ad+' '+result.soyad);
+					$("#isebaslamapop2").text(result.isebaslangictarihi);
+				},
+				error : function() {
+					alert("error : getPersonel");
+				}
+			});
+		 
+		 getRightOfPermission(permission.sicilNo);
+		    
+		    
+		},
+		error : function() {
+			alert("error : getPermissionInfo");
+
+		}
+	});
+    
+    
+	
+    
+}
+
+
+
+
+
+
+
+function getPermissionInfoHR(id){
+    $.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getPermission',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(id),
+		success : function(permission) {
+			sicilNo=permission.sicilNo;
+		    $("#sicilnopophr").text(permission.sicilNo);
+		    $("#formudolduranpophr").text(permission.formFiller);
+		    $("#formtarihinpophr").text(permission.formTarihi);
+		    $("#izinbaslangıctarihipophr").text(permission.baslangicTarihi);
+		    $("#izindonustarihipophr").text(permission.bitisTarihi);
+		    $("#gunsayisipophr").text(permission.gun);
+		    $("#nedenipophr").text(permission.izinNedeni);
+		    $("#aciklamapophr").text(permission.aciklama);
+		    $("#telpophr").text(permission.telefonNumarasi);
+		    $("#adrespophr").text(permission.adres);
+		    $("#izinidpophr").text(permission.id);    
+		    $.ajax({
+				type : "POST",
+				url : '/Permission-Claim-Management/rest/personel/getPersonel',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data :  JSON.stringify(permission.sicilNo),
+				success : function(result) {
+					getDepartman(result.department);
+					$("#personelpophr").text(result.ad+' '+result.soyad);
+					$("#isebaslamapophr").text(result.isebaslangictarihi);
+				},
+				error : function() {
+					alert("error : getPersonel");
+				}
+			});
+		 
+		 getRightOfPermission(permission.sicilNo);
+		    
+		    
+		},
+		error : function() {
+			alert("error : getPermissionInfo");
+
+		}
+	});
+    
+    
+	
+    
+}
+
+
+
+
+function getPermissionInfoP(id){
+    $.ajax({
+		type : "POST",
+		url : '/Permission-Claim-Management/rest/permission/getPermission',
+		contentType : "application/json",
+		mimeType : "application/json",
+		data : JSON.stringify(id),
+		success : function(permission) {
+			sicilNo=permission.sicilNo;
+		    $("#sicilnopopp").text(permission.sicilNo);
+		    $("#formudolduranpopp").text(permission.formFiller);
+		    $("#formtarihinpopp").text(permission.formTarihi);
+		    $("#izinbaslangıctarihipopp").text(permission.baslangicTarihi);
+		    $("#izindonustarihipopp").text(permission.bitisTarihi);
+		    $("#gunsayisipopp").text(permission.gun);
+		    $("#nedenipopp").text(permission.izinNedeni);
+		    $("#aciklamapopp").text(permission.aciklama);
+		    $("#telpopp").text(permission.telefonNumarasi);
+		    $("#adrespopp").text(permission.adres);
+		    $("#izinidpopp").text(permission.id);    
+		    $.ajax({
+				type : "POST",
+				url : '/Permission-Claim-Management/rest/personel/getPersonel',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data :  JSON.stringify(permission.sicilNo),
+				success : function(result) {
+					getDepartman(result.department);
+					$("#personelpopp").text(result.ad+' '+result.soyad);
+					$("#isebaslamapopp").text(result.isebaslangictarihi);
+				},
+				error : function() {
+					alert("error : getPersonel");
+				}
+			});
+		 
+		 getRightOfPermission(permission.sicilNo);
+		    
+		    
+		},
+		error : function() {
+			alert("error : getPermissionInfo");
+
+		}
+	});
+    
+    
+	
+    
+}
+
+
+
 
 
 

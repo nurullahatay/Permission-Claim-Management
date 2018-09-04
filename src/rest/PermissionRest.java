@@ -94,49 +94,50 @@ public class PermissionRest {
 	@Path("/deniedPermissionFirstManager")
 	@POST
 	@RolesAllowed("FirstManager")
-	public void deniedPermissionFirstManager(long id) throws Exception {
-		ServiceFacade.getInstance().deniedPermissionFirstManager(id);
+	public void deniedPermissionFirstManager(Permission permission) throws Exception {
+		ServiceFacade.getInstance().deniedPermissionFirstManager(permission);
 	}
 
 	@Path("/confirmedPermissionSecondManager")
 	@POST
 	@RolesAllowed("SecondManager")
-	public void confirmedPermissionSecondManager(long id) throws Exception {
-		ServiceFacade.getInstance().confirmedPermissionSecondManager(id);
+	public void confirmedPermissionSecondManager(Permission permission) throws Exception {
+		ServiceFacade.getInstance().confirmedPermissionSecondManager( permission);
 	}
 
 	@Path("/deniedPermissionSecondManager")
 	@POST
 	@RolesAllowed("SecondManager")
-	public void deniedPermissionSecondManager(long id) throws Exception {
-		ServiceFacade.getInstance().deniedPermissionSecondManager(id);
+	public void deniedPermissionSecondManager(Permission permission) throws Exception {
+		ServiceFacade.getInstance().deniedPermissionSecondManager( permission);
 	}
 
 	@Path("/confirmedPermissionHR")
 	@POST
 	@RolesAllowed("HR")
-	public void confirmedPermissionHR(long id) throws Exception {
-		ServiceFacade.getInstance().confirmedPermissionHR(id);
+	public void confirmedPermissionHR(Permission permission) throws Exception {
+		ServiceFacade.getInstance().confirmedPermissionHR( permission);
 	}
 
 	@Path("/deniedPermissionHR")
 	@POST
 	@RolesAllowed("HR")
-	public void deniedPermissionHR(long id) throws Exception {
-		ServiceFacade.getInstance().deniedPermissionHR(id);
+	public void deniedPermissionHR(Permission permission) throws Exception {
+		ServiceFacade.getInstance().deniedPermissionHR( permission);
 	}
 
 	@Path("/confirmedPermissionPersonel")
 	@POST
 	@PermitAll
-	public void confirmedPermissionPersonel(long id) throws Exception {
-		ServiceFacade.getInstance().confirmedPermissionPersonel(id);
+	public void confirmedPermissionPersonel(Permission permission) throws Exception {
+		ServiceFacade.getInstance().confirmedPermissionPersonel( permission);
 	}
 
 	@Path("/deniedPermissionPersonel")
 	@POST
 	@PermitAll
-	public void deniedPermissionPersonel(long id) throws Exception {
+	public void deniedPermissionPersonel(Permission permission) throws Exception {
+		ServiceFacade.getInstance().deniedPermissionPersonel( permission);
 	}
 
 	@Path("/searchPermission")

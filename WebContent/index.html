@@ -994,5 +994,355 @@ html, body, h1, h2, h3, h4, h5 {
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+	
+
+	<div class="modal fade" id="ikinciyoneticiizinbilgisi" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">İzin Bilgisi</h4>
+				</div>
+				<div class="modal-body">
+					<div class="w3-panel">
+						<h2>İzin Talebi</h2>
+						<br>
+						<div class="w3-row-padding" style="margin: 0 -16px">
+							<div class="w3-container">
+								<h5>Personel Bilgisi</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Personel :</td>
+										<td>Departman :</td>
+										<td>Sicil No :</td>
+									</tr>
+									<tr>
+										<td><p id="personelpop2"></p></td>
+										<td><p id="departmanpop2"></p></td>
+										<td><p id="sicilnopop2"></p></td>
+									</tr>
+									<tr>
+										<td>İşe Başlama Tarihi :</td>
+										<td>Formu Dolduran Kişi</td>
+										<td>izin Id</td>
+									</tr>
+									<tr>
+										<td><p id="isebaslamapop2"></p></td>
+										<td><i id="formudolduranpop2"></i></td>
+										
+										
+										<td><label id="izinidpop2"></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>Genel Bilgiler</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Form Oluşturma Tarihi</td>
+										<td>Kullanılabilecek izin günü sayısı</td>
+										<td>Toplam hakedilen izin günü sayısı</td>
+									</tr>
+									<tr>
+										<td><i id="formtarihinpop2"></i></td>
+										<td><i id="kullanilabilecekizinpop2"></i></td>
+										<td><i id="toplamhakedilenpop2"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İzin Talep Bilgisi</h5>
+
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Başlangıç Tarihi</td>
+										<td>Dönüş Tarihi</td>
+										<td>Gün</td>
+									</tr>
+									<tr>
+										<td><i id="izindonustarihipop2"></i></td>
+										<td><i id="izinbaslangıctarihipop2"></i></td>
+										<td><i id="gunsayisipop2"></i></td>
+									</tr>
+									<tr>
+										<td>İzin Nedeni</td>
+										<td>Açıklama</td>
+									</tr>
+									<tr>
+										<td><i id="nedenipop2"></i></td>
+										<td><i id="aciklamapop2"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İletişim Bilgileri</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Telefon Numarası</td>
+										<td>Adres</td>
+									</tr>
+									<tr>
+										<td><i id="telpop2"></i></td>
+										<td><i id="adrespop2"></i></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+
+						<table class="w3-table  w3-white">
+							<tr>
+								<td>Yorum</td>
+								<td><i><textarea id="yorum2" class="form-control"
+											name="yorum"></textarea></i></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer" id="modalfooter">
+					<button class="btn btn-success" type="button" onclick="confirmedPermissionSecondManager(document.getElementById('izinidpop2').textContent)">Onay</button>
+					<button class="btn btn-danger" onclick="deniedPermissionSecondManager(document.getElementById('izinidpop2').textContent)" type="button" id="redbutonHR">Red</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+
+	<div class="modal fade" id="hryoneticiizinbilgisi" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">İzin Bilgisi</h4>
+				</div>
+				<div class="modal-body">
+					<div class="w3-panel">
+						<h2>İzin Talebi</h2>
+						<br>
+						<div class="w3-row-padding" style="margin: 0 -16px">
+							<div class="w3-container">
+								<h5>Personel Bilgisi</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Personel :</td>
+										<td>Departman :</td>
+										<td>Sicil No :</td>
+									</tr>
+									<tr>
+										<td><p id="personelpophr"></p></td>
+										<td><p id="departmanpophr"></p></td>
+										<td><p id="sicilnopophr"></p></td>
+									</tr>
+									<tr>
+										<td>İşe Başlama Tarihi :</td>
+										<td>Formu Dolduran Kişi</td>
+										<td>izin Id</td>
+									</tr>
+									<tr>
+										<td><p id="isebaslamapophr"></p></td>
+										<td><i id="formudolduranpophr"></i></td>
+										
+										
+										<td><label id="izinidpophr"></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>Genel Bilgiler</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Form Oluşturma Tarihi</td>
+										<td>Kullanılabilecek izin günü sayısı</td>
+										<td>Toplam hakedilen izin günü sayısı</td>
+									</tr>
+									<tr>
+										<td><i id="formtarihinpophr"></i></td>
+										<td><i id="kullanilabilecekizinpophr"></i></td>
+										<td><i id="toplamhakedilenpophr"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İzin Talep Bilgisi</h5>
+
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Başlangıç Tarihi</td>
+										<td>Dönüş Tarihi</td>
+										<td>Gün</td>
+									</tr>
+									<tr>
+										<td><i id="izindonustarihipophr"></i></td>
+										<td><i id="izinbaslangıctarihipophr"></i></td>
+										<td><i id="gunsayisipophr"></i></td>
+									</tr>
+									<tr>
+										<td>İzin Nedeni</td>
+										<td>Açıklama</td>
+									</tr>
+									<tr>
+										<td><i id="nedenipophr"></i></td>
+										<td><i id="aciklamapophr"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İletişim Bilgileri</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Telefon Numarası</td>
+										<td>Adres</td>
+									</tr>
+									<tr>
+										<td><i id="telpophr"></i></td>
+										<td><i id="adrespophr"></i></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+
+						<table class="w3-table  w3-white">
+							<tr>
+								<td>Yorum</td>
+								<td><i><textarea id="yorumhr" class="form-control"
+											name="yorum"></textarea></i></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer" id="modalfooter">
+					<button class="btn btn-success" type="button" onclick="confirmedPermissionHR(document.getElementById('izinidpophr').textContent)">Onay</button>
+					<button class="btn btn-danger" onclick="deniedPermissionHR(document.getElementById('izinidpophr').textContent)" type="button" id="redbutonHR">Red</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="pyoneticiizinbilgisi" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">İzin Bilgisi</h4>
+				</div>
+				<div class="modal-body">
+					<div class="w3-panel">
+						<h2>İzin Talebi</h2>
+						<br>
+						<div class="w3-row-padding" style="margin: 0 -16px">
+							<div class="w3-container">
+								<h5>Personel Bilgisi</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Personel :</td>
+										<td>Departman :</td>
+										<td>Sicil No :</td>
+									</tr>
+									<tr>
+										<td><p id="personelpopp"></p></td>
+										<td><p id="departmanpopp"></p></td>
+										<td><p id="sicilnopopp"></p></td>
+									</tr>
+									<tr>
+										<td>İşe Başlama Tarihi :</td>
+										<td>Formu Dolduran Kişi</td>
+										<td>izin Id</td>
+									</tr>
+									<tr>
+										<td><p id="isebaslamapopp"></p></td>
+										<td><i id="formudolduranpopp"></i></td>
+										
+										
+										<td><label id="izinidpopp"></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>Genel Bilgiler</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Form Oluşturma Tarihi</td>
+										<td>Kullanılabilecek izin günü sayısı</td>
+										<td>Toplam hakedilen izin günü sayısı</td>
+									</tr>
+									<tr>
+										<td><i id="formtarihinpopp"></i></td>
+										<td><i id="kullanilabilecekizinpopp"></i></td>
+										<td><i id="toplamhakedilenpopp"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İzin Talep Bilgisi</h5>
+
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Başlangıç Tarihi</td>
+										<td>Dönüş Tarihi</td>
+										<td>Gün</td>
+									</tr>
+									<tr>
+										<td><i id="izindonustarihipopp"></i></td>
+										<td><i id="izinbaslangıctarihipopp"></i></td>
+										<td><i id="gunsayisipopp"></i></td>
+									</tr>
+									<tr>
+										<td>İzin Nedeni</td>
+										<td>Açıklama</td>
+									</tr>
+									<tr>
+										<td><i id="nedenipopp"></i></td>
+										<td><i id="aciklamapopp"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İletişim Bilgileri</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Telefon Numarası</td>
+										<td>Adres</td>
+									</tr>
+									<tr>
+										<td><i id="telpopp"></i></td>
+										<td><i id="adrespopp"></i></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+
+						<table class="w3-table  w3-white">
+							<tr>
+								<td>Yorum</td>
+								<td><i><textarea id="yorump" class="form-control"
+											name="yorum"></textarea></i></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer" id="modalfooter">
+					<button class="btn btn-success" type="button" onclick="confirmedPermissionPersonel(document.getElementById('izinidpopp').textContent)">Onay</button>
+					<button class="btn btn-danger" onclick="deniedPermissionPersonel(document.getElementById('izinidpopp').textContent)" type="button" id="redbutonHR">Red</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 </body>
 </html>

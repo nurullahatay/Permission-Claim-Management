@@ -543,17 +543,17 @@ public class PermissionDAO extends DatabaseHelper {
 		return permissions;
 	}
 
-	public void deniedPermissionFirstManager(long id) throws Exception {
+	public void deniedPermissionFirstManager(Permission permission) throws Exception {
 		logger.debug("PermissionDAO deniedPermissionFirstManager metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET FIRSTMANAGERAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi' WHERE ID =?";
+			String query = "UPDATE permission SET FIRSTMANAGERAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi' , COMMENT= ? WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
-
+			preparedStatement.setString(1, permission.getComment());
+			preparedStatement.setLong(2, permission.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -591,17 +591,17 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void deniedPermissionSecondManager(long id) throws Exception {
+	public void deniedPermissionSecondManager(Permission permission) throws Exception {
 		logger.debug("PermissionDAO deniedPermissionSecondManager metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET SECONDMANAGERAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi' WHERE ID =?";
+			String query = "UPDATE permission SET SECONDMANAGERAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi', COMMENT=?  WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
-
+			preparedStatement.setString(1, permission.getComment());
+			preparedStatement.setLong(2, permission.getId());
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -615,16 +615,17 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void confirmedPermissionSecondManager(long id) throws Exception {
+	public void confirmedPermissionSecondManager(Permission permission) throws Exception {
 		logger.debug("PermissionDAO confirmedPermissionSecondManager metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET SECONDMANAGERAPPROVAL = 'Onaylandı' WHERE ID =?";
+			String query = "UPDATE permission SET SECONDMANAGERAPPROVAL = 'Onaylandı',COMMENT=?  WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
+			preparedStatement.setString(1, permission.getComment());
+			preparedStatement.setLong(2, permission.getId());			
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -638,17 +639,17 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void deniedPermissionHR(long id) throws Exception {
+	public void deniedPermissionHR(Permission permission) throws Exception {
 		logger.debug("PermissionDAO deniedPermissionHR metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET IKAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi' WHERE ID =?";
+			String query = "UPDATE permission SET IKAPPROVAL = 'Reddedildi' ,STATUS = 'Reddedildi', COMMENT=? WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
-
+			preparedStatement.setString(1, permission.getComment());
+			preparedStatement.setLong(2, permission.getId());	
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -662,16 +663,17 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void confirmedPermissionHR(long id) throws Exception {
+	public void confirmedPermissionHR(Permission permission) throws Exception {
 		logger.debug("PermissionDAO confirmedPermissionHR metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET IKAPPROVAL = 'Onaylandı' WHERE ID =?";
+			String query = "UPDATE permission SET IKAPPROVAL = 'Onaylandı' , COMMENT= ?WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
+			preparedStatement.setString(1, permission.getComment());
+			preparedStatement.setLong(2, permission.getId());	
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -685,17 +687,17 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void deniedPermissionPersonel(long id) throws Exception {
+	public void deniedPermissionPersonel(Permission permission1) throws Exception {
 		logger.debug("PermissionDAO deniedPermissionPersonel metodu çalışmaya başladı.");
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET STATUS = 'Personel reddetti' WHERE ID =?";
+			String query = "UPDATE permission SET STATUS = 'Personel reddetti' , COMMENT=? WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
-
+			preparedStatement.setString(1, permission1.getComment());
+			preparedStatement.setLong(2, permission1.getId());	
 			preparedStatement.executeUpdate();
 			conn.commit();
 		} catch (Exception e) {
@@ -709,17 +711,18 @@ public class PermissionDAO extends DatabaseHelper {
 		}
 	}
 
-	public void confirmedPermissionPersonel(long id) throws Exception {
+	public void confirmedPermissionPersonel(Permission permission1) throws Exception {
 		logger.debug("PermissionDAO confirmedPermissionPersonel metodu çalışmaya başladı.");
-		Permission permission = ServiceFacade.getInstance().getPermission(id);
+		Permission permission = ServiceFacade.getInstance().getPermission(permission1.getId());
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			String query = "UPDATE permission SET STATUS = 'Onaylandı' WHERE ID =?";
+			String query = "UPDATE permission SET STATUS = 'Onaylandı', COMMENT=? WHERE ID =?";
 			logger.trace(query.toString());
 			conn = getConnection();
 			preparedStatement = (PreparedStatement) conn.prepareStatement(query);
-			preparedStatement.setLong(1, id);
+			preparedStatement.setString(1, permission1.getComment());
+			preparedStatement.setLong(2, permission1.getId());	
 			preparedStatement.executeUpdate();
 			conn.commit();
 			ServiceFacade.getInstance().decreasePermissionRight(permission.getSicilNo(), permission.getGun());

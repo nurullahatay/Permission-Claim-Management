@@ -183,26 +183,26 @@ public class ServiceFacade {
 	public void confirmedPermissionFirstManager(Permission permission) throws Exception {
 		permissionDAO.confirmedPermissionFirstManager( permission);
 	}
-	public void deniedPermissionFirstManager(long id) throws Exception {
-		permissionDAO.deniedPermissionFirstManager(id);
+	public void deniedPermissionFirstManager(Permission permission) throws Exception {
+		permissionDAO.deniedPermissionFirstManager(permission);
 	}
-	public void confirmedPermissionSecondManager(long id) throws Exception {
-		permissionDAO.confirmedPermissionSecondManager(id);
+	public void confirmedPermissionSecondManager(Permission permission) throws Exception {
+		permissionDAO.confirmedPermissionSecondManager( permission);
 	}
-	public void deniedPermissionSecondManager(long id) throws Exception {
-		permissionDAO.deniedPermissionSecondManager(id);
+	public void deniedPermissionSecondManager(Permission permission) throws Exception {
+		permissionDAO.deniedPermissionSecondManager( permission);
 	}
-	public void confirmedPermissionHR(long id) throws Exception {
-		permissionDAO.confirmedPermissionHR(id);
+	public void confirmedPermissionHR(Permission permission) throws Exception {
+		permissionDAO.confirmedPermissionHR( permission);
 	}
-	public void deniedPermissionHR(long id) throws Exception {
-		permissionDAO.deniedPermissionHR(id);
+	public void deniedPermissionHR(Permission permission) throws Exception {
+		permissionDAO.deniedPermissionHR( permission);
 	}
-	public void confirmedPermissionPersonel(long id) throws Exception {
-		permissionDAO.confirmedPermissionPersonel(id);
+	public void confirmedPermissionPersonel(Permission permission) throws Exception {
+		permissionDAO.confirmedPermissionPersonel( permission);
 	}
-	public void deniedPermissionPersonel(long id) throws Exception {
-		permissionDAO.deniedPermissionPersonel(id);
+	public void deniedPermissionPersonel(Permission permission) throws Exception {
+		permissionDAO.deniedPermissionPersonel( permission);
 	}
 
 	public void cancelPermission(long permission ) throws Exception {
