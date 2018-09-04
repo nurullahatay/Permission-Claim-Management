@@ -1,6 +1,74 @@
+// izin hakediş için takvim(geçerli olacağı tarih inputu için)
+function righttakvim(x){
+	$(function() {
+		$("#tarihright"+x).datepicker(
+				{
+					beforeShowDay : $.datepicker.noWeekends,
+					dateFormat : "dd-mm-yy",
+					altFormat : "yy-mm-dd",
+					altField : "#tarih-dbright"+x,
+					monthNames : [ "Ocak", "Şubat", "Mart",
+							"Nisan", "Mayıs", "Haziran", "Temmuz",
+							"Ağustos", "Eylül", "Ekim", "Kasım",
+							"Aralık" ],
+					dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+							"Cu", "Ct" ],
+					firstDay : 1,
+				});
+	});
+}
+$(document).ready(function(){
+		$("#tarihright1").datepicker(
+				{
+					beforeShowDay : $.datepicker.noWeekends,
+					dateFormat : "dd-mm-yy",
+					altFormat : "yy-mm-dd",
+					altField : "#tarih-dbright1",
+					monthNames : [ "Ocak", "Şubat", "Mart",
+							"Nisan", "Mayıs", "Haziran", "Temmuz",
+							"Ağustos", "Eylül", "Ekim", "Kasım",
+							"Aralık" ],
+					dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
+							"Cu", "Ct" ],
+					firstDay : 1,
+				});
 
+});
 
+// izin hakediş için dinamik div
+$(document).ready(function(){
+	 var j = 1;
+	    $("#ekle").on("click",function () {
+	    	j++;
+            $(".izinhakedis").append('<tr id="izinhakedistr'+j+'"><td><select id="selectpersonelRight'+j+'" name="personelarama'+j+'" class="form-control input-md"><option>Seçiniz</option></select></td><td><div class="datepicker"><input id="tarihright'+j+'" class="form-control" type="datepicker"><input type="hidden" id="tarih-dbright'+j+'" name="gecerliolacagitarih'+j+'"></div></td><td><input id="hakedilengunsayisi'+j+'" name="hakedilengunsayisi'+j+'" class="form-control input-md" type="text"></td></tr>');
+            dropboxfiller(j);
+            righttakvim(j);
+		  	
+	    });
+	    $("#sil").click(function(){
+	    	if(j==1)
+	    		{
+	    		alert("En az 1 personel olmalı")
+	    		}
+	    	if(j>1){
+	    	$("#izinhakedistr"+j+"").remove(); 
+	    	j--;
+	    	}
+	    });
+	    $("#addRightOfPermissionBtn").on("click",function(){
+	    	addRightOfPermission(j);
+	    });
+});
 
+function dropboxfiller(k){
+//	$(document).on("click","#personelaram"+k,function(){
+		$.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
+			$.each(result, function(i, personel){
+				$("#selectpersonelRight"+k).append('<option value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+			});
+		});
+	//});
+}
 function getAllRight(){
     var TDEKLE='</th><th>';
     $.getJSON("/Permission-Claim-Management/rest/right/getAllRight", function(result){
@@ -17,14 +85,15 @@ function getAllRight(){
 
 
 
-function addRightOfPermission() {
-
+function addRightOfPermission(z) {
+	var a;
+	for(a=1; a<=z; a++){
+		alert(a);
 	var rightOfPermission = {};
-
-	rightOfPermission["sicilNo"] = $('#selectpersonelRight').val();
-	rightOfPermission["validDate"] =$("#gtarih-db").val();
-	rightOfPermission["dayCountOfDeserved"] = $('#hakedilengunsayisi').val();
-	rightOfPermission["dayCountOfDeservedForYear"] = $('#hakedilengunsayisi').val();
+	rightOfPermission["sicilNo"] = $("#selectpersonelRight"+a).val();
+	rightOfPermission["validDate"] =$("#tarih-dbright"+a).val();
+	rightOfPermission["dayCountOfDeserved"] = $("#hakedilengunsayisi"+a).val();
+	rightOfPermission["dayCountOfDeservedForYear"] = $("#hakedilengunsayisi"+a).val();
 	
 	console.log(rightOfPermission.sicilNo+rightOfPermission.validDate+rightOfPermission.dayCountOfDeserved+rightOfPermission.dayCountOfDeservedForYear);
 	
@@ -42,6 +111,7 @@ function addRightOfPermission() {
 
 		}
 	});
+	};
 }
 
 function getRightOfPermission(sicilNo) {
@@ -139,7 +209,7 @@ var personel;
 $(document).ready(function(){
         $.getJSON("/Permission-Claim-Management/rest/personel/getAllPersonel", function(result){
             $.each(result, function(i, personel){
-                $("#selectpersonelRight").append('<option id="personelselectRight" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
+                $("#selectpersonelRight1").append('<option id="personelselectRight" value="'+personel.sicilno+'">'+personel.ad+' '+personel.soyad+'</option');
             });
         });
 });

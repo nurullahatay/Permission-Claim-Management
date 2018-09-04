@@ -707,24 +707,7 @@ $(document).ready(
 		});
 
 		
-// izin hakediş için dinamik div
-$(document).ready(function(){
-	 var i = 1;
-	    $("#ekle").click(function () {
-	    	i++;
-			$(".izinhakedis").append('<tr id="izinhakedistr'+i+'"><td><input id="personelarama'+i+'" name="personelarama'+i+'"class="form-control input-md" placeholder="Ara" type="text"></td><td><div class="datepicker"><input id="tarih" class="form-control" type="datepicker"><input type="hidden" id="tarih-db" name="gecerliolacagitarih'+i+'"></div></td><td><input id="hakedilengunsayisi'+i+'" name="hakedilengunsayisi'+i+'" class="form-control input-md" type="text"></td></tr>');
-	    });
-	    $("#sil").click(function(){
-	    	if(i==1)
-	    		{
-	    		alert("En az 1 personel olmalı")
-	    		}
-	    	if(i>1){
-	    	$("#izinhakedistr"+i+"").remove(); 
-	    	i--;
-	    	}
-	    });
-});
+
 
 // iki tarih arasındaki çalışma günlerini hesaplayan script
 $(document).ready(function(){
@@ -834,25 +817,6 @@ var monthname=new Array("Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmu
 var TODAY = monthname[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
 
 
-// izin hakediş için takvim(geçerli olacağı tarih inputu için)
-$(document).ready(function(){
-	$(function() {
-		$("#gtarih").datepicker(
-				{
-					beforeShowDay : $.datepicker.noWeekends,
-					dateFormat : "dd-mm-yy",
-					altFormat : "yy-mm-dd",
-					altField : "#gtarih-db",
-					monthNames : [ "Ocak", "Şubat", "Mart",
-							"Nisan", "Mayıs", "Haziran", "Temmuz",
-							"Ağustos", "Eylül", "Ekim", "Kasım",
-							"Aralık" ],
-					dayNamesMin : [ "Pa", "Pt", "Sl", "Ça", "Pe",
-							"Cu", "Ct" ],
-					firstDay : 1,
-				});
-	});
-});
 
 //izin iptal için takvim(aramada başlangıc zamanın belirleme)
 $(document).ready(function(){

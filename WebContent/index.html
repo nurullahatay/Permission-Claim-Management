@@ -314,8 +314,8 @@ html, body, h1, h2, h3, h4, h5 {
 
 							</tr>
 							<tr>
-								<td>Personel:<select id="selectpersonelRight">
-
+								<td><select id="selectpersonelRight1" class="form-control input-md">
+								<option>Seçiniz</option>
 
 
 
@@ -325,13 +325,13 @@ html, body, h1, h2, h3, h4, h5 {
 
 								<td>
 									<div class="datepicker">
-										<input id="gtarih" class="form-control" type="text">
+										<input id="tarihright1" class="form-control" type="text">
 										<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-										<input type="hidden" id="gtarih-db" name="gecerliolacagitarih">
+										<input type="hidden" id="tarih-dbright1" name="gecerliolacagitarih">
 										<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
 									</div>
 								</td>
-								<td><input id="hakedilengunsayisi"
+								<td><input id="hakedilengunsayisi1"
 									name="hakedilengunsayisi" placeholder=""
 									class="form-control input-md" type="text"></td>
 							</tr>
@@ -345,8 +345,7 @@ html, body, h1, h2, h3, h4, h5 {
 								</td>
 							</tr>
 						</table>
-						<button id="addRightOfPermissionBtn" class="btn btn-success"
-							onclick="addRightOfPermission()">Kaydet</button>
+						<button id="addRightOfPermissionBtn" class="btn btn-success">Kaydet</button>
 						<br /> <br />
 					</div>
 					<!-- izin hakedis listeleme-->
