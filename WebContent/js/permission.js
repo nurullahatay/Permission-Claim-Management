@@ -417,7 +417,7 @@ function getPermissionInfo(id){
 		    $("#aciklamapop").text(permission.aciklama);
 		    $("#telpop").text(permission.telefonNumarasi);
 		    $("#adrespop").text(permission.adres);
-		    
+		    $("#izinidpop").text(permission.id);    
 		    $.ajax({
 				type : "POST",
 				url : '/Permission-Claim-Management/rest/personel/getPersonel',

@@ -105,8 +105,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#setdepartmanmanagersdiv").fadeOut();
 
 			});
-			
-			
+
 			$("#aonayislemleri").click(function() {
 				$("#iziniptaldiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
@@ -118,8 +117,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#setdepartmanmanagersdiv").fadeOut();
 
 			});
-			
-			
+
 			$("#adepartmanyonetimi").click(function() {
 				$("#iziniptaldiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
@@ -131,8 +129,6 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#setdepartmanmanagersdiv").fadeIn();
 
 			});
-			
-			
 
 		});
 	</script>
@@ -204,9 +200,9 @@ html, body, h1, h2, h3, h4, h5 {
 				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
 				Personel Listesi</a> <a style="text-decoration: none" id="aizinlistesi"
 				href="#" class="w3-bar-item w3-button w3-padding"><i
-				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a>
-				<a style="text-decoration: none" id="adepartmanyonetimi"
-				href="#" class="w3-bar-item w3-button w3-padding"><i
+				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a> <a
+				style="text-decoration: none" id="adepartmanyonetimi" href="#"
+				class="w3-bar-item w3-button w3-padding"><i
 				class="fa fa-bullseye fa-fw"></i>Departman Yönetimi</a>
 			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
@@ -355,15 +351,15 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 					<!-- izin hakedis listeleme-->
 					<div id="list_rightOfPermission">
-							<table id="getAllRightOfPermission" class="table table-striped">
-								<tr>
-									<th>Sicil No</th>
-									<th>Geçerli Olacağı Tarih</th>
-									<th>Hakedilen Gün Sayısı</th>
-									<th>Mevcut Yıl İçin Hakedilen Gün Sayısı</th>
-									<th></th>
-								</tr>
-							</table>
+						<table id="getAllRightOfPermission" class="table table-striped">
+							<tr>
+								<th>Sicil No</th>
+								<th>Geçerli Olacağı Tarih</th>
+								<th>Hakedilen Gün Sayısı</th>
+								<th>Mevcut Yıl İçin Hakedilen Gün Sayısı</th>
+								<th></th>
+							</tr>
+						</table>
 						<button type="button" id="deleteAllRight" class="btn btn-danger"
 							onclick="deleteAllRight()">Hepsini Sil</button>
 					</div>
@@ -470,6 +466,7 @@ html, body, h1, h2, h3, h4, h5 {
 
 
 						<table class="w3-table  w3-white">
+
 							<tr>
 
 								<td>İzin başlangıç tarihi</td>
@@ -544,7 +541,7 @@ html, body, h1, h2, h3, h4, h5 {
 								<th>Telefon No</th>
 								<th>Adres</th>
 								<th>Durum</th>
-								<th>Sil</th>
+								<th>İzin Detayları</th>
 							</tr>
 						</table>
 					</div>
@@ -631,162 +628,163 @@ html, body, h1, h2, h3, h4, h5 {
 				</div>
 			</fieldset>
 			<div id="setdepartmanmanagersdiv">
-			<fieldset id="setdepartmanmanagersdiv">
-				<div class="w3-container">
+				<fieldset id="setdepartmanmanagersdiv">
+					<div class="w3-container">
 
-					<h2>Departman yöneticilerini atama</h2>
-					<br>
+						<h2>Departman yöneticilerini atama</h2>
+						<br>
 
-					<table class="w3-table  w3-white">
+						<table class="w3-table  w3-white">
 
-						<tr>
-							<td>Departman</td>
-							<td><select id="personeldep2" class="form-control">
-							</select></td>
-						</tr>
-						<tr>
-							<td>1. Yönetici</td>
-							<td><select id="selectpersonel2" class="form-control">
-									<option value="0">Seçiniz</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td>2. Yönetici</td>
-							<td><select id="selectpersonel3" class="form-control">
-									<option value="0">Seçiniz</option>
-							</select></td>
-						</tr>
-					</table>
-					<input class="w3-right" id="setdepartmanmanagers"
-						class="form-control" type="button" value="Submit" />
-				</div>
-			</fieldset>
+							<tr>
+								<td>Departman</td>
+								<td><select id="personeldep2" class="form-control">
+								</select></td>
+							</tr>
+							<tr>
+								<td>1. Yönetici</td>
+								<td><select id="selectpersonel2" class="form-control">
+										<option value="0">Seçiniz</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>2. Yönetici</td>
+								<td><select id="selectpersonel3" class="form-control">
+										<option value="0">Seçiniz</option>
+								</select></td>
+							</tr>
+						</table>
+						<input class="w3-right" id="setdepartmanmanagers"
+							class="form-control" type="button" value="Submit" />
+					</div>
+				</fieldset>
 			</div>
 			<fieldset id="getallpersoneldiv">
 				<div id="getallpersoneldiv">
 					<table id="getallpersoneltable"
 						class="w3-table w3-striped w3-white">
-						<th>Sicil No</th>
-						<th>Ad</th>
-						<th>Soyad</th>
-						<th>E-mail</th>
-						<th>Password</th>
-						<th>İşe Başlama Tarihi</th>
-						<th>Pozisyon</th>
-						<th>İkinci Yönetici Onayı Gerekli mi?</th>
-						<th>SİL</th>
-
-
+						<tr>
+							<th>Sicil No</th>
+							<th>Ad</th>
+							<th>Soyad</th>
+							<th>E-mail</th>
+							<th>Password</th>
+							<th>İşe Başlama Tarihi</th>
+							<th>Pozisyon</th>
+							<th>İkinci Yönetici Onayı Gerekli mi?</th>
+							<th>SİL</th>
+						</tr>
 
 
 					</table>
 				</div>
 			</fieldset>
-<div id="izinonayislemleridiv">
-			<div id="getAllFirstManagerApproval">
-				<fieldset id="getAllFirstManagerApproval">
-					<div class="w3-container">
-						<hr>
-						<h2>Birinci Yönetici Onayı Bekleyen İzinler</h2>
-						<br>
-						<table id="FirstManagerApproval"
-							class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>Sicil NO</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-								<th>Onay</th>
-								<th>Red</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
+			<div id="izinonayislemleridiv">
+				<div id="getAllFirstManagerApproval">
+					<fieldset id="getAllFirstManagerApproval">
+						<div class="w3-container">
+							<hr>
+							<h2>Birinci Yönetici Onayı Bekleyen İzinler</h2>
+							<br>
+							<table id="FirstManagerApproval"
+								class="w3-table  w3-striped w3-white">
+								<tr>
+									<th>ID</th>
+									<th>Sicil NO</th>
+									<th>İzin Oluşturma Tarihi</th>
+									<th>İzin Başlama Tarihi</th>
+									<th>İzin Bitiş Tarihi</th>
+									<th>Gün</th>
+									<th>İzin Nedeni</th>
+									<th>Telefon No</th>
+									<th>Adres</th>
+									<th>Durum</th>
+									<th>Onay</th>
+									<th>Red</th>
+								</tr>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+				<div id="getAllSecondManagerApproval">
+					<fieldset id="getAllSecondManagerApproval">
+						<div class="w3-container">
+							<hr>
+							<h2>İkinci Yönetici Onayı Bekleyen İzinler</h2>
+							<br>
+							<table id="SecondManagerApproval"
+								class="w3-table  w3-striped w3-white">
+								<tr>
+									<th>ID</th>
+									<th>Sicil NO</th>
+									<th>İzin Oluşturma Tarihi</th>
+									<th>İzin Başlama Tarihi</th>
+									<th>İzin Bitiş Tarihi</th>
+									<th>Gün</th>
+									<th>İzin Nedeni</th>
+									<th>Telefon No</th>
+									<th>Adres</th>
+									<th>Durum</th>
+									<th>Onay</th>
+									<th>Red</th>
+								</tr>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+				<div id="getAllHRApproval">
+					<fieldset id="getAllHRApproval">
+						<div class="w3-container">
+							<hr>
+							<h2>İnsan Kaynakları Onayı Bekleyen İzinler</h2>
+							<br>
+							<table id="HRApproval" class="w3-table  w3-striped w3-white">
+								<tr>
+									<th>ID</th>
+									<th>Sicil NO</th>
+									<th>İzin Oluşturma Tarihi</th>
+									<th>İzin Başlama Tarihi</th>
+									<th>İzin Bitiş Tarihi</th>
+									<th>Gün</th>
+									<th>İzin Nedeni</th>
+									<th>Telefon No</th>
+									<th>Adres</th>
+									<th>Durum</th>
+									<th>Onay</th>
+									<th>Red</th>
+								</tr>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+				<div id="getAllPersonelApproval">
+					<fieldset id="getAllPersonelApproval">
+						<div class="w3-container">
+							<hr>
+							<h2>Sizin Onayınızı Bekleyen İzinler</h2>
+							<br>
+							<table id="PersonelApproval"
+								class="w3-table  w3-striped w3-white">
+								<tr>
+									<th>ID</th>
+									<th>Sicil NO</th>
+									<th>İzin Oluşturma Tarihi</th>
+									<th>İzin Başlama Tarihi</th>
+									<th>İzin Bitiş Tarihi</th>
+									<th>Gün</th>
+									<th>İzin Nedeni</th>
+									<th>Telefon No</th>
+									<th>Adres</th>
+									<th>Durum</th>
+									<th>Onay</th>
+									<th>Red</th>
+								</tr>
+							</table>
+						</div>
+					</fieldset>
+				</div>
+
 			</div>
-			<div id="getAllSecondManagerApproval">
-				<fieldset id="getAllSecondManagerApproval">
-					<div class="w3-container">
-						<hr>
-						<h2>İkinci Yönetici Onayı Bekleyen İzinler</h2>
-						<br>
-						<table id="SecondManagerApproval"
-							class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>Sicil NO</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-								<th>Onay</th>
-								<th>Red</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-			<div id="getAllHRApproval">
-				<fieldset id="getAllHRApproval">
-					<div class="w3-container">
-						<hr>
-						<h2>İnsan Kaynakları Onayı Bekleyen İzinler</h2>
-						<br>
-						<table id="HRApproval" class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>Sicil NO</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-								<th>Onay</th>
-								<th>Red</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-			<div id="getAllPersonelApproval">
-				<fieldset id="getAllPersonelApproval">
-					<div class="w3-container">
-						<hr>
-						<h2>Sizin Onayınızı Bekleyen İzinler</h2>
-						<br>
-						<table id="PersonelApproval" class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>Sicil NO</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-								<th>Onay</th>
-								<th>Red</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-			
-	</div>
 			<div id="iziniptaldiv">
 				<fieldset id="iziniptaldiv">
 					<div class="w3-container">
@@ -832,9 +830,9 @@ html, body, h1, h2, h3, h4, h5 {
 								</tr>
 
 							</table>
-					
-								<button id="iziniptalarama" class="btn btn-success">Ara</button>
-						<br />
+
+							<button id="iziniptalarama" class="btn btn-success">Ara</button>
+							<br />
 						</div>
 
 						<div id="aramasonucları">
@@ -867,8 +865,8 @@ html, body, h1, h2, h3, h4, h5 {
 				</fieldset>
 			</div>
 
-			
-			
+
+
 			<!-- Footer -->
 			<footer class="w3-container w3-padding-16 w3-dark-grey">
 				<h4>FOOTER</h4>
@@ -878,7 +876,7 @@ html, body, h1, h2, h3, h4, h5 {
 				</p>
 			</footer>
 		</div>
-		
+
 		<!-- End page content -->
 	</div>
 
@@ -886,150 +884,112 @@ html, body, h1, h2, h3, h4, h5 {
 
 	<div class="modal fade" id="İzinBilgisi" role="dialog">
 		<div class="modal-dialog modal-lg">
-
 			<!-- Modal content-->
-
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
 					<h4 class="modal-title">İzin Bilgisi</h4>
 				</div>
 				<div class="modal-body">
-
-
 					<div class="w3-panel">
-
 						<h2>İzin Talebi</h2>
 						<br>
-
 						<div class="w3-row-padding" style="margin: 0 -16px">
-							<div class="w3-third">
+							<div class="w3-container">
 								<h5>Personel Bilgisi</h5>
-
 								<table class="w3-table  w3-white">
-
 									<tr>
-
 										<td>Personel :</td>
-										<td><p id="personelpop"></p></td>
-									</tr>
-
-									<tr>
-
 										<td>Departman :</td>
-										<td><p id="departmanpop"></p></td>
+										<td>Sicil No :</td>
 									</tr>
 									<tr>
-
-										<td>Sicil No :</td>
+										<td><p id="personelpop"></p></td>
+										<td><p id="departmanpop"></p></td>
 										<td><p id="sicilnopop"></p></td>
 									</tr>
 									<tr>
-
 										<td>İşe Başlama Tarihi :</td>
-										<td><p id="isebaslamapop"></p></td>
+										<td>Formu Dolduran Kişi</td>
+										<td>izin Id</td>
 									</tr>
 									<tr>
-
-										<td>Formu Dolduran Kişi</td>
+										<td><p id="isebaslamapop"></p></td>
 										<td><i id="formudolduranpop"></i></td>
+										<td><i id="izinidpop"></i></td>
 									</tr>
-
 								</table>
-
 							</div>
-							<div class="w3-twothird">
-								<h6>Genel Bilgiler</h6>
+							<div class="w3-container">
+								<h5>Genel Bilgiler</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Form Oluşturma Tarihi</td>
+										<td>Kullanılabilecek izin günü sayısı</td>
+										<td>Toplam hakedilen izin günü sayısı</td>
+									</tr>
+									<tr>
+										<td><i id="formtarihinpop"></i></td>
+										<td><i id="kullanilabilecekizinpop"></i></td>
+										<td><i id="toplamhakedilenpop"></i></td>
+									</tr>
+								</table>
+							</div>
+							<div class="w3-container">
+								<h5>İzin Talep Bilgisi</h5>
 
 								<table class="w3-table  w3-white">
 									<tr>
-
-										<td>Form Oluşturma Tarihi</td>
-										<td><i id="formtarihinpop"></i></td>
-
+										<td>Başlangıç Tarihi</td>
+										<td>Dönüş Tarihi</td>
+										<td>Gün</td>
 									</tr>
 									<tr>
-
-										<td>Kullanılabilecek izin günü sayısı</td>
-										<td><i id="kullanilabilecekizinpop"></i></td>
+										<td><i id="izindonustarihipop"></i></td>
+										<td><i id="izinbaslangıctarihipop"></i></td>
+										<td><i id="gunsayisipop"></i></td>
 									</tr>
 									<tr>
-
-										<td>Toplam hakedilen izin günü sayısı</td>
-										<td><i id="toplamhakedilenpop"></i></td>
+										<td>İzin Nedeni</td>
+										<td>Açıklama</td>
 									</tr>
-
-
-
+									<tr>
+										<td><i id="nedenipop"></i></td>
+										<td><i id="aciklamapop"></i></td>
+									</tr>
 								</table>
-
-								<div class="w3-twothird">
-									<h6>İzin Talep Bilgisi</h6>
-
-									<table class="w3-table  w3-white">
-										<tr>
-
-											<td>Başlangıç Tarihi</td>
-											<td><i id="izinbaslangıctarihipop"></i></td>
-
-										</tr>
-										<tr>
-
-											<td>Dönüş Tarihi</td>
-											<td><i id="izindonustarihipop"></i></td>
-										</tr>
-										<tr>
-
-											<td>Gün</td>
-											<td><i id="gunsayisipop"></i></td>
-										</tr>
-
-										<tr>
-
-											<td>İzin Nedeni</td>
-											<td><i id="nedenipop"></i></td>
-										</tr>
-										<tr>
-
-											<td>Açıklama</td>
-											<td><i id="aciklamapop"></i></td>
-										</tr>
-
-
-									</table>
-
-									<h6>İletişim Bilgileri</h6>
-									<table class="w3-table  w3-white">
-										<tr>
-											<td>Telefon Numarası
-											<td>
-											<td>
-											<td><i id="telpop"></i></td>
-
-
-										</tr>
-										<tr>
-											<td>Adres
-											<td><i id="adrespop"></i></td>
-
-										</tr>
-									</table>
-								</div>
-
+							</div>
+							<div class="w3-container">
+								<h5>İletişim Bilgileri</h5>
+								<table class="w3-table  w3-white">
+									<tr>
+										<td>Telefon Numarası</td>
+										<td>Adres</td>
+									</tr>
+									<tr>
+										<td><i id="telpop"></i></td>
+										<td><i id="adrespop"></i></td>
+									</tr>
+								</table>
 							</div>
 						</div>
 
 
-
-						<p id="deneme">Some text in the modal.</p>
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<table class="w3-table  w3-white">
+							<tr>
+								<td>Yorum</td>
+								<td><i><textarea id="yorum" class="form-control"
+											name="yorum"></textarea></i></td>
+							</tr>
+						</table>
 					</div>
 				</div>
-
+				<div class="modal-footer" id="modalfooter">
+					<button class="btn btn-success" type="button" onclick="">Onay</button>
+					<button class="btn btn-danger" onclick="" type="button"
+						id="redbutonHR">Red</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
