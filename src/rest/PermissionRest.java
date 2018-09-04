@@ -34,7 +34,25 @@ public class PermissionRest {
 	public List<Permission> getAllPermission() throws Exception {
 		return ServiceFacade.getInstance().getAllPermission();
 	}
-
+	
+	@Path("/getFromNowLaterAllPermission")
+	@GET
+	@PermitAll
+	public List<Permission> getFromNowLaterAllPermission() throws Exception {
+		return ServiceFacade.getInstance().getFromNowLaterAllPermission();
+	}
+	
+	
+	
+	
+	@Path("/getMyOwnPermissions")
+	@POST
+	@PermitAll
+	public List<Permission> getMyOwnPermissions(long id) throws Exception {
+		return ServiceFacade.getInstance().getMyOwnPermissions(id);
+	}
+	
+	
 	@Path("/getPermission")
 	@POST
 	@PermitAll

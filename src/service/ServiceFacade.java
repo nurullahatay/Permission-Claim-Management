@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -99,6 +100,12 @@ public class ServiceFacade {
 	public ArrayList<Permission> searchPermission(Permission permission) throws Exception {
 		return permissionDAO.searchPermission(permission);
 	}
+	
+	public ArrayList<Permission> getFromNowLaterAllPermission() throws Exception {
+		return permissionDAO.getFromNowLaterAllPermission();
+	}
+	
+	
 
 	///////////////////////////////////////////////////////////////////////////////// 77
 	public void addRightOfPermission(RightOfPermission rightOfPermission) throws Exception {
@@ -208,6 +215,10 @@ public class ServiceFacade {
 	public void cancelPermission(long permission ) throws Exception {
 		permissionDAO.cancelPermission( permission );
 		
+	}
+
+	public List<Permission> getMyOwnPermissions(long id) throws Exception {
+		return permissionDAO.getMyOwnPermissions(id);
 	}
 
 

@@ -62,7 +62,7 @@ function getFirstManagerApproval(deptId) {
 		success : function(result) {
 	$.each(result, function(i, per){
 	        	
-	        	$("#FirstManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="confirmedPermissionFirstManager('+per.id+')" id="onaybuton" class="'+per.id+'">Onay</button>'+TDEKLE+'<button onclick="deniedPermissionFirstManager('+per.id+')" type="button" id="redbuton" class="'+per.id+'">Red</button>'+'</td></tr>');
+	        	$("#FirstManagerApproval").append('<tr><td>'+per.id+TDEKLE+per.sicilNo+TDEKLE+per.formTarihi+TDEKLE+per.baslangicTarihi+TDEKLE+per.bitisTarihi+TDEKLE+per.gun+TDEKLE+per.izinNedeni+TDEKLE+per.telefonNumarasi+TDEKLE+per.adres+TDEKLE+durum+TDEKLE+'<button  onclick="getPermissionInfo('+per.id+')"  type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#İzinBilgisi">Göster</button>'+'</td></tr>');
 	        });
 			
 		},
@@ -309,6 +309,7 @@ $(document).ready(function(){
      });
 
 		getPersonelApproval(personel.sicilno);
+		getMyOwnPermissions(personel.sicilno);
 
 	$("#formudolduran").text(personel.ad+' '+personel.soyad);
 	formfiller=personel.sicilno;
@@ -436,12 +437,55 @@ $(document).ready(function(){
             		durum='Beklemede';
             	else 
             		durum = permission.durum;
-            	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button  onclick="getPermissionInfo('+permission.id+')"  type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#İzinBilgisi">Göster</button>'+'</td></tr>');
+            	$("#tümizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+'</td></tr>');
             });
     });
 });
 
 
+
+//tarihi geçmeyen izinleri getirme
+$(document).ready(function(){
+    	var TDEKLE='</td><td>';
+    	var durum='Henüz İncelenmedi';
+        $.getJSON("/Permission-Claim-Management/rest/permission/getFromNowLaterAllPermission", function(result){
+            $.each(result, function(i, permission){
+            	if(permission.durum=='0')
+            		durum='Beklemede';
+            	else 
+            		durum = permission.durum;
+            	$("#tarihigecmeyenizinlertable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+'</td></tr>');
+            });
+    });
+});
+
+
+//kendi izimlerimi getirme
+function getMyOwnPermissions(variable){
+	var TDEKLE='</td><td>';
+	var durum='Henüz İncelenmedi';
+		 $.ajax({
+			 	type : "POST",
+				url : '/Permission-Claim-Management/rest/permission/getMyOwnPermissions',
+				contentType : "application/json",
+				mimeType : "application/json",
+				data : JSON.stringify(variable),
+				success : function(result) {
+					 $.each(result, function(i, permission){
+			            	if(permission.durum=='0')
+			            		durum='Beklemede';
+			            	else 
+			            		durum = permission.durum;
+			            	$("#kendiizinlerimtable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+'</td></tr>');
+			            });
+
+				},
+				error : function() {
+					alert("error : getMyOwnPermissions");
+
+				}
+			});
+}
 
 function getPermissionInfo(id){
     $("#deneme").text(id);

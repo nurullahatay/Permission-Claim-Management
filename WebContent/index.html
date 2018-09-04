@@ -140,7 +140,7 @@ html, body, h1, h2, h3, h4, h5 {
 		<button
 			class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
 			onclick="w3_open();">
-			<i class="fa fa-bars"></i>  Menu
+			<i class="fa fa-bars"></i>  Menu
 		</button>
 		<span class="w3-bar-item w3-right">-</span>
 	</div>
@@ -166,26 +166,26 @@ html, body, h1, h2, h3, h4, h5 {
 			<a href="#"
 				class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
 				onclick="w3_close()" title="close menu"><i
-				class="fa fa-remove fa-fw"></i>  Close Menu</a> <a href="index.html"
+				class="fa fa-remove fa-fw"></i>  Close Menu</a> <a href="index.html"
 				class="w3-bar-item w3-button w3-padding w3-blue"
-				style="text-decoration: none"><i class="fa fa-gears fa-fw"></i> 
+				style="text-decoration: none"><i class="fa fa-gears fa-fw"></i> 
 				İzin Talep Yönetimi</a> <a id="apersonelekle" href="#"
 				class="w3-bar-item w3-button w3-padding"
-				style="text-decoration: none"><i class="fa fa-id-card fa-fw"></i> 
+				style="text-decoration: none"><i class="fa fa-id-card fa-fw"></i> 
 				Personel Ekle</a> <a id="apersonellistesi" href="#"
 				class="w3-bar-item w3-button w3-padding"
-				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
+				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
 				Personel Listesi</a> <a style="text-decoration: none" id="aizinlistesi"
 				href="#" class="w3-bar-item w3-button w3-padding"><i
-				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a> <a
+				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a> <a
 				style="text-decoration: none" id="adepartmanyonetimi" href="#"
 				class="w3-bar-item w3-button w3-padding"><i
 				class="fa fa-bullseye fa-fw"></i>Departman Yönetimi</a>
-			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
+			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  History</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
 	-->
 			<br> <br>
 		</div>
@@ -438,7 +438,8 @@ html, body, h1, h2, h3, h4, h5 {
 					</form>
 				</fieldset>
 			</div>
-			<div id="tümizinlerdiv">
+		<div id="tümizinlerdiv">
+
 				<fieldset id="tümizinlerdiv">
 					<div class="w3-container">
 						<hr>
@@ -455,13 +456,59 @@ html, body, h1, h2, h3, h4, h5 {
 								<th>Telefon No</th>
 								<th>Adres</th>
 								<th>Durum</th>
-								<th>İzin Detayları</th>
 							</tr>
 						</table>
 					</div>
 				</fieldset>
 			</div>
-			<hr>
+			
+			<div id="tarihigecmeyenizinler">
+
+				<fieldset id="tarihigecmeyenizinler">
+					<div class="w3-container">
+						<hr>
+						<h2>Tarihi Gecmeyen İzinler</h2>
+						<br>
+						<table id="tarihigecmeyenizinlertable" class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+			</div>
+			<div id="kendiizinlerim">
+
+				<fieldset id="kendiizinlerim">
+					<div class="w3-container">
+						<hr>
+						<h2>İzinlerim</h2>
+						<br>
+						<table id="kendiizinlerimtable" class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+			</div>
+			
 			<fieldset id="personelkayıtdiv">
 				<div class="w3-container">
 					<h2>Personel Kayıt</h2>

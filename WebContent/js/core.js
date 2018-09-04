@@ -55,8 +55,8 @@ function authenticatePersonel() {
              if (value == "FirstManager"){
             	 isFirstManager = true;
             	 $("#getAllFirstManagerApproval").show();
-            	 $("#getAllSecondManagerApproval").show();
-            	 $("#getAllHRApproval").show();
+            	 $("#getAllSecondManagerApproval").hide();
+            	 $("#getAllHRApproval").hide();
              }
     		 
              if (value == "SecondManager"){

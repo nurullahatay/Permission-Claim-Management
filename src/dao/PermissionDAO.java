@@ -165,6 +165,54 @@ public class PermissionDAO extends DatabaseHelper {
 		return permissions;
 	}
 
+	
+	public ArrayList<Permission> getFromNowLaterAllPermission() throws Exception {
+		logger.debug("PermissionDAO getFromNowLaterAllPermission metodu çalışmaya başladı.");
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String query = "SELECT * FROM permission WHERE STARTINGDATE >= CURDATE();";
+		ArrayList<Permission> permissions = new ArrayList<>();
+		Permission permission;
+		logger.trace(query.toString());
+		Connection conn = (Connection) getConnection();
+		try {
+			pst = (PreparedStatement) conn.prepareStatement(query);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				permission = new Permission();
+				permission.setId(rs.getLong("ID"));
+				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
+				permission.setSicilNo(rs.getLong("SICILNO"));
+				permission.setAciklama(rs.getString("DESCRIPTION"));
+				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
+				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
+				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
+				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
+				permissions.add(permission);
+			}
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO getFromNowLaterAllPermission metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closeResultSet(rs);
+			closePreparedStatement(pst);
+			closeConnection(conn);
+			logger.debug("PermissionDAO getFromNowLaterAllPermission metodu çalışması bitti.");
+		}
+		return permissions;
+	}
+	
+	
+	
 	public ArrayList<Permission> getAllPermission() throws Exception {
 		logger.debug("PermissionDAO getAllPermission metodu çalışmaya başladı.");
 		PreparedStatement pst = null;
@@ -773,5 +821,51 @@ public class PermissionDAO extends DatabaseHelper {
 			logger.debug("PermissionDAO cancelPermission metodu çalışması bitti.");
 		}
 
+	}
+
+	public List<Permission> getMyOwnPermissions(long id) throws Exception {
+		logger.debug("PermissionDAO getMyOwnPermissions metodu çalışmaya başladı.");
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String query = "SELECT  * FROM permission where SICILNO=?  ";
+		ArrayList<Permission> permissions = new ArrayList<>();
+		Permission permission;
+		logger.trace(query.toString());
+		Connection conn = (Connection) getConnection();
+		try {
+			pst = (PreparedStatement) conn.prepareStatement(query);
+			pst.setLong(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				permission = new Permission();
+				permission.setId(rs.getLong("ID"));
+				permission.setFormTarihi(rs.getString("PERMISSIONCREATINGHISTORY"));
+				permission.setSicilNo(rs.getLong("SICILNO"));
+				permission.setAciklama(rs.getString("DESCRIPTION"));
+				permission.setAdres(rs.getString("ADDRESS"));
+				permission.setBaslangicTarihi(rs.getString("STARTINGDATE"));
+				permission.setBirinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setBitisTarihi(rs.getString("DATEOFRETURN"));
+				permission.setDurum(rs.getString("STATUS"));
+				permission.setIkinciYoneticiOnayi(rs.getString("FIRSTMANAGERAPPROVAL"));
+				permission.setIkOnayi(rs.getString("IKAPPROVAL"));
+				permission.setTelefonNumarasi(rs.getString("PHONENUMBER"));
+				permission.setIzinNedeni(rs.getString("PERMISSIONREASON"));
+				permission.setGun(rs.getInt("DAY"));
+				permission.setFormFiller(rs.getLong("FORMFILLER"));
+				permissions.add(permission);
+			}
+			conn.commit();
+		} catch (Exception e) {
+			logger.error("PermissionDAO getMyOwnPermissions metodu exeption = " + e);
+			conn.rollback();
+			throw e;
+		} finally {
+			closeResultSet(rs);
+			closePreparedStatement(pst);
+			closeConnection(conn);
+			logger.debug("PermissionDAO getMyOwnPermissions metodu çalışması bitti.");
+		}
+		return permissions;
 	}
 }
