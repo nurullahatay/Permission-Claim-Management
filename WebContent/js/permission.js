@@ -476,8 +476,13 @@ function getMyOwnPermissions(variable){
 			            		durum='Beklemede';
 			            	else 
 			            		durum = permission.durum;
-			            	$("#kendiizinlerimtable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+'</td></tr>');
-			            });
+			            	
+			            	if(permission.durum == 'Onaylandı')
+			            		$("#kendiizinlerimtable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button class="btn btn-danger" type="button" onclick="cancelPermission('+permission.id+')">İptal</button>'+'</th></tr>');
+			            	else 
+			            		$("#kendiizinlerimtable").append('<tr><td>'+permission.id+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+' '+'</th></tr>');
+
+					 });
 
 				},
 				error : function() {
@@ -944,7 +949,7 @@ function cancelPermission(permission){
 		mimeType : "application/json",
 		data : JSON.stringify(permission),
 		success : function(result) {
-			//alert("SUCCESS : ",result);
+			alert("SUCCESS : ");
 		},
 		error : function() {
 			alert("error : cancelPermission");
