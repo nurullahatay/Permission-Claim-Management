@@ -28,12 +28,14 @@ function authenticatePersonel() {
     			$("#izintalebidiv").show();
     			$("#getallpersoneldiv").show();
     			$("#tümizinlerdiv").show();
-    			//$("#aizinhakedis").hide();
+    			$("#aizinhakedis").hide();
     			$("#izinhakedisdiv").hide();
     			 $("#getAllFirstManagerApproval").hide();
             	 $("#getAllSecondManagerApproval").hide();
             	 $("#getAllHRApproval").hide();
     			}
+    		 
+
     		 
              if (value == "HR"){   
             	 isHR=true;
@@ -51,6 +53,8 @@ function authenticatePersonel() {
               if (value == "personel"){
             	  isPersonel=true;
             	 $("#izintalebidiv").show();
+     			$("#aizinhakedis").hide();
+
               }
              if (value == "FirstManager"){
             	 isFirstManager = true;
