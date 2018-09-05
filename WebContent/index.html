@@ -41,6 +41,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#iziniptaldiv").fadeIn();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#aizinhakedis").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -51,6 +53,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#aizintalebi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -61,6 +65,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#apersonelekle").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -71,6 +77,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#apersonellistesi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -81,6 +89,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tümizinlerdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#aizinlistesi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -91,6 +101,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#personelkayıtdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#aonayislemleri").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -101,6 +113,8 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#personelkayıtdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeIn();
 				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
 			});
 			$("#adepartmanyonetimi").click(function() {
 				$("#iziniptaldiv").fadeOut();
@@ -111,7 +125,39 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#personelkayıtdiv").fadeOut();
 				$("#izinonayislemleridiv").fadeOut();
 				$("#setdepartmanmanagersdiv").fadeIn();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeOut();
+
 			});
+			
+			$("#atarihigecmeyenizinler").click(function() {
+				$("#iziniptaldiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeOut();
+				$("#tarihigecmeyenizinler").fadeIn();
+
+			});
+			
+			$("#akendiizinlerim").click(function() {
+				$("#iziniptaldiv").fadeOut();
+				$("#tümizinlerdiv").fadeOut();
+				$("#izintalebidiv").fadeOut();
+				$("#getallpersoneldiv").fadeOut();
+				$("#izinhakedisdiv").fadeOut();
+				$("#personelkayıtdiv").fadeOut();
+				$("#izinonayislemleridiv").fadeOut();
+				$("#setdepartmanmanagersdiv").fadeOut();
+				$("#kendiizinlerim").fadeIn();
+				$("#tarihigecmeyenizinler").fadeOut();
+
+			});
+			
 		});
 	</script>
 	<script>
@@ -181,6 +227,16 @@ html, body, h1, h2, h3, h4, h5 {
 				style="text-decoration: none" id="adepartmanyonetimi" href="#"
 				class="w3-bar-item w3-button w3-padding"><i
 				class="fa fa-bullseye fa-fw"></i>Departman Yönetimi</a>
+				<a
+				style="text-decoration: none" id="akendiizinlerim" href="#"
+				class="w3-bar-item w3-button w3-padding"><i
+				class="fa fa-bullseye fa-fw"></i>İzinlerim</a>
+				
+				<a
+				style="text-decoration: none" id="atarihigecmeyenizinler" href="#"
+				class="w3-bar-item w3-button w3-padding"><i
+				class="fa fa-bullseye fa-fw"></i>Tarihi Geçmeyen İzinler</a>
+				
 			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>

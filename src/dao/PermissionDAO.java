@@ -178,7 +178,7 @@ public class PermissionDAO extends DatabaseHelper {
 		logger.debug("PermissionDAO getFromNowLaterAllPermission metodu çalışmaya başladı.");
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		String query = "SELECT * FROM permission WHERE STARTINGDATE >= CURDATE();";
+		String query = "SELECT * FROM permission WHERE STARTINGDATE >= CURDATE() and STATUS='Onaylandı';";
 		ArrayList<Permission> permissions = new ArrayList<>();
 		Permission permission;
 		logger.trace(query.toString());

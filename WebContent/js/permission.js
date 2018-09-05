@@ -906,7 +906,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $(document).on("click","#iziniptalarama",function(){
     	$("#iziniptalsonuclari").empty();
-	var TDEKLE='</td><td>';
+	var TDEKLE='</th><th>';
 	var durum='Henüz İncelenmedi';
 	var permission={};
 	permission["sicilNo"]=$("#selectpersonelforsearch").val();
@@ -925,7 +925,7 @@ $(document).ready(function(){
 	            		durum='Beklemede';
 	            	else 
 	            		durum = permission.durum;
-	            	$("#iziniptalsonuclari").append('<tr><td>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="'+cancelPermission(permission.id)+'">İptal</button>'+'</td></tr>');
+	            	$("#iziniptalsonuclari").append('<tr><th>'+permission.id+TDEKLE+permission.sicilNo+TDEKLE+permission.formTarihi+TDEKLE+permission.baslangicTarihi+TDEKLE+permission.bitisTarihi+TDEKLE+permission.gun+TDEKLE+permission.izinNedeni+TDEKLE+permission.telefonNumarasi+TDEKLE+permission.adres+TDEKLE+durum+TDEKLE+'<button type="button" onclick="'+cancelPermission(permission.id)+'">İptal</button>'+'</th></tr>');
 	            });
 			},
 			error : function() {
