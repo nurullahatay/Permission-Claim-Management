@@ -12,6 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import bean.DatabaseProperties;
 import dto.Permission;
+import dto.RightOfPermission;
 import service.ServiceFacade;
 
 public class PermissionDAO extends DatabaseHelper {
@@ -34,8 +35,13 @@ public class PermissionDAO extends DatabaseHelper {
 		logger.debug("PermissionDAO addPermission metodu çalışmaya başladı.");
 		Connection conn = (Connection) getConnection();
 		PreparedStatement stmt = null;
+		
 		StringBuilder query = new StringBuilder();
 		try {
+			
+			RightOfPermission hakedilengun=ServiceFacade.getInstance().getRightOfPermission(permission.getSicilNo());
+			if(hakedilengun.getDayCountOfDeserved()>=permission.getGun()) {
+				
 			query.append(
 					"INSERT INTO permission(SICILNO, PERMISSIONCREATINGHISTORY, STARTINGDATE, DATEOFRETURN, DAY, PERMISSIONREASON, DESCRIPTION, PHONENUMBER, ADDRESS, SECONDMANAGERAPPROVAL, FIRSTMANAGERAPPROVAL, IKAPPROVAL, STATUS, FORMFILLER) ");
 			query.append("VALUES(?,NOW(),?,?,?,?,?,?,?,0,0,0,0,?) ");
@@ -51,9 +57,11 @@ public class PermissionDAO extends DatabaseHelper {
 			stmt.setString(7, permission.getTelefonNumarasi());
 			stmt.setString(8, permission.getAdres());
 			stmt.setLong(9, permission.getFormFiller());
-			stmt.executeUpdate();
-			conn.commit();
+			stmt.executeUpdate();conn.commit();
+			}
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("PermissionDAO addPermission metodu exeption = " + e);
 			conn.rollback();
 			throw e;
