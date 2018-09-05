@@ -1,62 +1,183 @@
-yeni database olusturun ismi 32bit olsun.
+calýsýyor olamasý lazým denemedim ama
 
-CREATE TABLE PERMISSION (
-  ID bigint NOT NULL AUTO_INCREMENT,
-  SICILNO bigint(20) DEFAULT NULL,
-  PERMISSIONCREATINGHISTORY date DEFAULT NULL,
-  STARTINGDATE date DEFAULT NULL,
-  DATEOFRETURN date DEFAULT NULL,
-  DAY int(3) DEFAULT NULL,
-  PERMISSIONREASON varchar(55) DEFAULT NULL,
-  DESCRIPTION varchar(255) DEFAULT NULL,
-  PHONENUMBER varchar(11) DEFAULT NULL,
-  ADDRESS varchar(70) DEFAULT NULL,
-  SECONDMANAGERAPPROVAL tinyint(1) DEFAULT NULL,
-  FIRSTMANAGERAPPROVAL tinyint(1) DEFAULT NULL,
-  IKAPPROVAL tinyint(1) DEFAULT NULL,
-  STATUS tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (Id)
-)
+CREATE TABLE `department` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `DEPARTMANNAME` varchar(30) NOT NULL,
+  `DEPARTMENTFIRSTMANAGER` bigint(20) DEFAULT '0',
+  `DEPARTMENTSECONDMANAGER` bigint(20) DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ;
+CREATE TABLE `permission` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `SICILNO` bigint(20) DEFAULT NULL,
+  `PERMISSIONCREATINGHISTORY` date DEFAULT NULL,
+  `STARTINGDATE` date DEFAULT NULL,
+  `DATEOFRETURN` date DEFAULT NULL,
+  `DAY` int(3) DEFAULT NULL,
+  `PERMISSIONREASON` varchar(55) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `PHONENUMBER` varchar(11) DEFAULT NULL,
+  `ADDRESS` varchar(70) DEFAULT NULL,
+  `SECONDMANAGERAPPROVAL` varchar(11) DEFAULT NULL,
+  `FIRSTMANAGERAPPROVAL` varchar(11) DEFAULT NULL,
+  `IKAPPROVAL` varchar(11) DEFAULT NULL,
+  `STATUS` varchar(25) DEFAULT NULL,
+  `COMMENT` varchar(100) DEFAULT NULL,
+  `FORMFILLER` bigint(20) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ;
+CREATE TABLE `personel` (
+  `SICILNO` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(25) NOT NULL,
+  `SURNAME` varchar(25) NOT NULL,
+  `EMAIL` varchar(25) NOT NULL,
+  `PASSWORD` varchar(25) NOT NULL,
+  `DEPARTMENT` bigint(20) NOT NULL,
+  `DATEOFSTART` date NOT NULL,
+  `POSITION` varchar(25) NOT NULL,
+  `SECONDMANEGERAPPROVAL` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`SICILNO`),
+  UNIQUE KEY `SICILNO` (`SICILNO`),
+  UNIQUE KEY `EMAIL` (`EMAIL`)
+) ENGINE=InnoDB AUTO_INCREMENT=259 DEFAULT CHARSET=utf8 ;
+CREATE TABLE `personel_roles` (
+  `EMAIL` varchar(25) NOT NULL,
+  `ROLE` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE DEPARTMENT (
-ID bigint NOT NULL AUTO_INCREMENT,
-DEPARTMANNAME varchar(30) not null,
-DEPARTMENTFIRSTMANAGER bigint not null,
-DEPARTMENTSECONDMANAGER bigint not null,
-PRIMARY KEY (ID)
-)
 
-CREATE TABLE RIGHTOFPERMISSION (
-  SICILNO bigint NOT NULL AUTO_INCREMENT,
-  VALIDDATE date NOT NULL,
-  DAYCOUNTOFDESERVED int NOT NULL,
-  DAYCOUNTOFDESERVEDFORYEAR int NOT NULL,
-  PRIMARY KEY (SicilNo)
-)
-
-create table ROLES
-(
-  ROLE_NAME varchar(15) not null primary key
-)
-
-create table PERSONEL_ROLES
-(
-  EMAIL varchar(25) not null,
-  ROLE varchar(15) not null,
-  primary key( EMAIL, ROLE )
-)
+insert into department (ID,DEPARTMANNAME) values(1,"Arastirma");
+insert into department (ID,DEPARTMANNAME) values(2,"Hizmet");
+insert into department (ID,DEPARTMANNAME) values(3,"Destek");
+insert into department (ID,DEPARTMANNAME) values(4,"Urun Gelistirme");
+insert into department (ID,DEPARTMANNAME) values(5,"Programlama");
+insert into department (ID,DEPARTMANNAME) values(6,"Admin");
+insert into department (ID,DEPARTMANNAME) values(7,"HR");
 
 
-CREATE TABLE PERSONEL (
-  SICILNO bigint(20) NOT NULL UNIQUE,
-  NAME varchar(25) NOT NULL,
-  SURNAME varchar(25) NOT NULL,
-  EMAIL varchar(25) NOT NULL UNIQUE ,
-  PASSWORD varchar(25) NOT NULL ,
-  ISEBASLANGICTARIHI date NOT NULL,
-  DEPARTMENT varchar(55) NOT NULL,
-  DATEOFSTART Date NOT NUll,
-  POSITION varchar(25) NOT NULL,
-  SECONDMANEGERAPPROVAL boolean DEFAULT NULL,
-  PRIMARY KEY (SicilNo)
-)
+
+insert into personel(SICILNO,NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values(100,'ADMIN','admin','ADMIN@mail.com','admin',6,NOW(),"Admin");
+
+
+///////////////////////////////////////////////////////////////////////////
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Arastirmap1','Arastirmap1','Arastirmap1@mail.com','Arastirmap1',1,NOW(),"1");
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Arastirmap2','Arastirmap2','Arastirmap2@mail.com','Arastirmap2',1,NOW(),"2");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Arastirmap3','Arastirmap3','Arastirmap3@mail.com','Arastirmap3',1,NOW(),"3");
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Arastirmap4','Arastirmap4','Arastirmap4@mail.com','Arastirmap4',1,NOW(),"4");
+
+///////////////////////////////////////////////////////////////////////////
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Hizmetp1','Hizmetp1','Hizmetp1@mail.com','Hizmetp1',2,NOW(),"1");
+
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Hizmetp2','Hizmetp2','Hizmetp2@mail.com','Hizmetp2',2,NOW(),"2");
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Hizmetp3','Hizmetp3','Hizmetp3@mail.com','Hizmetp3',2,NOW(),"3");
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Hizmetp4','Hizmetp4','Hizmetp4@mail.com','Hizmetp4',2,NOW(),"4");
+
+//////////////////////////////////////////////////////////////////////////////
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Destekp1','Destekp1','Destekp1@mail.com','Destekp1',3,NOW(),"1");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Destekp2','Destekp2','Destekp2@mail.com','Destekp2',3,NOW(),"2");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Destekp3','Destekp3','Destekp3@mail.com','Destekp3',3,NOW(),"3");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Destekp4','Destekp4','Destekp4@mail.com','Destekp4',3,NOW(),"4");
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('UrunGelistirmep1','UrunGelistirmep1','UrunGelistirmep1@mail.com','UrunGelistirmep1',4,NOW(),"1");
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('UrunGelistirmep2','UrunGelistirmep2','UrunGelistirmep2@mail.com','UrunGelistirmep2',4,NOW(),"2");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('UrunGelistirmep3','UrunGelistirmep3','UrunGelistirmep3@mail.com','UrunGelistirmep3',4,NOW(),"3");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('UrunGelistirmep4','UrunGelistirmep4','UrunGelistirmep4@mail.com','UrunGelistirmep4',4,NOW(),"4");
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Programlamap1','Programlamap1','Programlamap1@mail.com','Programlamap1',5,NOW(),"1");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Programlamap2','Programlamap2','Programlamap2@mail.com','Programlamap2',5,NOW(),"2");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Programlamap3','Programlamap3','Programlamap3@mail.com','Programlamap3',5,NOW(),"3");
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('Programlamap4','Programlamap4','Programlamap4@mail.com','Programlamap4',5,NOW(),"4");
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('HRp1','HRp1','HRp1@mail.com','HRp1',7,NOW(),"1");
+
+
+insert into personel(NAME,SURNAME,EMAIL,PASSWORD,DEPARTMENT,DATEOFSTART,POSITION) values('HRp2','HRp2','HRp2@mail.com','HRp2',7,NOW(),"2");
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+insert into personel_roles values("ADMIN@mail.com","admin");
+
+
+insert into personel_roles values("HRp1@mail.com","HR");
+
+insert into personel_roles values("HRp2@mail.com","HR");
+
+
+insert into personel_roles values("Programlamap4@mail.com","personel");
+
+insert into personel_roles values("Programlamap3@mail.com","personel");
+
+insert into personel_roles values("Programlamap2@mail.com","personel");
+
+insert into personel_roles values("Programlamap1@mail.com","personel");
+
+
+insert into personel_roles values("UrunGelistirmep4@mail.com","personel");
+
+insert into personel_roles values("UrunGelistirmep3@mail.com","personel");
+
+insert into personel_roles values("UrunGelistirmep2@mail.com","personel");
+
+insert into personel_roles values("UrunGelistirmep1@mail.com","personel");
+
+
+insert into personel_roles values("Destekp4@mail.com","personel");
+
+insert into personel_roles values("Destekp3@mail.com","personel");
+
+insert into personel_roles values("Destekp2@mail.com","personel");
+
+insert into personel_roles values("Destekp1@mail.com","personel");
+
+
+insert into personel_roles values("Hizmetp4@mail.com","personel");
+
+insert into personel_roles values("Hizmetp3@mail.com","personel");
+
+insert into personel_roles values("Hizmetp2@mail.com","personel");
+
+insert into personel_roles values("Hizmetp1@mail.com","personel");
+
+
+
+insert into personel_roles values("Arastirmap4@mail.com","personel");
+
+insert into personel_roles values("Arastirmap3@mail.com","personel");
+
+insert into personel_roles values("Arastirmap2@mail.com","personel");
+
+insert into personel_roles values("Arastirmap1@mail.com","personel");
+
+
