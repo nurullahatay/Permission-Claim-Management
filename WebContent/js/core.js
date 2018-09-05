@@ -54,6 +54,23 @@ function authenticatePersonel() {
             	  isPersonel=true;
             	 $("#izintalebidiv").show();
      			$("#aizinhakedis").hide();
+     			$("#izinhakedisdiv").hide();
+     			$("#tümizinlerdiv").hide();
+     			$("#personelkayıtdiv").hide();
+     			$("#setdepartmanmanagersdiv").hide();
+     			$("#getAllFirstManagerApproval").hide();
+         		$("#getAllSecondManagerApproval").hide();
+         		$("#getAllHRApproval").hide();
+         		$("#tarihigecmeyenizinler").hide();
+         		$("#atarihigecmeyenizinler").hide();
+         		$("#adepartmanyonetimi").hide();
+         		$("#aizinlistesi").hide();
+         		$("#apersonellistesi").hide();
+         		$("#apersonelekle").hide();
+         		$("#getallpersoneldiv").hide();
+         		$("#iziniptaldiv").hide();
+         		
+         		
 
               }
              if (value == "FirstManager"){
@@ -61,6 +78,8 @@ function authenticatePersonel() {
             	 $("#getAllFirstManagerApproval").show();
             	 $("#getAllSecondManagerApproval").hide();
             	 $("#getAllHRApproval").hide();
+           		$("#getallpersoneldiv").hide();
+           		$("#iziniptaldiv").hide();
              }
     		 
              if (value == "SecondManager"){
@@ -68,6 +87,8 @@ function authenticatePersonel() {
             	 $("#getAllFirstManagerApproval").hide();
             	 $("#getAllSecondManagerApproval").show();
             	 $("#getAllHRApproval").hide();
+            		$("#getallpersoneldiv").hide();
+            		$("#iziniptaldiv").hide();
              }
            });
       },
