@@ -88,7 +88,7 @@ function getAllRight(){
 function addRightOfPermission(z) {
 	var a;
 	for(a=1; a<=z; a++){
-		alert(a);
+		
 	var rightOfPermission = {};
 	rightOfPermission["sicilNo"] = $("#selectpersonelRight"+a).val();
 	rightOfPermission["validDate"] =$("#tarih-dbright"+a).val();
@@ -104,7 +104,7 @@ function addRightOfPermission(z) {
 		mimeType : "application/json",
 		data : JSON.stringify(rightOfPermission),
 		success : function() {
-			alert("success");
+			
 		},
 		error : function() {
 			alert("error");
@@ -112,6 +112,7 @@ function addRightOfPermission(z) {
 		}
 	});
 	};
+	location.reload();
 }
 
 function getRightOfPermission(sicilNo) {
@@ -141,7 +142,7 @@ function getAllRightOfPermission() {
 		mimeType : "application/json",
 		success : function(result) {
 			allRight = result;
-			alert("success");
+			
 		},
 		error : function() {
 			alert("error");
@@ -175,7 +176,7 @@ function deleteAllRight() {
 		contentType : "application/json",
 		mimeType : "application/json",
 		success : function() {
-			alert("success");
+			location.reload();
 		},
 		error : function() {
 			alert("error");
@@ -192,7 +193,7 @@ function deleteRight(sicilNo) {
 		mimeType : "application/json",
 		data : JSON.stringify(sicilNo),
 		success : function() {
-			alert("success");
+			location.reload();
 		},
 		error : function() {
 			alert("error");
