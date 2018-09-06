@@ -129,7 +129,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tarihigecmeyenizinler").fadeOut();
 
 			});
-			
+
 			$("#atarihigecmeyenizinler").click(function() {
 				$("#iziniptaldiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
@@ -143,7 +143,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tarihigecmeyenizinler").fadeIn();
 
 			});
-			
+
 			$("#akendiizinlerim").click(function() {
 				$("#iziniptaldiv").fadeOut();
 				$("#tümizinlerdiv").fadeOut();
@@ -157,7 +157,7 @@ html, body, h1, h2, h3, h4, h5 {
 				$("#tarihigecmeyenizinler").fadeOut();
 
 			});
-			
+
 		});
 	</script>
 	<script>
@@ -186,7 +186,7 @@ html, body, h1, h2, h3, h4, h5 {
 		<button
 			class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
 			onclick="w3_open();">
-			<i class="fa fa-bars"></i>  Menu
+			<i class="fa fa-bars"></i> Menu
 		</button>
 		<span class="w3-bar-item w3-right">-</span>
 	</div>
@@ -212,31 +212,28 @@ html, body, h1, h2, h3, h4, h5 {
 			<a href="#"
 				class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
 				onclick="w3_close()" title="close menu"><i
-				class="fa fa-remove fa-fw"></i>  Close Menu</a> <a href="index.html"
+				class="fa fa-remove fa-fw"></i> Close Menu</a> <a href="index.html"
 				class="w3-bar-item w3-button w3-padding w3-blue"
-				style="text-decoration: none"><i class="fa fa-gears fa-fw"></i> 
+				style="text-decoration: none"><i class="fa fa-gears fa-fw"></i>
 				İzin Talep Yönetimi</a> <a id="apersonelekle" href="#"
 				class="w3-bar-item w3-button w3-padding"
-				style="text-decoration: none"><i class="fa fa-id-card fa-fw"></i> 
+				style="text-decoration: none"><i class="fa fa-id-card fa-fw"></i>
 				Personel Ekle</a> <a id="apersonellistesi" href="#"
 				class="w3-bar-item w3-button w3-padding"
-				style="text-decoration: none"><i class="fa fa-building fa-fw"></i> 
+				style="text-decoration: none"><i class="fa fa-building fa-fw"></i>
 				Personel Listesi</a> <a style="text-decoration: none" id="aizinlistesi"
 				href="#" class="w3-bar-item w3-button w3-padding"><i
 				class="fa fa-bullseye fa-fw"></i> İzin Listesi</a> <a
 				style="text-decoration: none" id="adepartmanyonetimi" href="#"
 				class="w3-bar-item w3-button w3-padding"><i
-				class="fa fa-bullseye fa-fw"></i>Departman Yönetimi</a>
-				<a
+				class="fa fa-bullseye fa-fw"></i>Departman Yönetimi</a> <a
 				style="text-decoration: none" id="akendiizinlerim" href="#"
 				class="w3-bar-item w3-button w3-padding"><i
-				class="fa fa-bullseye fa-fw"></i>İzinlerim</a>
-				
-				<a
+				class="fa fa-bullseye fa-fw"></i>İzinlerim</a> <a
 				style="text-decoration: none" id="atarihigecmeyenizinler" href="#"
 				class="w3-bar-item w3-button w3-padding"><i
 				class="fa fa-bullseye fa-fw"></i>Tarihi Geçmeyen İzinler</a>
-				
+
 			<!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Orders</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>  News</a>
     <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw"></i>  General</a>
@@ -328,15 +325,17 @@ html, body, h1, h2, h3, h4, h5 {
 								<th>Hakedilen Gün Sayısı</th>
 							</tr>
 							<tr>
-								<td><select required id="selectpersonelRight1" class="form-control input-md">
-								<option>Seçiniz</option>
-								</select>
-								</td>
+								<td><select required id="selectpersonelRight1"
+									class="form-control input-md">
+										<option>Seçiniz</option>
+								</select></td>
 								<td>
 									<div class="datepicker">
-										<input required id="tarihright1" class="form-control" type="text">
+										<input required id="tarihright1" class="form-control"
+											type="text">
 										<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-										<input type="hidden" id="tarih-dbright1" name="gecerliolacagitarih">
+										<input type="hidden" id="tarih-dbright1"
+											name="gecerliolacagitarih">
 										<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
 									</div>
 								</td>
@@ -354,7 +353,8 @@ html, body, h1, h2, h3, h4, h5 {
 								</td>
 							</tr>
 						</table>
-						<button id="addRightOfPermissionBtn" class="form-control btn-success btn ">Kaydet</button>
+						<button id="addRightOfPermissionBtn"
+							class="form-control btn-success btn ">Kaydet</button>
 						<br /> <br />
 					</div>
 					<!-- izin hakedis listeleme-->
@@ -375,202 +375,203 @@ html, body, h1, h2, h3, h4, h5 {
 			</div>
 			<div id="izintalebidiv">
 				<fieldset id="izinhakedisdiv">
-				<form id="postPermission">
-					<div class="w3-panel">
-						<h2>İzin Talebi</h2>
-						<br>
-						<div class="w3-row-padding" style="margin: 0 -16px">
-							<div class="w3-third">
-								<h5>Personel Bilgisi</h5>
-								<table class="w3-table  w3-white">
-									<tr>
-										<td><div id="dropboxgetirme">
-												Personel:<select required id="selectpersonel">
-												</select>
-											</div></td>
-									</tr>
-									<tr>
-										<td>Departman</td>
-										<td><p id="departman">________</p></td>
-									</tr>
-									<tr>
-										<td>Sicil No</td>
-										<td><p id="sicilno">________</p></td>
-									</tr>
-									<tr>
-										<td>İşe Başlama Tarihi</td>
-										<td><p id="isebaslama">________</p></td>
-									</tr>
-									<tr>
-										<td>Formu Dolduran Kişi</td>
-										<td><i id="formudolduran">________</i></td>
-									</tr>
-								</table>
-							</div>
-							<div class="w3-twothird">
-								<h6>Genel Bilgiler</h6>
-								<table class="w3-table  w3-white">
-									<tr>
-										<td>Form Oluşturma Tarihi</td>
-										<td><i><b><script language="JavaScript"
-														type="text/javascript">
+					<form id="postPermission">
+						<div class="w3-panel">
+							<h2>İzin Talebi</h2>
+							<br>
+							<div class="w3-row-padding" style="margin: 0 -16px">
+								<div class="w3-third">
+									<h5>Personel Bilgisi</h5>
+									<table class="w3-table  w3-white">
+										<tr>
+											<td><div id="dropboxgetirme">
+													Personel:<select required id="selectpersonel">
+													</select>
+												</div></td>
+										</tr>
+										<tr>
+											<td>Departman</td>
+											<td><p id="departman">________</p></td>
+										</tr>
+										<tr>
+											<td>Sicil No</td>
+											<td><p id="sicilno">________</p></td>
+										</tr>
+										<tr>
+											<td>İşe Başlama Tarihi</td>
+											<td><p id="isebaslama">________</p></td>
+										</tr>
+										<tr>
+											<td>Formu Dolduran Kişi</td>
+											<td><i id="formudolduran">________</i></td>
+										</tr>
+									</table>
+								</div>
+
+								<div class="w3-twothird">
+									<h6>Genel Bilgiler</h6>
+									<table class="w3-table  w3-white">
+										<tr>
+											<td>Form Oluşturma Tarihi</td>
+											<td><i><b><script language="JavaScript"
+															type="text/javascript">
 											document.write(TODAY);
 										</script></b></i></td>
-									</tr>
-									<tr>
-										<td>Kullanılabilecek izin günü sayısı</td>
-										<td><i id="kullanilabilecekizin">_____</i></td>
-									</tr>
-									<tr>
-										<td>Toplam hakedilen izin günü sayısı</td>
-										<td><i id="toplamhakedilen">____</i></td>
-									</tr>
-								</table>
-								<h6>İletişim Bilgileri</h6>
-								<table class="w3-table  w3-white">
-									<tr>
-										<td>Telefon Numarası
-										<td>
-										<td><i><input required type="number" class="form-control"
-												id="permissiontel" name="telno" /></i></td>
-									</tr>
-									<td>Adres
-									<td>
-									<td><i><input required type="text" class="form-control"
-											id="permissionadres" name="adres" /></i></td>
-								</table>
+										</tr>
+										<tr>
+											<td>Kullanılabilecek izin günü sayısı</td>
+											<td><i id="kullanilabilecekizin">_____</i></td>
+										</tr>
+										<tr>
+											<td>Toplam hakedilen izin günü sayısı</td>
+											<td><i id="toplamhakedilen">____</i></td>
+										</tr>
+									</table>
+									<h6>İletişim Bilgileri</h6>
+									<table class="w3-table  w3-white">
+										<tr>
+											<td>Telefon Numarası</td>
+											<td><i><input required type="number"
+													class="form-control" id="permissiontel" name="telno" /></i></td>
+										</tr>
+										<td>Adres</td>
+										<td><i><input required type="text"
+												class="form-control" id="permissionadres" name="adres" /></i></td>
+									</table>
+								</div>
 							</div>
 						</div>
-					</div>
-					<hr>
-					<div class="w3-container">
-						<h5>İzin Talep Bilgisi</h5>
-						<table class="w3-table  w3-white">
-							<tr>
-								<td>İzin başlangıç tarihi</td>
-								<td><i><div class="datepicker">
-											<input required id="tarih" class="form-control" type="text">
-											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="permissionstart"
-												name="izinbaslangictarihi">
-											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-										</div></i></td>
-							</tr>
-							<tr>
-								<td>İzin bitiş tarihi</td>
-								<td><i>
-										<div class="datepicker">
-											<input required id="tarih2" class="form-control" type="text">
-											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="permissionfinish"
-												name="izinbitistarihi">
-											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-										</div>
-								</i></td>
-							</tr>
-							<tr>
-								<td>Gün</td>
-								<td><i> <input type="text" class="form-control"
-										id="permissiongun" name="gun" readonly
-										placeholder="hesaplamak için tıklayınız">
-								</i></td>
-							</tr>
-							<tr>
-								<td>İzin nedeni</td>
-								<td><i><select required class="form-control"
-										name="permissionreason" id="permissionreason">
-											<option value="Yıllık">Yıllık</option>
-											<option value="Özel">Özel</option>
-									</select></i></td>
-							</tr>
-							<tr>
-								<td>Açıklama</td>
-								<td><i><textarea id="permissionaciklama"
-											class="form-control" name="aciklama"></textarea></i></td>
-							</tr>
-						</table>
-						<input type="submit" id="" class="form-control btn-info btn "/>
-					</div>
-					</form>
-				</fieldset>
+			<hr>
+			<div class="w3-container">
+				<h5>İzin Talep Bilgisi</h5>
+				<table class="w3-table  w3-white">
+					<tr>
+						<td>İzin başlangıç tarihi</td>
+						<td><i><div class="datepicker">
+									<input required id="tarih" class="form-control" type="text">
+									<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+									<input type="hidden" id="permissionstart"
+										name="izinbaslangictarihi">
+									<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+								</div></i></td>
+					</tr>
+					<tr>
+						<td>İzin bitiş tarihi</td>
+						<td><i>
+								<div class="datepicker">
+									<input required id="tarih2" class="form-control" type="text">
+									<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+									<input type="hidden" id="permissionfinish"
+										name="izinbitistarihi">
+									<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+								</div>
+						</i></td>
+					</tr>
+					<tr>
+						<td>Gün</td>
+						<td><i> <input type="text" class="form-control"
+								id="permissiongun" name="gun" readonly
+								placeholder="hesaplamak için tıklayınız">
+						</i></td>
+					</tr>
+					<tr>
+						<td>İzin nedeni</td>
+						<td><i><select required class="form-control"
+								name="permissionreason" id="permissionreason">
+									<option value="Yıllık">Yıllık</option>
+									<option value="Özel">Özel</option>
+							</select></i></td>
+					</tr>
+					<tr>
+						<td>Açıklama</td>
+						<td><i><textarea id="permissionaciklama"
+									class="form-control" name="aciklama"></textarea></i></td>
+					</tr>
+				</table>
+				<input type="submit" id="" class="form-control btn-info btn " />
 			</div>
+			</form>
+			</fieldset>
+		</div>
 		<div id="tümizinlerdiv">
 
-				<fieldset id="tümizinlerdiv">
-					<div class="w3-container">
-						<hr>
-						<h2>İzin Listesi</h2>
-						<br>
-						<table id="tümizinlertable" class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-			
-			<div id="tarihigecmeyenizinler">
-
-				<fieldset id="tarihigecmeyenizinler">
-					<div class="w3-container">
-						<hr>
-						<h2>Tarihi Gecmeyen İzinler</h2>
-						<br>
-						<table id="tarihigecmeyenizinlertable" class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-			<div id="kendiizinlerim">
-
-				<fieldset id="kendiizinlerim">
-					<div class="w3-container">
-						<hr>
-						<h2>İzinlerim</h2>
-						<br>
-						<table id="kendiizinlerimtable" class="w3-table  w3-striped w3-white">
-							<tr>
-								<th>ID</th>
-								<th>İzin Oluşturma Tarihi</th>
-								<th>İzin Başlama Tarihi</th>
-								<th>İzin Bitiş Tarihi</th>
-								<th>Gün</th>
-								<th>İzin Nedeni</th>
-								<th>Telefon No</th>
-								<th>Adres</th>
-								<th>Durum</th>
-								<th>İptal</th>
-							</tr>
-						</table>
-					</div>
-				</fieldset>
-			</div>
-			
-			<fieldset id="personelkayıtdiv">
+			<fieldset id="tümizinlerdiv">
 				<div class="w3-container">
-					<h2>Personel Kayıt</h2>
+					<hr>
+					<h2>İzin Listesi</h2>
 					<br>
-						<form id="postPersonel">
+					<table id="tümizinlertable" class="w3-table  w3-striped w3-white">
+						<tr>
+							<th>ID</th>
+							<th>İzin Oluşturma Tarihi</th>
+							<th>İzin Başlama Tarihi</th>
+							<th>İzin Bitiş Tarihi</th>
+							<th>Gün</th>
+							<th>İzin Nedeni</th>
+							<th>Telefon No</th>
+							<th>Adres</th>
+							<th>Durum</th>
+						</tr>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+
+		<div id="tarihigecmeyenizinler">
+
+			<fieldset id="tarihigecmeyenizinler">
+				<div class="w3-container">
+					<hr>
+					<h2>Tarihi Gecmeyen İzinler</h2>
+					<br>
+					<table id="tarihigecmeyenizinlertable"
+						class="w3-table  w3-striped w3-white">
+						<tr>
+							<th>ID</th>
+							<th>İzin Oluşturma Tarihi</th>
+							<th>İzin Başlama Tarihi</th>
+							<th>İzin Bitiş Tarihi</th>
+							<th>Gün</th>
+							<th>İzin Nedeni</th>
+							<th>Telefon No</th>
+							<th>Adres</th>
+							<th>Durum</th>
+						</tr>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+		<div id="kendiizinlerim">
+
+			<fieldset id="kendiizinlerim">
+				<div class="w3-container">
+					<hr>
+					<h2>İzinlerim</h2>
+					<br>
+					<table id="kendiizinlerimtable"
+						class="w3-table  w3-striped w3-white">
+						<tr>
+							<th>ID</th>
+							<th>İzin Oluşturma Tarihi</th>
+							<th>İzin Başlama Tarihi</th>
+							<th>İzin Bitiş Tarihi</th>
+							<th>Gün</th>
+							<th>İzin Nedeni</th>
+							<th>Telefon No</th>
+							<th>Adres</th>
+							<th>Durum</th>
+							<th>İptal</th>
+						</tr>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+
+		<fieldset id="personelkayıtdiv">
+			<div class="w3-container">
+				<h2>Personel Kayıt</h2>
+				<br>
+				<form id="postPersonel">
 					<table class="w3-table  w3-white">
 						<tr>
 							<td>Ad</td>
@@ -579,13 +580,13 @@ html, body, h1, h2, h3, h4, h5 {
 						</tr>
 						<tr>
 							<td>Soyad</td>
-							<td><input required id="personelsoyad" name="soyad" placeholder=""
-								class="form-control input-md" type="text"></td>
+							<td><input required id="personelsoyad" name="soyad"
+								placeholder="" class="form-control input-md" type="text"></td>
 						</tr>
 						<tr>
 							<td>E-mail</td>
-							<td><input required id="personelemail" placeholder="" name="email"
-								class="form-control input-md" type="email"></td>
+							<td><input required id="personelemail" placeholder=""
+								name="email" class="form-control input-md" type="email"></td>
 						</tr>
 						<tr>
 							<td>Parola</td>
@@ -627,242 +628,236 @@ html, body, h1, h2, h3, h4, h5 {
 							</div>
 						</div>
 					</table>
-					<input type="submit" class="form-control btn-info btn " >Ekle</button>
-			</form>
-				</div>
-			</fieldset>
-			<div id="setdepartmanmanagersdiv">
-				<fieldset id="setdepartmanmanagersdiv">
-					<div class="w3-container">
-						<h2>Departman yöneticilerini atama</h2>
-						<br>
-						<table class="w3-table  w3-white">
-							<tr>
-								<td>Departman</td>
-								<td><select id="personeldep2" class="form-control">
-								</select></td>
-							</tr>
-							<tr>
-								<td>1. Yönetici</td>
-								<td><select id="selectpersonel2" class="form-control">
-										<option value="0">Seçiniz</option>
-								</select></td>
-							</tr>
-							<tr>
-								<td>2. Yönetici</td>
-								<td><select id="selectpersonel3" class="form-control">
-										<option value="0">Seçiniz</option>
-								</select></td>
-							</tr>
-						</table>
-						<button id="setdepartmanmanagers"
-							class="form-control btn-info btn ">Kaydet</button>
-					</div>
-				</fieldset>
+					<input type="submit" class="form-control btn-info btn ">Ekle
+					</button>
+				</form>
 			</div>
-			<fieldset id="getallpersoneldiv">
-				<div id="getallpersoneldiv">
-					<table id="getallpersoneltable"
-						class="w3-table w3-striped w3-white">
+		</fieldset>
+		<div id="setdepartmanmanagersdiv">
+			<fieldset id="setdepartmanmanagersdiv">
+				<div class="w3-container">
+					<h2>Departman yöneticilerini atama</h2>
+					<br>
+					<table class="w3-table  w3-white">
 						<tr>
-							<th>Sicil No</th>
-							<th>Ad</th>
-							<th>Soyad</th>
-							<th>E-mail</th>
-							<th>Password</th>
-							<th>İşe Başlama Tarihi</th>
-							<th>Pozisyon</th>
-							<th>İkinci Yönetici Onayı Gerekli mi?</th>
-							<th>SİL</th>
+							<td>Departman</td>
+							<td><select id="personeldep2" class="form-control">
+							</select></td>
+						</tr>
+						<tr>
+							<td>1. Yönetici</td>
+							<td><select id="selectpersonel2" class="form-control">
+									<option value="0">Seçiniz</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>2. Yönetici</td>
+							<td><select id="selectpersonel3" class="form-control">
+									<option value="0">Seçiniz</option>
+							</select></td>
 						</tr>
 					</table>
+					<button id="setdepartmanmanagers"
+						class="form-control btn-info btn ">Kaydet</button>
 				</div>
 			</fieldset>
-			<div id="izinonayislemleridiv">
-				<div id="getAllFirstManagerApproval">
-					<fieldset id="getAllFirstManagerApproval">
-						<div class="w3-container">
-							<hr>
-							<h2>Birinci Yönetici Onayı Bekleyen İzinler</h2>
-							<br>
-							<table id="FirstManagerApproval"
-								class="w3-table  w3-striped w3-white">
-								<tr>
-									<th>ID</th>
-									<th>Sicil NO</th>
-									<th>İzin Oluşturma Tarihi</th>
-									<th>İzin Başlama Tarihi</th>
-									<th>İzin Bitiş Tarihi</th>
-									<th>Gün</th>
-									<th>İzin Nedeni</th>
-									<th>Telefon No</th>
-									<th>Adres</th>
-									<th>Durum</th>
-									<th>Onay</th>
-									<th>Red</th>
-								</tr>
-							</table>
-						</div>
-					</fieldset>
-				</div>
-				<div id="getAllSecondManagerApproval">
-					<fieldset id="getAllSecondManagerApproval">
-						<div class="w3-container">
-							<hr>
-							<h2>İkinci Yönetici Onayı Bekleyen İzinler</h2>
-							<br>
-							<table id="SecondManagerApproval"
-								class="w3-table  w3-striped w3-white">
-								<tr>
-									<th>ID</th>
-									<th>Sicil NO</th>
-									<th>İzin Oluşturma Tarihi</th>
-									<th>İzin Başlama Tarihi</th>
-									<th>İzin Bitiş Tarihi</th>
-									<th>Gün</th>
-									<th>İzin Nedeni</th>
-									<th>Telefon No</th>
-									<th>Adres</th>
-									<th>Durum</th>
-									<th>Onay</th>
-									<th>Red</th>
-								</tr>
-							</table>
-						</div>
-					</fieldset>
-				</div>
-				<div id="getAllHRApproval">
-					<fieldset id="getAllHRApproval">
-						<div class="w3-container">
-							<hr>
-							<h2>İnsan Kaynakları Onayı Bekleyen İzinler</h2>
-							<br>
-							<table id="HRApproval" class="w3-table  w3-striped w3-white">
-								<tr>
-									<th>ID</th>
-									<th>Sicil NO</th>
-									<th>İzin Oluşturma Tarihi</th>
-									<th>İzin Başlama Tarihi</th>
-									<th>İzin Bitiş Tarihi</th>
-									<th>Gün</th>
-									<th>İzin Nedeni</th>
-									<th>Telefon No</th>
-									<th>Adres</th>
-									<th>Durum</th>
-									<th>Onay</th>
-									<th>Red</th>
-								</tr>
-							</table>
-						</div>
-					</fieldset>
-				</div>
-				<div id="getAllPersonelApproval">
-					<fieldset id="getAllPersonelApproval">
-						<div class="w3-container">
-							<hr>
-							<h2>Sizin Onayınızı Bekleyen İzinler</h2>
-							<br>
-							<table id="PersonelApproval"
-								class="w3-table  w3-striped w3-white">
-								<tr>
-									<th>ID</th>
-									<th>Sicil NO</th>
-									<th>İzin Oluşturma Tarihi</th>
-									<th>İzin Başlama Tarihi</th>
-									<th>İzin Bitiş Tarihi</th>
-									<th>Gün</th>
-									<th>İzin Nedeni</th>
-									<th>Telefon No</th>
-									<th>Adres</th>
-									<th>Durum</th>
-									<th>Onay</th>
-									<th>Red</th>
-								</tr>
-							</table>
-						</div>
-					</fieldset>
-				</div>
+		</div>
+		<fieldset id="getallpersoneldiv">
+			<div id="getallpersoneldiv">
+				<table id="getallpersoneltable" class="w3-table w3-striped w3-white">
+					<tr>
+						<th>Sicil No</th>
+						<th>Ad</th>
+						<th>Soyad</th>
+						<th>E-mail</th>
+						<th>Password</th>
+						<th>İşe Başlama Tarihi</th>
+						<th>Pozisyon</th>
+						<th>İkinci Yönetici Onayı Gerekli mi?</th>
+						<th>SİL</th>
+					</tr>
+				</table>
 			</div>
-			<div id="iziniptaldiv">
-				<fieldset id="iziniptaldiv">
+		</fieldset>
+		<div id="izinonayislemleridiv">
+			<div id="getAllFirstManagerApproval">
+				<fieldset id="getAllFirstManagerApproval">
 					<div class="w3-container">
 						<hr>
-						<h2>İzin İptal</h2>
+						<h2>Birinci Yönetici Onayı Bekleyen İzinler</h2>
 						<br>
-						<div id="aramakosullari">
-
-							<table class="w3-table izinhakedis w3-white">
-								<tr>
-									<td>Çalışan</td>
-									<td><select class="form-control" id="selectpersonelforsearch">
-											<option value="0">Seçiniz</option>
-												</select></td>
-								</tr>
-								<tr>
-									<td>Başlangıç Günü</td>
-									<td>
-										<div class="datepicker">
-											<input required id="btarih" class="form-control" type="text">
-											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="btarih-db"
-												name="gecerliolacagitarih">
-											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>Bitiş Günü</td>
-									<td>
-										<div class="datepicker">
-											<input id="starih" required class="form-control" type="text">
-											<!-- seçilen tarih GG-AA-YYYY şeklinde -->
-											<input type="hidden" id="starih-db"
-												name="gecerliolacagitarih">
-											<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
-										</div>
-									</td>
-								</tr>
-							</table>
-							<button id="iziniptalarama" class="form-control btn-info btn ">Ara</button>
-							<br />
-					
-						</div>
-						<div id="aramasonucları">
-							<div class="w3-container">
-								<hr>
-								<h2>Arama Sonuçları</h2>
-								<br>
-								<table id="iziniptalsonuclari"
-									class="w3-table  w3-striped w3-white">
-									<tr>
-										<th>ID</th>
-										<th>Sicil NO</th>
-										<th>İzin Oluşturma Tarihi</th>
-										<th>İzin Başlama Tarihi</th>
-										<th>İzin Bitiş Tarihi</th>
-										<th>Gün</th>
-										<th>İzin Nedeni</th>
-										<th>Telefon No</th>
-										<th>Adres</th>
-										<th>Durum</th>
-										<th>İptal</th>
-									</tr>
-								</table>
-							</div>
-						</div>
+						<table id="FirstManagerApproval"
+							class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>Sicil NO</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+								<th>Onay</th>
+								<th>Red</th>
+							</tr>
+						</table>
 					</div>
 				</fieldset>
 			</div>
-			<!-- Footer -->
-			<footer class="w3-container w3-padding-16 w3-dark-grey">
-				<h4>FOOTER</h4>
-				<p>
-					Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-						target="_blank">w3.css</a>
-				</p>
-			</footer>
+			<div id="getAllSecondManagerApproval">
+				<fieldset id="getAllSecondManagerApproval">
+					<div class="w3-container">
+						<hr>
+						<h2>İkinci Yönetici Onayı Bekleyen İzinler</h2>
+						<br>
+						<table id="SecondManagerApproval"
+							class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>Sicil NO</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+								<th>Onay</th>
+								<th>Red</th>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+			</div>
+			<div id="getAllHRApproval">
+				<fieldset id="getAllHRApproval">
+					<div class="w3-container">
+						<hr>
+						<h2>İnsan Kaynakları Onayı Bekleyen İzinler</h2>
+						<br>
+						<table id="HRApproval" class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>Sicil NO</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+								<th>Onay</th>
+								<th>Red</th>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+			</div>
+			<div id="getAllPersonelApproval">
+				<fieldset id="getAllPersonelApproval">
+					<div class="w3-container">
+						<hr>
+						<h2>Sizin Onayınızı Bekleyen İzinler</h2>
+						<br>
+						<table id="PersonelApproval" class="w3-table  w3-striped w3-white">
+							<tr>
+								<th>ID</th>
+								<th>Sicil NO</th>
+								<th>İzin Oluşturma Tarihi</th>
+								<th>İzin Başlama Tarihi</th>
+								<th>İzin Bitiş Tarihi</th>
+								<th>Gün</th>
+								<th>İzin Nedeni</th>
+								<th>Telefon No</th>
+								<th>Adres</th>
+								<th>Durum</th>
+								<th>Onay</th>
+								<th>Red</th>
+							</tr>
+						</table>
+					</div>
+				</fieldset>
+			</div>
 		</div>
-		<!-- End page content -->
+		<div id="iziniptaldiv">
+			<fieldset id="iziniptaldiv">
+				<div class="w3-container">
+					<hr>
+					<h2>İzin İptal</h2>
+					<br>
+					<div id="aramakosullari">
+
+						<table class="w3-table izinhakedis w3-white">
+							<tr>
+								<td>Çalışan</td>
+								<td><select class="form-control"
+									id="selectpersonelforsearch">
+										<option value="0">Seçiniz</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>Başlangıç Günü</td>
+								<td>
+									<div class="datepicker">
+										<input required id="btarih" class="form-control" type="text">
+										<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+										<input type="hidden" id="btarih-db" name="gecerliolacagitarih">
+										<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>Bitiş Günü</td>
+								<td>
+									<div class="datepicker">
+										<input id="starih" required class="form-control" type="text">
+										<!-- seçilen tarih GG-AA-YYYY şeklinde -->
+										<input type="hidden" id="starih-db" name="gecerliolacagitarih">
+										<!-- mysql'e göre uyarlanan tarih YYYY-AA-GG şeklinde -->
+									</div>
+								</td>
+							</tr>
+						</table>
+						<button id="iziniptalarama" class="form-control btn-info btn ">Ara</button>
+						<br />
+
+					</div>
+					<div id="aramasonucları">
+						<div class="w3-container">
+							<hr>
+							<h2>Arama Sonuçları</h2>
+							<br>
+							<table id="iziniptalsonuclari"
+								class="w3-table  w3-striped w3-white">
+								<tr>
+									<th>ID</th>
+									<th>Sicil NO</th>
+									<th>İzin Oluşturma Tarihi</th>
+									<th>İzin Başlama Tarihi</th>
+									<th>İzin Bitiş Tarihi</th>
+									<th>Gün</th>
+									<th>İzin Nedeni</th>
+									<th>Telefon No</th>
+									<th>Adres</th>
+									<th>Durum</th>
+									<th>İptal</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<!-- Footer -->
+		<footer class="w3-container w3-padding-16 w3-dark-grey">
+			
+		</footer>
+	</div>
+	<!-- End page content -->
 	</div>
 	<div class="modal fade" id="İzinBilgisi" role="dialog">
 		<div class="modal-dialog modal-lg">
@@ -898,8 +893,8 @@ html, body, h1, h2, h3, h4, h5 {
 									<tr>
 										<td><p id="isebaslamapop"></p></td>
 										<td><i id="formudolduranpop"></i></td>
-										
-										
+
+
 										<td><label id="izinidpop"></td>
 									</tr>
 								</table>
@@ -966,18 +961,21 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 				</div>
 				<div class="modal-footer" id="modalfooter">
-					<button class="btn btn-success" type="button" onclick="confirmedPermissionFirstManager(document.getElementById('izinidpop').textContent)">Onay</button>
-					<button class="btn btn-danger" onclick="deniedPermissionFirstManager(document.getElementById('izinidpop').textContent)" type="button" id="redbutonHR">Red</button>
+					<button class="btn btn-success" type="button"
+						onclick="confirmedPermissionFirstManager(document.getElementById('izinidpop').textContent)">Onay</button>
+					<button class="btn btn-danger"
+						onclick="deniedPermissionFirstManager(document.getElementById('izinidpop').textContent)"
+						type="button" id="redbutonHR">Red</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-	
+
+
+
+
+
 	<div class="modal fade" id="ikinciyoneticiizinbilgisi" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<!-- Modal content-->
@@ -1012,8 +1010,8 @@ html, body, h1, h2, h3, h4, h5 {
 									<tr>
 										<td><p id="isebaslamapop2"></p></td>
 										<td><i id="formudolduranpop2"></i></td>
-										
-										
+
+
 										<td><label id="izinidpop2"></td>
 									</tr>
 								</table>
@@ -1080,16 +1078,19 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 				</div>
 				<div class="modal-footer" id="modalfooter">
-					<button class="btn btn-success" type="button" onclick="confirmedPermissionSecondManager(document.getElementById('izinidpop2').textContent)">Onay</button>
-					<button class="btn btn-danger" onclick="deniedPermissionSecondManager(document.getElementById('izinidpop2').textContent)" type="button" id="redbutonHR">Red</button>
+					<button class="btn btn-success" type="button"
+						onclick="confirmedPermissionSecondManager(document.getElementById('izinidpop2').textContent)">Onay</button>
+					<button class="btn btn-danger"
+						onclick="deniedPermissionSecondManager(document.getElementById('izinidpop2').textContent)"
+						type="button" id="redbutonHR">Red</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<div class="modal fade" id="hryoneticiizinbilgisi" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<!-- Modal content-->
@@ -1124,8 +1125,8 @@ html, body, h1, h2, h3, h4, h5 {
 									<tr>
 										<td><p id="isebaslamapophr"></p></td>
 										<td><i id="formudolduranpophr"></i></td>
-										
-										
+
+
 										<td><label id="izinidpophr"></td>
 									</tr>
 								</table>
@@ -1192,15 +1193,18 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 				</div>
 				<div class="modal-footer" id="modalfooter">
-					<button class="btn btn-success" type="button" onclick="confirmedPermissionHR(document.getElementById('izinidpophr').textContent)">Onay</button>
-					<button class="btn btn-danger" onclick="deniedPermissionHR(document.getElementById('izinidpophr').textContent)" type="button" id="redbutonHR">Red</button>
+					<button class="btn btn-success" type="button"
+						onclick="confirmedPermissionHR(document.getElementById('izinidpophr').textContent)">Onay</button>
+					<button class="btn btn-danger"
+						onclick="deniedPermissionHR(document.getElementById('izinidpophr').textContent)"
+						type="button" id="redbutonHR">Red</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="modal fade" id="pyoneticiizinbilgisi" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<!-- Modal content-->
@@ -1235,8 +1239,8 @@ html, body, h1, h2, h3, h4, h5 {
 									<tr>
 										<td><p id="isebaslamapopp"></p></td>
 										<td><i id="formudolduranpopp"></i></td>
-										
-										
+
+
 										<td><label id="izinidpopp"></td>
 									</tr>
 								</table>
@@ -1303,14 +1307,17 @@ html, body, h1, h2, h3, h4, h5 {
 					</div>
 				</div>
 				<div class="modal-footer" id="modalfooter">
-					<button class="btn btn-success" type="button" onclick="confirmedPermissionPersonel(document.getElementById('izinidpopp').textContent)">Onay</button>
-					<button class="btn btn-danger" onclick="deniedPermissionPersonel(document.getElementById('izinidpopp').textContent)" type="button" id="redbutonHR">Red</button>
+					<button class="btn btn-success" type="button"
+						onclick="confirmedPermissionPersonel(document.getElementById('izinidpopp').textContent)">Onay</button>
+					<button class="btn btn-danger"
+						onclick="deniedPermissionPersonel(document.getElementById('izinidpopp').textContent)"
+						type="button" id="redbutonHR">Red</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 </body>
 </html>
