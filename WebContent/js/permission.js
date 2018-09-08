@@ -911,6 +911,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $(document).on("click","#iziniptalarama",function(){
     	$("#iziniptalsonuclari").empty();
+    	$("#iziniptalsonuclari").append('<tr><th>ID</th><th>Sicil NO</th><th>İzin Oluşturma Tarihi</th><th>İzin Başlama Tarihi</th><th>İzin Bitiş Tarihi</th><th>Gün</th><th>İzin Nedeni</th>th>Telefon No</th><th>Adres</th><th>Durum</th><th>İptal</th></tr>')
 	var TDEKLE='</th><th>';
 	var durum='Henüz İncelenmedi';
 	var permission={};
@@ -949,7 +950,7 @@ function cancelPermission(permission){
 		mimeType : "application/json",
 		data : JSON.stringify(permission),
 		success : function(result) {
-			alert("SUCCESS : ");
+			
 		},
 		error : function() {
 			alert("error : cancelPermission");
