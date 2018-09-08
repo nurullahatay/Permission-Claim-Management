@@ -34,7 +34,7 @@ public class PersonelRest {
 
 	@Path("/addPersonel")
 	@POST
-	@RolesAllowed("admin")
+	@RolesAllowed({"admin","HR"})
 	public void addPersonel(Personel personel) throws Exception {
 		ServiceFacade.getInstance().addPersonel(personel);
 	}
