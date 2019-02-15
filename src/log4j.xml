@@ -7,7 +7,7 @@
 		<param name="maxFileSize" value="1MB" />
 		<param name="MaxBackupIndex" value="2" />
 		<param name="File"
-			value="/root/data/workspace/18.06/src/Applicationlog.log" />
+			value="/root/data/workspace/Permission-Claim-Management/src/Applicationlog.log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
 				value="%d{yyyy-MMM-dd HH:mm:ss,SSS} [%t] %c %x %-5p %m%n" />
@@ -29,10 +29,10 @@
 		<param name="SMTPProtocol" value="smtps" /> <!-- GMail will not work without this, log4j 1.2.16 is required -->
 		<param name="SMTPHost" value="smtp.gmail.com" />
 		<param name="SMTPPort" value="465" />
-		<param name="SMTPUsername" value="nataylog@gmail.com" /> <!-- example@gmail.com -->
-		<param name="SMTPPassword" value="L1o2g345" /> <!-- passowrd -->
-		<param name="From" value="nataylog@gmail.com" />
-		<param name="To" value="natay78@gmail.com" />
+		<param name="SMTPUsername" value="@gmail.com" /> <!-- example@gmail.com -->
+		<param name="SMTPPassword" value="password" /> <!-- passowrd -->
+		<param name="From" value="@gmail.com" />
+		<param name="To" value="@gmail.com" />
 		<param name="Subject" value="App Error Log" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
